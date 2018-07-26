@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/07/26/My-New-Post/8.png">
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/07/26/My-New-Post/10.png">
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/07/26/My-New-Post/9.png">
-<meta property="og:updated_time" content="2018-07-26T17:30:59.155Z">
+<meta property="og:updated_time" content="2018-07-26T17:41:18.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Github+Hexo 搭建个人博客">
 <meta name="twitter:description" content="这个博客搭了我一整天，老实讲其实不难，只是我太蠢了，没有好好看人家写的文章。 写下这篇文章，旨在记录我搭建博客的过程，方便我下次想再复盘重新搭建一次博客时能少花点时间。如果你们有需要，也可参考参考，希望对你们有帮助。 OS：Windows 10  1.环境准备  1.1 Git  这个第一个安装，直接去官网下载 1.2 node.js  一样，去官网下载好后一键傻瓜式下一步，当然，英语好的话或者如">
@@ -107,10 +107,10 @@
 <li>1.3 hexo<br>  这个对于某些人可能有点困难（比如我=_=）,我们在后面表述。</li>
 </ul>
 </li>
-<li><p>2.创建 GitHub 域名与SSH密钥部署</p>
+<li><p>2.创建 GitHub 域名与 SSH 密钥部署</p>
 <ul>
 <li>2.1 注册 GitHub<br>  去<a href="https://github.com/" title="GitHub" target="_blank" rel="noopener">官网</a>注册，注意认真取 username，如果真心想好好玩的话，会方便很多。</li>
-<li><p>2.2 创建Repository（存储库）</p>
+<li><p>2.2 创建 Repository（存储库）</p>
   <img src="/ganru.github.io/2018/07/26/My-New-Post/3.png">
 <p>  写 Repository name 时尽量与 Owner 一致，对下面操作会方便一些。</p>
   <img src="/ganru.github.io/2018/07/26/My-New-Post/4.png">
@@ -146,11 +146,11 @@ git config --global user.email &quot;ganr1988@gmail.com&quot;    //换成你自�
 <pre><code>hexo server
 </code></pre><p>  输入后，若出现这样的情况：</p>
   <img src="/ganru.github.io/2018/07/26/My-New-Post/7.png">
-<p>  说明 Hexo Server 已经启动了，在浏览器中打开<a href="http://localhost:4000/，这时可以看到Hexo已为你生成了一篇blog。（端口默认是4000）" target="_blank" rel="noopener">http://localhost:4000/，这时可以看到Hexo已为你生成了一篇blog。（端口默认是4000）</a></p>
+<p>  说明 Hexo Server 已经启动了，在浏览器中打开<a href="http://localhost:4000/，这时可以看到" target="_blank" rel="noopener">http://localhost:4000/，这时可以看到</a> Hexo 已为你生成了一篇 blog。（端口默认是4000）</p>
 <p>  按下 Ctrl+C 停止 Server，接下来我们开始写一篇新的文章。</p>
   <img src="/ganru.github.io/2018/07/26/My-New-Post/8.png">
-<p>  可看到它的生成路径，我们可以使用一个支持markdown语法的编辑器（比如 Sublime Text）尽情地编辑文件 My-New-Post.md 。</p>
-<p>  写完文章之后，将md（My-New-Post）文件生成静态网页：</p>
+<p>  可看到它的生成路径，我们可以使用一个支持 Markdown 语法的编辑器（比如 Sublime Text）尽情地编辑文件 My-New-Post.md 。</p>
+<p>  写完文章之后，将 md（My-New-Post）文件生成静态网页：</p>
 <pre><code>$ hexo generate 
 </code></pre><p>  该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件 </p>
 </li>
@@ -164,19 +164,19 @@ git config --global user.email &quot;ganr1988@gmail.com&quot;    //换成你自�
 <pre><code>deploy:
     type: git
     repository: git@github.com:ganru/ganru.github.io //记得改成你的 Repository name 
-</code></pre><p>  注意：使用 SSH <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Darksiderlyd/Darksiderlyd.github.io ，不要用 https，这个我也不明白为什么，网上很多人说弄htpps，但我弄了好久没成功，这个倒成功了。（=_=）<br>  然后再改：</p>
+</code></pre><p>  注意：使用 SSH <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:ganru.github.io ，不要用 https，这个我也不明白为什么，网上很多人说弄 htpps，但我弄了好久没成功，这个倒成功了。（=_=）<br>  然后再改：</p>
   <img src="/ganru.github.io/2018/07/26/My-New-Post/9.png">
 <p>  注意：所有的冒号之后要空一格。如：type: git。</p>
 <p>  执行代码：</p>
 <pre><code>$ hexo deploy 
-</code></pre><p>  这时候就开始把本地的博客打包部署到你的 GitHub Repository （比如我的ganru.github.io）里面了。</p>
+</code></pre><p>  这时候就开始把本地的博客打包部署到你的 GitHub Repository （比如我的 ganru.github.io）里面了。</p>
 </li>
 <li><p>6.通过网络登录博客<br>  打开浏览器，输入你的博客地址（<a href="https://ganru.github.io/），若正常显示，说明你的本地博客部署（上传）成功了。">https://ganru.github.io/），若正常显示，说明你的本地博客部署（上传）成功了。</a></p>
 </li>
 <li><p>7.总结<br>  以后写博客就轻松了，我们只要在这基础上写文章就行：</p>
 <pre><code>$ hexo new “......” //......表示文章的标题 
 </code></pre><p>  每次写完文章后，记得依次写这三个指令：</p>
-<pre><code>hexo clean 
+<pre><code>hexo clean //该代码表示清除缓存
 hexo generate （或者 hexo g）
 hexo deploy     （或者 hexo d）
 </code></pre><p>  文章才能上传到你的 GitHub 里面。</p>
@@ -189,7 +189,7 @@ hexo deploy     （或者 hexo d）
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ganru.github.io/2018/07/26/My-New-Post/" data-id="cjk2u435c00001wumgqcyqlns" class="article-share-link">Share</a>
+      <a data-url="https://ganru.github.io/2018/07/26/My-New-Post/" data-id="cjk2uhlpc00002wumbi1cl17w" class="article-share-link">Share</a>
       
       
     </footer>
