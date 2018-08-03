@@ -91,14 +91,14 @@
 <p>写下这篇文章，旨在记录我搭建博客的过程，方便我下次想再复盘重新搭建一次博客时能少花点时间。如果你们有需要，也可参考参考，希望对你们有帮助。</p>
 <p>OS：Windows 10</p>
 <ul>
-<li><p>1.环境准备</p>
+<li><p><strong>1.环境准备</strong></p>
 <ul>
 <li>1.1 Git<br>  这个第一个安装，直接去<a href="https://git-scm.com/" title="Git" target="_blank" rel="noopener">官网</a>下载</li>
 <li>1.2 node.js<br>  一样，去<a href="https://nodejs.org/en/" title="Node.js" target="_blank" rel="noopener">官网</a>下载好后一键傻瓜式下一步，当然，英语好的话或者如果你有其他的想法，Google、百度能帮你解决问题。</li>
 <li>1.3 hexo<br>  这个对于某些人可能有点困难（比如我=_=）,我们在后面表述。</li>
 </ul>
 </li>
-<li><p>2.创建 GitHub 域名与 SSH 密钥部署</p>
+<li><p><strong>2.创建 GitHub 域名与 SSH 密钥部署</strong></p>
 <ul>
 <li>2.1 注册 GitHub<br>  去<a href="https://github.com/" title="GitHub" target="_blank" rel="noopener">官网</a>注册，注意认真取 username，如果真心想好好玩的话，会方便很多。</li>
 <li><p>2.2 创建 Repository（存储库）</p>
@@ -124,12 +124,12 @@ git config --global user.email &quot;ganr1988@gmail.com&quot;    //换成你自�
 </li>
 </ul>
 </li>
-<li><p>3.hexo 的安装<br>  安装成功 Git 之后，我们在想放置的路径（我的是 D:\Hexo ）下右键打开 Git Bash Here ，输入：</p>
+<li><p><strong>3.hexo 的安装</strong><br>  安装成功 Git 之后，我们在想放置的路径（我的是 D:\Hexo ）下右键打开 Git Bash Here ，输入：</p>
 <pre><code>$ npm install -g hexo-cli
 </code></pre><p>  这行代码表示安装 hexo ，验证是否成功可输入 hexo -v ,成功后如下图：</p>
   <img src="/ganru.github.io/2018/07/26/My-New-Post/2.png">
 </li>
-<li><p>4.在本地建设博客<br>  输入代码：</p>
+<li><p><strong>4.在本地建设博客</strong><br>  输入代码：</p>
 <pre><code>hexo init
 </code></pre><p>  该步骤是初始化的意思，会自动在目标文件夹（D:\Hexo）建立网站所需要的文件。</p>
 <pre><code>npm install
@@ -145,7 +145,7 @@ git config --global user.email &quot;ganr1988@gmail.com&quot;    //换成你自�
 <pre><code>$ hexo generate 
 </code></pre><p>  该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件 </p>
 </li>
-<li><p>5.部署文件到 GitHub<br>  输入代码：</p>
+<li><p><strong>5.部署文件到 GitHub</strong><br>  输入代码：</p>
 <pre><code>$ hexo deploy
 </code></pre><p>  可能会出错：</p>
   <img src="/ganru.github.io/2018/07/26/My-New-Post/10.png">
@@ -162,9 +162,9 @@ git config --global user.email &quot;ganr1988@gmail.com&quot;    //换成你自�
 <pre><code>$ hexo deploy 
 </code></pre><p>  这时候就开始把本地的博客打包部署到你的 GitHub Repository （比如我的 ganru.github.io）里面了。</p>
 </li>
-<li><p>6.通过网络登录博客<br>  打开浏览器，输入你的博客地址（<a href="https://ganru.github.io/），若正常显示，说明你的本地博客部署（上传）成功了。">https://ganru.github.io/），若正常显示，说明你的本地博客部署（上传）成功了。</a></p>
+<li><p><strong>6.通过网络登录博客</strong><br>  打开浏览器，输入你的博客地址（<a href="https://ganru.github.io/），若正常显示，说明你的本地博客部署（上传）成功了。">https://ganru.github.io/），若正常显示，说明你的本地博客部署（上传）成功了。</a></p>
 </li>
-<li><p>7.总结<br>  以后写博客就轻松了，我们只要在这基础上写文章就行：</p>
+<li><p><strong>7.总结</strong><br>  以后写博客就轻松了，我们只要在这基础上写文章就行：</p>
 <pre><code>$ hexo new “......” //......表示文章的标题 
 </code></pre><p>  每次写完文章后，记得依次写这三个指令：</p>
 <pre><code>hexo clean //该代码表示清除缓存
@@ -180,7 +180,7 @@ hexo deploy     （或者 hexo d）
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ganru.github.io/2018/07/26/My-New-Post/" data-id="cjkdu835e0000x0um339oybiw" class="article-share-link">Share</a>
+      <a data-url="https://ganru.github.io/2018/07/26/My-New-Post/" data-id="cjkdugl54000040umem20p3m1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,7 +225,7 @@ hexo deploy     （或者 hexo d）
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ganru.github.io/2018/07/26/hello-world/" data-id="cjkdu835k0001x0umqdnmc16m" class="article-share-link">Share</a>
+      <a data-url="https://ganru.github.io/2018/07/26/hello-world/" data-id="cjkdugl5a000140umpaac8297" class="article-share-link">Share</a>
       
       
     </footer>
