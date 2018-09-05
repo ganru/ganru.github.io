@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description" content="1. 变量和简单数据类型  1.1 字符串拼接： first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;quot;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-05T14:18:18.383Z">
+<meta property="og:updated_time" content="2018-09-05T14:21:29.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 随笔">
 <meta name="twitter:description" content="1. 变量和简单数据类型  1.1 字符串拼接： first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;quot;">
@@ -120,22 +120,18 @@ print(message)
 <ul>
 <li><p><strong>2.4.1 增</strong>：有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</p>
 </li>
-<li><p><strong>2.4.2 删</strong>：del语句。如：del Array[0]（删掉列表头部元素）<br>  标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。</p>
-<pre><code>ex：
-motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+<li><p><strong>2.4.2 删</strong>：del语句。如：del Array[0]（删掉列表头部元素）<br>  标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。<br>  ex：</p>
+<pre><code>motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
 print(motorcycles)
 popped_motorcycle = motorcycles.pop()
 print(motorcycles)
 print(popped_motorcycle)
-out：
-[&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+</code></pre><p>  out：</p>
+<pre><code>[&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
 [&apos;honda&apos;, &apos;yamaha&apos;]
 suzuki
-</code></pre><p>  这两种删，前者为销毁，后者为暂时删除。<br>  补充：</p>
-<pre><code>如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。
-ex：Array.remove(&apos;doubi&apos;)
-remove()也是暂时删除。
-</code></pre></li>
+</code></pre><p>  这两种删，前者为销毁，后者为暂时删除。<br>  补充：<br>  如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>  ex：Array.remove(‘doubi’)<br>  remove()也是暂时删除。</p>
+</li>
 <li><p><strong>2.4.3 改</strong>：<br>  ex：</p>
 <pre><code>Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
 Array[0] = &apos;gandalf&apos;
@@ -146,12 +142,12 @@ Array[0] = &apos;gandalf&apos;
 </li>
 </ul>
 </li>
-<li><p>2.5 列表排序与长度确定（注意分永久和暂时排序）</p>
+<li><p><strong>2.5 列表排序与长度确定（注意分永久和暂时排序）</strong></p>
 </li>
-<li><p>2.6 列表使用时可能会产生索引错误<br>  如：索引超过当前列表长度的序值。</p>
+<li><p><strong>2.6 列表使用时可能会产生索引错误</strong><br>  如：索引超过当前列表长度的序值。</p>
 <pre><code>列表为空时索引 -1。
 </code></pre></li>
-<li><p>2.7 列表中 for 的使用<br>  跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。</p>
+<li><p><strong>2.7 列表中 for 的使用</strong><br>  跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。</p>
 <pre><code>如 for cat in cats:
         .
         .        //循环语句块（带上缩进才算，即写完 for 换行之后，缩进该行）
@@ -455,7 +451,7 @@ out：
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ganru.github.io/2018/09/05/Python-随笔/" data-id="cjlp8acy50000roum2k5lv191" class="article-share-link">Share</a>
+      <a data-url="https://ganru.github.io/2018/09/05/Python-随笔/" data-id="cjlp8e6z60001m0umsczpjzk4" class="article-share-link">Share</a>
       
       
     </footer>
