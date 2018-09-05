@@ -1,11 +1,550 @@
-extends includes/layout
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Python 随笔 | 小黑屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 变量和简单数据类型  1.1 字符串拼接： first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 随笔">
+<meta property="og:url" content="https://ganru.github.io/2018/09/05/Python-随笔/index.html">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="1. 变量和简单数据类型  1.1 字符串拼接： first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;quot;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-05T14:40:42.223Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 随笔">
+<meta name="twitter:description" content="1. 变量和简单数据类型  1.1 字符串拼接： first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;quot;">
+  
+    <link rel="alternate" href="/ganru.github.io/atom.xml" title="小黑屋" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/ganru.github.io/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/ganru.github.io/" id="logo">小黑屋</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/ganru.github.io/">Home</a>
+        
+          <a class="main-nav-link" href="/ganru.github.io/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/ganru.github.io/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ganru.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Python-随笔" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/ganru.github.io/2018/09/05/Python-随笔/" class="article-date">
+  <time datetime="2018-09-05T13:58:03.000Z" itemprop="datePublished">2018-09-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python 随笔
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p><strong>1. 变量和简单数据类型</strong></p>
+<ul>
+<li><p><strong>1.1 字符串拼接：</strong></p>
+<pre><code>first_name = &quot;ada&quot;
+last_name = &quot;lovelace&quot;
+full_name = first_name + &quot; &quot; + last_name
+print(&quot;Hello, &quot; + full_name.title() + &quot;!&quot;)
+</code></pre><p>  out：</p>
+<pre><code>Hello, Ada Lovelace!
+</code></pre></li>
+<li><p><strong>1.2 str() 的使用</strong></p>
+<pre><code>age = 20
+message = &quot;Happy &quot; + age + &quot;rd Birthday!&quot;
+print(message)
+</code></pre><p>  out：</p>
+<pre><code>TypeError: Can&apos;t convert &apos;int&apos; object to str implicitly        //报错
+</code></pre><p>  以上应改为：</p>
+<pre><code>message = &quot;Happy &quot; + str(age) + &quot;rd Birthday!&quot;
+</code></pre></li>
+<li><p><strong>1.3 学习要点：</strong><br>  如何创建描述性变量名以及如何消除名称错误和语法错误；<br>  字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；<br>  使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；<br>  如何使用整数和浮点数；<br>  使用数值数据时需要注意的意外行为。<br>  你还学习了如何编写说明性注释，让代码对你和其他人来说更容易理解。最后，你了解了让代码尽可能简单的理念。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>2. 列表的使用    （大部分情况下把它当作数组来用）</strong></p>
+<ul>
+<li><strong>2.1 什么是列表（和 C/C++ 中的数组有点像）</strong></li>
+<li><strong>2.2 列表元素的访问</strong></li>
+<li><p><strong>2.3 元素的索引从 0 开始</strong><br>  标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
+</li>
+<li><p><strong>2.4 列表的增、删、改、查</strong></p>
+<ul>
+<li><p><strong>2.4.1 增</strong>：有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</p>
+</li>
+<li><p><strong>2.4.2 删</strong>：del语句。如：del Array[0]（删掉列表头部元素）<br>  标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。<br>  ex：</p>
+<pre><code>motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+print(motorcycles)
+popped_motorcycle = motorcycles.pop()
+print(motorcycles)
+print(popped_motorcycle)
+</code></pre><p>  out：</p>
+<pre><code>[&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+[&apos;honda&apos;, &apos;yamaha&apos;]
+suzuki
+</code></pre><p>  这两种删，前者为销毁，后者为暂时删除。</p>
+<p>  补充：<br>  如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>  ex：Array.remove(‘doubi’)<br>  remove()也是暂时删除。</p>
+</li>
+<li><p><strong>2.4.3 改</strong>：<br>  ex：</p>
+<pre><code>Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
+Array[0] = &apos;gandalf&apos;
+</code></pre><p>  out：</p>
+<pre><code>[&apos;gandalf&apos;,&apos;G&apos;,&apos;GG&apos;]
+</code></pre></li>
+<li><p><strong>2.4.4 查</strong>：与 2.12 类似。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>2.5 列表排序与长度确定（注意分永久和暂时排序）</strong></p>
+</li>
+<li><p><strong>2.6 列表使用时可能会产生索引错误</strong><br>  如：索引超过当前列表长度的序值。<br>  列表为空时索引 -1。</p>
+</li>
+<li><p><strong>2.7 列表中 for 的使用</strong><br>  跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。<br>  如 for cat in cats:<br>  .<br>  .        //循环语句块（带上缩进才算，即写完 for 换行之后，缩进该行）<br>  .<br>  表示从列表 cats 选取第一个元素并赋予 cat，然后执行语句块，直至选取到列表 cats 中最后一个元素。</p>
+<p>  注意这里的命名规则，尽量用复数名词表示列表（如 cats），用单数名词表示单个列表元素（如 cat）。</p>
+<p>  通常遇见这种错误</p>
+<pre><code>Indentation Error: expected an indented block
+</code></pre><p>  表示你没缩进，编译器没检测到循环语句块。<br>  这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。<br>  补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）</p>
+</li>
+<li><p><strong>2.8 数值列表的创建</strong></p>
+<ul>
+<li><p><strong>2.8.1 函数 range(a,b,c) </strong><br>  作用：生成一系列数字。<br>  使用方式：</p>
+<pre><code>从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）
+</code></pre><p>  ex：</p>
+<pre><code>for value in range(1,4):
+    print(value)
+</code></pre><p>  out：</p>
+<pre><code>1
+2
+3
+</code></pre><p>2.8.2 函数 list()<br>  作用：生成列表。<br>  使用方式：</p>
+<pre><code>numbers = list(range(1,4))
+print(numbers)
+</code></pre><p>  out：</p>
+<pre><code>[1,2,3]
+</code></pre></li>
+</ul>
+<p>2.9    数字列表的统计计算<br>  min()、max()、sum() 的使用</p>
+<p>2.10 列表解析<br>  用于简化代码。<br>  ex：</p>
+<pre><code>numbers = [value**2 for value in range(1,4)]
+print(numbers)
+</code></pre><p>  out：</p>
+<pre><code>[1,4,9]
+</code></pre><p>2.11 切片（ python 术语，意为处理列表的部分元素）<br>  其语法形式为：</p>
+<pre><code>Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
+print(Array[1:4])    //从第 1 个开始，到第 4 个结束（不包含第 4 个）。注意，从 0 开始计算。
+</code></pre><p>  out：</p>
+<pre><code>[&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
+</code></pre><p>  如果没有指定开头索引值（如 Array[:4]）,则将从表头开始，其输出结果为：</p>
+<pre><code>[&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
+</code></pre><p>  类似的，没有指定末尾索引值（如 Array[1:]）,则从指定索引序号到列表末尾，其输出结果为：</p>
+<pre><code>[&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
+</code></pre><p>  此外，索引序号可以为负数，请注意若为 [-3:]（负几都一样）,并不会给你打完一整个列表，而只会打印最后3个元素，直至列表结束。</p>
+<p>2.12 切片的遍历<br>  很简单，加个循环语句（如 for ）就行。</p>
+<pre><code>ex：
+    for cat in cats[:3]:
+out：
+    [前面三个元素]
+</code></pre><p>2.13 列表的复制<br>  其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。<br>  ex：</p>
+<pre><code>my_cars = friend_cars[:]
+</code></pre><p>  out：</p>
+<pre><code>得到两个一毛一样的列表（但是互相独立）
+</code></pre><p>  注意不要这么写：</p>
+<pre><code>my_cars = friend_cars
+</code></pre><p>  这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。</p>
+<p>2.14 元组<br>  2.14.1 元组的定义</p>
+<pre><code>列表中的元素可变，而元组不能变，其他相同。
+存在的意义：在整个程序生命周期中保持一组元素值不变。（说白了就是常量）
+其定义格式为：
+    dimensions = (200, 50)        //用小括号，不再用中括号
+    print(dimensions[0])
+    print(dimensions[1])
+out：
+    200
+    50
+</code></pre><p>  2.14.2 元组的遍历</p>
+<pre><code>ex：
+    dimensions = (200, 50)
+    for dimension in dimensions:
+        print(dimension)
+out：
+    200
+    50
+</code></pre><p>  2.14.3 修改元组的变量</p>
+<pre><code>虽然元组元素不可改变，但是可以给存储元组的变量赋值。
+ex：
+    dimensions = (200, 50)
+    print(&quot;原来的：&quot;)
+    for dimension in dimensions:
+        print(dimension)
+    dimensions = (400, 100)
+    print(&quot;\n改变：&quot;)
+    for dimension in dimensions:
+        print(dimension)
+out：
+    原来的：
+    200
+    50
+
+    改变：
+    400
+    100
+
+注意：这里说的修改不是这么改：
+    dimensions[0] = 250
+    这是改不了的，元组存储的元素不可改变，只能从根源上改。
+</code></pre><p>2.15 学习要点：<br>  列表的增、删、改、查<br>  for 的使用（和 C 有所不同，而且密切注意缩进的不同）<br>  列表的复制<br>  元组的应用</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><p>条件语句（不管怎么用，都不影响原值）<br> 3.1 if 语句的使用</p>
+<pre><code>cars = [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
+for car in cars:
+    if car == &apos;bmw&apos;:
+        print(car.upper())
+    elif car == &apos;audi&apos;:
+        print(car.title() + &quot; is very good!&quot;)                
+    else:
+        print(car.title())
+out：
+    Audi is very good!
+    BMW
+    Subaru
+    Toyota
+</code></pre><p> 3.2 常用的判断符号</p>
+<pre><code>== 判断是否相等
+!= 判断是否不等
+and 判断两条件是否同时为 True 。（相当于 &amp;&amp; ）
+or 判断是否有一个条件为 True 。（相当于 ||）
+in 判断特定值是否已在列表中
+    ex：
+        Array = [&apos;gan&apos;,&apos;GG&apos;]
+        &apos;gan&apos; in Array
+    out：
+        True
+not in 判断特定值是否不在列表中
+</code></pre><p> 3.3 学习要点：</p>
+<pre><code>if-elif-else 结构的使用
+if 与 for 的混合使用
+对特定元素的筛选
+</code></pre></li>
+<li><p>字典<br> 4.1 字典的定义</p>
+<pre><code>类似于数据结构中的线性表，链表之类，具有将数据关联起来的作用。
+字典的格式：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}    //由多个键值对构成
+使用字典来存储用户提供的数据或在编写能自动生成大量键—值对的代码时，通常都需要先定义一个空字典。
+</code></pre><p> 4.2 字典的访问</p>
+<pre><code>ex：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
+    print(student_0[&apos;name&apos;])
+out：
+    ganru
+</code></pre><p> 4.3 字典的增、删、改、查</p>
+<pre><code>4.3.1 增
+    ex：
+        student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
+        print(student_0)
+        student_0[&apos;sex&apos;] = &apos;man&apos;
+        student_0[&apos;graduated school&apos;] = &apos;JYU&apos;
+        print(student_0)
+    out：
+        {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
+        {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
+
+4.3.2 删
+    用 del 语句。
+    ex：
+        student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
+        print(student_0)
+        del student_0[&apos;graduated school&apos;]
+        print(student_0)
+    out：
+        {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
+        {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;}
+    注意：永删。
+
+4.3.3 改
+    ex：
+        student_0 = {&apos;name&apos;:&apos;ganru&apos;}
+        print(&quot;my name is&quot; + student_0[&apos;name&apos;] + &quot;.&quot;)
+        student_0[&apos;name&apos;] = &apos;Gandalf&apos;
+        print(&quot;my name is&quot; + student_0[&apos;name&apos;] + &quot;.&quot;)
+    out：
+        my name is gan.
+        my name is gandalf.
+
+4.3.4 查
+    与 4.2 相似。
+</code></pre><p> 4.4 字典的遍历</p>
+<pre><code>4.4.1 遍历所有键值对
+    用 for 循环。
+        ex：
+            student_0 = {
+                &apos;name&apos;:&apos;ganru&apos;,
+                &apos;age&apos;:19,
+                }
+            for key,value in student_0.items()：    //声明两个变量，用于存储键值对中的键和值。
+                print(&quot;\nKey: &quot; + key)
+                print(&quot;Value: &quot; + value)
+        out：
+            Key: name
+            Value: ganru
+
+            Key: age
+            Value: 19
+    注意：遍历字典时，键值对的返回顺序与存储顺序不一定相同。
+
+4.4.2 遍历无值键
+    用方法 keys() 来对字典进行遍历。
+    ex：
+        student_0 = {
+            &apos;name&apos;:&apos;ganru&apos;,
+            &apos;age&apos;:19,
+            &apos;sex&apos;:&apos;man&apos;,
+            &apos;graduated school&apos;:&apos;JYU&apos;,
+            }
+        for name in student_0.keys():        //其实可以不写 .keys()，输出依然不变（默认遍历）
+            print(name.title())
+    out：
+        name
+        age
+        graduated school
+
+4.4.3 以某种顺序遍历字典中的所有键
+    用函数 sorted() 。
+    ex：
+        favorite_languages = {
+            &apos;jen&apos;: &apos;python&apos;,
+            &apos;sarah&apos;: &apos;c&apos;,
+            &apos;edward&apos;: &apos;ruby&apos;,
+            &apos;phil&apos;: &apos;python&apos;,
+            }
+
+        for name in sorted(favorite_languages.keys()):
+            print(name.title() + &quot;, thank you for taking the poll.&quot;)
+    out：
+        Edward, thank you for taking the poll.
+        Jen, thank you for taking the poll.
+        Phil, thank you for taking the poll.
+        Sarah, thank you for taking the poll.
+
+4.4.4 遍历所有值（无键）
+    用方法 values()。（可能得到很多重复项）
+    ex：
+        favorite_languages = {
+            &apos;jen&apos;: &apos;python&apos;,
+            &apos;sarah&apos;: &apos;c&apos;,
+            &apos;edward&apos;: &apos;ruby&apos;,
+            &apos;phil&apos;: &apos;python&apos;,
+            }
+
+        for language in favorite_languages.values():
+            print(language.title())
+    out：
+        Python
+        C
+        Ruby
+        Python
+
+    在 values() 的基础上用集合set()，可除掉重复项。
+    ex：
+        favorite_languages = {
+            &apos;jen&apos;: &apos;python&apos;,
+            &apos;sarah&apos;: &apos;c&apos;,
+            &apos;edward&apos;: &apos;ruby&apos;,
+            &apos;phil&apos;: &apos;python&apos;,
+            }
+
+        for language in set(favorite_languages.values()):
+            print(language.title())
+    out：
+        Python
+        C
+        Ruby
+</code></pre><p> 4.5 字典的嵌套</p>
+<pre><code>比如 字典中的字典。
+ex：
+    alien_0 = {&apos;color&apos;: &apos;green&apos;, &apos;points&apos;: 5}
+    alien_1 = {&apos;color&apos;: &apos;yellow&apos;, &apos;points&apos;: 10}
+    alien_2 = {&apos;color&apos;: &apos;red&apos;, &apos;points&apos;: 15}
+    aliens = [alien_0, alien_1, alien_2]
+    for alien in aliens:
+        print(alien)
+out：
+    {&apos;color&apos;: &apos;green&apos;, &apos;points&apos;: 5}
+    {&apos;color&apos;: &apos;yellow&apos;, &apos;points&apos;: 10}
+    {&apos;color&apos;: &apos;red&apos;, &apos;points&apos;: 15}
+</code></pre><p> 4.6 字典中存储列表</p>
+<pre><code>ex：
+    student_0 = {
+        &apos;name&apos;: &apos;ganru&apos;,
+        &apos;language&apos;: [&apos;python&apos;, &apos;C&apos;, &apos;C++&apos;],
+        }
+</code></pre></li>
+</ol>
+<pre><code>    print(student_0[&apos;name&apos;].title() + &quot;&apos;s favorite languages are:&quot;)
+    for language in student_0[&apos;language&apos;]:
+        print(&quot;\t&quot; + language.title())
+
+out：
+    Ganru&apos;s favorite languages are:
+        Python
+        C
+        C++
+</code></pre><ol start="5">
+<li>用户输入与 while 循环</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ganru.github.io/2018/09/05/Python-随笔/" data-id="cjlp9l7hz000180um9epu3wlf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/ganru.github.io/2018/07/26/My-New-Post/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Github+Hexo 搭建个人博客</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/ganru.github.io/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/ganru.github.io/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
 
 
-block content
-  .post-item
-  h2.post-title-wrapper
-      p.post-title=page.title
-  if page.date && page.source !== 'about/index.md'
-      div.post-date
-        time(datetime=page.date.toJSON())=date(page.date, date_format)
-  .post-content!= page.content
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/ganru.github.io/2018/09/05/Python-随笔/">Python 随笔</a>
+          </li>
+        
+          <li>
+            <a href="/ganru.github.io/2018/07/26/My-New-Post/">Github+Hexo 搭建个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/ganru.github.io/2018/07/26/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Ganru<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/ganru.github.io/" class="mobile-nav-link">Home</a>
+  
+    <a href="/ganru.github.io/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/ganru.github.io/fancybox/jquery.fancybox.css">
+  <script src="/ganru.github.io/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/ganru.github.io/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
