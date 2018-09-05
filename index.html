@@ -87,30 +87,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><p><strong>1. 变量和简单数据类型</strong></p>
-<ul>
-<li><p><strong>1.1 字符串拼接：</strong></p>
-<pre><code>first_name = &quot;ada&quot;
-last_name = &quot;lovelace&quot;
-full_name = first_name + &quot; &quot; + last_name
-print(&quot;Hello, &quot; + full_name.title() + &quot;!&quot;)
-</code></pre><p>  out：</p>
-<pre><code>Hello, Ada Lovelace!
-</code></pre></li>
-<li><p><strong>1.2 str() 的使用</strong></p>
-<pre><code>age = 20
-message = &quot;Happy &quot; + age + &quot;rd Birthday!&quot;
-print(message)
-</code></pre><p>  out：</p>
-<pre><code>TypeError: Can&apos;t convert &apos;int&apos; object to str implicitly        //报错
-</code></pre><p>  以上应改为：</p>
-<pre><code>message = &quot;Happy &quot; + str(age) + &quot;rd Birthday!&quot;
-</code></pre></li>
-<li><p><strong>1.3 学习要点：</strong><br>  如何创建描述性变量名以及如何消除名称错误和语法错误；<br>  字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；<br>  使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；<br>  如何使用整数和浮点数；<br>  使用数值数据时需要注意的意外行为。<br>  你还学习了如何编写说明性注释，让代码对你和其他人来说更容易理解。最后，你了解了让代码尽可能简单的理念。</p>
-</li>
-</ul>
-</li>
+        <p>#- <strong>1. 变量和简单数据类型</strong></p>
+<pre><code>##- **1.1 字符串拼接：**
+        first_name = &quot;ada&quot;
+        last_name = &quot;lovelace&quot;
+        full_name = first_name + &quot; &quot; + last_name
+        print(&quot;Hello, &quot; + full_name.title() + &quot;!&quot;)
+
+    out：
+        Hello, Ada Lovelace!
+
+##- **1.2 str() 的使用**
+        age = 20
+        message = &quot;Happy &quot; + age + &quot;rd Birthday!&quot;
+        print(message)
+
+    out：
+        TypeError: Can&apos;t convert &apos;int&apos; object to str implicitly        //报错
+
+    以上应改为：
+            message = &quot;Happy &quot; + str(age) + &quot;rd Birthday!&quot;
+
+- **1.3 学习要点：**
+    如何创建描述性变量名以及如何消除名称错误和语法错误；
+    字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；
+    使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；
+    如何使用整数和浮点数；
+    使用数值数据时需要注意的意外行为。
+    你还学习了如何编写说明性注释，让代码对你和其他人来说更容易理解。最后，你了解了让代码尽可能简单的理念。
+</code></pre><ul>
 <li><p><strong>2. 列表的使用    （大部分情况下把它当作数组来用）</strong></p>
 <ul>
 <li><strong>2.1 什么是列表（和 C/C++ 中的数组有点像）</strong></li>
@@ -131,7 +136,8 @@ print(popped_motorcycle)
 <pre><code>[&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
 [&apos;honda&apos;, &apos;yamaha&apos;]
 suzuki
-</code></pre><p>  这两种删，前者为销毁，后者为暂时删除。<br>  补充：<br>  &amp;nbsp 如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>  &amp;nbsp ex：Array.remove(‘doubi’)<br>  &amp;nbsp remove()也是暂时删除。</p>
+</code></pre><p>  这两种删，前者为销毁，后者为暂时删除。</p>
+<p>  补充：<br>  如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>  ex：Array.remove(‘doubi’)<br>  remove()也是暂时删除。</p>
 </li>
 <li><p><strong>2.4.3 改</strong>：<br>  ex：</p>
 <pre><code>Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
@@ -152,25 +158,26 @@ Array[0] = &apos;gandalf&apos;
 <p>  通常遇见这种错误</p>
 <pre><code>Indentation Error: expected an indented block
 </code></pre><p>  表示你没缩进，编译器没检测到循环语句块。<br>  这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。<br>  补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）</p>
-<p>2.8    数值列表的创建<br>  2.8.1 函数 range(a,b,c) </p>
-<pre><code>作用：生成一系列数字。
-使用方式：
-    从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）
-ex：
-    for value in range(1,4):
-        print(value)
-out：
-    1
-    2
-    3
-</code></pre><p>  2.8.2 函数 list()</p>
-<pre><code>作用：生成列表。
-使用方式：
-    numbers = list(range(1,4))
-    print(numbers)
-out：
-    [1,2,3]
-</code></pre><p>2.9    数字列表的统计计算<br>  min()、max()、sum() 的使用</p>
+</li>
+<li><p><strong>2.8 数值列表的创建</strong></p>
+<ul>
+<li><p><strong>2.8.1 函数 range(a,b,c) </strong><br>  作用：生成一系列数字。<br>  使用方式：</p>
+<pre><code>从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）
+</code></pre><p>  ex：</p>
+<pre><code>for value in range(1,4):
+    print(value)
+</code></pre><p>  out：</p>
+<pre><code>1
+2
+3
+</code></pre><p>2.8.2 函数 list()<br>  作用：生成列表。<br>  使用方式：</p>
+<pre><code>numbers = list(range(1,4))
+print(numbers)
+</code></pre><p>  out：</p>
+<pre><code>[1,2,3]
+</code></pre></li>
+</ul>
+<p>2.9    数字列表的统计计算<br>  min()、max()、sum() 的使用</p>
 <p>2.10 列表解析<br>  用于简化代码。<br>  ex：</p>
 <pre><code>numbers = [value**2 for value in range(1,4)]
 print(numbers)
@@ -446,7 +453,7 @@ out：
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ganru.github.io/2018/09/05/Python-随笔/" data-id="cjlp8q0bv0001aoumz27mxsyl" class="article-share-link">Share</a>
+      <a data-url="https://ganru.github.io/2018/09/05/Python-随笔/" data-id="cjlp917ib0001fsum4itsm8dt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -571,7 +578,7 @@ hexo deploy     （或者 hexo d）
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ganru.github.io/2018/07/26/My-New-Post/" data-id="cjlp8q0bd0000aoumey0cajjn" class="article-share-link">Share</a>
+      <a data-url="https://ganru.github.io/2018/07/26/My-New-Post/" data-id="cjlp917hv0000fsumwov4jt4u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -616,7 +623,7 @@ hexo deploy     （或者 hexo d）
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ganru.github.io/2018/07/26/hello-world/" data-id="cjlp8q0c60002aoum499ba9vt" class="article-share-link">Share</a>
+      <a data-url="https://ganru.github.io/2018/07/26/hello-world/" data-id="cjlp917ir0002fsum78u44dju" class="article-share-link">Share</a>
       
       
     </footer>
