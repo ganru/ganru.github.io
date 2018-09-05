@@ -7,17 +7,17 @@
   
   <title>Python 随笔 | 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="**1. 变量和简单数据类型  1.1 字符串拼接：** first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;q">
+  <meta name="description" content="1. 变量和简单数据类型  1.1 字符串拼接： first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 随笔">
 <meta property="og:url" content="https://ganru.github.io/2018/09/05/Python-随笔/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="**1. 变量和简单数据类型  1.1 字符串拼接：** first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;q">
+<meta property="og:description" content="1. 变量和简单数据类型  1.1 字符串拼接： first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;quot;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-05T14:15:26.096Z">
+<meta property="og:updated_time" content="2018-09-05T14:18:18.383Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 随笔">
-<meta name="twitter:description" content="**1. 变量和简单数据类型  1.1 字符串拼接：** first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;q">
+<meta name="twitter:description" content="1. 变量和简单数据类型  1.1 字符串拼接： first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name print(&amp;quot;Hello, &amp;quot; + full_name.title() + &amp;quot;!&amp;quot;">
   
     <link rel="alternate" href="/ganru.github.io/atom.xml" title="小黑屋" type="application/atom+xml">
   
@@ -87,9 +87,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li><p>**1. 变量和简单数据类型</p>
+<li><p><strong>1. 变量和简单数据类型</strong></p>
 <ul>
-<li><p>1.1 字符串拼接：**</p>
+<li><p><strong>1.1 字符串拼接：</strong></p>
 <pre><code>first_name = &quot;ada&quot;
 last_name = &quot;lovelace&quot;
 full_name = first_name + &quot; &quot; + last_name
@@ -110,24 +110,25 @@ print(message)
 </li>
 </ul>
 </li>
-<li><p>**2. 列表的使用    （大部分情况下把它当作数组来用）</p>
+<li><p><strong>2. 列表的使用    （大部分情况下把它当作数组来用）</strong></p>
 <ul>
-<li>2.1 什么是列表（和 C/C++ 中的数组有点像）</li>
-<li>2.2 列表元素的访问</li>
-<li><p>2.3 元素的索引从 0 开始**<br>  标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
+<li><strong>2.1 什么是列表（和 C/C++ 中的数组有点像）</strong></li>
+<li><strong>2.2 列表元素的访问</strong></li>
+<li><p><strong>2.3 元素的索引从 0 开始</strong><br>  标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
 </li>
 <li><p><strong>2.4 列表的增、删、改、查</strong></p>
 <ul>
 <li><p><strong>2.4.1 增</strong>：有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</p>
 </li>
-<li><p><strong>2.4.2 删</strong>：del语句。如：del Array[0]（删掉列表头部元素）<br>  标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。<br>  ex：</p>
-<pre><code>motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+<li><p><strong>2.4.2 删</strong>：del语句。如：del Array[0]（删掉列表头部元素）<br>  标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。</p>
+<pre><code>ex：
+motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
 print(motorcycles)
 popped_motorcycle = motorcycles.pop()
 print(motorcycles)
 print(popped_motorcycle)
-</code></pre><p>  out：</p>
-<pre><code>[&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+out：
+[&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
 [&apos;honda&apos;, &apos;yamaha&apos;]
 suzuki
 </code></pre><p>  这两种删，前者为销毁，后者为暂时删除。<br>  补充：</p>
@@ -454,7 +455,7 @@ out：
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ganru.github.io/2018/09/05/Python-随笔/" data-id="cjlp86h4g0001r8um8gs0ipvd" class="article-share-link">Share</a>
+      <a data-url="https://ganru.github.io/2018/09/05/Python-随笔/" data-id="cjlp8acy50000roum2k5lv191" class="article-share-link">Share</a>
       
       
     </footer>
