@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  1. 变量和简单数据类型1.1 字符串拼接：first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-06T07:14:51.656Z">
+<meta property="og:updated_time" content="2018-09-06T07:25:05.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 笔记">
 <meta name="twitter:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  1. 变量和简单数据类型1.1 字符串拼接：first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_n">
@@ -309,177 +309,182 @@ print(&quot;Hello, &quot; + full_name.title() + &quot;!&quot;)
 
 out：
     Hello, Ada Lovelace!
-</code></pre><h2 id="1-2-str-的使用"><a href="#1-2-str-的使用" class="headerlink" title="1.2 str() 的使用"></a>1.2 str() 的使用</h2><pre><code>age = 20
-message = &quot;Happy &quot; + age + &quot;rd Birthday!&quot;
-print(message)
+</code></pre><h2 id="1-2-str-的使用"><a href="#1-2-str-的使用" class="headerlink" title="1.2 str() 的使用"></a>1.2 str() 的使用</h2><pre><code>    age = 20
+    message = &quot;Happy &quot; + age + &quot;rd Birthday!&quot;
+    print(message)
 
-out：
-    TypeError: Can&apos;t convert &apos;int&apos; object to str implicitly        //报错
+    out：
+        TypeError: Can&apos;t convert &apos;int&apos; object to str implicitly        //报错
 
 以上应改为：
-        message = &quot;Happy &quot; + str(age) + &quot;rd Birthday!&quot;
+            message = &quot;Happy &quot; + str(age) + &quot;rd Birthday!&quot;
 </code></pre><h2 id="1-3-学习要点："><a href="#1-3-学习要点：" class="headerlink" title="1.3 学习要点："></a>1.3 学习要点：</h2><pre><code>如何创建描述性变量名以及如何消除名称错误和语法错误；
 字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；
 使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；
 如何使用整数和浮点数；
 使用数值数据时需要注意的意外行为。
 你还学习了如何编写说明性注释，让代码对你和其他人来说更容易理解。最后，你了解了让代码尽可能简单的理念。
-</code></pre><ol start="2">
-<li><p>列表的使用    （大部分情况下把它当作数组来用）<br> 2.1 什么是列表（和 C/C++ 中的数组有点像）<br> 2.2    列表元素的访问<br> 2.3    元素的索引从 0 开始</p>
-<pre><code>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。
-</code></pre><p> 2.4 列表的增、删、改、查</p>
-<pre><code>2.4.1 增：有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）
-
-2.4.2 删：del语句。如：del Array[0]（删掉列表头部元素）
-    标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。
-        ex：
-            motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
-            print(motorcycles)
-            popped_motorcycle = motorcycles.pop()
-            print(motorcycles)
-            print(popped_motorcycle)
-        out：
-            [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
-            [&apos;honda&apos;, &apos;yamaha&apos;]
-            suzuki
-    这两种删，前者为销毁，后者为暂时删除。
-    补充：
-        如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。
-        ex：Array.remove(&apos;doubi&apos;)
-        remove()也是暂时删除。
-
-2.4.3 改：ex：
-        Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
-        Array[0] = &apos;gandalf&apos;
-    out：
-        [&apos;gandalf&apos;,&apos;G&apos;,&apos;GG&apos;]
-
-2.4.4 查：与 2.12 类似。
-</code></pre><p> 2.5    列表排序与长度确定（注意分永久和暂时排序）</p>
-<p> 2.6    列表使用时可能会产生索引错误</p>
-<pre><code>如：索引超过当前列表长度的序值。
-    列表为空时索引 -1。
-</code></pre><p> 2.7    列表中 for 的使用</p>
-<pre><code>跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。
-    如 for cat in cats:
-            .
-            .        //循环语句块（带上缩进才算，即写完 for 换行之后，缩进该行）
-            .
-        表示从列表 cats 选取第一个元素并赋予 cat，然后执行语句块，直至选取到列表 cats 中最后一个元素。
-
-注意这里的命名规则，尽量用复数名词表示列表（如 cats），用单数名词表示单个列表元素（如 cat）。
-
-通常遇见这种错误
-    Indentation Error: expected an indented block
-表示你没缩进，编译器没检测到循环语句块。
-这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。
-补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）
-</code></pre><p> 2.8    数值列表的创建</p>
-<pre><code>2.8.1 函数 range(a,b,c) 
-    作用：生成一系列数字。
-    使用方式：
-        从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）
+</code></pre><h1 id="2-列表的使用-（大部分情况下把它当作数组来用）"><a href="#2-列表的使用-（大部分情况下把它当作数组来用）" class="headerlink" title="2. 列表的使用    （大部分情况下把它当作数组来用）"></a>2. 列表的使用    （大部分情况下把它当作数组来用）</h1><h2 id="2-1-什么是列表（和-C-C-中的数组有点像）"><a href="#2-1-什么是列表（和-C-C-中的数组有点像）" class="headerlink" title="2.1 什么是列表（和 C/C++ 中的数组有点像）"></a>2.1 什么是列表（和 C/C++ 中的数组有点像）</h2><h2 id="2-2-列表元素的访问"><a href="#2-2-列表元素的访问" class="headerlink" title="2.2 列表元素的访问"></a>2.2 列表元素的访问</h2><h2 id="2-3-元素的索引从-0-开始"><a href="#2-3-元素的索引从-0-开始" class="headerlink" title="2.3 元素的索引从 0 开始"></a>2.3 元素的索引从 0 开始</h2><pre><code>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。
+</code></pre><h2 id="2-4-列表的增、删、改、查"><a href="#2-4-列表的增、删、改、查" class="headerlink" title="2.4 列表的增、删、改、查"></a>2.4 列表的增、删、改、查</h2><h3 id="2-4-1-增：有两种常见方法，append-b-（加在列表尾）、insert-a-b-（a是索引序号，b是新增元素）"><a href="#2-4-1-增：有两种常见方法，append-b-（加在列表尾）、insert-a-b-（a是索引序号，b是新增元素）" class="headerlink" title="2.4.1 增：有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）"></a>2.4.1 增：有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</h3><h3 id="2-4-2-删：del语句。如：del-Array-0-（删掉列表头部元素）"><a href="#2-4-2-删：del语句。如：del-Array-0-（删掉列表头部元素）" class="headerlink" title="2.4.2 删：del语句。如：del Array[0]（删掉列表头部元素）"></a>2.4.2 删：del语句。如：del Array[0]（删掉列表头部元素）</h3><pre><code>标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。
     ex：
-        for value in range(1,4):
-            print(value)
+        motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+        print(motorcycles)
+        popped_motorcycle = motorcycles.pop()
+        print(motorcycles)
+        print(popped_motorcycle)
     out：
-        1
-        2
-        3
+        [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+        [&apos;honda&apos;, &apos;yamaha&apos;]
+        suzuki
+这两种删，前者为销毁，后者为暂时删除。
+补充：
+    如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。
+    ex：Array.remove(&apos;doubi&apos;)
+    remove()也是暂时删除。
 
-2.8.2 函数 list()
-    作用：生成列表。
-    使用方式：
-        numbers = list(range(1,4))
+    2.4.3 改：ex：
+            Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
+            Array[0] = &apos;gandalf&apos;
+        out：
+            [&apos;gandalf&apos;,&apos;G&apos;,&apos;GG&apos;]
+
+    2.4.4 查：与 2.12 类似。
+
+2.5    列表排序与长度确定（注意分永久和暂时排序）
+
+2.6    列表使用时可能会产生索引错误
+    如：索引超过当前列表长度的序值。
+        列表为空时索引 -1。
+
+2.7    列表中 for 的使用
+    跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。
+        如 for cat in cats:
+                .
+                .        //循环语句块（带上缩进才算，即写完 for 换行之后，缩进该行）
+                .
+            表示从列表 cats 选取第一个元素并赋予 cat，然后执行语句块，直至选取到列表 cats 中最后一个元素。
+
+    注意这里的命名规则，尽量用复数名词表示列表（如 cats），用单数名词表示单个列表元素（如 cat）。
+
+    通常遇见这种错误
+        Indentation Error: expected an indented block
+    表示你没缩进，编译器没检测到循环语句块。
+    这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。
+    补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）
+
+2.8    数值列表的创建
+    2.8.1 函数 range(a,b,c) 
+        作用：生成一系列数字。
+        使用方式：
+            从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）
+        ex：
+            for value in range(1,4):
+                print(value)
+        out：
+            1
+            2
+            3
+
+    2.8.2 函数 list()
+        作用：生成列表。
+        使用方式：
+            numbers = list(range(1,4))
+            print(numbers)
+        out：
+            [1,2,3]
+
+2.9    数字列表的统计计算
+    min()、max()、sum() 的使用
+
+2.10 列表解析
+    用于简化代码。
+    ex：
+        numbers = [value**2 for value in range(1,4)]
         print(numbers)
     out：
-        [1,2,3]
-</code></pre><p> 2.9    数字列表的统计计算</p>
-<pre><code>min()、max()、sum() 的使用
-</code></pre><p> 2.10 列表解析</p>
-<pre><code>用于简化代码。
-ex：
-    numbers = [value**2 for value in range(1,4)]
-    print(numbers)
-out：
-    [1,4,9]
-</code></pre><p> 2.11 切片（ python 术语，意为处理列表的部分元素）</p>
-<pre><code>其语法形式为：
-    Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
-    print(Array[1:4])    //从第 1 个开始，到第 4 个结束（不包含第 4 个）。注意，从 0 开始计算。
-out：
-    [&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
-如果没有指定开头索引值（如 Array[:4]）,则将从表头开始，其输出结果为：
-    [&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
-类似的，没有指定末尾索引值（如 Array[1:]）,则从指定索引序号到列表末尾，其输出结果为：
-    [&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
-此外，索引序号可以为负数，请注意若为 [-3:]（负几都一样）,并不会给你打完一整个列表，而只会打印最后3个元素，直至列表结束。
-</code></pre><p> 2.12 切片的遍历</p>
-<pre><code>很简单，加个循环语句（如 for ）就行。
+        [1,4,9]
+
+2.11 切片（ python 术语，意为处理列表的部分元素）
+    其语法形式为：
+        Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
+        print(Array[1:4])    //从第 1 个开始，到第 4 个结束（不包含第 4 个）。注意，从 0 开始计算。
+    out：
+        [&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
+    如果没有指定开头索引值（如 Array[:4]）,则将从表头开始，其输出结果为：
+        [&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
+    类似的，没有指定末尾索引值（如 Array[1:]）,则从指定索引序号到列表末尾，其输出结果为：
+        [&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
+    此外，索引序号可以为负数，请注意若为 [-3:]（负几都一样）,并不会给你打完一整个列表，而只会打印最后3个元素，直至列表结束。
+
+2.12 切片的遍历
+    很简单，加个循环语句（如 for ）就行。
+        ex：
+            for cat in cats[:3]:
+        out：
+            [前面三个元素]
+
+2.13 列表的复制
+    其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。
     ex：
-        for cat in cats[:3]:
+        my_cars = friend_cars[:]
     out：
-        [前面三个元素]
-</code></pre><p> 2.13 列表的复制</p>
-<pre><code>其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。
-ex：
-    my_cars = friend_cars[:]
-out：
-    得到两个一毛一样的列表（但是互相独立）
+        得到两个一毛一样的列表（但是互相独立）
 
-注意不要这么写：
-    my_cars = friend_cars
-这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。
-</code></pre><p> 2.14 元组</p>
-<pre><code>2.14.1 元组的定义
-    列表中的元素可变，而元组不能变，其他相同。
-    存在的意义：在整个程序生命周期中保持一组元素值不变。（说白了就是常量）
-    其定义格式为：
-        dimensions = (200, 50)        //用小括号，不再用中括号
-        print(dimensions[0])
-        print(dimensions[1])
-    out：
-        200
-        50
+    注意不要这么写：
+        my_cars = friend_cars
+    这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。
 
-2.14.2 元组的遍历
-    ex：
-        dimensions = (200, 50)
-        for dimension in dimensions:
-            print(dimension)
-    out：
-        200
-        50
+2.14 元组
+    2.14.1 元组的定义
+        列表中的元素可变，而元组不能变，其他相同。
+        存在的意义：在整个程序生命周期中保持一组元素值不变。（说白了就是常量）
+        其定义格式为：
+            dimensions = (200, 50)        //用小括号，不再用中括号
+            print(dimensions[0])
+            print(dimensions[1])
+        out：
+            200
+            50
 
-2.14.3 修改元组的变量
-    虽然元组元素不可改变，但是可以给存储元组的变量赋值。
-    ex：
-        dimensions = (200, 50)
-        print(&quot;原来的：&quot;)
-        for dimension in dimensions:
-            print(dimension)
-        dimensions = (400, 100)
-        print(&quot;\n改变：&quot;)
-        for dimension in dimensions:
-            print(dimension)
-    out：
-        原来的：
-        200
-        50
+    2.14.2 元组的遍历
+        ex：
+            dimensions = (200, 50)
+            for dimension in dimensions:
+                print(dimension)
+        out：
+            200
+            50
 
-        改变：
-        400
-        100
+    2.14.3 修改元组的变量
+        虽然元组元素不可改变，但是可以给存储元组的变量赋值。
+        ex：
+            dimensions = (200, 50)
+            print(&quot;原来的：&quot;)
+            for dimension in dimensions:
+                print(dimension)
+            dimensions = (400, 100)
+            print(&quot;\n改变：&quot;)
+            for dimension in dimensions:
+                print(dimension)
+        out：
+            原来的：
+            200
+            50
 
-    注意：这里说的修改不是这么改：
-        dimensions[0] = 250
-        这是改不了的，元组存储的元素不可改变，只能从根源上改。
-</code></pre><p> 2.15 学习要点：</p>
-<pre><code>列表的增、删、改、查
-for 的使用（和 C 有所不同，而且密切注意缩进的不同）
-列表的复制
-元组的应用
-</code></pre></li>
+            改变：
+            400
+            100
+
+        注意：这里说的修改不是这么改：
+            dimensions[0] = 250
+            这是改不了的，元组存储的元素不可改变，只能从根源上改。
+
+2.15 学习要点：
+    列表的增、删、改、查
+    for 的使用（和 C 有所不同，而且密切注意缩进的不同）
+    列表的复制
+    元组的应用
+</code></pre><ol start="3">
 <li><p>条件语句（不管怎么用，都不影响原值）<br> 3.1 if 语句的使用</p>
 <pre><code>cars = [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
 for car in cars:
@@ -658,7 +663,7 @@ if 与 for 的混合使用
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-变量和简单数据类型"><span class="nav-number">1.</span> <span class="nav-text">1. 变量和简单数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-字符串拼接："><span class="nav-number">1.1.</span> <span class="nav-text">1.1 字符串拼接：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-str-的使用"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 str() 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-学习要点："><span class="nav-number">1.3.</span> <span class="nav-text">1.3 学习要点：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-变量和简单数据类型"><span class="nav-number">1.</span> <span class="nav-text">1. 变量和简单数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-字符串拼接："><span class="nav-number">1.1.</span> <span class="nav-text">1.1 字符串拼接：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-str-的使用"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 str() 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-学习要点："><span class="nav-number">1.3.</span> <span class="nav-text">1.3 学习要点：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-列表的使用-（大部分情况下把它当作数组来用）"><span class="nav-number">2.</span> <span class="nav-text">2. 列表的使用    （大部分情况下把它当作数组来用）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-什么是列表（和-C-C-中的数组有点像）"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 什么是列表（和 C/C++ 中的数组有点像）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-列表元素的访问"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 列表元素的访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-元素的索引从-0-开始"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 元素的索引从 0 开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-列表的增、删、改、查"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 列表的增、删、改、查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-增：有两种常见方法，append-b-（加在列表尾）、insert-a-b-（a是索引序号，b是新增元素）"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1 增：有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-删：del语句。如：del-Array-0-（删掉列表头部元素）"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.4.2 删：del语句。如：del Array[0]（删掉列表头部元素）</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
