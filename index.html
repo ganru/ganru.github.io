@@ -433,7 +433,7 @@ out：
     400
     100
 </code></pre><p>注意：这里说的修改不是这么改：<br>    <code>dimensions[0] = 250</code><br>这是改不了的，元组存储的元素不可改变，只能从根源上改。</p>
-<h2 id="学习要点："><a href="#学习要点：" class="headerlink" title="学习要点："></a>学习要点：</h2><ol>
+<h2 id="学习要点-1"><a href="#学习要点-1" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
 <li>列表的增、删、改、查</li>
 <li>for 的使用（和 C 有所不同，而且密切注意缩进的不同）</li>
 <li>列表的复制</li>
@@ -463,15 +463,15 @@ in 判断特定值是否已在列表中
     out：
         True
 not in 判断特定值是否不在列表中
-</code></pre><h2 id="学习要点：-1"><a href="#学习要点：-1" class="headerlink" title="学习要点："></a>学习要点：</h2><ol>
+</code></pre><h2 id="学习要点-2"><a href="#学习要点-2" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
 <li>if-elif-else 结构的使用</li>
 <li>if 与 for 的混合使用</li>
 <li>对特定元素的筛选</li>
 </ol>
 <h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><h2 id="字典的定义"><a href="#字典的定义" class="headerlink" title="字典的定义"></a>字典的定义</h2><p>类似于数据结构中的线性表，链表之类，具有将数据关联起来的作用。</p>
 <p>字典的格式：</p>
-<pre><code>`student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}    //由多个键值对构成`
-</code></pre><p>使用字典来存储用户提供的数据或在编写能自动生成大量键—值对的代码时，通常都需要先定义一个空字典。</p>
+<p><code>student_0 = {&#39;name&#39;:&#39;ganru&#39;,&#39;age&#39;:19}    //由多个键值对构成</code></p>
+<p>使用字典来存储用户提供的数据或在编写能自动生成大量键—值对的代码时，通常都需要先定义一个空字典。</p>
 <p><a id="zidian"></a></p>
 <h2 id="字典的访问"><a href="#字典的访问" class="headerlink" title="字典的访问"></a>字典的访问</h2><pre><code>ex：
     student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
@@ -583,9 +583,26 @@ out：
     Python
     C
     Ruby
-</code></pre><p>4.5 字典的嵌套<br>    比如 字典中的字典。<br>    ex：<br>        alien_0 = {‘color’: ‘green’, ‘points’: 5}<br>        alien_1 = {‘color’: ‘yellow’, ‘points’: 10}<br>        alien_2 = {‘color’: ‘red’, ‘points’: 15}<br>        aliens = [alien_0, alien_1, alien_2]<br>        for alien in aliens:<br>            print(alien)<br>    out：<br>        {‘color’: ‘green’, ‘points’: 5}<br>        {‘color’: ‘yellow’, ‘points’: 10}<br>        {‘color’: ‘red’, ‘points’: 15}</p>
-<p>4.6 字典中存储列表<br>    ex：<br>        student_0 = {<br>            ‘name’: ‘ganru’,<br>            ‘language’: [‘python’, ‘C’, ‘C++’],<br>            }</p>
-<pre><code>    print(student_0[&apos;name&apos;].title() + &quot;&apos;s favorite languages are:&quot;)
+</code></pre><h2 id="字典的嵌套"><a href="#字典的嵌套" class="headerlink" title="字典的嵌套"></a>字典的嵌套</h2><p>比如 字典中的字典。</p>
+<pre><code>ex：
+    alien_0 = {&apos;color&apos;: &apos;green&apos;, &apos;points&apos;: 5}
+    alien_1 = {&apos;color&apos;: &apos;yellow&apos;, &apos;points&apos;: 10}
+    alien_2 = {&apos;color&apos;: &apos;red&apos;, &apos;points&apos;: 15}
+    aliens = [alien_0, alien_1, alien_2]
+    for alien in aliens:
+        print(alien)
+out：
+    {&apos;color&apos;: &apos;green&apos;, &apos;points&apos;: 5}
+    {&apos;color&apos;: &apos;yellow&apos;, &apos;points&apos;: 10}
+    {&apos;color&apos;: &apos;red&apos;, &apos;points&apos;: 15}
+</code></pre><h2 id="字典中存储列表"><a href="#字典中存储列表" class="headerlink" title="字典中存储列表"></a>字典中存储列表</h2><pre><code>ex：
+    student_0 = {
+        &apos;name&apos;: &apos;ganru&apos;,
+        &apos;language&apos;: [&apos;python&apos;, &apos;C&apos;, &apos;C++&apos;],
+        }
+
+
+    print(student_0[&apos;name&apos;].title() + &quot;&apos;s favorite languages are:&quot;)
     for language in student_0[&apos;language&apos;]:
         print(&quot;\t&quot; + language.title())
 
@@ -594,7 +611,13 @@ out：
         Python
         C
         C++
-</code></pre>
+</code></pre><h2 id="学习要点-3"><a href="#学习要点-3" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<li>如何定义字典，以及如何使用存储在字典中的信息；</li>
+<li>如何访问和修改字典中的元素，以及如何遍历字典中的所有信息；</li>
+<li>如何遍历字典中所有的键值对、所有的键和所有的值；</li>
+<li>如何在列表中嵌套字典、在字典中嵌套列表以及在字典中嵌套字典。</li>
+</ol>
+<h1 id="用户输入与-while-循环"><a href="#用户输入与-while-循环" class="headerlink" title="用户输入与 while 循环"></a>用户输入与 while 循环</h1>
           
         
       
