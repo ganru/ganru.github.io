@@ -319,11 +319,29 @@ print(message)
 
 out：
     TypeError: Can&apos;t convert &apos;int&apos; object to str implicitly        //报错
-</code></pre><p>以上应改为：<br>        message = “Happy “ + str(age) + “rd Birthday!”</p>
-<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><p>如何创建描述性变量名以及如何消除名称错误和语法错误；<br>字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；<br>使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；<br>如何使用整数和浮点数；<br>使用数值数据时需要注意的意外行为。<br>你还学习了如何编写说明性注释，让代码对你和其他人来说更容易理解。最后，你了解了让代码尽可能简单的理念。</p>
-<h1 id="列表的使用（大部分情况下把它当作数组来用）"><a href="#列表的使用（大部分情况下把它当作数组来用）" class="headerlink" title="列表的使用（大部分情况下把它当作数组来用）"></a>列表的使用（大部分情况下把它当作数组来用）</h1><h2 id="什么是列表（和-C-C-中的数组有点像）"><a href="#什么是列表（和-C-C-中的数组有点像）" class="headerlink" title="什么是列表（和 C/C++ 中的数组有点像）"></a>什么是列表（和 C/C++ 中的数组有点像）</h2><h2 id="列表元素的访问"><a href="#列表元素的访问" class="headerlink" title="列表元素的访问"></a>列表元素的访问</h2><h2 id="元素的索引从-0-开始"><a href="#元素的索引从-0-开始" class="headerlink" title="元素的索引从 0 开始"></a>元素的索引从 0 开始</h2><p>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
+</code></pre><p>以上应改为：<br><code>message = &quot;Happy &quot; + str(age) + &quot;rd Birthday!&quot;</code></p>
+<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><pre><code>如何创建描述性变量名以及如何消除名称错误和语法错误；
+字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；
+使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；
+如何使用整数和浮点数；
+使用数值数据时需要注意的意外行为。
+你还学习了如何编写说明性注释，让代码对你和其他人来说更容易理解。最后，你了解了让代码尽可能简单的理念。
+</code></pre><h1 id="列表的使用（大部分情况下把它当作数组来用）"><a href="#列表的使用（大部分情况下把它当作数组来用）" class="headerlink" title="列表的使用（大部分情况下把它当作数组来用）"></a>列表的使用（大部分情况下把它当作数组来用）</h1><h2 id="什么是列表（和-C-C-中的数组有点像）"><a href="#什么是列表（和-C-C-中的数组有点像）" class="headerlink" title="什么是列表（和 C/C++ 中的数组有点像）"></a>什么是列表（和 C/C++ 中的数组有点像）</h2><h2 id="列表元素的访问"><a href="#列表元素的访问" class="headerlink" title="列表元素的访问"></a>列表元素的访问</h2><h2 id="元素的索引从-0-开始"><a href="#元素的索引从-0-开始" class="headerlink" title="元素的索引从 0 开始"></a>元素的索引从 0 开始</h2><p>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
 <h2 id="列表的增、删、改、查"><a href="#列表的增、删、改、查" class="headerlink" title="列表的增、删、改、查"></a>列表的增、删、改、查</h2><h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</p>
-<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>del语句。如：del Array[0]（删掉列表头部元素）<br>标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。<br>    ex：<br>        motorcycles = [‘honda’, ‘yamaha’, ‘suzuki’]<br>        print(motorcycles)<br>        popped_motorcycle = motorcycles.pop()<br>        print(motorcycles)<br>        print(popped_motorcycle)<br>    out：<br>        [‘honda’, ‘yamaha’, ‘suzuki’]<br>        [‘honda’, ‘yamaha’]<br>        suzuki<br>这两种删，前者为销毁，后者为暂时删除。<br>补充：<br>如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>    ex：Array.remove(‘doubi’)<br>    remove()也是暂时删除。</p>
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>del语句。如：del Array[0]（删掉列表头部元素）</p>
+<p>标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。</p>
+<pre><code>ex：
+    motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+    print(motorcycles)
+    popped_motorcycle = motorcycles.pop()
+    print(motorcycles)
+    print(popped_motorcycle)
+out：
+    [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+    [&apos;honda&apos;, &apos;yamaha&apos;]
+    suzuki
+</code></pre><p>这两种删，前者为销毁，后者为暂时删除。</p>
+<p>补充：<br>如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>    ex：Array.remove(‘doubi’)<br>    remove()也是暂时删除。</p>
 <h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><pre><code>ex：
     Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
     Array[0] = &apos;gandalf&apos;
@@ -351,7 +369,7 @@ out：
 </code></pre><p>2.9    数字列表的统计计算<br>    min()、max()、sum() 的使用</p>
 <p>2.10 列表解析<br>    用于简化代码。<br>    ex：<br>        numbers = [value**2 for value in range(1,4)]<br>        print(numbers)<br>    out：<br>        [1,4,9]</p>
 <p>2.11 切片（ python 术语，意为处理列表的部分元素）<br>    其语法形式为：<br>        Array = [‘gan’,’G’,’GA’,’GAN’,’GANR’]<br>        print(Array[1:4])    //从第 1 个开始，到第 4 个结束（不包含第 4 个）。注意，从 0 开始计算。<br>    out：<br>        [‘G’,’GA’,’GAN’]<br>    如果没有指定开头索引值（如 Array[:4]）,则将从表头开始，其输出结果为：<br>        [‘gan’,’G’,’GA’,’GAN’]<br>    类似的，没有指定末尾索引值（如 Array[1:]）,则从指定索引序号到列表末尾，其输出结果为：<br>        [‘G’,’GA’,’GAN’,’GANR’]<br>    此外，索引序号可以为负数，请注意若为 [-3:]（负几都一样）,并不会给你打完一整个列表，而只会打印最后3个元素，直至列表结束。</p>
-<p><a id="qiepian">切片的遍历</a><br>    很简单，加个循环语句（如 for ）就行。<br>        ex：<br>            for cat in cats[:3]:<br>        out：<br>            [前面三个元素]</p>
+<p><a id="qiepian"></a><br>切片的遍历<br>    很简单，加个循环语句（如 for ）就行。<br>        ex：<br>            for cat in cats[:3]:<br>        out：<br>            [前面三个元素]</p>
 <p>2.13 列表的复制<br>    其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。<br>    ex：<br>        my_cars = friend_cars[:]<br>    out：<br>        得到两个一毛一样的列表（但是互相独立）</p>
 <pre><code>注意不要这么写：
     my_cars = friend_cars
