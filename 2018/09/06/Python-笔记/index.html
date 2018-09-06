@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  变量和简单数据类型字符串拼接first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name prin">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-06T08:11:58.552Z">
+<meta property="og:updated_time" content="2018-09-06T08:15:47.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 笔记">
 <meta name="twitter:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  变量和简单数据类型字符串拼接first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name prin">
@@ -356,8 +356,13 @@ out：
 <p><strong>注意</strong>这里的命名规则，尽量用复数名词表示列表（如 cats），用单数名词表示单个列表元素（如 cat）。</p>
 <p>通常遇见这种错误<br>    <code>Indentation Error: expected an indented block</code><br>表示你没缩进，编译器没检测到循环语句块。<br>这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。<br>补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）</p>
 <h2 id="数值列表的创建"><a href="#数值列表的创建" class="headerlink" title="数值列表的创建"></a>数值列表的创建</h2><h3 id="函数-range-a-b-c"><a href="#函数-range-a-b-c" class="headerlink" title="函数 range(a,b,c)"></a>函数 range(a,b,c)</h3><p>作用：生成一系列数字。<br>使用方式：<br>    从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ex：</span><br><span class="line">	for value in range(1,4):</span><br><span class="line">		print(value)</span><br><span class="line">out：</span><br><span class="line">	1</span><br><span class="line">	2</span><br><span class="line">	3</span><br></pre></td></tr></table></figure></p>
-<h3 id="函数-list"><a href="#函数-list" class="headerlink" title="函数 list()"></a>函数 list()</h3><p>作用：生成列表。<br>    ex：<br>        numbers = list(range(1,4))<br>        print(numbers)<br>    out：<br>        [1,2,3]</p>
-<p>2.9    数字列表的统计计算<br>    min()、max()、sum() 的使用</p>
+<h3 id="函数-list"><a href="#函数-list" class="headerlink" title="函数 list()"></a>函数 list()</h3><p>作用：生成列表。</p>
+<pre><code>ex：
+    numbers = list(range(1,4))
+    print(numbers)
+out：
+    [1,2,3]
+</code></pre><p>2.9    数字列表的统计计算<br>    min()、max()、sum() 的使用</p>
 <p>2.10 列表解析<br>    用于简化代码。<br>    ex：<br>        numbers = [value**2 for value in range(1,4)]<br>        print(numbers)<br>    out：<br>        [1,4,9]</p>
 <p>2.11 切片（ python 术语，意为处理列表的部分元素）<br>    其语法形式为：<br>        Array = [‘gan’,’G’,’GA’,’GAN’,’GANR’]<br>        print(Array[1:4])    //从第 1 个开始，到第 4 个结束（不包含第 4 个）。注意，从 0 开始计算。<br>    out：<br>        [‘G’,’GA’,’GAN’]<br>    如果没有指定开头索引值（如 Array[:4]）,则将从表头开始，其输出结果为：<br>        [‘gan’,’G’,’GA’,’GAN’]<br>    类似的，没有指定末尾索引值（如 Array[1:]）,则从指定索引序号到列表末尾，其输出结果为：<br>        [‘G’,’GA’,’GAN’,’GANR’]<br>    此外，索引序号可以为负数，请注意若为 [-3:]（负几都一样）,并不会给你打完一整个列表，而只会打印最后3个元素，直至列表结束。</p>
 <p><a id="qiepian"></a><br>切片的遍历<br>    很简单，加个循环语句（如 for ）就行。<br>        ex：<br>            for cat in cats[:3]:<br>        out：<br>            [前面三个元素]</p>
