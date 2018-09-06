@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  变量和简单数据类型字符串拼接first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name prin">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-06T07:58:13.401Z">
+<meta property="og:updated_time" content="2018-09-06T08:04:57.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 笔记">
 <meta name="twitter:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  变量和简单数据类型字符串拼接first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_name prin">
@@ -316,13 +316,15 @@ print(message)
 out：
     TypeError: Can&apos;t convert &apos;int&apos; object to str implicitly        //报错
 </code></pre><p>以上应改为：<br><code>message = &quot;Happy &quot; + str(age) + &quot;rd Birthday!&quot;</code></p>
-<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><pre><code>如何创建描述性变量名以及如何消除名称错误和语法错误；
-字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；
-使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；
-如何使用整数和浮点数；
-使用数值数据时需要注意的意外行为。
-你还学习了如何编写说明性注释，让代码对你和其他人来说更容易理解。最后，你了解了让代码尽可能简单的理念。
-</code></pre><h1 id="列表的使用（大部分情况下把它当作数组来用）"><a href="#列表的使用（大部分情况下把它当作数组来用）" class="headerlink" title="列表的使用（大部分情况下把它当作数组来用）"></a>列表的使用（大部分情况下把它当作数组来用）</h1><h2 id="什么是列表（和-C-C-中的数组有点像）"><a href="#什么是列表（和-C-C-中的数组有点像）" class="headerlink" title="什么是列表（和 C/C++ 中的数组有点像）"></a>什么是列表（和 C/C++ 中的数组有点像）</h2><h2 id="列表元素的访问"><a href="#列表元素的访问" class="headerlink" title="列表元素的访问"></a>列表元素的访问</h2><h2 id="元素的索引从-0-开始"><a href="#元素的索引从-0-开始" class="headerlink" title="元素的索引从 0 开始"></a>元素的索引从 0 开始</h2><p>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
+<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<li>如何创建描述性变量名以及如何消除名称错误和语法错误；</li>
+<li>字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；</li>
+<li>使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；</li>
+<li>如何使用整数和浮点数；</li>
+<li>使用数值数据时需要注意的意外行为。</li>
+<li>你还学习了如何编写说明性注释，让代码对你和其他人来说更容易理解。最后，你了解了让代码尽可能简单的理念。</li>
+</ol>
+<h1 id="列表的使用（大部分情况下把它当作数组来用）"><a href="#列表的使用（大部分情况下把它当作数组来用）" class="headerlink" title="列表的使用（大部分情况下把它当作数组来用）"></a>列表的使用（大部分情况下把它当作数组来用）</h1><h2 id="什么是列表（和-C-C-中的数组有点像）"><a href="#什么是列表（和-C-C-中的数组有点像）" class="headerlink" title="什么是列表（和 C/C++ 中的数组有点像）"></a>什么是列表（和 C/C++ 中的数组有点像）</h2><h2 id="列表元素的访问"><a href="#列表元素的访问" class="headerlink" title="列表元素的访问"></a>列表元素的访问</h2><h2 id="元素的索引从-0-开始"><a href="#元素的索引从-0-开始" class="headerlink" title="元素的索引从 0 开始"></a>元素的索引从 0 开始</h2><p>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
 <h2 id="列表的增、删、改、查"><a href="#列表的增、删、改、查" class="headerlink" title="列表的增、删、改、查"></a>列表的增、删、改、查</h2><h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</p>
 <h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>del语句。如：del Array[0]（删掉列表头部元素）</p>
 <p>标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。</p>
@@ -337,25 +339,30 @@ out：
     [&apos;honda&apos;, &apos;yamaha&apos;]
     suzuki
 </code></pre><p>这两种删，前者为销毁，后者为暂时删除。</p>
-<p>补充：<br>如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>    ex：Array.remove(‘doubi’)<br>    remove()也是暂时删除。</p>
+<p>补充：<br>如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>    ex：Array.remove(‘doubi’)<br>    remove() 也是暂时删除。</p>
 <h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><pre><code>ex：
     Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
     Array[0] = &apos;gandalf&apos;
 out：
     [&apos;gandalf&apos;,&apos;G&apos;,&apos;GG&apos;]
 </code></pre><h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><p>与 <a href="#qiepian">切片的遍历</a> 类似。</p>
-<p>2.5    列表排序与长度确定（注意分永久和暂时排序）</p>
-<p>2.6    列表使用时可能会产生索引错误<br>    如：索引超过当前列表长度的序值。<br>        列表为空时索引 -1。</p>
-<p>2.7    列表中 for 的使用<br>    跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。<br>        如 for cat in cats:<br>                .<br>                .        //循环语句块（带上缩进才算，即写完 for 换行之后，缩进该行）<br>                .<br>            表示从列表 cats 选取第一个元素并赋予 cat，然后执行语句块，直至选取到列表 cats 中最后一个元素。</p>
-<pre><code>注意这里的命名规则，尽量用复数名词表示列表（如 cats），用单数名词表示单个列表元素（如 cat）。
+<h2 id="列表排序与长度确定（注意分永久和暂时排序）"><a href="#列表排序与长度确定（注意分永久和暂时排序）" class="headerlink" title="列表排序与长度确定（注意分永久和暂时排序）"></a>列表排序与长度确定（注意分永久和暂时排序）</h2><h2 id="列表使用时可能会产生索引错误"><a href="#列表使用时可能会产生索引错误" class="headerlink" title="列表使用时可能会产生索引错误"></a>列表使用时可能会产生索引错误</h2><p>如：索引超过当前列表长度的序值。<br>列表为空时索引 -1。</p>
+<h2 id="列表中-for-的使用"><a href="#列表中-for-的使用" class="headerlink" title="列表中 for 的使用"></a>列表中 for 的使用</h2><p>跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。<br>        如 for cat in cats:<br>                .<br>                .        //循环语句块（带上缩进才算，即写完 for 换行之后，缩进该行）<br>                .<br>            表示从列表 cats 选取第一个元素并赋予 cat，然后执行语句块，直至选取到列表 cats 中最后一个元素。</p>
+<p>注意这里的命名规则，尽量用复数名词表示列表（如 cats），用单数名词表示单个列表元素（如 cat）。</p>
+<p>通常遇见这种错误<br>    Indentation Error: expected an indented block<br>表示你没缩进，编译器没检测到循环语句块。<br>这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。<br>补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）</p>
+<h2 id="数值列表的创建"><a href="#数值列表的创建" class="headerlink" title="数值列表的创建"></a>数值列表的创建</h2><pre><code>2.8.1 函数 range(a,b,c) 
+    作用：生成一系列数字。
+    使用方式：
+        从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）
+    ex：
+        for value in range(1,4):
+            print(value)
+    out：
+        1
+        2
+        3
 
-通常遇见这种错误
-    Indentation Error: expected an indented block
-表示你没缩进，编译器没检测到循环语句块。
-这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。
-补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）
-</code></pre><p>2.8    数值列表的创建<br>    2.8.1 函数 range(a,b,c)<br>        作用：生成一系列数字。<br>        使用方式：<br>            从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）<br>        ex：<br>            for value in range(1,4):<br>                print(value)<br>        out：<br>            1<br>            2<br>            3</p>
-<pre><code>2.8.2 函数 list()
+2.8.2 函数 list()
     作用：生成列表。
     使用方式：
         numbers = list(range(1,4))
@@ -565,7 +572,7 @@ Toyota
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#变量和简单数据类型"><span class="nav-number">1.</span> <span class="nav-text">变量和简单数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串拼接"><span class="nav-number">1.1.</span> <span class="nav-text">字符串拼接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#str-的使用"><span class="nav-number">1.2.</span> <span class="nav-text">str() 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习要点"><span class="nav-number">1.3.</span> <span class="nav-text">学习要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表的使用（大部分情况下把它当作数组来用）"><span class="nav-number">2.</span> <span class="nav-text">列表的使用（大部分情况下把它当作数组来用）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是列表（和-C-C-中的数组有点像）"><span class="nav-number">2.1.</span> <span class="nav-text">什么是列表（和 C/C++ 中的数组有点像）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表元素的访问"><span class="nav-number">2.2.</span> <span class="nav-text">列表元素的访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元素的索引从-0-开始"><span class="nav-number">2.3.</span> <span class="nav-text">元素的索引从 0 开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表的增、删、改、查"><span class="nav-number">2.4.</span> <span class="nav-text">列表的增、删、改、查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#增"><span class="nav-number">2.4.1.</span> <span class="nav-text">增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删"><span class="nav-number">2.4.2.</span> <span class="nav-text">删</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改"><span class="nav-number">2.4.3.</span> <span class="nav-text">改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查"><span class="nav-number">2.4.4.</span> <span class="nav-text">查</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#变量和简单数据类型"><span class="nav-number">1.</span> <span class="nav-text">变量和简单数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串拼接"><span class="nav-number">1.1.</span> <span class="nav-text">字符串拼接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#str-的使用"><span class="nav-number">1.2.</span> <span class="nav-text">str() 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习要点"><span class="nav-number">1.3.</span> <span class="nav-text">学习要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表的使用（大部分情况下把它当作数组来用）"><span class="nav-number">2.</span> <span class="nav-text">列表的使用（大部分情况下把它当作数组来用）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是列表（和-C-C-中的数组有点像）"><span class="nav-number">2.1.</span> <span class="nav-text">什么是列表（和 C/C++ 中的数组有点像）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表元素的访问"><span class="nav-number">2.2.</span> <span class="nav-text">列表元素的访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元素的索引从-0-开始"><span class="nav-number">2.3.</span> <span class="nav-text">元素的索引从 0 开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表的增、删、改、查"><span class="nav-number">2.4.</span> <span class="nav-text">列表的增、删、改、查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#增"><span class="nav-number">2.4.1.</span> <span class="nav-text">增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删"><span class="nav-number">2.4.2.</span> <span class="nav-text">删</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改"><span class="nav-number">2.4.3.</span> <span class="nav-text">改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查"><span class="nav-number">2.4.4.</span> <span class="nav-text">查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表排序与长度确定（注意分永久和暂时排序）"><span class="nav-number">2.5.</span> <span class="nav-text">列表排序与长度确定（注意分永久和暂时排序）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表使用时可能会产生索引错误"><span class="nav-number">2.6.</span> <span class="nav-text">列表使用时可能会产生索引错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表中-for-的使用"><span class="nav-number">2.7.</span> <span class="nav-text">列表中 for 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值列表的创建"><span class="nav-number">2.8.</span> <span class="nav-text">数值列表的创建</span></a></li></ol></li></ol></div>
             
 
           </div>
