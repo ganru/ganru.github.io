@@ -396,8 +396,9 @@ out：
     my_cars = friend_cars[:]
 out：
     得到两个一毛一样的列表（但是互相独立）
-</code></pre><p>注意不要这么写：<br>    <code>my_cars = friend_cars</code></p>
-<p>这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。</p>
+</code></pre><p>注意不要这么写：</p>
+<pre><code>`my_cars = friend_cars`
+</code></pre><p>这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。</p>
 <h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><h3 id="元组的定义"><a href="#元组的定义" class="headerlink" title="元组的定义"></a>元组的定义</h3><p>列表中的元素可变，而元组不能变，其他相同。</p>
 <p>存在的意义：在整个程序生命周期中保持一组元素值不变。（说白了就是常量）<br>其定义格式为：</p>
 <pre><code>    dimensions = (200, 50)        //用小括号，不再用中括号
@@ -462,8 +463,138 @@ in 判断特定值是否已在列表中
     out：
         True
 not in 判断特定值是否不在列表中
-</code></pre><p>3.3 学习要点：<br>    if-elif-else 结构的使用<br>    if 与 for 的混合使用<br>    对特定元素的筛选</p>
+</code></pre><h2 id="学习要点：-1"><a href="#学习要点：-1" class="headerlink" title="学习要点："></a>学习要点：</h2><ol>
+<li>if-elif-else 结构的使用</li>
+<li>if 与 for 的混合使用</li>
+<li>对特定元素的筛选</li>
+</ol>
+<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><h2 id="字典的定义"><a href="#字典的定义" class="headerlink" title="字典的定义"></a>字典的定义</h2><p>类似于数据结构中的线性表，链表之类，具有将数据关联起来的作用。</p>
+<p>字典的格式：</p>
+<pre><code>`student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}    //由多个键值对构成`
+</code></pre><p>使用字典来存储用户提供的数据或在编写能自动生成大量键—值对的代码时，通常都需要先定义一个空字典。</p>
+<p><a id="zidian"></a></p>
+<h2 id="字典的访问"><a href="#字典的访问" class="headerlink" title="字典的访问"></a>字典的访问</h2><pre><code>ex：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
+    print(student_0[&apos;name&apos;])
+out：
+    ganru
+</code></pre><h2 id="字典的增、删、改、查"><a href="#字典的增、删、改、查" class="headerlink" title="字典的增、删、改、查"></a>字典的增、删、改、查</h2><h3 id="增-1"><a href="#增-1" class="headerlink" title="增"></a>增</h3><pre><code>ex：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
+    print(student_0)
+    student_0[&apos;sex&apos;] = &apos;man&apos;
+    student_0[&apos;graduated school&apos;] = &apos;JYU&apos;
+    print(student_0)
+out：
+    {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
+    {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
+</code></pre><h3 id="删-1"><a href="#删-1" class="headerlink" title="删"></a>删</h3><p>用 del 语句。</p>
+<pre><code>ex：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
+    print(student_0)
+    del student_0[&apos;graduated school&apos;]
+    print(student_0)
+out：
+    {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
+    {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;}
+</code></pre><p>注意：永删。</p>
+<h3 id="改-1"><a href="#改-1" class="headerlink" title="改"></a>改</h3><pre><code>ex：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;}
+    print(&quot;my name is&quot; + student_0[&apos;name&apos;] + &quot;.&quot;)
+    student_0[&apos;name&apos;] = &apos;Gandalf&apos;
+    print(&quot;my name is&quot; + student_0[&apos;name&apos;] + &quot;.&quot;)
+out：
+    my name is gan.
+    my name is gandalf.
+</code></pre><h3 id="查-1"><a href="#查-1" class="headerlink" title="查"></a>查</h3><p>与 <a href="#zidian">字典的访问</a> 相似。</p>
+<h2 id="字典的遍历"><a href="#字典的遍历" class="headerlink" title="字典的遍历"></a>字典的遍历</h2><h3 id="遍历所有键值对"><a href="#遍历所有键值对" class="headerlink" title="遍历所有键值对"></a>遍历所有键值对</h3><p>用 for 循环。</p>
+<pre><code>ex：
+    student_0 = {
+        &apos;name&apos;:&apos;ganru&apos;,
+        &apos;age&apos;:19,
+        }
+    for key,value in student_0.items()：    //声明两个变量，用于存储键值对中的键和值。
+        print(&quot;\nKey: &quot; + key)
+        print(&quot;Value: &quot; + value)
+out：
+    Key: name
+    Value: ganru
 
+    Key: age
+    Value: 19
+</code></pre><p>注意：遍历字典时，键值对的返回顺序与存储顺序不一定相同。</p>
+<h3 id="遍历无值键"><a href="#遍历无值键" class="headerlink" title="遍历无值键"></a>遍历无值键</h3><p>用方法 keys() 来对字典进行遍历。</p>
+<pre><code>ex：
+    student_0 = {
+        &apos;name&apos;:&apos;ganru&apos;,
+        &apos;age&apos;:19,
+        &apos;sex&apos;:&apos;man&apos;,
+        &apos;graduated school&apos;:&apos;JYU&apos;,
+        }
+    for name in student_0.keys():        //其实可以不写 .keys()，输出依然不变（默认遍历）
+        print(name.title())
+out：
+    name
+    age
+    graduated school
+</code></pre><h3 id="以某种顺序遍历字典中的所有键"><a href="#以某种顺序遍历字典中的所有键" class="headerlink" title="以某种顺序遍历字典中的所有键"></a>以某种顺序遍历字典中的所有键</h3><p>用函数 sorted() 。</p>
+<pre><code>ex：
+    favorite_languages = {
+        &apos;jen&apos;: &apos;python&apos;,
+        &apos;sarah&apos;: &apos;c&apos;,
+        &apos;edward&apos;: &apos;ruby&apos;,
+        &apos;phil&apos;: &apos;python&apos;,
+        }
+
+    for name in sorted(favorite_languages.keys()):
+        print(name.title() + &quot;, thank you for taking the poll.&quot;)
+out：
+    Edward, thank you for taking the poll.
+    Jen, thank you for taking the poll.
+    Phil, thank you for taking the poll.
+    Sarah, thank you for taking the poll.
+</code></pre><h3 id="遍历所有值（无键）"><a href="#遍历所有值（无键）" class="headerlink" title="遍历所有值（无键）"></a>遍历所有值（无键）</h3><p>用方法 values()。（可能得到很多重复项）</p>
+<pre><code>ex：
+    favorite_languages = {
+        &apos;jen&apos;: &apos;python&apos;,
+        &apos;sarah&apos;: &apos;c&apos;,
+        &apos;edward&apos;: &apos;ruby&apos;,
+        &apos;phil&apos;: &apos;python&apos;,
+        }
+
+    for language in favorite_languages.values():
+        print(language.title())
+out：
+    Python
+    C
+    Ruby
+    Python
+</code></pre><p>在 values() 的基础上用集合set()，可除掉重复项。</p>
+<pre><code>ex：
+    favorite_languages = {
+        &apos;jen&apos;: &apos;python&apos;,
+        &apos;sarah&apos;: &apos;c&apos;,
+        &apos;edward&apos;: &apos;ruby&apos;,
+        &apos;phil&apos;: &apos;python&apos;,
+        }
+
+    for language in set(favorite_languages.values()):
+        print(language.title())
+out：
+    Python
+    C
+    Ruby
+</code></pre><p>4.5 字典的嵌套<br>    比如 字典中的字典。<br>    ex：<br>        alien_0 = {‘color’: ‘green’, ‘points’: 5}<br>        alien_1 = {‘color’: ‘yellow’, ‘points’: 10}<br>        alien_2 = {‘color’: ‘red’, ‘points’: 15}<br>        aliens = [alien_0, alien_1, alien_2]<br>        for alien in aliens:<br>            print(alien)<br>    out：<br>        {‘color’: ‘green’, ‘points’: 5}<br>        {‘color’: ‘yellow’, ‘points’: 10}<br>        {‘color’: ‘red’, ‘points’: 15}</p>
+<p>4.6 字典中存储列表<br>    ex：<br>        student_0 = {<br>            ‘name’: ‘ganru’,<br>            ‘language’: [‘python’, ‘C’, ‘C++’],<br>            }</p>
+<pre><code>    print(student_0[&apos;name&apos;].title() + &quot;&apos;s favorite languages are:&quot;)
+    for language in student_0[&apos;language&apos;]:
+        print(&quot;\t&quot; + language.title())
+
+out：
+    Ganru&apos;s favorite languages are:
+        Python
+        C
+        C++
+</code></pre>
           
         
       
