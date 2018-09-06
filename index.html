@@ -367,9 +367,8 @@ out：
 out：
     [1,2,3]
 </code></pre><h2 id="数字列表的统计计算"><a href="#数字列表的统计计算" class="headerlink" title="数字列表的统计计算"></a>数字列表的统计计算</h2><pre><code>min()、max()、sum() 的使用
-</code></pre><h2 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h2><pre><code>用于简化代码。
-
-ex：
+</code></pre><h2 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h2><p>用于简化代码。</p>
+<pre><code>ex：
     numbers = [value**2 for value in range(1,4)]
     print(numbers)
 out：
@@ -392,64 +391,78 @@ out：
         for cat in cats[:3]:
     out：
         [前面三个元素]
-</code></pre><h2 id="列表的复制"><a href="#列表的复制" class="headerlink" title="列表的复制"></a>列表的复制</h2><pre><code>其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。
-ex：
+</code></pre><h2 id="列表的复制"><a href="#列表的复制" class="headerlink" title="列表的复制"></a>列表的复制</h2><p>其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。</p>
+<pre><code>ex：
     my_cars = friend_cars[:]
 out：
     得到两个一毛一样的列表（但是互相独立）
+</code></pre><p>注意不要这么写：<br>    <code>my_cars = friend_cars</code></p>
+<p>这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。</p>
+<h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><h3 id="元组的定义"><a href="#元组的定义" class="headerlink" title="元组的定义"></a>元组的定义</h3><p>列表中的元素可变，而元组不能变，其他相同。</p>
+<p>存在的意义：在整个程序生命周期中保持一组元素值不变。（说白了就是常量）<br>其定义格式为：</p>
+<pre><code>    dimensions = (200, 50)        //用小括号，不再用中括号
+    print(dimensions[0])
+    print(dimensions[1])
+out：
+    200
+    50
+</code></pre><h3 id="元组的遍历"><a href="#元组的遍历" class="headerlink" title="元组的遍历"></a>元组的遍历</h3><pre><code>ex：
+    dimensions = (200, 50)
+    for dimension in dimensions:
+        print(dimension)
+out：
+    200
+    50
+</code></pre><h3 id="修改元组的变量"><a href="#修改元组的变量" class="headerlink" title="修改元组的变量"></a>修改元组的变量</h3><p>虽然元组元素不可改变，但是可以给存储元组的变量赋值。</p>
+<pre><code>ex：
+    dimensions = (200, 50)
+    print(&quot;原来的：&quot;)
+    for dimension in dimensions:
+        print(dimension)
+    dimensions = (400, 100)
+    print(&quot;\n改变：&quot;)
+    for dimension in dimensions:
+        print(dimension)
+out：
+    原来的：
+    200
+    50
 
-注意不要这么写：
-    my_cars = friend_cars
-这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。
-</code></pre><p>2.14 元组<br>    2.14.1 元组的定义<br>        列表中的元素可变，而元组不能变，其他相同。<br>        存在的意义：在整个程序生命周期中保持一组元素值不变。（说白了就是常量）<br>        其定义格式为：<br>            dimensions = (200, 50)        //用小括号，不再用中括号<br>            print(dimensions[0])<br>            print(dimensions[1])<br>        out：<br>            200<br>            50</p>
-<pre><code>2.14.2 元组的遍历
-    ex：
-        dimensions = (200, 50)
-        for dimension in dimensions:
-            print(dimension)
-    out：
-        200
-        50
-
-2.14.3 修改元组的变量
-    虽然元组元素不可改变，但是可以给存储元组的变量赋值。
-    ex：
-        dimensions = (200, 50)
-        print(&quot;原来的：&quot;)
-        for dimension in dimensions:
-            print(dimension)
-        dimensions = (400, 100)
-        print(&quot;\n改变：&quot;)
-        for dimension in dimensions:
-            print(dimension)
-    out：
-        原来的：
-        200
-        50
-
-        改变：
-        400
-        100
-
-    注意：这里说的修改不是这么改：
-        dimensions[0] = 250
-        这是改不了的，元组存储的元素不可改变，只能从根源上改。
-</code></pre><p>2.15 学习要点：<br>    列表的增、删、改、查<br>    for 的使用（和 C 有所不同，而且密切注意缩进的不同）<br>    列表的复制<br>    元组的应用</p>
-<ol start="3">
-<li>条件语句（不管怎么用，都不影响原值）<br>3.1 if 语句的使用<br> cars = [‘audi’, ‘bmw’, ‘subaru’, ‘toyota’]<br> for car in cars:<pre><code>if car == &apos;bmw&apos;:
-    print(car.upper())
-elif car == &apos;audi&apos;:
-    print(car.title() + &quot; is very good!&quot;)                
-else:
-    print(car.title())
-</code></pre> out：<pre><code>Audi is very good!
-BMW
-Subaru
-Toyota
-</code></pre></li>
+    改变：
+    400
+    100
+</code></pre><p>注意：这里说的修改不是这么改：<br>    <code>dimensions[0] = 250</code><br>这是改不了的，元组存储的元素不可改变，只能从根源上改。</p>
+<h2 id="学习要点："><a href="#学习要点：" class="headerlink" title="学习要点："></a>学习要点：</h2><ol>
+<li>列表的增、删、改、查</li>
+<li>for 的使用（和 C 有所不同，而且密切注意缩进的不同）</li>
+<li>列表的复制</li>
+<li>元组的应用</li>
 </ol>
-<p>3.2 常用的判断符号<br>    == 判断是否相等<br>    != 判断是否不等<br>    and 判断两条件是否同时为 True 。（相当于 &amp;&amp; ）<br>    or 判断是否有一个条件为 True 。（相当于 ||）<br>    in 判断特定值是否已在列表中<br>        ex：<br>            Array = [‘gan’,’GG’]<br>            ‘gan’ in Array<br>        out：<br>            True<br>    not in 判断特定值是否不在列表中</p>
-<p>3.3 学习要点：<br>    if-elif-else 结构的使用<br>    if 与 for 的混合使用<br>    对特定元素的筛选</p>
+<h1 id="条件语句（不管怎么用，都不影响原值）"><a href="#条件语句（不管怎么用，都不影响原值）" class="headerlink" title="条件语句（不管怎么用，都不影响原值）"></a>条件语句（不管怎么用，都不影响原值）</h1><h2 id="if-语句的使用"><a href="#if-语句的使用" class="headerlink" title="if 语句的使用"></a>if 语句的使用</h2><pre><code>cars = [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
+for car in cars:
+    if car == &apos;bmw&apos;:
+        print(car.upper())
+    elif car == &apos;audi&apos;:
+        print(car.title() + &quot; is very good!&quot;)                
+    else:
+        print(car.title())
+out：
+    Audi is very good!
+    BMW
+    Subaru
+    Toyota
+</code></pre><h2 id="常用的判断符号"><a href="#常用的判断符号" class="headerlink" title="常用的判断符号"></a>常用的判断符号</h2><pre><code>== 判断是否相等
+!= 判断是否不等
+and 判断两条件是否同时为 True 。（相当于 &amp;&amp; ）
+or 判断是否有一个条件为 True 。（相当于 ||）
+in 判断特定值是否已在列表中
+    ex：
+        Array = [&apos;gan&apos;,&apos;GG&apos;]
+        &apos;gan&apos; in Array
+    out：
+        True
+not in 判断特定值是否不在列表中
+</code></pre><p>3.3 学习要点：<br>    if-elif-else 结构的使用<br>    if 与 for 的混合使用<br>    对特定元素的筛选</p>
 
           
         
