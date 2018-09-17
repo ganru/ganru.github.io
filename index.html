@@ -292,6 +292,1231 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/用户输入与-while-循环/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/09/17/用户输入与-while-循环/" itemprop="url">用户输入与 while 循环</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T16:10:18+08:00">
+                2018-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><p>写在前面</p></strong></p>
+<hr>
+<blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<h1 id="用户输入与-while-循环"><a href="#用户输入与-while-循环" class="headerlink" title="用户输入与 while 循环"></a>用户输入与 while 循环</h1><h2 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h2><h3 id="函数-input-的使用（类似于-gets）"><a href="#函数-input-的使用（类似于-gets）" class="headerlink" title="函数 input() 的使用（类似于 gets）"></a>函数 input() 的使用（类似于 gets）</h3><p>作用：接收用户键入的数据并保存为字符串。</p>
+<pre><code>ex：
+    message = input(&quot;Tell me something, and I will repeat it back to you: &quot;)
+    print(message)
+
+out：
+    Tell me something, and I will repeat it back to you: Hello everyone!
+    Hello everyone!
+</code></pre><p>input() 括号里面填写的是提示信息，给用户指示该如何键入。</p>
+<p>有时候如果提示信息太长，一行写不完，可以这么做：</p>
+<pre><code>ex：
+    prompt = &quot;If you tell us who you are, we can personalize the messages you see.&quot;
+    prompt += &quot;\nWhat is your first name? &quot;
+
+    name = input(prompt)
+    print(&quot;\nHello, &quot; + name + &quot;!&quot;)
+
+out：
+    If you tell us who you are, we can personalize the messages you see.
+    What is your first name? Ganru
+    Hello, Ganru!
+</code></pre><p>可看出：采用的是字符串拼接的方式。</p>
+<p>注意：这里 Python 接收到的用户键入的数据<strong>永远</strong>是字符串。</p>
+<h3 id="函数-int-的使用（类似于-putchar）"><a href="#函数-int-的使用（类似于-putchar）" class="headerlink" title="函数 int() 的使用（类似于 putchar）"></a>函数 int() 的使用（类似于 putchar）</h3><p>常见作用：</p>
+<ol>
+<li>接收用户键入的数据并保存为整型数值。（通常配合 input() 使用）</li>
+<li><p>将字符串转变为数值表示。</p>
+<p> ex：</p>
+<pre><code>height = input(&quot;How tall are you, in inches? &quot;)
+height = int(height)
+
+if height &gt;= 36:
+    print(&quot;\nYou&apos;re tall enough to ride!&quot;)
+else:
+    print(&quot;\nYou&apos;ll be able to ride when you&apos;re a little older.&quot;)
+</code></pre><p> out：</p>
+<pre><code>How tall are you, in inches? 71
+You&apos;re tall enough to ride!
+</code></pre></li>
+</ol>
+<h2 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h2><pre><code>ex：
+    current_number = 1
+    while current_number &lt;= 5:
+        print(current_number)
+        current_number += 1
+</code></pre><h3 id="用户自行中断"><a href="#用户自行中断" class="headerlink" title="用户自行中断"></a>用户自行中断</h3><pre><code>ex：
+    prompt = &quot;\nTell me something, and I will repeat it back to you:&quot;
+    prompt += &quot;\nEnter &apos;quit&apos; to end the program. &quot;
+    message = &quot;&quot;
+    while message != &apos;quit&apos;:
+        message = input(prompt)
+
+        if message != &apos;quit&apos;:
+            print(message)
+
+out：
+    Tell me something, and I will repeat it back to you:
+    Enter &apos;quit&apos; to end the program. Hello everyone!
+    Hello everyone!
+
+    Tell me something, and I will repeat it back to you:
+    Enter &apos;quit&apos; to end the program. Hello again.
+    Hello again.
+
+    Tell me something, and I will repeat it back to you:
+    Enter &apos;quit&apos; to end the program. quit
+</code></pre><h3 id="运行时中断-（break-语句的使用）"><a href="#运行时中断-（break-语句的使用）" class="headerlink" title="运行时中断 （break 语句的使用）"></a>运行时中断 （break 语句的使用）</h3><p>常见作用：</p>
+<ol>
+<li>让机器判断并跳出无限循环。</li>
+<li><p>让机器筛选特定值。</p>
+<p> ex：</p>
+<pre><code>prompt = &quot;\nwho are you?&quot;
+message = &quot;&quot;
+while True:
+    message = input(prompt)
+
+    if message == &apos;ganru&apos;:
+        break
+    else:
+        print(&quot;Hello, &quot; + message.title() + &quot;!&quot;)
+</code></pre></li>
+</ol>
+<h3 id="运行时-continue"><a href="#运行时-continue" class="headerlink" title="运行时 continue"></a>运行时 continue</h3><pre><code>ex：
+    current_number = 0
+    while current_number &lt; 10:
+     current_number += 1
+
+        if current_number % 2 == 0:
+            continue
+
+        print(current_number)        //打印奇数
+out：
+    1
+    3
+    5
+    7
+    9
+</code></pre><h2 id="while-与列表、字典的关系"><a href="#while-与列表、字典的关系" class="headerlink" title="while 与列表、字典的关系"></a>while 与列表、字典的关系</h2><p><strong>for 适合遍历列表，while 适合处理列表。</strong></p>
+<p>.<br>.</p>
+<h3 id="列表间元素移动"><a href="#列表间元素移动" class="headerlink" title="列表间元素移动"></a>列表间元素移动</h3><pre><code>ex：
+    unconfirmed_users = [&apos;alice&apos;, &apos;brian&apos;, &apos;candace&apos;]
+    confirmed_users = []
+
+    while unconfirmed_users:
+        current_user = unconfirmed_users.pop()
+
+        print(&quot;Verifying user: &quot; + current_user.title())
+        confirmed_users.append(current_user)
+
+    print(&quot;\nThe following users have been confirmed:&quot;)
+    for confirmed_user in confirmed_users:
+        print(confirmed_user.title())
+out：
+    Verifying user: Candace
+    Verifying user: Brian
+    Verifying user: Alice
+
+    The following users have been confirmed:
+    Candace
+    Brian
+    Alice
+</code></pre><h3 id="while-与-remove"><a href="#while-与-remove" class="headerlink" title="while 与 remove"></a>while 与 remove</h3><pre><code>ex：
+    names = [&apos;ganru&apos;,&apos;gandalf&apos;,&apos;gan&apos;,&apos;ganru&apos;,&apos;gandalf&apos;,&apos;ganru&apos;,&apos;gandalf&apos;]
+    print(names)
+
+    while &apos;gandalf&apos; in names:    //判断字符串 &apos;gandalf&apos; 是否在 names 列表中。
+        names.remove(&apos;gandalf&apos;)
+
+    print(names)
+out：
+    [&apos;ganru&apos;,&apos;gandalf&apos;,&apos;gan&apos;,&apos;ganru&apos;,&apos;gandalf&apos;,&apos;ganru&apos;,&apos;gandalf&apos;]
+    [&apos;ganru&apos;,&apos;gan&apos;,&apos;ganru&apos;,&apos;ganru&apos;,]
+</code></pre><h3 id="使用用户输入来填充字典"><a href="#使用用户输入来填充字典" class="headerlink" title="使用用户输入来填充字典"></a>使用用户输入来填充字典</h3><pre><code>ex：
+    responses = {}
+
+    # 设置一个标志，指出调查是否继续
+    polling_active = True
+
+    while polling_active:
+        # 提示输入被调查者的名字和回答
+        name = input(&quot;\nWhat is your name? &quot;)
+        response = input(&quot;Which mountain would you like to climb someday? &quot;)
+
+        # 将答卷存储在字典中
+        responses[name] = response
+
+        # 看看是否还有人要参与调查
+        repeat = input(&quot;Would you like to let another person respond? (yes/ no) &quot;)
+        if repeat == &apos;no&apos;:
+            polling_active = False
+
+        # 调查结束，显示结果
+        print(&quot;\n--- Poll Results ---&quot;)
+        for name, response in responses.items():
+            print(name + &quot; would like to climb &quot; + response + &quot;.&quot;)
+</code></pre><h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<li>input() 的使用</li>
+<li>int() 的使用</li>
+<li>while 循环时中断、continue 及其常见作用</li>
+<li>while 与列表、字典的配合</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/字典/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/09/17/字典/" itemprop="url">字典</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T16:08:47+08:00">
+                2018-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><p>写在前面</p></strong></p>
+<hr>
+<blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><h2 id="字典的定义"><a href="#字典的定义" class="headerlink" title="字典的定义"></a>字典的定义</h2><p>类似于数据结构中的线性表，链表之类，具有将数据关联起来的作用。</p>
+<p>字典的格式：</p>
+<p><code>student_0 = {&#39;name&#39;:&#39;ganru&#39;,&#39;age&#39;:19}    //由多个键值对构成</code></p>
+<p>使用字典来存储用户提供的数据或在编写能自动生成大量键—值对的代码时，通常都需要先定义一个空字典。</p>
+<p><a id="zidian"></a></p>
+<h2 id="字典的访问"><a href="#字典的访问" class="headerlink" title="字典的访问"></a>字典的访问</h2><pre><code>ex：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
+    print(student_0[&apos;name&apos;])
+out：
+    ganru
+</code></pre><h2 id="字典的增、删、改、查"><a href="#字典的增、删、改、查" class="headerlink" title="字典的增、删、改、查"></a>字典的增、删、改、查</h2><h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><pre><code>ex：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
+    print(student_0)
+    student_0[&apos;sex&apos;] = &apos;man&apos;
+    student_0[&apos;graduated school&apos;] = &apos;JYU&apos;
+    print(student_0)
+out：
+    {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
+    {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
+</code></pre><h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>用 del 语句。</p>
+<pre><code>ex：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
+    print(student_0)
+    del student_0[&apos;graduated school&apos;]
+    print(student_0)
+out：
+    {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
+    {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;}
+</code></pre><p>注意：永删。</p>
+<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><pre><code>ex：
+    student_0 = {&apos;name&apos;:&apos;ganru&apos;}
+    print(&quot;my name is&quot; + student_0[&apos;name&apos;] + &quot;.&quot;)
+    student_0[&apos;name&apos;] = &apos;Gandalf&apos;
+    print(&quot;my name is&quot; + student_0[&apos;name&apos;] + &quot;.&quot;)
+out：
+    my name is gan.
+    my name is gandalf.
+</code></pre><h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><p>与 <a href="#zidian">字典的访问</a> 相似。</p>
+<h2 id="字典的遍历"><a href="#字典的遍历" class="headerlink" title="字典的遍历"></a>字典的遍历</h2><h3 id="遍历所有键值对"><a href="#遍历所有键值对" class="headerlink" title="遍历所有键值对"></a>遍历所有键值对</h3><p>用 for 循环。</p>
+<pre><code>ex：
+    student_0 = {
+        &apos;name&apos;:&apos;ganru&apos;,
+        &apos;age&apos;:19,
+        }
+    for key,value in student_0.items()：    //声明两个变量，用于存储键值对中的键和值。
+        print(&quot;\nKey: &quot; + key)
+        print(&quot;Value: &quot; + value)
+out：
+    Key: name
+    Value: ganru
+
+    Key: age
+    Value: 19
+</code></pre><p>注意：遍历字典时，键值对的返回顺序与存储顺序不一定相同。</p>
+<h3 id="遍历无值键"><a href="#遍历无值键" class="headerlink" title="遍历无值键"></a>遍历无值键</h3><p>用方法 keys() 来对字典进行遍历。</p>
+<pre><code>ex：
+    student_0 = {
+        &apos;name&apos;:&apos;ganru&apos;,
+        &apos;age&apos;:19,
+        &apos;sex&apos;:&apos;man&apos;,
+        &apos;graduated school&apos;:&apos;JYU&apos;,
+        }
+    for name in student_0.keys():        //其实可以不写 .keys()，输出依然不变（默认遍历）
+        print(name.title())
+out：
+    name
+    age
+    graduated school
+</code></pre><h3 id="以某种顺序遍历字典中的所有键"><a href="#以某种顺序遍历字典中的所有键" class="headerlink" title="以某种顺序遍历字典中的所有键"></a>以某种顺序遍历字典中的所有键</h3><p>用函数 sorted() 。</p>
+<pre><code>ex：
+    favorite_languages = {
+        &apos;jen&apos;: &apos;python&apos;,
+        &apos;sarah&apos;: &apos;c&apos;,
+        &apos;edward&apos;: &apos;ruby&apos;,
+        &apos;phil&apos;: &apos;python&apos;,
+        }
+
+    for name in sorted(favorite_languages.keys()):
+        print(name.title() + &quot;, thank you for taking the poll.&quot;)
+out：
+    Edward, thank you for taking the poll.
+    Jen, thank you for taking the poll.
+    Phil, thank you for taking the poll.
+    Sarah, thank you for taking the poll.
+</code></pre><h3 id="遍历所有值（无键）"><a href="#遍历所有值（无键）" class="headerlink" title="遍历所有值（无键）"></a>遍历所有值（无键）</h3><p>用方法 values()。（可能得到很多重复项）</p>
+<pre><code>ex：
+    favorite_languages = {
+        &apos;jen&apos;: &apos;python&apos;,
+        &apos;sarah&apos;: &apos;c&apos;,
+        &apos;edward&apos;: &apos;ruby&apos;,
+        &apos;phil&apos;: &apos;python&apos;,
+        }
+
+    for language in favorite_languages.values():
+        print(language.title())
+out：
+    Python
+    C
+    Ruby
+    Python
+</code></pre><p>在 values() 的基础上用集合set()，可除掉重复项。</p>
+<pre><code>ex：
+    favorite_languages = {
+        &apos;jen&apos;: &apos;python&apos;,
+        &apos;sarah&apos;: &apos;c&apos;,
+        &apos;edward&apos;: &apos;ruby&apos;,
+        &apos;phil&apos;: &apos;python&apos;,
+        }
+
+    for language in set(favorite_languages.values()):
+        print(language.title())
+out：
+    Python
+    C
+    Ruby
+</code></pre><h2 id="字典的嵌套"><a href="#字典的嵌套" class="headerlink" title="字典的嵌套"></a>字典的嵌套</h2><p>比如 字典中的字典。</p>
+<pre><code>ex：
+    alien_0 = {&apos;color&apos;: &apos;green&apos;, &apos;points&apos;: 5}
+    alien_1 = {&apos;color&apos;: &apos;yellow&apos;, &apos;points&apos;: 10}
+    alien_2 = {&apos;color&apos;: &apos;red&apos;, &apos;points&apos;: 15}
+    aliens = [alien_0, alien_1, alien_2]
+    for alien in aliens:
+        print(alien)
+out：
+    {&apos;color&apos;: &apos;green&apos;, &apos;points&apos;: 5}
+    {&apos;color&apos;: &apos;yellow&apos;, &apos;points&apos;: 10}
+    {&apos;color&apos;: &apos;red&apos;, &apos;points&apos;: 15}
+</code></pre><h2 id="字典中存储列表"><a href="#字典中存储列表" class="headerlink" title="字典中存储列表"></a>字典中存储列表</h2><pre><code>ex：
+    student_0 = {
+        &apos;name&apos;: &apos;ganru&apos;,
+        &apos;language&apos;: [&apos;python&apos;, &apos;C&apos;, &apos;C++&apos;],
+        }
+
+
+    print(student_0[&apos;name&apos;].title() + &quot;&apos;s favorite languages are:&quot;)
+    for language in student_0[&apos;language&apos;]:
+        print(&quot;\t&quot; + language.title())
+
+out：
+    Ganru&apos;s favorite languages are:
+        Python
+        C
+        C++
+</code></pre><h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<li>如何定义字典，以及如何使用存储在字典中的信息；</li>
+<li>如何访问和修改字典中的元素，以及如何遍历字典中的所有信息；</li>
+<li>如何遍历字典中所有的键值对、所有的键和所有的值；</li>
+<li>如何在列表中嵌套字典、在字典中嵌套列表以及在字典中嵌套字典。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/条件语句/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/09/17/条件语句/" itemprop="url">条件语句</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T16:06:01+08:00">
+                2018-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><p>写在前面</p></strong></p>
+<hr>
+<blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<h1 id="条件语句（不管怎么用，都不影响原值）"><a href="#条件语句（不管怎么用，都不影响原值）" class="headerlink" title="条件语句（不管怎么用，都不影响原值）"></a>条件语句（不管怎么用，都不影响原值）</h1><h2 id="if-语句的使用"><a href="#if-语句的使用" class="headerlink" title="if 语句的使用"></a>if 语句的使用</h2><pre><code>cars = [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
+for car in cars:
+    if car == &apos;bmw&apos;:
+        print(car.upper())
+    elif car == &apos;audi&apos;:
+        print(car.title() + &quot; is very good!&quot;)                
+    else:
+        print(car.title())
+out：
+    Audi is very good!
+    BMW
+    Subaru
+    Toyota
+</code></pre><h2 id="常用的判断符号"><a href="#常用的判断符号" class="headerlink" title="常用的判断符号"></a>常用的判断符号</h2><pre><code>== 判断是否相等
+!= 判断是否不等
+and 判断两条件是否同时为 True 。（相当于 &amp;&amp; ）
+or 判断是否有一个条件为 True 。（相当于 ||）
+in 判断特定值是否已在列表中
+    ex：
+        Array = [&apos;gan&apos;,&apos;GG&apos;]
+        &apos;gan&apos; in Array
+    out：
+        True
+not in 判断特定值是否不在列表中
+</code></pre><h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<li>if-elif-else 结构的使用</li>
+<li>if 与 for 的混合使用</li>
+<li>对特定元素的筛选</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/列表的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/09/17/列表的使用/" itemprop="url">列表的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T16:04:32+08:00">
+                2018-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><p>写在前面</p></strong></p>
+<hr>
+<blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<h1 id="列表的使用（大部分情况下把它当作数组来用）"><a href="#列表的使用（大部分情况下把它当作数组来用）" class="headerlink" title="列表的使用（大部分情况下把它当作数组来用）"></a>列表的使用（大部分情况下把它当作数组来用）</h1><h2 id="什么是列表（和-C-C-中的数组有点像）"><a href="#什么是列表（和-C-C-中的数组有点像）" class="headerlink" title="什么是列表（和 C/C++ 中的数组有点像）"></a>什么是列表（和 C/C++ 中的数组有点像）</h2><p>存储多个数据的元素集合。</p>
+<h2 id="列表元素的访问"><a href="#列表元素的访问" class="headerlink" title="列表元素的访问"></a>列表元素的访问</h2><pre><code>ex：
+    motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+    print(motorcycles)
+</code></pre><h2 id="元素的索引从-0-开始"><a href="#元素的索引从-0-开始" class="headerlink" title="元素的索引从 0 开始"></a>元素的索引从 0 开始</h2><p>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
+<h2 id="列表的增、删、改、查"><a href="#列表的增、删、改、查" class="headerlink" title="列表的增、删、改、查"></a>列表的增、删、改、查</h2><h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</p>
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>del语句。如：del Array[0]（删掉列表头部元素）</p>
+<p>标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。</p>
+<pre><code>ex：
+    motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+    print(motorcycles)
+    popped_motorcycle = motorcycles.pop()
+    print(motorcycles)
+    print(popped_motorcycle)
+out：
+    [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
+    [&apos;honda&apos;, &apos;yamaha&apos;]
+    suzuki
+</code></pre><p>这两种删，前者为销毁，后者为数据提取。</p>
+<p>补充：<br>如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>    ex：Array.remove(‘doubi’)</p>
+<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><pre><code>ex：
+    Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
+    Array[0] = &apos;gandalf&apos;
+out：
+    [&apos;gandalf&apos;,&apos;G&apos;,&apos;GG&apos;]
+</code></pre><h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><p>与 <a href="#qiepian">切片的遍历</a> 类似。</p>
+<h2 id="列表排序与长度确定（注意分永久和暂时排序）"><a href="#列表排序与长度确定（注意分永久和暂时排序）" class="headerlink" title="列表排序与长度确定（注意分永久和暂时排序）"></a>列表排序与长度确定（注意分永久和暂时排序）</h2><h3 id="永久性排序："><a href="#永久性排序：" class="headerlink" title="永久性排序："></a>永久性排序：</h3><pre><code>ex：
+    cars = [&apos;bmw&apos;, &apos;audi&apos;, &apos;toyota&apos;, &apos;subaru&apos;]
+    cars.sort()        //若要大到小排序，在括号内输入 **reverse = True。**
+    print(cars)        //如果要反转列表，写 **cars.reverse**
+out：
+    [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
+</code></pre><h3 id="暂时性排序："><a href="#暂时性排序：" class="headerlink" title="暂时性排序："></a>暂时性排序：</h3><pre><code>ex：
+    Array = [&apos;qwd&apos;,&apos;asd&apos;,&apos;gwa&apos;,&apos;xdf&apos;]
+    print(Array)
+    print(sorted(Array))    //注：如果想大到小排序，写 **sorted(Array，reverse = True)。**
+    print(Array)
+out：
+    [&apos;qwd&apos;,&apos;asd&apos;,&apos;gwa&apos;,&apos;xdf&apos;]
+    [&apos;asd&apos;,&apos;gwa&apos;,&apos;qwd&apos;,&apos;xdf&apos;]
+    [&apos;qwd&apos;,&apos;asd&apos;,&apos;gwa&apos;,&apos;xdf&apos;]
+</code></pre><p><strong>补充：</strong><br>首字母大到小排序：reverse = True<br>字符串长度大到小排序：key = len<br>key 有很多种方式，具体不表。</p>
+<h3 id="列表长度确定"><a href="#列表长度确定" class="headerlink" title="列表长度确定"></a>列表长度确定</h3><pre><code>ex：
+    cars = [&apos;bmw&apos;, &apos;audi&apos;, &apos;toyota&apos;, &apos;subaru&apos;]
+    len(cars)
+</code></pre><h2 id="列表使用时可能会产生索引错误"><a href="#列表使用时可能会产生索引错误" class="headerlink" title="列表使用时可能会产生索引错误"></a>列表使用时可能会产生索引错误</h2><p>如：索引超过当前列表长度的序值。<br>列表为空时索引 -1。</p>
+<h2 id="列表中-for-的使用"><a href="#列表中-for-的使用" class="headerlink" title="列表中 for 的使用"></a>列表中 for 的使用</h2><p>跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。</p>
+<pre><code>如 for cat in cats:
+        .
+        .        //循环语句块（带上缩进才算，即写完 for 换行之后，缩进该行）
+        .
+</code></pre><p>表示从列表 cats 选取第一个元素并赋予 cat，然后执行语句块，直至选取到列表 cats 中最后一个元素。</p>
+<p><strong>注意</strong>这里的命名规则，尽量用复数名词表示列表（如 cats），用单数名词表示单个列表元素（如 cat）。</p>
+<p>通常遇见这种错误<br>    <code>Indentation Error: expected an indented block</code><br>表示你没缩进，编译器没检测到循环语句块。<br>这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。<br>补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）</p>
+<h2 id="数值列表的创建"><a href="#数值列表的创建" class="headerlink" title="数值列表的创建"></a>数值列表的创建</h2><h3 id="函数-range-a-b-c"><a href="#函数-range-a-b-c" class="headerlink" title="函数 range(a,b,c)"></a>函数 range(a,b,c)</h3><p>作用：生成一系列数字。<br>使用方式：<br>    从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ex：</span><br><span class="line">	for value in range(1,4):</span><br><span class="line">		print(value)</span><br><span class="line">out：</span><br><span class="line">	1</span><br><span class="line">	2</span><br><span class="line">	3</span><br></pre></td></tr></table></figure></p>
+<h3 id="函数-list"><a href="#函数-list" class="headerlink" title="函数 list()"></a>函数 list()</h3><p>作用：生成列表。</p>
+<pre><code>ex：
+    numbers = list(range(1,4))
+    print(numbers)
+out：
+    [1,2,3]
+</code></pre><h2 id="数字列表的统计计算"><a href="#数字列表的统计计算" class="headerlink" title="数字列表的统计计算"></a>数字列表的统计计算</h2><pre><code>min()、max()、sum() 的使用
+</code></pre><h2 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h2><p>用于简化代码。</p>
+<pre><code>ex：
+    numbers = [value**2 for value in range(1,4)]
+    print(numbers)
+out：
+    [1,4,9]
+</code></pre><h2 id="切片（-python-术语，意为处理列表的部分元素）"><a href="#切片（-python-术语，意为处理列表的部分元素）" class="headerlink" title="切片（ python 术语，意为处理列表的部分元素）"></a>切片（ python 术语，意为处理列表的部分元素）</h2><pre><code>其语法形式为：
+
+    Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
+    print(Array[1:4])    //从第 1 个开始，到第 4 个结束（不包含第 4 个）。注意，从 0 开始计算。
+out：
+    [&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
+</code></pre><p>如果没有指定开头索引值（如 Array[:4]）,则将从表头开始，其输出结果为：</p>
+<pre><code>[&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
+</code></pre><p>类似的，没有指定末尾索引值（如 Array[1:]）,则从指定索引序号到列表末尾，其输出结果为：</p>
+<pre><code>[&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
+</code></pre><p>此外，索引序号可以为负数，请注意若为 [-3:]（负几都一样）,并不会给你打完一整个列表，而只会打印最后3个元素，直至列表结束。</p>
+<p><a id="qiepian"></a></p>
+<h2 id="切片的遍历"><a href="#切片的遍历" class="headerlink" title="切片的遍历"></a>切片的遍历</h2><pre><code>很简单，加个循环语句（如 for ）就行。
+
+    ex：
+        for cat in cats[:3]:
+    out：
+        [前面三个元素]
+</code></pre><h2 id="列表的复制"><a href="#列表的复制" class="headerlink" title="列表的复制"></a>列表的复制</h2><p>其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。</p>
+<pre><code>ex：
+    my_cars = friend_cars[:]
+out：
+    得到两个一毛一样的列表（但是互相独立）
+</code></pre><p>注意不要这么写：</p>
+<pre><code>`my_cars = friend_cars`
+</code></pre><p>这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。</p>
+<h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><h3 id="元组的定义"><a href="#元组的定义" class="headerlink" title="元组的定义"></a>元组的定义</h3><p>列表中的元素可变，而元组不能变，其他相同。</p>
+<p>存在的意义：在整个程序生命周期中保持一组元素值不变。（说白了就是常量）<br>其定义格式为：</p>
+<pre><code>    dimensions = (200, 50)        //用小括号，不再用中括号
+    print(dimensions[0])
+    print(dimensions[1])
+out：
+    200
+    50
+</code></pre><h3 id="元组的遍历"><a href="#元组的遍历" class="headerlink" title="元组的遍历"></a>元组的遍历</h3><pre><code>ex：
+    dimensions = (200, 50)
+    for dimension in dimensions:
+        print(dimension)
+out：
+    200
+    50
+</code></pre><h3 id="修改元组的变量"><a href="#修改元组的变量" class="headerlink" title="修改元组的变量"></a>修改元组的变量</h3><p>虽然元组元素不可改变，但是可以给存储元组的变量赋值。</p>
+<pre><code>ex：
+    dimensions = (200, 50)
+    print(&quot;原来的：&quot;)
+    for dimension in dimensions:
+        print(dimension)
+    dimensions = (400, 100)
+    print(&quot;\n改变：&quot;)
+    for dimension in dimensions:
+        print(dimension)
+out：
+    原来的：
+    200
+    50
+
+    改变：
+    400
+    100
+</code></pre><p>注意：这里说的修改不是这么改：<br>    <code>dimensions[0] = 250</code><br>这是改不了的，元组存储的元素不可改变，只能从根源上改。</p>
+<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<li>列表的增、删、改、查</li>
+<li>for 的使用（和 C 有所不同，而且密切注意缩进的不同）</li>
+<li>列表的复制</li>
+<li>元组的应用</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/变量和简单的数据类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/09/17/变量和简单的数据类型/" itemprop="url">变量和简单的数据类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T16:02:26+08:00">
+                2018-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><p>写在前面</p></strong></p>
+<hr>
+<blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<h1 id="变量和简单数据类型"><a href="#变量和简单数据类型" class="headerlink" title="变量和简单数据类型"></a>变量和简单数据类型</h1><h2 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h2><pre><code>first_name = &quot;ada&quot;
+last_name = &quot;lovelace&quot;
+full_name = first_name + &quot; &quot; + last_name
+print(&quot;Hello, &quot; + full_name.title() + &quot;!&quot;)
+
+out：
+    Hello, Ada Lovelace!
+</code></pre><h2 id="str-的使用"><a href="#str-的使用" class="headerlink" title="str() 的使用"></a>str() 的使用</h2><pre><code>age = 20
+message = &quot;Happy &quot; + age + &quot;rd Birthday!&quot;
+print(message)
+
+out：
+    TypeError: Can&apos;t convert &apos;int&apos; object to str implicitly        //报错
+</code></pre><p>以上应改为：<br><code>message = &quot;Happy &quot; + str(age) + &quot;rd Birthday!&quot;</code></p>
+<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<li>如何创建描述性变量名以及如何消除名称错误和语法错误；</li>
+<li>字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；</li>
+<li>使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；</li>
+<li>如何使用整数和浮点数；</li>
+<li>使用数值数据时需要注意的意外行为。</li>
+<li>你还学习了如何编写说明性注释，让代码对你和其他人来说更容易理解。最后，你了解了让代码尽可能简单的理念。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/06/Python-笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1324,7 +2549,7 @@ hexo deploy     （或者 hexo d）
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
