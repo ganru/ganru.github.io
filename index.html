@@ -642,13 +642,21 @@ out：
 <li>如何遍历字典中所有的键值对、所有的键和所有的值；</li>
 <li>如何在列表中嵌套字典、在字典中嵌套列表以及在字典中嵌套字典。</li>
 </ol>
-<h1 id="用户输入与-while-循环"><a href="#用户输入与-while-循环" class="headerlink" title="用户输入与 while 循环"></a>用户输入与 while 循环</h1><h2 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h2><h3 id="函数-input-的使用（类似于-gets）"><a href="#函数-input-的使用（类似于-gets）" class="headerlink" title="函数 input() 的使用（类似于 gets）"></a>函数 input() 的使用（类似于 gets）</h3><p>作用：接收用户键入的数据并保存为字符串。<br>    ex：<br>        message = input(“Tell me something, and I will repeat it back to you: “)<br>        print(message)</p>
-<pre><code>out：
+<h1 id="用户输入与-while-循环"><a href="#用户输入与-while-循环" class="headerlink" title="用户输入与 while 循环"></a>用户输入与 while 循环</h1><h2 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h2><h3 id="函数-input-的使用（类似于-gets）"><a href="#函数-input-的使用（类似于-gets）" class="headerlink" title="函数 input() 的使用（类似于 gets）"></a>函数 input() 的使用（类似于 gets）</h3><p>作用：接收用户键入的数据并保存为字符串。</p>
+<pre><code>ex：
+    message = input(&quot;Tell me something, and I will repeat it back to you: &quot;)
+    print(message)
+
+out：
     Tell me something, and I will repeat it back to you: Hello everyone!
     Hello everyone!
 </code></pre><p>input() 括号里面填写的是提示信息，给用户指示该如何键入。</p>
-<p>有时候如果提示信息太长，一行写不完，可以这么做：<br>    ex：<br>        prompt = “If you tell us who you are, we can personalize the messages you see.”<br>        prompt += “\nWhat is your first name? “</p>
-<pre><code>    name = input(prompt)
+<p>有时候如果提示信息太长，一行写不完，可以这么做：</p>
+<pre><code>ex：
+    prompt = &quot;If you tell us who you are, we can personalize the messages you see.&quot;
+    prompt += &quot;\nWhat is your first name? &quot;
+
+    name = input(prompt)
     print(&quot;\nHello, &quot; + name + &quot;!&quot;)
 
 out：
@@ -658,22 +666,23 @@ out：
 </code></pre><p>可看出：采用的是字符串拼接的方式。</p>
 <p>注意：这里 Python 接收到的用户键入的数据<strong>永远</strong>是字符串。</p>
 <h3 id="函数-int-的使用（类似于-putchar）"><a href="#函数-int-的使用（类似于-putchar）" class="headerlink" title="函数 int() 的使用（类似于 putchar）"></a>函数 int() 的使用（类似于 putchar）</h3><p>常见作用：</p>
-<pre><code>1. 接收用户键入的数据并保存为整型数值。（通常配合 input() 使用）
-2. 将字符串转变为数值表示。
+<ol>
+<li>接收用户键入的数据并保存为整型数值。（通常配合 input() 使用）</li>
+<li><p>将字符串转变为数值表示。</p>
+<p> ex：</p>
+<pre><code>height = input(&quot;How tall are you, in inches? &quot;)
+height = int(height)
 
-ex：
-    height = input(&quot;How tall are you, in inches? &quot;)
-    height = int(height)
-
-    if height &gt;= 36:
-        print(&quot;\nYou&apos;re tall enough to ride!&quot;)
-    else:
-        print(&quot;\nYou&apos;ll be able to ride when you&apos;re a little older.&quot;)
-
-out：
-    How tall are you, in inches? 71
-    You&apos;re tall enough to ride!
-</code></pre><h2 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h2><pre><code>ex：
+if height &gt;= 36:
+    print(&quot;\nYou&apos;re tall enough to ride!&quot;)
+else:
+    print(&quot;\nYou&apos;ll be able to ride when you&apos;re a little older.&quot;)
+</code></pre><p> out：</p>
+<pre><code>How tall are you, in inches? 71
+You&apos;re tall enough to ride!
+</code></pre></li>
+</ol>
+<h2 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h2><pre><code>ex：
     current_number = 1
     while current_number &lt;= 5:
         print(current_number)
@@ -700,20 +709,22 @@ out：
     Tell me something, and I will repeat it back to you:
     Enter &apos;quit&apos; to end the program. quit
 </code></pre><h3 id="运行时中断-（break-语句的使用）"><a href="#运行时中断-（break-语句的使用）" class="headerlink" title="运行时中断 （break 语句的使用）"></a>运行时中断 （break 语句的使用）</h3><p>常见作用：</p>
-<pre><code>1. 让机器判断并跳出无限循环。
-2. 让机器筛选特定值。
+<ol>
+<li>让机器判断并跳出无限循环。</li>
+<li><p>让机器筛选特定值。</p>
+<p> ex：</p>
+<pre><code>prompt = &quot;\nwho are you?&quot;
+message = &quot;&quot;
+while True:
+    message = input(prompt)
 
-ex：
-    prompt = &quot;\nwho are you?&quot;
-    message = &quot;&quot;
-    while True:
-        message = input(prompt)
-
-        if message == &apos;ganru&apos;:
-            break
-        else:
-            print(&quot;Hello, &quot; + message.title() + &quot;!&quot;)
-</code></pre><h3 id="运行时-continue"><a href="#运行时-continue" class="headerlink" title="运行时 continue"></a>运行时 continue</h3><pre><code>ex：
+    if message == &apos;ganru&apos;:
+        break
+    else:
+        print(&quot;Hello, &quot; + message.title() + &quot;!&quot;)
+</code></pre></li>
+</ol>
+<h3 id="运行时-continue"><a href="#运行时-continue" class="headerlink" title="运行时 continue"></a>运行时 continue</h3><pre><code>ex：
     current_number = 0
     while current_number &lt; 10:
      current_number += 1
@@ -729,8 +740,7 @@ out：
     7
     9
 </code></pre><h2 id="while-与列表、字典的关系"><a href="#while-与列表、字典的关系" class="headerlink" title="while 与列表、字典的关系"></a>while 与列表、字典的关系</h2><pre><code>**for 适合遍历列表，while 适合处理列表。**
-</code></pre><p>.</p>
-<p>.</p>
+</code></pre><p>.<br>.</p>
 <h3 id="列表间元素移动"><a href="#列表间元素移动" class="headerlink" title="列表间元素移动"></a>列表间元素移动</h3><pre><code>ex：
     unconfirmed_users = [&apos;alice&apos;, &apos;brian&apos;, &apos;candace&apos;]
     confirmed_users = []
