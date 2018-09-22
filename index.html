@@ -401,13 +401,31 @@
 out：
     ganru, Welcome to you!
 </code></pre><h2 id="实参与形参"><a href="#实参与形参" class="headerlink" title="实参与形参"></a>实参与形参</h2><p>如 hello() 的函数定义，括号里面的变量<strong> username </strong>是形参，只具有形式意义，而值<strong> ‘ganru’ </strong>是实参，具有实际意义。<br>如何判断：函数定义中的变量为形参，函数调用中的变量为实参。</p>
-<h2 id="实参的传递"><a href="#实参的传递" class="headerlink" title="实参的传递"></a>实参的传递</h2><h3 id="位置实参"><a href="#位置实参" class="headerlink" title="位置实参"></a>位置实参</h3><p>定义：基于实参的顺序将函数调用中的每个实参都关联到函数定义中的一个形参。<br>    ex：<br>        def student(name, sex):<br>            .<br>            .<br>            .</p>
-<pre><code>student(&apos;garu&apos;,&apos;boy&apos;)    #这里的 &apos;garu&apos; 为第一顺序，&apos;boy&apos; 为第二顺序。
-</code></pre><h3 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h3><p>定义：传递给函数的名称—值对。无需考虑函数调用中的实参顺序，还清楚地指出了函数调用中各个值的用途。<br>    ex：<br>        def student(name, sex):<br>            .<br>            .<br>            .</p>
-<pre><code>student(sex = &apos;boy&apos;, name = &apos;garu&apos;)    #顺序反了也没事
+<h2 id="实参的传递"><a href="#实参的传递" class="headerlink" title="实参的传递"></a>实参的传递</h2><h3 id="位置实参"><a href="#位置实参" class="headerlink" title="位置实参"></a>位置实参</h3><p>定义：基于实参的顺序将函数调用中的每个实参都关联到函数定义中的一个形参。</p>
+<pre><code>ex：
+    def student(name, sex):
+        .
+        .
+        .
+
+    student(&apos;garu&apos;,&apos;boy&apos;)    #这里的 &apos;garu&apos; 为第一顺序，&apos;boy&apos; 为第二顺序。
+</code></pre><h3 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h3><p>定义：传递给函数的名称—值对。无需考虑函数调用中的实参顺序，还清楚地指出了函数调用中各个值的用途。</p>
+<pre><code>ex：
+    def student(name, sex):
+        .
+        .
+        .
+
+    student(sex = &apos;boy&apos;, name = &apos;garu&apos;)    #顺序反了也没事
 </code></pre><p>注意：使用关键字实参时，务必准确地指定函数定义中的形参名。</p>
-<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>调用函数中给形参提供了实参时，Python 将使用指定的实参值；否则，将使用形参的默认值。<br>作用：给形参指定默认值后，可在函数调用中省略相应的实参。<br>    ex：<br>        def student(name, sex = ‘boy’):<br>            .<br>            .<br>            .</p>
-<pre><code>student(name = &apos;garu&apos;)    #以后每次调用，如果没有显式提供实参给 sex，sex 都是 &apos;boy&apos;。
+<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>调用函数中给形参提供了实参时，Python 将使用指定的实参值；否则，将使用形参的默认值。<br>作用：给形参指定默认值后，可在函数调用中省略相应的实参。</p>
+<pre><code>ex：
+    def student(name, sex = &apos;boy&apos;):
+        .
+        .
+        .
+
+    student(name = &apos;garu&apos;)    #以后每次调用，如果没有显式提供实参给 sex，sex 都是 &apos;boy&apos;。
 </code></pre><p>注意：如果以后要用默认值，也就是考虑到可能不写值，则形参放最后面（如：sex），以免出现位置实参错误。</p>
 <h3 id="等效的函数调用"><a href="#等效的函数调用" class="headerlink" title="等效的函数调用"></a>等效的函数调用</h3><p>就是上面的实参调用方式可以混用。</p>
 <h2 id="return"><a href="#return" class="headerlink" title="return"></a>return</h2><pre><code>ex：
@@ -423,8 +441,21 @@ out：
     result = add(a,b)
     print(&quot;result is &quot; + str(result))    
 </code></pre><p>注意：输出时要给 result 打上str()。<br>否则会报警：can only concatenate str (not “int”) to str</p>
-<p>6.5 实参可选<br>    ex：<br>        def location(country, province, city):<br>            “””个人居住地”””<br>            my_location = country + ‘ ‘ + province + ‘ ‘ + city<br>            return my_location.title()</p>
-<p>这种函数或许适用大多数情况，但是直辖市啥整？<br>可以试试：<br>    def location(country, city, province = ‘’):    # province 放后面，以免出现位置实参错误<br>        “””个人居住地”””<br>        if province:    #如果是空字符串，Python 将解读为 False。<br>            my_location = country + ‘ ‘ + province + ‘ ‘ + city<br>        else:<br>            my_location = country + ‘ ‘ + city<br>        return my_location.title()<br>新函数就是所说的实参可选。</p>
+<p>6.5 实参可选</p>
+<pre><code>ex：
+    def location(country, province, city):
+        &quot;&quot;&quot;个人居住地&quot;&quot;&quot;
+        my_location = country + &apos; &apos; + province + &apos; &apos; + city
+        return my_location.title()
+</code></pre><p>这种函数或许适用大多数情况，但是直辖市啥整？<br>可以试试：</p>
+<pre><code>def location(country, city, province = &apos;&apos;):    # province 放后面，以免出现位置实参错误
+    &quot;&quot;&quot;个人居住地&quot;&quot;&quot;
+    if province:    #如果是空字符串，Python 将解读为 False。
+        my_location = country + &apos; &apos; + province + &apos; &apos; + city
+    else:
+        my_location = country + &apos; &apos; + city
+    return my_location.title()
+</code></pre><p>新函数就是所说的实参可选。</p>
 <h2 id="字典的返回"><a href="#字典的返回" class="headerlink" title="字典的返回"></a>字典的返回</h2><pre><code>ex：
     def location(country, province, city):
         &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
@@ -440,45 +471,60 @@ out：
 
 out：
     {&apos;country_name&apos;: &apos;China&apos;, &apos;province_name&apos;: &apos;Guangdong&apos;, &apos;city_name&apos;: &apos;Shenzhen&apos;}
-</code></pre><p>当然，直辖市我们也要考虑：<br>    def location(country, city, province = ‘’):    #默认值放后面<br>        “””返回一个字典，其中包含一个人的位置所在地”””<br>        if province:<br>            my_location = {<br>                ‘country_name’: country,<br>                ‘province_name’: province,<br>                ‘city_name’: city,<br>                }<br>        else:<br>            my_location = {<br>                ‘country_name’: country,<br>                ‘city_name’: city,<br>                }<br>        return my_location</p>
-<pre><code>mylocation = location(country = &apos;China&apos;, city = &apos;Beijing&apos;)
+</code></pre><p>当然，直辖市我们也要考虑：</p>
+<pre><code>def location(country, city, province = &apos;&apos;):    #默认值放后面
+    &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
+    if province:
+        my_location = {
+            &apos;country_name&apos;: country,
+            &apos;province_name&apos;: province,
+            &apos;city_name&apos;: city,
+            }
+    else:
+        my_location = {
+            &apos;country_name&apos;: country,
+            &apos;city_name&apos;: city,
+            }
+    return my_location
+
+mylocation = location(country = &apos;China&apos;, city = &apos;Beijing&apos;)
 print(mylocation)
-</code></pre><h2 id="函数与-while"><a href="#函数与-while" class="headerlink" title="函数与 while"></a>函数与 while</h2><pre><code>ex：
-    def location(country, city, province = &apos;&apos;):
-        &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
-        if province:
-            my_location = {
-                &apos;country_name&apos;: country,
-                &apos;province_name&apos;: province,
-                &apos;city_name&apos;: city,
-                }
-        else:
-            my_location = {
-                &apos;country_name&apos;: country,
-                &apos;city_name&apos;: city,
-                }
-        return my_location
+</code></pre><h2 id="函数与-while"><a href="#函数与-while" class="headerlink" title="函数与 while"></a>函数与 while</h2><p>ex：</p>
+<pre><code>def location(country, city, province = &apos;&apos;):
+    &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
+    if province:
+        my_location = {
+            &apos;country_name&apos;: country,
+            &apos;province_name&apos;: province,
+            &apos;city_name&apos;: city,
+            }
+    else:
+        my_location = {
+            &apos;country_name&apos;: country,
+            &apos;city_name&apos;: city,
+            }
+    return my_location
 
-    users_location = {}
-    sign = True
-    while sign:
-        print(&quot;\nPlease tell me your name and your location:&quot;)
-        us_name = input(&quot;your name:&quot;)
-        co_name = input(&quot;your country:&quot;)
-        pr_name = input(&quot;your province:&quot;)
-        ci_name = input(&quot;your city:&quot;)
+users_location = {}
+sign = True
+while sign:
+    print(&quot;\nPlease tell me your name and your location:&quot;)
+    us_name = input(&quot;your name:&quot;)
+    co_name = input(&quot;your country:&quot;)
+    pr_name = input(&quot;your province:&quot;)
+    ci_name = input(&quot;your city:&quot;)
 
-        user_location = location(country = co_name, province = pr_name, city = ci_name)
-        users_location[us_name] = user_location
+    user_location = location(country = co_name, province = pr_name, city = ci_name)
+    users_location[us_name] = user_location
 
-        symbol = input(&quot;Thank you, can you continue?(yes or no)&quot;)
-        if symbol == &apos;yes&apos;:
-            sign = True
-            print(users_location)
-        else:
-            sign = False
+    symbol = input(&quot;Thank you, can you continue?(yes or no)&quot;)
+    if symbol == &apos;yes&apos;:
+        sign = True
+        print(users_location)
+    else:
+        sign = False
 
-    print(&quot;Thank you!&quot;)
+print(&quot;Thank you!&quot;)
 </code></pre><p>小结：字典中的添加不涉及方法 append()。</p>
 <h2 id="向函数传递列表、字典"><a href="#向函数传递列表、字典" class="headerlink" title="向函数传递列表、字典"></a>向函数传递列表、字典</h2><pre><code>ex：
     def users_language(language):    #实参有要求的，这里默认导入的实参为字典，若有其他需求，可以加个 if 语句控制实现需求
@@ -538,7 +584,7 @@ out：
     robot pendant
     iphone case
 </code></pre><h2 id="禁止函数修改列表、字典"><a href="#禁止函数修改列表、字典" class="headerlink" title="禁止函数修改列表、字典"></a>禁止函数修改列表、字典</h2><p>根据上节的打印可知，unprinted_designs 打印完后列表变为空的了，若想保持其不变，我们可以建立一个列表副本：<br>    <code>print_models(unprinted_designs[:], completed_models)    #切片建立副本</code><br>但建议在有充分的理由需要传递副本的情况下这么做，毕竟多建一个列表，时间复杂度增加，内存使用率增大，不利于做大项目。</p>
-<h2 id="任意数量的实参传递"><a href="#任意数量的实参传递" class="headerlink" title="任意数量的实参传递"></a>任意数量的实参传递</h2><h3 id="传递任意数量的实参-（建立空元组）"><a href="#传递任意数量的实参-（建立空元组）" class="headerlink" title="传递任意数量的实参 （建立空元组）"></a>传递任意数量的实参 （建立空元组）</h3><p>常见作用：<br>有时候真不知道函数要接收多少个实参，这时候可以对形参名加个 <em> ，让 Python 创建一个空元组，并将收到的所有值都封装到这个元组中。<br>    ex：<br>        def make_pizza(</em>toppings):<br>            “””概述要制作的比萨”””<br>            print(“\nMaking a pizza with the following toppings:”)<br>            for topping in toppings:<br>                print(“- “ + topping)</p>
+<h2 id="任意数量的实参传递"><a href="#任意数量的实参传递" class="headerlink" title="任意数量的实参传递"></a>任意数量的实参传递</h2><h3 id="传递任意数量的实参-（建立空元组）"><a href="#传递任意数量的实参-（建立空元组）" class="headerlink" title="传递任意数量的实参 （建立空元组）"></a>传递任意数量的实参 （建立空元组）</h3><p>常见作用：<br>有时候真不知道函数要接收多少个实参，这时候可以对形参名加个 /<em> ，让 Python 创建一个空元组，并将收到的所有值都封装到这个元组中。<br>    ex：<br>        def make_pizza(</em>toppings):<br>            “””概述要制作的比萨”””<br>            print(“\nMaking a pizza with the following toppings:”)<br>            for topping in toppings:<br>                print(“- “ + topping)</p>
 <pre><code>make_pizza(&apos;pepperoni&apos;)
 make_pizza(&apos;mushrooms&apos;, &apos;green peppers&apos;, &apos;extra cheese&apos;)
 </code></pre><p>函数调用解析：<br>这时候 * 号调用作用于 tuple/list/str 前，意思是解包(unpack)tuple/list/str，解包后的 tuple/list/str 将不再是一个参数，而是每个元素都是一个函数参数，依次传递给函数。</p>
