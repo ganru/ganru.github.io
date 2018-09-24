@@ -292,6 +292,395 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/24/类（面向对象编程）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/09/24/类（面向对象编程）/" itemprop="url">类（面向对象编程）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T17:18:18+08:00">
+                2018-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><p>写在前面</p></strong></p>
+<hr>
+<blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<h1 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h1><p>可以理解为 C 中的结构体，两者有点像，但又有不同。<br>根据类来创建对象被称为实例化，这让你能够使用类的实例。</p>
+<h1 id="类的创建与使用"><a href="#类的创建与使用" class="headerlink" title="类的创建与使用"></a>类的创建与使用</h1><h2 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h2><p>创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。</p>
+<p>ex：<br>    class Student():    #首字母要大写，指的是类（约定的），括号空，是因为要从空白建立类<br>        “””学生类的模拟”””</p>
+<pre><code>def _init_(self, name, age):    
+#注意这里有个坑，默认方法构造书写格式是__init__，而不是_init_，即在init两侧都是双下划线，不是单下划线。 
+    &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
+    self.name = name
+    self.age = age
+
+def study(self):
+    &quot;&quot;&quot;模拟学生学习&quot;&quot;&quot;
+    print(self.name.title() + &quot; is now learning.&quot;)
+
+def sleep(self):
+    &quot;&quot;&quot;模拟学生睡觉&quot;&quot;&quot;
+    print(self.name.title() + &quot; is now sleeping.&quot;)
+
+def get_descriptive(self):
+    &quot;&quot;&quot;返回学生信息&quot;&quot;&quot;
+    descriptive = self.name + &apos; &apos; + self.age
+    return descriptive.title()
+</code></pre><ol>
+<li>上述代码中，在类中出现的函数称为方法，如 3 个 def，与函数一样，只是名称发生了变化。</li>
+<li>在类中，每当使用者用 Student 类创建新实例时，Python 就会自动运行方法 __init__()。每次写类都要初始化。</li>
+<li>方法也有不同，方法名首尾都有下划线的一般指 <strong>默认方法</strong>，这是为了避免Python默认方法与普通方法发生名称冲突。</li>
+<li>在 <em>init</em>() 中 self 必不可少，Python 调用这个方法来创建 Student 实例时，将自动传入实参 self。</li>
+<li>每个与类相关联的方法调用都自动传递实参 self，它是一个指向实例本身的引用，让实例能够访问类中的属性和方法。</li>
+<li>可通过实例访问的变量成为 属性（如：name、age）。</li>
+<li>每次新建实例时，只需写后面两个形参值。</li>
+<li>另外两个方法，由于不需要额外的信息，故只有一个形参 self。</li>
+<li>虽然没有写显式 return 语句，但 Python 会自动返回一个表示该学生的实例。</li>
+</ol>
+<h2 id="类的使用"><a href="#类的使用" class="headerlink" title="类的使用"></a>类的使用</h2><pre><code>class Student():
+    --snip--
+
+student_0 = Student(&apos;ganru&apos;, 20)
+
+print(&quot;student_0&apos;s name is &quot; + student_0.name.title() + &quot;.&quot;)
+print(&quot;student_0 is &quot; + str(student_0.age) + &quot; years old.&quot;)
+student_0.study()
+student_0.sleep()
+print(student_0.get_descriptive())
+</code></pre><p>out：</p>
+<pre><code>student_0&apos;s name is Ganru.
+student_0 is 20 years old.
+Ganru is now learning.
+Ganru is now sleeping.
+</code></pre><h1 id="给属性指定默认值"><a href="#给属性指定默认值" class="headerlink" title="给属性指定默认值"></a>给属性指定默认值</h1><p>还是原来的 Student() 类，我们指定学生学校默认为 JYU：</p>
+<pre><code>class Student():
+    &quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;
+
+    def _init_(self, name, age):    
+        &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
+        self.name = name
+        self.age = age
+        self.school = &apos;JYU&apos;        #改动在这里
+
+    def study(self):
+        --snip--
+
+    def sleep(self):
+        --snip--
+
+    def get_descriptive(self):
+        --snip--
+
+    def original_school(self):
+        &quot;&quot;&quot;打印一条学生原来学校的消息&quot;&quot;&quot;
+        print(&quot;The student from &quot; + self.school)
+
+student_0 = Student(&apos;ganru&apos;, 20)
+print(student_0.get_descriptive())
+student_0.original_school()
+</code></pre><h1 id="属性值的修改"><a href="#属性值的修改" class="headerlink" title="属性值的修改"></a>属性值的修改</h1><h2 id="直接修改"><a href="#直接修改" class="headerlink" title="直接修改"></a>直接修改</h2><pre><code>class Student():
+    --snip--
+
+student_0 = Student(&apos;ganru&apos;, 20)
+print(student_0.get_descriptive())
+student_0.school = &apos;THU&apos;    #改动在这里
+student_0.original_school()
+</code></pre><h2 id="通过方法修改属性的值"><a href="#通过方法修改属性的值" class="headerlink" title="通过方法修改属性的值"></a>通过方法修改属性的值</h2><p>若想无需直接访问属性，可将值传递给一个方法，由它在内部进行更新。<br>在原先类 Student() 的基础上，加上：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def update_school(self, value):</span><br><span class="line">	&quot;&quot;&quot;将学校名称改为指定值&quot;&quot;&quot;</span><br><span class="line">	self.school = value</span><br></pre></td></tr></table></figure></p>
+<pre><code>student_0 = Student(&apos;ganru&apos;, 20)
+print(student_0.get_descriptive())
+
+student_0.update_school(&apos;PKU&apos;)    #改动在这里
+student_0.original_school()
+</code></pre><p>还可以加一些功能，比如禁止属性值回调。<br>可参考书（P145）中的 <strong>里程表读数回调</strong>：</p>
+<pre><code>class Car():
+    --snip--
+
+    def update_odometer(self, mileage):
+        &quot;&quot;&quot;
+        将里程表读数设置为指定的值
+        禁止将里程表读数往回调
+        &quot;&quot;&quot;
+        if mileage &gt;= self.odometer_reading:
+            self.odometer_reading = mileage
+        else:
+            print(&quot;You can&apos;t roll back an odometer!&quot;)
+</code></pre><h2 id="通过方法对属性的值进行递增"><a href="#通过方法对属性的值进行递增" class="headerlink" title="通过方法对属性的值进行递增"></a>通过方法对属性的值进行递增</h2><p>比如上面的 Car 类，可以加一个 def：</p>
+<pre><code>def increment_odometer(self, miles):
+    &quot;&quot;&quot;将里程表读数在原来的基础上增加指定的量&quot;&quot;&quot;
+    self.odometer_reading += miles
+</code></pre><h1 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h1><p>有时候懒得写多几个重复项，想引用其他类并自定义自己的类，可用继承。原有类称父类，新类称子类。</p>
+<pre><code>父类：
+class Car():
+    &quot;&quot;&quot;一次模拟汽车的简单尝试&quot;&quot;&quot;
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+        self.odometer_reading = 0
+
+    def get_descriptive_name(self):
+        long_name = str(self.year) + &apos; &apos; + self.make + &apos; &apos; + self.model
+        return long_name.title()
+
+    def read_odometer(self):
+        print(&quot;This car has &quot; + str(self.odometer_reading) + &quot; miles on it.&quot;)
+
+    def update_odometer(self, mileage):
+        if mileage &gt;= self.odometer_reading:
+            self.odometer_reading = mileage
+        else:
+            print(&quot;You can&apos;t roll back an odometer!&quot;)
+
+    def increment_odometer(self, miles):
+        self.odometer_reading += miles
+
+子类：
+class ElectricCar(Car):        #类括号内若导入参数，则继承某一个类
+    &quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;
+
+    def __init__(self, make, model, year):
+        &quot;&quot;&quot;初始化父类的属性&quot;&quot;&quot;
+        super().__init__(make, model, year)        
+        #super 是一个特殊函数，让 Python 调用 ElectricCar 的父类的方法 __init__()，让 ElectricCar 实例包含父类的所有属性。
+
+
+my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
+print(my_tesla.get_descriptive_name())
+</code></pre><p>out：<br>    2016 Tesla Model S</p>
+<ol>
+<li>父类和子类必须要在同一文件中，且父类在子类前面。</li>
+<li>父类也称超类，名称 super 因此而得名。</li>
+</ol>
+<h1 id="给子类定义属性和方法"><a href="#给子类定义属性和方法" class="headerlink" title="给子类定义属性和方法"></a>给子类定义属性和方法</h1><pre><code>class Car():
+    --snip--
+
+class ElectricCar(Car):
+    &quot;&quot;&quot;Represent aspects of a car, specific to electric vehicles.&quot;&quot;&quot;
+
+    def __init__(self, make, model, year):
+        &quot;&quot;&quot;
+        电动汽车的独特之处
+        初始化父类的属性，再初始化电动汽车特有的属性
+        &quot;&quot;&quot;
+        super().__init__(make, model, year)
+        self.battery_size = 70                #子类属性添加
+
+    def describe_battery(self):
+        &quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;
+        print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)
+
+my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
+print(my_tesla.get_descriptive_name())
+my_tesla.describe_battery()
+</code></pre><p>out：</p>
+<pre><code>2016 Tesla Model S
+This car has a 70-kWh battery.
+</code></pre><p>如果一个属性或方法是任何汽车都有的，而不是电动汽车特有的，就应将其加入到 Car 类而不是 ElectricCar 类中。<br>这样，使用 Car 类的人将获得相应的功能，而 ElectricCar 类只包含处理电动汽车特有属性和行为的代码。</p>
+<h1 id="重写父类"><a href="#重写父类" class="headerlink" title="重写父类"></a>重写父类</h1><p>假设 Car 类有一个名为 fill_gas_tank() 的方法，它对全电动汽车来说毫无意义，这时我们可以重写它：</p>
+<pre><code>def ElectricCar(Car):
+    --snip--
+
+    def fill_gas_tank():
+        &quot;&quot;&quot;电动汽车没有油箱&quot;&quot;&quot;
+        print(&quot;This car doesn&apos;t need a gas tank!&quot;)
+</code></pre><p>这时候，如果我们再次调用方法 fill_gas_tank()，则 Python 不会使用父类的方法，而是我们在子类新写的方法。</p>
+<h1 id="将实例用作属性（属性中的属性或方法）"><a href="#将实例用作属性（属性中的属性或方法）" class="headerlink" title="将实例用作属性（属性中的属性或方法）"></a>将实例用作属性（属性中的属性或方法）</h1><p>有时候类太大，可能会比较复杂，可以将大类拆分成小类。</p>
+<pre><code>class Car():
+    --snip--
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Battery():</span><br><span class="line">	&quot;&quot;&quot;一次模拟电动汽车电瓶的简单尝试&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">	def __init__(self, battery_size=70):</span><br><span class="line">		&quot;&quot;&quot;初始化电瓶的属性&quot;&quot;&quot;</span><br><span class="line">		self.battery_size = battery_size</span><br><span class="line"></span><br><span class="line">	def describe_battery(self):</span><br><span class="line">		&quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;</span><br><span class="line">		print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)</span><br></pre></td></tr></table></figure>
+
+
+class ElectricCar(Car):
+    &quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;
+
+    def __init__(self, make, model, year):
+        &quot;&quot;&quot;
+        初始化父类的属性，再初始化电动汽车特有的属性
+        &quot;&quot;&quot;
+        super().__init__(make, model, year)
+        self.battery = Battery()        #将实例用作属性
+
+my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
+print(my_tesla.get_descriptive_name())
+my_tesla.battery.describe_battery()
+</code></pre><p>out：</p>
+<pre><code>2016 Tesla Model S
+This car has a 70-kWh battery.
+</code></pre><h1 id="类的导入"><a href="#类的导入" class="headerlink" title="类的导入"></a>类的导入</h1><p>跟函数模块差不多，将类写入一个 .py 文件。<br>导入格式：</p>
+<p>import module_name（.py 文件名）<br>from module_name（.py 文件名） import class_name（在 .py 文件中的类名）<br>from module_name import class_0, class_1, …</p>
+<p>如果模块与模块之间有联系，则这两个模块都要导入同一个文件中，不然创建实例时将引发错误。</p>
+<h1 id="Python-标准库"><a href="#Python-标准库" class="headerlink" title="Python 标准库"></a>Python 标准库</h1><p>Python标准库是一组模块，安装的Python都包含它。大致理解类之后，就可以使用他人的模块了。</p>
+<p>尝试：<br>如果在以前，我们可能这么写：favorite_languages = {}<br>字典能够将信息关联起来，但不记录添加键—值对的顺序。要创建字典并记录其添加顺序，可使用模块 collections 中的 OrderedDict 类。</p>
+<pre><code>from collections import OrderedDict
+
+favorite_languages = OrderedDict()
+
+favorite_languages[&apos;jen&apos;] = &apos;python&apos;
+favorite_languages[&apos;sarah&apos;] = &apos;c&apos;
+favorite_languages[&apos;edward&apos;] = &apos;ruby&apos;
+favorite_languages[&apos;phil&apos;] = &apos;python&apos;
+
+for name, language in favorite_languages.items():
+    print(name.title() + &quot;&apos;s favorite language is &quot; +
+        language.title() + &quot;.&quot;)
+</code></pre><p>out：</p>
+<pre><code>Jen&apos;s favorite language is Python.
+Sarah&apos;s favorite language is C.
+Edward&apos;s favorite language is Ruby.
+Phil&apos;s favorite language is Python.
+</code></pre><h1 id="类编码风格"><a href="#类编码风格" class="headerlink" title="类编码风格"></a>类编码风格</h1><ol>
+<li><p>驼峰命名法：类名中的每个单词的首字母都大写，而不使用下划线。<br>ex：<br>class Car():<br>class Student():<br>…</p>
+</li>
+<li><p>实例名和模块名都采用小写格式，并在单词之间加上下划线。<br>ex：<br>my_tesla<br>student_0<br>son.py<br>…</p>
+</li>
+<li><p>对于每个类，都写类注释。</p>
+</li>
+<li>在类中，可使用一个空行来分隔方法；而在模块中，可使用两个空行来分隔类。</li>
+<li>需要同时导入标准库中的模块和你编写的模块时，先编写导入标准库模块的 import 语句，再添加一个空行，然后编写导入你自己编写的模块的 import 语句。</li>
+</ol>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
+<li>类的创建于使用（类的建立一定要初始化）</li>
+<li>实例属性的修改</li>
+<li>类的继承</li>
+<li>重写父类</li>
+<li>将实例用作属性（属性中的属性或方法）</li>
+<li>类的导入</li>
+<li>类编码的规约</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/22/函数专项/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -390,7 +779,7 @@
 <blockquote>
 <p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
 </blockquote>
-<h1 id="函数专项"><a href="#函数专项" class="headerlink" title="函数专项"></a>函数专项</h1><h2 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h2><p>关键字 def 定义函数。</p>
+<h1 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h1><p>关键字 def 定义函数。</p>
 <pre><code>ex：
     def hello(username):
         &quot;&quot;&quot;此处写函数注释，建议每次都写，方便日后维护&quot;&quot;&quot;
@@ -400,8 +789,8 @@
 
 out：
     ganru, Welcome to you!
-</code></pre><h2 id="实参与形参"><a href="#实参与形参" class="headerlink" title="实参与形参"></a>实参与形参</h2><p>如 hello() 的函数定义，括号里面的变量<strong> username </strong>是形参，只具有形式意义，而值<strong> ‘ganru’ </strong>是实参，具有实际意义。<br>如何判断：函数定义中的变量为形参，函数调用中的变量为实参。</p>
-<h2 id="实参的传递"><a href="#实参的传递" class="headerlink" title="实参的传递"></a>实参的传递</h2><h3 id="位置实参"><a href="#位置实参" class="headerlink" title="位置实参"></a>位置实参</h3><p>定义：基于实参的顺序将函数调用中的每个实参都关联到函数定义中的一个形参。</p>
+</code></pre><h1 id="实参与形参"><a href="#实参与形参" class="headerlink" title="实参与形参"></a>实参与形参</h1><p>如 hello() 的函数定义，括号里面的变量<strong> username </strong>是形参，只具有形式意义，而值<strong> ‘ganru’ </strong>是实参，具有实际意义。<br>如何判断：函数定义中的变量为形参，函数调用中的变量为实参。</p>
+<h1 id="实参的传递"><a href="#实参的传递" class="headerlink" title="实参的传递"></a>实参的传递</h1><h2 id="位置实参"><a href="#位置实参" class="headerlink" title="位置实参"></a>位置实参</h2><p>定义：基于实参的顺序将函数调用中的每个实参都关联到函数定义中的一个形参。</p>
 <pre><code>ex：
     def student(name, sex):
         .
@@ -409,7 +798,7 @@ out：
         .
 
     student(&apos;garu&apos;,&apos;boy&apos;)    #这里的 &apos;garu&apos; 为第一顺序，&apos;boy&apos; 为第二顺序。
-</code></pre><h3 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h3><p>定义：传递给函数的名称—值对。无需考虑函数调用中的实参顺序，还清楚地指出了函数调用中各个值的用途。</p>
+</code></pre><h2 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h2><p>定义：传递给函数的名称—值对。无需考虑函数调用中的实参顺序，还清楚地指出了函数调用中各个值的用途。</p>
 <pre><code>ex：
     def student(name, sex):
         .
@@ -418,7 +807,7 @@ out：
 
     student(sex = &apos;boy&apos;, name = &apos;garu&apos;)    #顺序反了也没事
 </code></pre><p>注意：使用关键字实参时，务必准确地指定函数定义中的形参名。</p>
-<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>调用函数中给形参提供了实参时，Python 将使用指定的实参值；否则，将使用形参的默认值。<br>作用：给形参指定默认值后，可在函数调用中省略相应的实参。</p>
+<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h2><p>调用函数中给形参提供了实参时，Python 将使用指定的实参值；否则，将使用形参的默认值。<br>作用：给形参指定默认值后，可在函数调用中省略相应的实参。</p>
 <pre><code>ex：
     def student(name, sex = &apos;boy&apos;):
         .
@@ -427,8 +816,8 @@ out：
 
     student(name = &apos;garu&apos;)    #以后每次调用，如果没有显式提供实参给 sex，sex 都是 &apos;boy&apos;。
 </code></pre><p>注意：如果以后要用默认值，也就是考虑到可能不写值，则形参放最后面（如：sex），以免出现位置实参错误。</p>
-<h3 id="等效的函数调用"><a href="#等效的函数调用" class="headerlink" title="等效的函数调用"></a>等效的函数调用</h3><p>就是上面的实参调用方式可以混用。</p>
-<h2 id="return"><a href="#return" class="headerlink" title="return"></a>return</h2><pre><code>ex：
+<h2 id="等效的函数调用"><a href="#等效的函数调用" class="headerlink" title="等效的函数调用"></a>等效的函数调用</h2><p>就是上面的实参调用方式可以混用。</p>
+<h1 id="return"><a href="#return" class="headerlink" title="return"></a>return</h1><pre><code>ex：
     def add(first,second):
         &quot;&quot;&quot;二值相加&quot;&quot;&quot;
         value = first + second
@@ -456,7 +845,7 @@ out：
         my_location = country + &apos; &apos; + city
     return my_location.title()
 </code></pre><p>新函数就是所说的实参可选。</p>
-<h2 id="字典的返回"><a href="#字典的返回" class="headerlink" title="字典的返回"></a>字典的返回</h2><pre><code>ex：
+<h1 id="字典的返回"><a href="#字典的返回" class="headerlink" title="字典的返回"></a>字典的返回</h1><pre><code>ex：
     def location(country, province, city):
         &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
         my_location = {
@@ -489,7 +878,7 @@ out：
 
 mylocation = location(country = &apos;China&apos;, city = &apos;Beijing&apos;)
 print(mylocation)
-</code></pre><h2 id="函数与-while"><a href="#函数与-while" class="headerlink" title="函数与 while"></a>函数与 while</h2><p>ex：</p>
+</code></pre><h1 id="函数与-while"><a href="#函数与-while" class="headerlink" title="函数与 while"></a>函数与 while</h1><p>ex：</p>
 <pre><code>def location(country, city, province = &apos;&apos;):
     &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
     if province:
@@ -526,7 +915,7 @@ while sign:
 
 print(&quot;Thank you!&quot;)
 </code></pre><p>小结：字典中的添加不涉及方法 append()。</p>
-<h2 id="向函数传递列表、字典"><a href="#向函数传递列表、字典" class="headerlink" title="向函数传递列表、字典"></a>向函数传递列表、字典</h2><pre><code>ex：
+<h1 id="向函数传递列表、字典"><a href="#向函数传递列表、字典" class="headerlink" title="向函数传递列表、字典"></a>向函数传递列表、字典</h1><pre><code>ex：
     def users_language(language):    #实参有要求的，这里默认导入的实参为字典，若有其他需求，可以加个 if 语句控制实现需求
         &quot;&quot;&quot;展现各个人分别喜欢的语言&quot;&quot;&quot;
         for key, value in language.items():
@@ -549,7 +938,7 @@ out：
     edward&apos;s favorite language is ruby
 
     phil&apos;s favorite language is python
-</code></pre><h2 id="用函数修改列表、字典"><a href="#用函数修改列表、字典" class="headerlink" title="用函数修改列表、字典"></a>用函数修改列表、字典</h2><pre><code>ex：
+</code></pre><h1 id="用函数修改列表、字典"><a href="#用函数修改列表、字典" class="headerlink" title="用函数修改列表、字典"></a>用函数修改列表、字典</h1><pre><code>ex：
     def print_models(unprinted_designs, completed_models):
         &quot;&quot;&quot;
         模拟打印每个设计，直到没有未打印的设计为止
@@ -583,8 +972,8 @@ out：
     dodecahedron
     robot pendant
     iphone case
-</code></pre><h2 id="禁止函数修改列表、字典"><a href="#禁止函数修改列表、字典" class="headerlink" title="禁止函数修改列表、字典"></a>禁止函数修改列表、字典</h2><p>根据上节的打印可知，unprinted_designs 打印完后列表变为空的了，若想保持其不变，我们可以建立一个列表副本：<br>    <code>print_models(unprinted_designs[:], completed_models)    #切片建立副本</code><br>但建议在有充分的理由需要传递副本的情况下这么做，毕竟多建一个列表，时间复杂度增加，内存使用率增大，不利于做大项目。</p>
-<h2 id="任意数量的实参传递"><a href="#任意数量的实参传递" class="headerlink" title="任意数量的实参传递"></a>任意数量的实参传递</h2><h3 id="传递任意数量的实参-（建立空元组）"><a href="#传递任意数量的实参-（建立空元组）" class="headerlink" title="传递任意数量的实参 （建立空元组）"></a>传递任意数量的实参 （建立空元组）</h3><p>常见作用：<br>有时候真不知道函数要接收多少个实参，这时候可以对形参名加个 * ，让 Python 创建一个空元组，并将收到的所有值都封装到这个元组中。</p>
+</code></pre><h1 id="禁止函数修改列表、字典"><a href="#禁止函数修改列表、字典" class="headerlink" title="禁止函数修改列表、字典"></a>禁止函数修改列表、字典</h1><p>根据上节的打印可知，unprinted_designs 打印完后列表变为空的了，若想保持其不变，我们可以建立一个列表副本：<br>    <code>print_models(unprinted_designs[:], completed_models)    #切片建立副本</code><br>但建议在有充分的理由需要传递副本的情况下这么做，毕竟多建一个列表，时间复杂度增加，内存使用率增大，不利于做大项目。</p>
+<h1 id="任意数量的实参传递"><a href="#任意数量的实参传递" class="headerlink" title="任意数量的实参传递"></a>任意数量的实参传递</h1><h2 id="传递任意数量的实参-（建立空元组）"><a href="#传递任意数量的实参-（建立空元组）" class="headerlink" title="传递任意数量的实参 （建立空元组）"></a>传递任意数量的实参 （建立空元组）</h2><p>常见作用：<br>有时候真不知道函数要接收多少个实参，这时候可以对形参名加个 * ，让 Python 创建一个空元组，并将收到的所有值都封装到这个元组中。</p>
 <pre><code>ex：
     def make_pizza(*toppings):
         &quot;&quot;&quot;概述要制作的比萨&quot;&quot;&quot;
@@ -602,7 +991,7 @@ out：
     - mushrooms
     - green peppers
     - extra cheese
-</code></pre><h3 id="结合使用位置实参和任意数量实参"><a href="#结合使用位置实参和任意数量实参" class="headerlink" title="结合使用位置实参和任意数量实参"></a>结合使用位置实参和任意数量实参</h3><pre><code>ex：
+</code></pre><h2 id="结合使用位置实参和任意数量实参"><a href="#结合使用位置实参和任意数量实参" class="headerlink" title="结合使用位置实参和任意数量实参"></a>结合使用位置实参和任意数量实参</h2><pre><code>ex：
     def make_pizza(size, *toppings):
         &quot;&quot;&quot;概述要制作的比萨&quot;&quot;&quot;
         print(&quot;\nMaking a &quot; + str(size) +
@@ -620,7 +1009,7 @@ out：
     - mushrooms
     - green peppers
     - extra cheese
-</code></pre><h3 id="使用任意数量的关键字实参-（建立空字典）"><a href="#使用任意数量的关键字实参-（建立空字典）" class="headerlink" title="使用任意数量的关键字实参    （建立空字典）"></a>使用任意数量的关键字实参    （建立空字典）</h3><p>预先不知道传递给函数的会是什么样的信息，有多少个，这时可以用关键字实参调用。即接收任意数量的 键-值 对。<br>格式：对形参加 ** ，让Python创建一个空字典，并将收到的所有 键-值 对都封装到这个字典中。</p>
+</code></pre><h2 id="使用任意数量的关键字实参-（建立空字典）"><a href="#使用任意数量的关键字实参-（建立空字典）" class="headerlink" title="使用任意数量的关键字实参    （建立空字典）"></a>使用任意数量的关键字实参    （建立空字典）</h2><p>预先不知道传递给函数的会是什么样的信息，有多少个，这时可以用关键字实参调用。即接收任意数量的 键-值 对。<br>格式：对形参加 ** ，让Python创建一个空字典，并将收到的所有 键-值 对都封装到这个字典中。</p>
 <pre><code>ex：
     def build_profile(first, last, **user_info):    #**号创建空字典
         &quot;&quot;&quot;创建一个字典，其中包含我们知道的有关用户的一切&quot;&quot;&quot;
@@ -637,7 +1026,7 @@ out：
     print(user_profile)
 out：
     {&apos;first_name&apos;: &apos;albert&apos;, &apos;last_name&apos;: &apos;einstein&apos;, &apos;location&apos;: &apos;princeton&apos;, &apos;field&apos;: &apos;physics&apos;}
-</code></pre><h2 id="函数与模块"><a href="#函数与模块" class="headerlink" title="函数与模块"></a>函数与模块</h2><h3 id="导入整个模块"><a href="#导入整个模块" class="headerlink" title="导入整个模块"></a>导入整个模块</h3><p>模块是后缀 .py 的子文件，在模块中写好函数（除函数外，其余都不要写），然后在主文件中用 import 导入整个模块。<br>ex：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">son.py		#模块名</span><br><span class="line"></span><br><span class="line">def users_language(language):	#实参有要求的，这里默认导入的实参为字典，若有其他需求，可以加个 if 语句控制实现需求</span><br><span class="line">&quot;&quot;&quot;展现各个人分别喜欢的语言&quot;&quot;&quot;</span><br><span class="line">for key, value in language.items():</span><br><span class="line">	print(&quot;\n&quot; + key + &quot;&apos;s favorite language is &quot; + value)</span><br></pre></td></tr></table></figure></p>
+</code></pre><h1 id="函数与模块"><a href="#函数与模块" class="headerlink" title="函数与模块"></a>函数与模块</h1><h2 id="导入整个模块"><a href="#导入整个模块" class="headerlink" title="导入整个模块"></a>导入整个模块</h2><p>模块是后缀 .py 的子文件，在模块中写好函数（除函数外，其余都不要写），然后在主文件中用 import 导入整个模块。<br>ex：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">son.py		#模块名</span><br><span class="line"></span><br><span class="line">def users_language(language):	#实参有要求的，这里默认导入的实参为字典，若有其他需求，可以加个 if 语句控制实现需求</span><br><span class="line">&quot;&quot;&quot;展现各个人分别喜欢的语言&quot;&quot;&quot;</span><br><span class="line">for key, value in language.items():</span><br><span class="line">	print(&quot;\n&quot; + key + &quot;&apos;s favorite language is &quot; + value)</span><br></pre></td></tr></table></figure></p>
 <pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">master.py		#主文件名</span><br><span class="line"></span><br><span class="line">favorite_languages = &#123;</span><br><span class="line">	&apos;jen&apos;: &apos;python&apos;,</span><br><span class="line">	&apos;sarah&apos;: &apos;c&apos;,</span><br><span class="line">	&apos;edward&apos;: &apos;ruby&apos;,</span><br><span class="line">	&apos;phil&apos;: &apos;python&apos;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">son.users_language(favorite_languages)</span><br></pre></td></tr></table></figure>
 </code></pre><p>out：</p>
 <pre><code>jen&apos;s favorite language is python
@@ -647,9 +1036,9 @@ sarah&apos;s favorite language is c
 edward&apos;s favorite language is ruby
 
 phil&apos;s favorite language is python
-</code></pre><h3 id="导入特定函数及给函数指定别名"><a href="#导入特定函数及给函数指定别名" class="headerlink" title="导入特定函数及给函数指定别名"></a>导入特定函数及给函数指定别名</h3><p>格式：<br><code>from module_name（.py 文件名） import function_name（在 .py 文件中的函数名）</code><br>导入多个函数：<br><code>from module_name import function_0, function_1, ...</code><br>若函数名太长或与程序现有名称冲突：（指定别名区分）<br><code>from module_name import function_0 as f_0</code></p>
-<h3 id="给模块指定别名"><a href="#给模块指定别名" class="headerlink" title="给模块指定别名"></a>给模块指定别名</h3><p>格式：<br><code>import son as s        #比如上述中的 son.py 函数文件</code></p>
-<p>使用的时候，<code>son.users_language(favorite_languages)</code> 可以这么写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 导入模块中的所有函数</span><br><span class="line">格式：</span><br><span class="line">`from module_name import *`</span><br><span class="line">\* 号运算符可以让 Python 导入模块中的所有函数。</span><br><span class="line"></span><br><span class="line">## 函数编写要点</span><br><span class="line">1. 尽量给函数指定描述性名称且只用小写字母与下划线，便于他人阅读。</span><br><span class="line">2. 每个函数都要有其功能注释，便于他人迅速理解该函数。</span><br><span class="line">3. 给形参指定默认值及时，等号两边不要有空格</span><br><span class="line">（这是约定，但我 C 写习惯了，没怎么注意，能运行就行，好看就行）</span><br><span class="line">4. 一行代码行不要超过79个字符，若形参很多，可以这样：</span><br></pre></td></tr></table></figure></p>
+</code></pre><h2 id="导入特定函数及给函数指定别名"><a href="#导入特定函数及给函数指定别名" class="headerlink" title="导入特定函数及给函数指定别名"></a>导入特定函数及给函数指定别名</h2><p>格式：<br><code>from module_name（.py 文件名） import function_name（在 .py 文件中的函数名）</code><br>导入多个函数：<br><code>from module_name import function_0, function_1, ...</code><br>若函数名太长或与程序现有名称冲突：（指定别名区分）<br><code>from module_name import function_0 as f_0</code></p>
+<h2 id="给模块指定别名"><a href="#给模块指定别名" class="headerlink" title="给模块指定别名"></a>给模块指定别名</h2><p>格式：<br><code>import son as s        #比如上述中的 son.py 函数文件</code></p>
+<p>使用的时候，<code>son.users_language(favorite_languages)</code> 可以这么写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 导入模块中的所有函数</span><br><span class="line">格式：</span><br><span class="line">`from module_name import *`</span><br><span class="line">\* 号运算符可以让 Python 导入模块中的所有函数。</span><br><span class="line"></span><br><span class="line"># 函数编写要点</span><br><span class="line">1. 尽量给函数指定描述性名称且只用小写字母与下划线，便于他人阅读。</span><br><span class="line">2. 每个函数都要有其功能注释，便于他人迅速理解该函数。</span><br><span class="line">3. 给形参指定默认值及时，等号两边不要有空格</span><br><span class="line">（这是约定，但我 C 写习惯了，没怎么注意，能运行就行，好看就行）</span><br><span class="line">4. 一行代码行不要超过79个字符，若形参很多，可以这样：</span><br></pre></td></tr></table></figure></p>
 <pre><code>def print_models(
         unprinted_designs, completed_models)
 ```
@@ -658,7 +1047,7 @@ phil&apos;s favorite language is python
 <li>如果模块很多函数，可以在两个函数之间换两次行。</li>
 <li>所有的import语句都应放在文件开头，唯一例外的情形是，在文件开头使用了注释来描述整个程序。</li>
 </ol>
-<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
 <li>实参形参的判断及使用</li>
 <li>函数与返回值</li>
 <li>实参可选</li>
@@ -812,7 +1201,7 @@ phil&apos;s favorite language is python
 <blockquote>
 <p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
 </blockquote>
-<h1 id="用户输入与-while-循环"><a href="#用户输入与-while-循环" class="headerlink" title="用户输入与 while 循环"></a>用户输入与 while 循环</h1><h2 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h2><h3 id="函数-input-的使用（类似于-gets）"><a href="#函数-input-的使用（类似于-gets）" class="headerlink" title="函数 input() 的使用（类似于 gets）"></a>函数 input() 的使用（类似于 gets）</h3><p>作用：接收用户键入的数据并保存为字符串。</p>
+<h1 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h1><h2 id="函数-input-的使用（类似于-gets）"><a href="#函数-input-的使用（类似于-gets）" class="headerlink" title="函数 input() 的使用（类似于 gets）"></a>函数 input() 的使用（类似于 gets）</h2><p>作用：接收用户键入的数据并保存为字符串。</p>
 <pre><code>ex：
     message = input(&quot;Tell me something, and I will repeat it back to you: &quot;)
     print(message)
@@ -835,7 +1224,7 @@ out：
     Hello, Ganru!
 </code></pre><p>可看出：采用的是字符串拼接的方式。</p>
 <p>注意：这里 Python 接收到的用户键入的数据<strong>永远</strong>是字符串。</p>
-<h3 id="函数-int-的使用（类似于-putchar）"><a href="#函数-int-的使用（类似于-putchar）" class="headerlink" title="函数 int() 的使用（类似于 putchar）"></a>函数 int() 的使用（类似于 putchar）</h3><p>常见作用：</p>
+<h2 id="函数-int-的使用（类似于-putchar）"><a href="#函数-int-的使用（类似于-putchar）" class="headerlink" title="函数 int() 的使用（类似于 putchar）"></a>函数 int() 的使用（类似于 putchar）</h2><p>常见作用：</p>
 <ol>
 <li>接收用户键入的数据并保存为整型数值。（通常配合 input() 使用）</li>
 <li><p>将字符串转变为数值表示。</p>
@@ -852,12 +1241,12 @@ else:
 You&apos;re tall enough to ride!
 </code></pre></li>
 </ol>
-<h2 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h2><pre><code>ex：
+<h1 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h1><pre><code>ex：
     current_number = 1
     while current_number &lt;= 5:
         print(current_number)
         current_number += 1
-</code></pre><h3 id="用户自行中断"><a href="#用户自行中断" class="headerlink" title="用户自行中断"></a>用户自行中断</h3><pre><code>ex：
+</code></pre><h2 id="用户自行中断"><a href="#用户自行中断" class="headerlink" title="用户自行中断"></a>用户自行中断</h2><pre><code>ex：
     prompt = &quot;\nTell me something, and I will repeat it back to you:&quot;
     prompt += &quot;\nEnter &apos;quit&apos; to end the program. &quot;
     message = &quot;&quot;
@@ -878,7 +1267,7 @@ out：
 
     Tell me something, and I will repeat it back to you:
     Enter &apos;quit&apos; to end the program. quit
-</code></pre><h3 id="运行时中断-（break-语句的使用）"><a href="#运行时中断-（break-语句的使用）" class="headerlink" title="运行时中断 （break 语句的使用）"></a>运行时中断 （break 语句的使用）</h3><p>常见作用：</p>
+</code></pre><h2 id="运行时中断-（break-语句的使用）"><a href="#运行时中断-（break-语句的使用）" class="headerlink" title="运行时中断 （break 语句的使用）"></a>运行时中断 （break 语句的使用）</h2><p>常见作用：</p>
 <ol>
 <li>让机器判断并跳出无限循环。</li>
 <li><p>让机器筛选特定值。</p>
@@ -894,7 +1283,7 @@ while True:
         print(&quot;Hello, &quot; + message.title() + &quot;!&quot;)
 </code></pre></li>
 </ol>
-<h3 id="运行时-continue"><a href="#运行时-continue" class="headerlink" title="运行时 continue"></a>运行时 continue</h3><pre><code>ex：
+<h2 id="运行时-continue"><a href="#运行时-continue" class="headerlink" title="运行时 continue"></a>运行时 continue</h2><pre><code>ex：
     current_number = 0
     while current_number &lt; 10:
      current_number += 1
@@ -909,9 +1298,9 @@ out：
     5
     7
     9
-</code></pre><h2 id="while-与列表、字典的关系"><a href="#while-与列表、字典的关系" class="headerlink" title="while 与列表、字典的关系"></a>while 与列表、字典的关系</h2><p><strong>for 适合遍历列表，while 适合处理列表。</strong></p>
+</code></pre><h1 id="while-与列表、字典的关系"><a href="#while-与列表、字典的关系" class="headerlink" title="while 与列表、字典的关系"></a>while 与列表、字典的关系</h1><p><strong>for 适合遍历列表，while 适合处理列表。</strong></p>
 <p>.<br>.</p>
-<h3 id="列表间元素移动"><a href="#列表间元素移动" class="headerlink" title="列表间元素移动"></a>列表间元素移动</h3><pre><code>ex：
+<h2 id="列表间元素移动"><a href="#列表间元素移动" class="headerlink" title="列表间元素移动"></a>列表间元素移动</h2><pre><code>ex：
     unconfirmed_users = [&apos;alice&apos;, &apos;brian&apos;, &apos;candace&apos;]
     confirmed_users = []
 
@@ -933,7 +1322,7 @@ out：
     Candace
     Brian
     Alice
-</code></pre><h3 id="while-与-remove"><a href="#while-与-remove" class="headerlink" title="while 与 remove"></a>while 与 remove</h3><pre><code>ex：
+</code></pre><h2 id="while-与-remove"><a href="#while-与-remove" class="headerlink" title="while 与 remove"></a>while 与 remove</h2><pre><code>ex：
     names = [&apos;ganru&apos;,&apos;gandalf&apos;,&apos;gan&apos;,&apos;ganru&apos;,&apos;gandalf&apos;,&apos;ganru&apos;,&apos;gandalf&apos;]
     print(names)
 
@@ -944,7 +1333,7 @@ out：
 out：
     [&apos;ganru&apos;,&apos;gandalf&apos;,&apos;gan&apos;,&apos;ganru&apos;,&apos;gandalf&apos;,&apos;ganru&apos;,&apos;gandalf&apos;]
     [&apos;ganru&apos;,&apos;gan&apos;,&apos;ganru&apos;,&apos;ganru&apos;,]
-</code></pre><h3 id="使用用户输入来填充字典"><a href="#使用用户输入来填充字典" class="headerlink" title="使用用户输入来填充字典"></a>使用用户输入来填充字典</h3><pre><code>ex：
+</code></pre><h2 id="使用用户输入来填充字典"><a href="#使用用户输入来填充字典" class="headerlink" title="使用用户输入来填充字典"></a>使用用户输入来填充字典</h2><pre><code>ex：
     responses = {}
 
     # 设置一个标志，指出调查是否继续
@@ -967,7 +1356,7 @@ out：
         print(&quot;\n--- Poll Results ---&quot;)
         for name, response in responses.items():
             print(name + &quot; would like to climb &quot; + response + &quot;.&quot;)
-</code></pre><h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+</code></pre><h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
 <li>input() 的使用</li>
 <li>int() 的使用</li>
 <li>while 循环时中断、continue 及其常见作用</li>
@@ -1119,17 +1508,17 @@ out：
 <blockquote>
 <p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
 </blockquote>
-<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><h2 id="字典的定义"><a href="#字典的定义" class="headerlink" title="字典的定义"></a>字典的定义</h2><p>类似于数据结构中的线性表，链表之类，具有将数据关联起来的作用。</p>
+<h1 id="字典的定义"><a href="#字典的定义" class="headerlink" title="字典的定义"></a>字典的定义</h1><p>类似于数据结构中的线性表，链表之类，具有将数据关联起来的作用。</p>
 <p>字典的格式：</p>
 <p><code>student_0 = {&#39;name&#39;:&#39;ganru&#39;,&#39;age&#39;:19}    //由多个键值对构成</code></p>
 <p>使用字典来存储用户提供的数据或在编写能自动生成大量键—值对的代码时，通常都需要先定义一个空字典。</p>
 <p><a id="zidian"></a></p>
-<h2 id="字典的访问"><a href="#字典的访问" class="headerlink" title="字典的访问"></a>字典的访问</h2><pre><code>ex：
+<h1 id="字典的访问"><a href="#字典的访问" class="headerlink" title="字典的访问"></a>字典的访问</h1><pre><code>ex：
     student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
     print(student_0[&apos;name&apos;])
 out：
     ganru
-</code></pre><h2 id="字典的增、删、改、查"><a href="#字典的增、删、改、查" class="headerlink" title="字典的增、删、改、查"></a>字典的增、删、改、查</h2><h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><pre><code>ex：
+</code></pre><h1 id="字典的增、删、改、查"><a href="#字典的增、删、改、查" class="headerlink" title="字典的增、删、改、查"></a>字典的增、删、改、查</h1><h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><pre><code>ex：
     student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
     print(student_0)
     student_0[&apos;sex&apos;] = &apos;man&apos;
@@ -1138,7 +1527,7 @@ out：
 out：
     {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19}
     {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
-</code></pre><h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>用 del 语句。</p>
+</code></pre><h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><p>用 del 语句。</p>
 <pre><code>ex：
     student_0 = {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
     print(student_0)
@@ -1148,7 +1537,7 @@ out：
     {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;,&apos;graduated school&apos;:&apos;JYU&apos;}
     {&apos;name&apos;:&apos;ganru&apos;,&apos;age&apos;:19,&apos;sex&apos;:&apos;man&apos;}
 </code></pre><p>注意：永删。</p>
-<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><pre><code>ex：
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><pre><code>ex：
     student_0 = {&apos;name&apos;:&apos;ganru&apos;}
     print(&quot;my name is&quot; + student_0[&apos;name&apos;] + &quot;.&quot;)
     student_0[&apos;name&apos;] = &apos;Gandalf&apos;
@@ -1156,8 +1545,8 @@ out：
 out：
     my name is gan.
     my name is gandalf.
-</code></pre><h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><p>与 <a href="#zidian">字典的访问</a> 相似。</p>
-<h2 id="字典的遍历"><a href="#字典的遍历" class="headerlink" title="字典的遍历"></a>字典的遍历</h2><h3 id="遍历所有键值对"><a href="#遍历所有键值对" class="headerlink" title="遍历所有键值对"></a>遍历所有键值对</h3><p>用 for 循环。</p>
+</code></pre><h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><p>与 <a href="#zidian">字典的访问</a> 相似。</p>
+<h1 id="字典的遍历"><a href="#字典的遍历" class="headerlink" title="字典的遍历"></a>字典的遍历</h1><h2 id="遍历所有键值对"><a href="#遍历所有键值对" class="headerlink" title="遍历所有键值对"></a>遍历所有键值对</h2><p>用 for 循环。</p>
 <pre><code>ex：
     student_0 = {
         &apos;name&apos;:&apos;ganru&apos;,
@@ -1173,7 +1562,7 @@ out：
     Key: age
     Value: 19
 </code></pre><p>注意：遍历字典时，键值对的返回顺序与存储顺序不一定相同。</p>
-<h3 id="遍历无值键"><a href="#遍历无值键" class="headerlink" title="遍历无值键"></a>遍历无值键</h3><p>用方法 keys() 来对字典进行遍历。</p>
+<h2 id="遍历无值键"><a href="#遍历无值键" class="headerlink" title="遍历无值键"></a>遍历无值键</h2><p>用方法 keys() 来对字典进行遍历。</p>
 <pre><code>ex：
     student_0 = {
         &apos;name&apos;:&apos;ganru&apos;,
@@ -1187,7 +1576,7 @@ out：
     name
     age
     graduated school
-</code></pre><h3 id="以某种顺序遍历字典中的所有键"><a href="#以某种顺序遍历字典中的所有键" class="headerlink" title="以某种顺序遍历字典中的所有键"></a>以某种顺序遍历字典中的所有键</h3><p>用函数 sorted() 。</p>
+</code></pre><h2 id="以某种顺序遍历字典中的所有键"><a href="#以某种顺序遍历字典中的所有键" class="headerlink" title="以某种顺序遍历字典中的所有键"></a>以某种顺序遍历字典中的所有键</h2><p>用函数 sorted() 。</p>
 <pre><code>ex：
     favorite_languages = {
         &apos;jen&apos;: &apos;python&apos;,
@@ -1203,7 +1592,7 @@ out：
     Jen, thank you for taking the poll.
     Phil, thank you for taking the poll.
     Sarah, thank you for taking the poll.
-</code></pre><h3 id="遍历所有值（无键）"><a href="#遍历所有值（无键）" class="headerlink" title="遍历所有值（无键）"></a>遍历所有值（无键）</h3><p>用方法 values()。（可能得到很多重复项）</p>
+</code></pre><h2 id="遍历所有值（无键）"><a href="#遍历所有值（无键）" class="headerlink" title="遍历所有值（无键）"></a>遍历所有值（无键）</h2><p>用方法 values()。（可能得到很多重复项）</p>
 <pre><code>ex：
     favorite_languages = {
         &apos;jen&apos;: &apos;python&apos;,
@@ -1234,7 +1623,7 @@ out：
     Python
     C
     Ruby
-</code></pre><h2 id="字典的嵌套"><a href="#字典的嵌套" class="headerlink" title="字典的嵌套"></a>字典的嵌套</h2><p>比如 字典中的字典。</p>
+</code></pre><h1 id="字典的嵌套"><a href="#字典的嵌套" class="headerlink" title="字典的嵌套"></a>字典的嵌套</h1><p>比如 字典中的字典。</p>
 <pre><code>ex：
     alien_0 = {&apos;color&apos;: &apos;green&apos;, &apos;points&apos;: 5}
     alien_1 = {&apos;color&apos;: &apos;yellow&apos;, &apos;points&apos;: 10}
@@ -1246,7 +1635,7 @@ out：
     {&apos;color&apos;: &apos;green&apos;, &apos;points&apos;: 5}
     {&apos;color&apos;: &apos;yellow&apos;, &apos;points&apos;: 10}
     {&apos;color&apos;: &apos;red&apos;, &apos;points&apos;: 15}
-</code></pre><h2 id="字典中存储列表"><a href="#字典中存储列表" class="headerlink" title="字典中存储列表"></a>字典中存储列表</h2><pre><code>ex：
+</code></pre><h1 id="字典中存储列表"><a href="#字典中存储列表" class="headerlink" title="字典中存储列表"></a>字典中存储列表</h1><pre><code>ex：
     student_0 = {
         &apos;name&apos;: &apos;ganru&apos;,
         &apos;language&apos;: [&apos;python&apos;, &apos;C&apos;, &apos;C++&apos;],
@@ -1262,7 +1651,7 @@ out：
         Python
         C
         C++
-</code></pre><h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+</code></pre><h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
 <li>如何定义字典，以及如何使用存储在字典中的信息；</li>
 <li>如何访问和修改字典中的元素，以及如何遍历字典中的所有信息；</li>
 <li>如何遍历字典中所有的键值对、所有的键和所有的值；</li>
@@ -1414,7 +1803,7 @@ out：
 <blockquote>
 <p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
 </blockquote>
-<h1 id="条件语句（不管怎么用，都不影响原值）"><a href="#条件语句（不管怎么用，都不影响原值）" class="headerlink" title="条件语句（不管怎么用，都不影响原值）"></a>条件语句（不管怎么用，都不影响原值）</h1><h2 id="if-语句的使用"><a href="#if-语句的使用" class="headerlink" title="if 语句的使用"></a>if 语句的使用</h2><pre><code>cars = [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
+<h1 id="if-语句的使用"><a href="#if-语句的使用" class="headerlink" title="if 语句的使用"></a>if 语句的使用</h1><pre><code>cars = [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
 for car in cars:
     if car == &apos;bmw&apos;:
         print(car.upper())
@@ -1427,7 +1816,7 @@ out：
     BMW
     Subaru
     Toyota
-</code></pre><h2 id="常用的判断符号"><a href="#常用的判断符号" class="headerlink" title="常用的判断符号"></a>常用的判断符号</h2><pre><code>== 判断是否相等
+</code></pre><h1 id="常用的判断符号"><a href="#常用的判断符号" class="headerlink" title="常用的判断符号"></a>常用的判断符号</h1><pre><code>== 判断是否相等
 != 判断是否不等
 and 判断两条件是否同时为 True 。（相当于 &amp;&amp; ）
 or 判断是否有一个条件为 True 。（相当于 ||）
@@ -1438,7 +1827,7 @@ in 判断特定值是否已在列表中
     out：
         True
 not in 判断特定值是否不在列表中
-</code></pre><h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+</code></pre><h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
 <li>if-elif-else 结构的使用</li>
 <li>if 与 for 的混合使用</li>
 <li>对特定元素的筛选</li>
@@ -1589,13 +1978,13 @@ not in 判断特定值是否不在列表中
 <blockquote>
 <p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
 </blockquote>
-<h1 id="列表的使用（大部分情况下把它当作数组来用）"><a href="#列表的使用（大部分情况下把它当作数组来用）" class="headerlink" title="列表的使用（大部分情况下把它当作数组来用）"></a>列表的使用（大部分情况下把它当作数组来用）</h1><h2 id="什么是列表（和-C-C-中的数组有点像）"><a href="#什么是列表（和-C-C-中的数组有点像）" class="headerlink" title="什么是列表（和 C/C++ 中的数组有点像）"></a>什么是列表（和 C/C++ 中的数组有点像）</h2><p>存储多个数据的元素集合。</p>
-<h2 id="列表元素的访问"><a href="#列表元素的访问" class="headerlink" title="列表元素的访问"></a>列表元素的访问</h2><pre><code>ex：
+<h1 id="什么是列表（和-C-C-中的数组有点像）"><a href="#什么是列表（和-C-C-中的数组有点像）" class="headerlink" title="什么是列表（和 C/C++ 中的数组有点像）"></a>什么是列表（和 C/C++ 中的数组有点像）</h1><p>存储多个数据的元素集合。</p>
+<h1 id="列表元素的访问"><a href="#列表元素的访问" class="headerlink" title="列表元素的访问"></a>列表元素的访问</h1><pre><code>ex：
     motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
     print(motorcycles)
-</code></pre><h2 id="元素的索引从-0-开始"><a href="#元素的索引从-0-开始" class="headerlink" title="元素的索引从 0 开始"></a>元素的索引从 0 开始</h2><p>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
-<h2 id="列表的增、删、改、查"><a href="#列表的增、删、改、查" class="headerlink" title="列表的增、删、改、查"></a>列表的增、删、改、查</h2><h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</p>
-<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>del语句。如：del Array[0]（删掉列表头部元素）</p>
+</code></pre><h1 id="元素的索引从-0-开始"><a href="#元素的索引从-0-开始" class="headerlink" title="元素的索引从 0 开始"></a>元素的索引从 0 开始</h1><p>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
+<h1 id="列表的增、删、改、查"><a href="#列表的增、删、改、查" class="headerlink" title="列表的增、删、改、查"></a>列表的增、删、改、查</h1><h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><p>有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</p>
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><p>del语句。如：del Array[0]（删掉列表头部元素）</p>
 <p>标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。</p>
 <pre><code>ex：
     motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
@@ -1609,19 +1998,19 @@ out：
     suzuki
 </code></pre><p>这两种删，前者为销毁，后者为数据提取。</p>
 <p>补充：<br>如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>    ex：Array.remove(‘doubi’)</p>
-<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><pre><code>ex：
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><pre><code>ex：
     Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
     Array[0] = &apos;gandalf&apos;
 out：
     [&apos;gandalf&apos;,&apos;G&apos;,&apos;GG&apos;]
-</code></pre><h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><p>与 <a href="#qiepian">切片的遍历</a> 类似。</p>
-<h2 id="列表排序与长度确定（注意分永久和暂时排序）"><a href="#列表排序与长度确定（注意分永久和暂时排序）" class="headerlink" title="列表排序与长度确定（注意分永久和暂时排序）"></a>列表排序与长度确定（注意分永久和暂时排序）</h2><h3 id="永久性排序："><a href="#永久性排序：" class="headerlink" title="永久性排序："></a>永久性排序：</h3><pre><code>ex：
+</code></pre><h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><p>与 <a href="#qiepian">切片的遍历</a> 类似。</p>
+<h1 id="列表排序与长度确定（注意分永久和暂时排序）"><a href="#列表排序与长度确定（注意分永久和暂时排序）" class="headerlink" title="列表排序与长度确定（注意分永久和暂时排序）"></a>列表排序与长度确定（注意分永久和暂时排序）</h1><h2 id="永久性排序："><a href="#永久性排序：" class="headerlink" title="永久性排序："></a>永久性排序：</h2><pre><code>ex：
     cars = [&apos;bmw&apos;, &apos;audi&apos;, &apos;toyota&apos;, &apos;subaru&apos;]
     cars.sort()        //若要大到小排序，在括号内输入 **reverse = True。**
     print(cars)        //如果要反转列表，写 **cars.reverse**
 out：
     [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
-</code></pre><h3 id="暂时性排序："><a href="#暂时性排序：" class="headerlink" title="暂时性排序："></a>暂时性排序：</h3><pre><code>ex：
+</code></pre><h2 id="暂时性排序："><a href="#暂时性排序：" class="headerlink" title="暂时性排序："></a>暂时性排序：</h2><pre><code>ex：
     Array = [&apos;qwd&apos;,&apos;asd&apos;,&apos;gwa&apos;,&apos;xdf&apos;]
     print(Array)
     print(sorted(Array))    //注：如果想大到小排序，写 **sorted(Array，reverse = True)。**
@@ -1631,11 +2020,11 @@ out：
     [&apos;asd&apos;,&apos;gwa&apos;,&apos;qwd&apos;,&apos;xdf&apos;]
     [&apos;qwd&apos;,&apos;asd&apos;,&apos;gwa&apos;,&apos;xdf&apos;]
 </code></pre><p><strong>补充：</strong><br>首字母大到小排序：reverse = True<br>字符串长度大到小排序：key = len<br>key 有很多种方式，具体不表。</p>
-<h3 id="列表长度确定"><a href="#列表长度确定" class="headerlink" title="列表长度确定"></a>列表长度确定</h3><pre><code>ex：
+<h2 id="列表长度确定"><a href="#列表长度确定" class="headerlink" title="列表长度确定"></a>列表长度确定</h2><pre><code>ex：
     cars = [&apos;bmw&apos;, &apos;audi&apos;, &apos;toyota&apos;, &apos;subaru&apos;]
     len(cars)
-</code></pre><h2 id="列表使用时可能会产生索引错误"><a href="#列表使用时可能会产生索引错误" class="headerlink" title="列表使用时可能会产生索引错误"></a>列表使用时可能会产生索引错误</h2><p>如：索引超过当前列表长度的序值。<br>列表为空时索引 -1。</p>
-<h2 id="列表中-for-的使用"><a href="#列表中-for-的使用" class="headerlink" title="列表中 for 的使用"></a>列表中 for 的使用</h2><p>跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。</p>
+</code></pre><h1 id="列表使用时可能会产生索引错误"><a href="#列表使用时可能会产生索引错误" class="headerlink" title="列表使用时可能会产生索引错误"></a>列表使用时可能会产生索引错误</h1><p>如：索引超过当前列表长度的序值。<br>列表为空时索引 -1。</p>
+<h1 id="列表中-for-的使用"><a href="#列表中-for-的使用" class="headerlink" title="列表中 for 的使用"></a>列表中 for 的使用</h1><p>跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。</p>
 <pre><code>如 for cat in cats:
         .
         .        //循环语句块（带上缩进才算，即写完 for 换行之后，缩进该行）
@@ -1643,21 +2032,21 @@ out：
 </code></pre><p>表示从列表 cats 选取第一个元素并赋予 cat，然后执行语句块，直至选取到列表 cats 中最后一个元素。</p>
 <p><strong>注意</strong>这里的命名规则，尽量用复数名词表示列表（如 cats），用单数名词表示单个列表元素（如 cat）。</p>
 <p>通常遇见这种错误<br>    <code>Indentation Error: expected an indented block</code><br>表示你没缩进，编译器没检测到循环语句块。<br>这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。<br>补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）</p>
-<h2 id="数值列表的创建"><a href="#数值列表的创建" class="headerlink" title="数值列表的创建"></a>数值列表的创建</h2><h3 id="函数-range-a-b-c"><a href="#函数-range-a-b-c" class="headerlink" title="函数 range(a,b,c)"></a>函数 range(a,b,c)</h3><p>作用：生成一系列数字。<br>使用方式：<br>    从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ex：</span><br><span class="line">	for value in range(1,4):</span><br><span class="line">		print(value)</span><br><span class="line">out：</span><br><span class="line">	1</span><br><span class="line">	2</span><br><span class="line">	3</span><br></pre></td></tr></table></figure></p>
-<h3 id="函数-list"><a href="#函数-list" class="headerlink" title="函数 list()"></a>函数 list()</h3><p>作用：生成列表。</p>
+<h1 id="数值列表的创建"><a href="#数值列表的创建" class="headerlink" title="数值列表的创建"></a>数值列表的创建</h1><h2 id="函数-range-a-b-c"><a href="#函数-range-a-b-c" class="headerlink" title="函数 range(a,b,c)"></a>函数 range(a,b,c)</h2><p>作用：生成一系列数字。<br>使用方式：<br>    从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ex：</span><br><span class="line">	for value in range(1,4):</span><br><span class="line">		print(value)</span><br><span class="line">out：</span><br><span class="line">	1</span><br><span class="line">	2</span><br><span class="line">	3</span><br></pre></td></tr></table></figure></p>
+<h2 id="函数-list"><a href="#函数-list" class="headerlink" title="函数 list()"></a>函数 list()</h2><p>作用：生成列表。</p>
 <pre><code>ex：
     numbers = list(range(1,4))
     print(numbers)
 out：
     [1,2,3]
-</code></pre><h2 id="数字列表的统计计算"><a href="#数字列表的统计计算" class="headerlink" title="数字列表的统计计算"></a>数字列表的统计计算</h2><pre><code>min()、max()、sum() 的使用
-</code></pre><h2 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h2><p>用于简化代码。</p>
+</code></pre><h1 id="数字列表的统计计算"><a href="#数字列表的统计计算" class="headerlink" title="数字列表的统计计算"></a>数字列表的统计计算</h1><pre><code>min()、max()、sum() 的使用
+</code></pre><h1 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h1><p>用于简化代码。</p>
 <pre><code>ex：
     numbers = [value**2 for value in range(1,4)]
     print(numbers)
 out：
     [1,4,9]
-</code></pre><h2 id="切片（-python-术语，意为处理列表的部分元素）"><a href="#切片（-python-术语，意为处理列表的部分元素）" class="headerlink" title="切片（ python 术语，意为处理列表的部分元素）"></a>切片（ python 术语，意为处理列表的部分元素）</h2><pre><code>其语法形式为：
+</code></pre><h1 id="切片（-python-术语，意为处理列表的部分元素）"><a href="#切片（-python-术语，意为处理列表的部分元素）" class="headerlink" title="切片（ python 术语，意为处理列表的部分元素）"></a>切片（ python 术语，意为处理列表的部分元素）</h1><pre><code>其语法形式为：
 
     Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
     print(Array[1:4])    //从第 1 个开始，到第 4 个结束（不包含第 4 个）。注意，从 0 开始计算。
@@ -1669,13 +2058,13 @@ out：
 <pre><code>[&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
 </code></pre><p>此外，索引序号可以为负数，请注意若为 [-3:]（负几都一样）,并不会给你打完一整个列表，而只会打印最后3个元素，直至列表结束。</p>
 <p><a id="qiepian"></a></p>
-<h2 id="切片的遍历"><a href="#切片的遍历" class="headerlink" title="切片的遍历"></a>切片的遍历</h2><pre><code>很简单，加个循环语句（如 for ）就行。
+<h1 id="切片的遍历"><a href="#切片的遍历" class="headerlink" title="切片的遍历"></a>切片的遍历</h1><pre><code>很简单，加个循环语句（如 for ）就行。
 
     ex：
         for cat in cats[:3]:
     out：
         [前面三个元素]
-</code></pre><h2 id="列表的复制"><a href="#列表的复制" class="headerlink" title="列表的复制"></a>列表的复制</h2><p>其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。</p>
+</code></pre><h1 id="列表的复制"><a href="#列表的复制" class="headerlink" title="列表的复制"></a>列表的复制</h1><p>其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。</p>
 <pre><code>ex：
     my_cars = friend_cars[:]
 out：
@@ -1683,7 +2072,7 @@ out：
 </code></pre><p>注意不要这么写：</p>
 <pre><code>`my_cars = friend_cars`
 </code></pre><p>这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。</p>
-<h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h2><h3 id="元组的定义"><a href="#元组的定义" class="headerlink" title="元组的定义"></a>元组的定义</h3><p>列表中的元素可变，而元组不能变，其他相同。</p>
+<h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><h2 id="元组的定义"><a href="#元组的定义" class="headerlink" title="元组的定义"></a>元组的定义</h2><p>列表中的元素可变，而元组不能变，其他相同。</p>
 <p>存在的意义：在整个程序生命周期中保持一组元素值不变。（说白了就是常量）<br>其定义格式为：</p>
 <pre><code>    dimensions = (200, 50)        //用小括号，不再用中括号
     print(dimensions[0])
@@ -1691,14 +2080,14 @@ out：
 out：
     200
     50
-</code></pre><h3 id="元组的遍历"><a href="#元组的遍历" class="headerlink" title="元组的遍历"></a>元组的遍历</h3><pre><code>ex：
+</code></pre><h2 id="元组的遍历"><a href="#元组的遍历" class="headerlink" title="元组的遍历"></a>元组的遍历</h2><pre><code>ex：
     dimensions = (200, 50)
     for dimension in dimensions:
         print(dimension)
 out：
     200
     50
-</code></pre><h3 id="修改元组的变量"><a href="#修改元组的变量" class="headerlink" title="修改元组的变量"></a>修改元组的变量</h3><p>虽然元组元素不可改变，但是可以给存储元组的变量赋值。</p>
+</code></pre><h2 id="修改元组的变量"><a href="#修改元组的变量" class="headerlink" title="修改元组的变量"></a>修改元组的变量</h2><p>虽然元组元素不可改变，但是可以给存储元组的变量赋值。</p>
 <pre><code>ex：
     dimensions = (200, 50)
     print(&quot;原来的：&quot;)
@@ -1717,7 +2106,7 @@ out：
     400
     100
 </code></pre><p>注意：这里说的修改不是这么改：<br>    <code>dimensions[0] = 250</code><br>这是改不了的，元组存储的元素不可改变，只能从根源上改。</p>
-<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
 <li>列表的增、删、改、查</li>
 <li>for 的使用（和 C 有所不同，而且密切注意缩进的不同）</li>
 <li>列表的复制</li>
@@ -1869,21 +2258,21 @@ out：
 <blockquote>
 <p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
 </blockquote>
-<h1 id="变量和简单数据类型"><a href="#变量和简单数据类型" class="headerlink" title="变量和简单数据类型"></a>变量和简单数据类型</h1><h2 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h2><pre><code>first_name = &quot;ada&quot;
+<h1 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h1><pre><code>first_name = &quot;ada&quot;
 last_name = &quot;lovelace&quot;
 full_name = first_name + &quot; &quot; + last_name
 print(&quot;Hello, &quot; + full_name.title() + &quot;!&quot;)
 
 out：
     Hello, Ada Lovelace!
-</code></pre><h2 id="str-的使用"><a href="#str-的使用" class="headerlink" title="str() 的使用"></a>str() 的使用</h2><pre><code>age = 20
+</code></pre><h1 id="str-的使用"><a href="#str-的使用" class="headerlink" title="str() 的使用"></a>str() 的使用</h1><pre><code>age = 20
 message = &quot;Happy &quot; + age + &quot;rd Birthday!&quot;
 print(message)
 
 out：
     TypeError: Can&apos;t convert &apos;int&apos; object to str implicitly        //报错
 </code></pre><p>以上应改为：<br><code>message = &quot;Happy &quot; + str(age) + &quot;rd Birthday!&quot;</code></p>
-<h2 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
 <li>如何创建描述性变量名以及如何消除名称错误和语法错误；</li>
 <li>字符串是什么，以及如何使用小写、大写和首字母大写方式显示字符串；</li>
 <li>使用空白来显示整洁的输出，以及如何剔除字符串中多余的空白；</li>
@@ -2726,27 +3115,80 @@ edward&apos;s favorite language is ruby
 phil&apos;s favorite language is python
 </code></pre><h3 id="导入特定函数及给函数指定别名"><a href="#导入特定函数及给函数指定别名" class="headerlink" title="导入特定函数及给函数指定别名"></a>导入特定函数及给函数指定别名</h3><p>格式：<br><code>from module_name（.py 文件名） import function_name（在 .py 文件中的函数名）</code><br>导入多个函数：<br><code>from module_name import function_0, function_1, ...</code><br>若函数名太长或与程序现有名称冲突：（指定别名区分）<br><code>from module_name import function_0 as f_0</code></p>
 <h3 id="给模块指定别名"><a href="#给模块指定别名" class="headerlink" title="给模块指定别名"></a>给模块指定别名</h3><p>格式：<br><code>import son as s        #比如上述中的 son.py 函数文件</code></p>
-<p>使用的时候，<code>son.users_language(favorite_languages)</code> 可以这么写：<br><code>s.users_language(favorite_languages)</code></p>
-<h3 id="导入模块中的所有函数"><a href="#导入模块中的所有函数" class="headerlink" title="导入模块中的所有函数"></a>导入模块中的所有函数</h3><p>格式：<br><code>from module_name import *</code><br>* 号运算符可以让 Python 导入模块中的所有函数。</p>
-<h2 id="函数编写要点"><a href="#函数编写要点" class="headerlink" title="函数编写要点"></a>函数编写要点</h2><ol>
-<li>尽量给函数指定描述性名称且只用小写字母与下划线，便于他人阅读。</li>
-<li>每个函数都要有其功能注释，便于他人迅速理解该函数。</li>
-<li>给形参指定默认值及时，等号两边不要有空格<br>（这是约定，但我 C 写习惯了，没怎么注意，能运行就行，好看就行）</li>
-<li><p>一行代码行不要超过79个字符，若形参很多，可以这样：</p>
-<p> def print_models(</p>
-<pre><code>unprinted_designs, completed_models)
-</code></pre><p>输入左括号后换行，并输入两次 Tab ，便于观看。</p>
+<p>使用的时候，<code>son.users_language(favorite_languages)</code> 可以这么写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 导入模块中的所有函数</span><br><span class="line">格式：</span><br><span class="line">`from module_name import *`</span><br><span class="line">\* 号运算符可以让 Python 导入模块中的所有函数。</span><br><span class="line"></span><br><span class="line">## 函数编写要点</span><br><span class="line">1. 尽量给函数指定描述性名称且只用小写字母与下划线，便于他人阅读。</span><br><span class="line">2. 每个函数都要有其功能注释，便于他人迅速理解该函数。</span><br><span class="line">3. 给形参指定默认值及时，等号两边不要有空格</span><br><span class="line">（这是约定，但我 C 写习惯了，没怎么注意，能运行就行，好看就行）</span><br><span class="line">4. 一行代码行不要超过79个字符，若形参很多，可以这样：</span><br><span class="line">	</span><br><span class="line">	def print_models(</span><br><span class="line">			unprinted_designs, completed_models)</span><br><span class="line">输入左括号后换行，并输入两次 Tab ，便于观看。</span><br><span class="line">5. 如果模块很多函数，可以在两个函数之间换两次行。</span><br><span class="line">6. 所有的import语句都应放在文件开头，唯一例外的情形是，在文件开头使用了注释来描述整个程序。</span><br><span class="line"></span><br><span class="line">## 学习要点</span><br><span class="line">1. 实参形参的判断及使用</span><br><span class="line">2. 函数与返回值</span><br><span class="line">3. 实参可选</span><br><span class="line">4. 函数与列表、字典、 if语句和while循环的结合</span><br><span class="line">5. 切片建立列表副本（禁止函数修改列表）</span><br><span class="line">6. 函数与模块</span><br><span class="line"></span><br><span class="line"># 类（面向对象编程）</span><br><span class="line">## 类的定义</span><br><span class="line">可以理解为 C 中的结构体，两者有点像，但又有不同。</span><br><span class="line">根据类来创建对象被称为实例化，这让你能够使用类的实例。</span><br><span class="line"></span><br><span class="line">## 类的创建与使用</span><br><span class="line">### 创建类</span><br><span class="line">创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。</span><br><span class="line"></span><br><span class="line">ex：</span><br><span class="line">	class Student():	#首字母要大写，指的是类（约定的），括号空，是因为要从空白建立类</span><br><span class="line">		&quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;</span><br><span class="line">		</span><br><span class="line">		def _init_(self, name, age):	</span><br><span class="line">		#注意这里有个坑，默认方法构造书写格式是__init__，而不是_init_，即在init两侧都是双下划线，不是单下划线。 </span><br><span class="line">			&quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;</span><br><span class="line">			self.name = name</span><br><span class="line">			self.age = age</span><br><span class="line">		</span><br><span class="line">		def study(self):</span><br><span class="line">			&quot;&quot;&quot;模拟学生学习&quot;&quot;&quot;</span><br><span class="line">			print(self.name.title() + &quot; is now learning.&quot;)</span><br><span class="line">		</span><br><span class="line">		def sleep(self):</span><br><span class="line">			&quot;&quot;&quot;模拟学生睡觉&quot;&quot;&quot;</span><br><span class="line">			print(self.name.title() + &quot; is now sleeping.&quot;)</span><br><span class="line">		</span><br><span class="line">		def get_descriptive(self):</span><br><span class="line">			&quot;&quot;&quot;返回学生信息&quot;&quot;&quot;</span><br><span class="line">			descriptive = self.name + &apos; &apos; + self.age</span><br><span class="line">			return descriptive.title()</span><br><span class="line"></span><br><span class="line">1. 上述代码中，在类中出现的函数称为方法，如 3 个 def，与函数一样，只是名称发生了变化。</span><br><span class="line">2. 在类中，每当使用者用 Student 类创建新实例时，Python 就会自动运行方法 \_\_init\_\_()。每次写类都要初始化。</span><br><span class="line">3. 方法也有不同，方法名首尾都有下划线的一般指 **默认方法**，这是为了避免Python默认方法与普通方法发生名称冲突。</span><br><span class="line">4. 在 _init_() 中 self 必不可少，Python 调用这个方法来创建 Student 实例时，将自动传入实参 self。</span><br><span class="line">5. 每个与类相关联的方法调用都自动传递实参 self，它是一个指向实例本身的引用，让实例能够访问类中的属性和方法。</span><br><span class="line">6. 可通过实例访问的变量成为 属性（如：name、age）。</span><br><span class="line">7. 每次新建实例时，只需写后面两个形参值。</span><br><span class="line">8. 另外两个方法，由于不需要额外的信息，故只有一个形参 self。</span><br><span class="line">9. 虽然没有写显式 return 语句，但 Python 会自动返回一个表示该学生的实例。</span><br><span class="line"></span><br><span class="line">### 类的使用</span><br><span class="line"></span><br><span class="line">	class Student():</span><br><span class="line">		--snip--</span><br><span class="line">	</span><br><span class="line">	student_0 = Student(&apos;ganru&apos;, 20)</span><br><span class="line">	</span><br><span class="line">	print(&quot;student_0&apos;s name is &quot; + student_0.name.title() + &quot;.&quot;)</span><br><span class="line">	print(&quot;student_0 is &quot; + str(student_0.age) + &quot; years old.&quot;)</span><br><span class="line">	student_0.study()</span><br><span class="line">	student_0.sleep()</span><br><span class="line">	print(student_0.get_descriptive())</span><br><span class="line">	</span><br><span class="line">out：</span><br><span class="line"></span><br><span class="line">	student_0&apos;s name is Ganru.</span><br><span class="line">	student_0 is 20 years old.</span><br><span class="line">	Ganru is now learning.</span><br><span class="line">	Ganru is now sleeping.</span><br><span class="line"></span><br><span class="line">## 给属性指定默认值</span><br><span class="line">还是原来的 Student() 类，我们指定学生学校默认为 JYU：</span><br><span class="line"></span><br><span class="line">	class Student():</span><br><span class="line">		&quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;</span><br><span class="line">		</span><br><span class="line">		def _init_(self, name, age):	</span><br><span class="line">			&quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;</span><br><span class="line">			self.name = name</span><br><span class="line">			self.age = age</span><br><span class="line">			self.school = &apos;JYU&apos;		#改动在这里</span><br><span class="line">		</span><br><span class="line">		def study(self):</span><br><span class="line">			--snip--</span><br><span class="line">		</span><br><span class="line">		def sleep(self):</span><br><span class="line">			--snip--</span><br><span class="line">		</span><br><span class="line">		def get_descriptive(self):</span><br><span class="line">			--snip--</span><br><span class="line">		</span><br><span class="line">		def original_school(self):</span><br><span class="line">			&quot;&quot;&quot;打印一条学生原来学校的消息&quot;&quot;&quot;</span><br><span class="line">			print(&quot;The student from &quot; + self.school)</span><br><span class="line">	</span><br><span class="line">	student_0 = Student(&apos;ganru&apos;, 20)</span><br><span class="line">	print(student_0.get_descriptive())</span><br><span class="line">	student_0.original_school()</span><br><span class="line"></span><br><span class="line">## 属性值的修改</span><br><span class="line">### 直接修改</span><br><span class="line"></span><br><span class="line">	class Student():</span><br><span class="line">		--snip--</span><br><span class="line">	</span><br><span class="line">	student_0 = Student(&apos;ganru&apos;, 20)</span><br><span class="line">	print(student_0.get_descriptive())</span><br><span class="line">	student_0.school = &apos;THU&apos;	#改动在这里</span><br><span class="line">	student_0.original_school()</span><br><span class="line">	</span><br><span class="line">### 通过方法修改属性的值</span><br><span class="line">若想无需直接访问属性，可将值传递给一个方法，由它在内部进行更新。</span><br><span class="line">在原先类 Student() 的基础上，加上：</span><br></pre></td></tr></table></figure></p>
+<pre><code>def update_school(self, value):
+    &quot;&quot;&quot;将学校名称改为指定值&quot;&quot;&quot;
+    self.school = value
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">	student_0 = Student(&apos;ganru&apos;, 20)</span><br><span class="line">	print(student_0.get_descriptive())</span><br><span class="line">	</span><br><span class="line">	student_0.update_school(&apos;PKU&apos;)	#改动在这里</span><br><span class="line">	student_0.original_school()</span><br><span class="line"></span><br><span class="line">还可以加一些功能，比如禁止属性值回调。</span><br><span class="line">可参考书（P145）中的 **里程表读数回调**：</span><br><span class="line"></span><br><span class="line">	class Car():</span><br><span class="line">		--snip--</span><br><span class="line">		</span><br><span class="line">		def update_odometer(self, mileage):</span><br><span class="line">			&quot;&quot;&quot;</span><br><span class="line">			将里程表读数设置为指定的值</span><br><span class="line">			禁止将里程表读数往回调</span><br><span class="line">			&quot;&quot;&quot;</span><br><span class="line">			if mileage &gt;= self.odometer_reading:</span><br><span class="line">				self.odometer_reading = mileage</span><br><span class="line">			else:</span><br><span class="line">				print(&quot;You can&apos;t roll back an odometer!&quot;)</span><br><span class="line">	</span><br><span class="line">### 通过方法对属性的值进行递增</span><br><span class="line">比如上面的 Car 类，可以加一个 def：</span><br><span class="line"></span><br><span class="line">	def increment_odometer(self, miles):</span><br><span class="line">		&quot;&quot;&quot;将里程表读数在原来的基础上增加指定的量&quot;&quot;&quot;</span><br><span class="line">		self.odometer_reading += miles</span><br><span class="line"></span><br><span class="line">## 类的继承</span><br><span class="line">有时候懒得写多几个重复项，想引用其他类并自定义自己的类，可用继承。原有类称父类，新类称子类。</span><br><span class="line"></span><br><span class="line">	父类：</span><br><span class="line">	class Car():</span><br><span class="line">		&quot;&quot;&quot;一次模拟汽车的简单尝试&quot;&quot;&quot;</span><br><span class="line">		def __init__(self, make, model, year):</span><br><span class="line">			self.make = make</span><br><span class="line">			self.model = model</span><br><span class="line">			self.year = year</span><br><span class="line">			self.odometer_reading = 0</span><br><span class="line"></span><br><span class="line">		def get_descriptive_name(self):</span><br><span class="line">			long_name = str(self.year) + &apos; &apos; + self.make + &apos; &apos; + self.model</span><br><span class="line">			return long_name.title()</span><br><span class="line"></span><br><span class="line">		def read_odometer(self):</span><br><span class="line">			print(&quot;This car has &quot; + str(self.odometer_reading) + &quot; miles on it.&quot;)</span><br><span class="line"></span><br><span class="line">		def update_odometer(self, mileage):</span><br><span class="line">			if mileage &gt;= self.odometer_reading:</span><br><span class="line">				self.odometer_reading = mileage</span><br><span class="line">			else:</span><br><span class="line">				print(&quot;You can&apos;t roll back an odometer!&quot;)</span><br><span class="line">		</span><br><span class="line">		def increment_odometer(self, miles):</span><br><span class="line">			self.odometer_reading += miles</span><br><span class="line"></span><br><span class="line">	子类：</span><br><span class="line">	class ElectricCar(Car):		#类括号内若导入参数，则继承某一个类</span><br><span class="line">		&quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;</span><br><span class="line">		</span><br><span class="line">		def __init__(self, make, model, year):</span><br><span class="line">			&quot;&quot;&quot;初始化父类的属性&quot;&quot;&quot;</span><br><span class="line">			super().__init__(make, model, year)		</span><br><span class="line">			#super 是一个特殊函数，让 Python 调用 ElectricCar 的父类的方法 __init__()，让 ElectricCar 实例包含父类的所有属性。</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">	my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)</span><br><span class="line">	print(my_tesla.get_descriptive_name())</span><br><span class="line">	</span><br><span class="line">out：</span><br><span class="line">	2016 Tesla Model S</span><br><span class="line"></span><br><span class="line">1. 父类和子类必须要在同一文件中，且父类在子类前面。</span><br><span class="line">2. 父类也称超类，名称 super 因此而得名。</span><br><span class="line"></span><br><span class="line">## 给子类定义属性和方法</span><br><span class="line"></span><br><span class="line">	class Car():</span><br><span class="line">		--snip--</span><br><span class="line"></span><br><span class="line">	class ElectricCar(Car):</span><br><span class="line">		&quot;&quot;&quot;Represent aspects of a car, specific to electric vehicles.&quot;&quot;&quot;</span><br><span class="line">		</span><br><span class="line">		def __init__(self, make, model, year):</span><br><span class="line">			&quot;&quot;&quot;</span><br><span class="line">			电动汽车的独特之处</span><br><span class="line">			初始化父类的属性，再初始化电动汽车特有的属性</span><br><span class="line">			&quot;&quot;&quot;</span><br><span class="line">			super().__init__(make, model, year)</span><br><span class="line">			self.battery_size = 70				#子类属性添加</span><br><span class="line">			</span><br><span class="line">		def describe_battery(self):</span><br><span class="line">			&quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;</span><br><span class="line">			print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)</span><br><span class="line">		</span><br><span class="line">	my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)</span><br><span class="line">	print(my_tesla.get_descriptive_name())</span><br><span class="line">	my_tesla.describe_battery()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">out：</span><br><span class="line">	</span><br><span class="line">	2016 Tesla Model S</span><br><span class="line">	This car has a 70-kWh battery.</span><br><span class="line"></span><br><span class="line">如果一个属性或方法是任何汽车都有的，而不是电动汽车特有的，就应将其加入到 Car 类而不是 ElectricCar 类中。</span><br><span class="line">这样，使用 Car 类的人将获得相应的功能，而 ElectricCar 类只包含处理电动汽车特有属性和行为的代码。</span><br><span class="line"></span><br><span class="line">## 重写父类</span><br><span class="line">假设 Car 类有一个名为 fill_gas_tank() 的方法，它对全电动汽车来说毫无意义，这时我们可以重写它：</span><br><span class="line"></span><br><span class="line">	def ElectricCar(Car):</span><br><span class="line">		--snip--</span><br><span class="line">	</span><br><span class="line">		def fill_gas_tank():</span><br><span class="line">			&quot;&quot;&quot;电动汽车没有油箱&quot;&quot;&quot;</span><br><span class="line">			print(&quot;This car doesn&apos;t need a gas tank!&quot;)</span><br><span class="line">	</span><br><span class="line">这时候，如果我们再次调用方法 fill_gas_tank()，则 Python 不会使用父类的方法，而是我们在子类新写的方法。</span><br><span class="line"></span><br><span class="line">## 将实例用作属性（属性中的属性或方法）</span><br><span class="line">有时候类太大，可能会比较复杂，可以将大类拆分成小类。</span><br><span class="line">	</span><br><span class="line">	class Car():</span><br><span class="line">		--snip--</span><br></pre></td></tr></table></figure>
+
+class Battery():
+    &quot;&quot;&quot;一次模拟电动汽车电瓶的简单尝试&quot;&quot;&quot;
+
+    def __init__(self, battery_size=70):
+        &quot;&quot;&quot;初始化电瓶的属性&quot;&quot;&quot;
+        self.battery_size = battery_size
+
+    def describe_battery(self):
+        &quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;
+        print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)
+```
+
+class ElectricCar(Car):
+    &quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;
+
+    def __init__(self, make, model, year):
+        &quot;&quot;&quot;
+        初始化父类的属性，再初始化电动汽车特有的属性
+        &quot;&quot;&quot;
+        super().__init__(make, model, year)
+        self.battery = Battery()        #将实例用作属性
+
+my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
+print(my_tesla.get_descriptive_name())
+my_tesla.battery.describe_battery()
+</code></pre><p>out：</p>
+<pre><code>2016 Tesla Model S
+This car has a 70-kWh battery.
+</code></pre><h2 id="类的导入"><a href="#类的导入" class="headerlink" title="类的导入"></a>类的导入</h2><p>跟函数模块差不多，将类写入一个 .py 文件。<br>导入格式：</p>
+<p>import module_name（.py 文件名）<br>from module_name（.py 文件名） import class_name（在 .py 文件中的类名）<br>from module_name import class_0, class_1, …</p>
+<p>如果模块与模块之间有联系，则这两个模块都要导入同一个文件中，不然创建实例时将引发错误。</p>
+<h2 id="Python-标准库"><a href="#Python-标准库" class="headerlink" title="Python 标准库"></a>Python 标准库</h2><p>Python标准库是一组模块，安装的Python都包含它。大致理解类之后，就可以使用他人的模块了。</p>
+<p>尝试：<br>如果在以前，我们可能这么写：favorite_languages = {}<br>字典能够将信息关联起来，但不记录添加键—值对的顺序。要创建字典并记录其添加顺序，可使用模块 collections 中的 OrderedDict 类。</p>
+<pre><code>from collections import OrderedDict
+
+favorite_languages = OrderedDict()
+
+favorite_languages[&apos;jen&apos;] = &apos;python&apos;
+favorite_languages[&apos;sarah&apos;] = &apos;c&apos;
+favorite_languages[&apos;edward&apos;] = &apos;ruby&apos;
+favorite_languages[&apos;phil&apos;] = &apos;python&apos;
+
+for name, language in favorite_languages.items():
+    print(name.title() + &quot;&apos;s favorite language is &quot; +
+        language.title() + &quot;.&quot;)
+</code></pre><p>out：</p>
+<pre><code>Jen&apos;s favorite language is Python.
+Sarah&apos;s favorite language is C.
+Edward&apos;s favorite language is Ruby.
+Phil&apos;s favorite language is Python.
+</code></pre><h2 id="类编码风格"><a href="#类编码风格" class="headerlink" title="类编码风格"></a>类编码风格</h2><ol>
+<li><p>驼峰命名法：类名中的每个单词的首字母都大写，而不使用下划线。<br>ex：<br>class Car():<br>class Student():<br>…</p>
 </li>
-<li>如果模块很多函数，可以在两个函数之间换两次行。</li>
-<li>所有的import语句都应放在文件开头，唯一例外的情形是，在文件开头使用了注释来描述整个程序。</li>
+<li><p>实例名和模块名都采用小写格式，并在单词之间加上下划线。<br>ex：<br>my_tesla<br>student_0<br>son.py<br>…</p>
+</li>
+<li><p>对于每个类，都写类注释。</p>
+</li>
+<li>在类中，可使用一个空行来分隔方法；而在模块中，可使用两个空行来分隔类。</li>
+<li>需要同时导入标准库中的模块和你编写的模块时，先编写导入标准库模块的 import 语句，再添加一个空行，然后编写导入你自己编写的模块的 import 语句。</li>
 </ol>
 <h2 id="学习要点-5"><a href="#学习要点-5" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
-<li>实参形参的判断及使用</li>
-<li>函数与返回值</li>
-<li>实参可选</li>
-<li>函数与列表、字典、 if语句和while循环的结合</li>
-<li>切片建立列表副本（禁止函数修改列表）</li>
-<li>函数与模块</li>
+<li>类的创建于使用（类的建立一定要初始化）</li>
+<li>实例属性的修改</li>
+<li>类的继承</li>
+<li>重写父类</li>
+<li>将实例用作属性（属性中的属性或方法）</li>
+<li>类的导入</li>
+<li>类编码的规约</li>
 </ol>
 
           
@@ -3187,7 +3629,7 @@ hexo deploy     （或者 hexo d）
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
