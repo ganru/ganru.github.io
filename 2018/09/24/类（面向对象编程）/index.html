@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  类的定义可以理解为 C 中的结构体，两者有点像，但又有不同。根据类来创建对象被称为实例化，这让你能够使用类的实例。 类的创建与使用创建类创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。 ex：    class S">
+<meta name="description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  类的定义可以理解为 C 中的结构体，两者有点像，但又有不同。根据类来创建对象被称为实例化，这让你能够使用类的实例。 类的创建与使用创建类创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。 ex： class Stud">
 <meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="类（面向对象编程）">
 <meta property="og:url" content="https://ganru.github.io/2018/09/24/类（面向对象编程）/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  类的定义可以理解为 C 中的结构体，两者有点像，但又有不同。根据类来创建对象被称为实例化，这让你能够使用类的实例。 类的创建与使用创建类创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。 ex：    class S">
+<meta property="og:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  类的定义可以理解为 C 中的结构体，两者有点像，但又有不同。根据类来创建对象被称为实例化，这让你能够使用类的实例。 类的创建与使用创建类创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。 ex： class Stud">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-24T09:21:05.129Z">
+<meta property="og:updated_time" content="2018-09-24T09:37:15.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类（面向对象编程）">
-<meta name="twitter:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  类的定义可以理解为 C 中的结构体，两者有点像，但又有不同。根据类来创建对象被称为实例化，这让你能够使用类的实例。 类的创建与使用创建类创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。 ex：    class S">
+<meta name="twitter:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  类的定义可以理解为 C 中的结构体，两者有点像，但又有不同。根据类来创建对象被称为实例化，这让你能够使用类的实例。 类的创建与使用创建类创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。 ex： class Stud">
 
 
 
@@ -389,25 +389,28 @@
 </blockquote>
 <h1 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h1><p>可以理解为 C 中的结构体，两者有点像，但又有不同。<br>根据类来创建对象被称为实例化，这让你能够使用类的实例。</p>
 <h1 id="类的创建与使用"><a href="#类的创建与使用" class="headerlink" title="类的创建与使用"></a>类的创建与使用</h1><h2 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h2><p>创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。</p>
-<p>ex：<br>    class Student():    #首字母要大写，指的是类（约定的），括号空，是因为要从空白建立类<br>        “””学生类的模拟”””</p>
-<pre><code>def _init_(self, name, age):    
-#注意这里有个坑，默认方法构造书写格式是__init__，而不是_init_，即在init两侧都是双下划线，不是单下划线。 
-    &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
-    self.name = name
-    self.age = age
+<p>ex：</p>
+<pre><code>class Student():    #首字母要大写，指的是类（约定的），括号空，是因为要从空白建立类
+    &quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;
 
-def study(self):
-    &quot;&quot;&quot;模拟学生学习&quot;&quot;&quot;
-    print(self.name.title() + &quot; is now learning.&quot;)
+    def _init_(self, name, age):    
+    #注意这里有个坑，默认方法构造书写格式是__init__，而不是_init_，即在init两侧都是双下划线，不是单下划线。 
+        &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
+        self.name = name
+        self.age = age
 
-def sleep(self):
-    &quot;&quot;&quot;模拟学生睡觉&quot;&quot;&quot;
-    print(self.name.title() + &quot; is now sleeping.&quot;)
+    def study(self):
+        &quot;&quot;&quot;模拟学生学习&quot;&quot;&quot;
+        print(self.name.title() + &quot; is now learning.&quot;)
 
-def get_descriptive(self):
-    &quot;&quot;&quot;返回学生信息&quot;&quot;&quot;
-    descriptive = self.name + &apos; &apos; + self.age
-    return descriptive.title()
+    def sleep(self):
+        &quot;&quot;&quot;模拟学生睡觉&quot;&quot;&quot;
+        print(self.name.title() + &quot; is now sleeping.&quot;)
+
+    def get_descriptive(self):
+        &quot;&quot;&quot;返回学生信息&quot;&quot;&quot;
+        descriptive = self.name + &apos; &apos; + self.age
+        return descriptive.title()
 </code></pre><ol>
 <li>上述代码中，在类中出现的函数称为方法，如 3 个 def，与函数一样，只是名称发生了变化。</li>
 <li>在类中，每当使用者用 Student 类创建新实例时，Python 就会自动运行方法 __init__()。每次写类都要初始化。</li>
@@ -491,8 +494,8 @@ student_0.original_school()
     &quot;&quot;&quot;将里程表读数在原来的基础上增加指定的量&quot;&quot;&quot;
     self.odometer_reading += miles
 </code></pre><h1 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h1><p>有时候懒得写多几个重复项，想引用其他类并自定义自己的类，可用继承。原有类称父类，新类称子类。</p>
-<pre><code>父类：
-class Car():
+<p>父类：</p>
+<pre><code>class Car():
     &quot;&quot;&quot;一次模拟汽车的简单尝试&quot;&quot;&quot;
     def __init__(self, make, model, year):
         self.make = make
@@ -515,9 +518,8 @@ class Car():
 
     def increment_odometer(self, miles):
         self.odometer_reading += miles
-
-子类：
-class ElectricCar(Car):        #类括号内若导入参数，则继承某一个类
+</code></pre><p>子类：</p>
+<pre><code>class ElectricCar(Car):        #类括号内若导入参数，则继承某一个类
     &quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;
 
     def __init__(self, make, model, year):
@@ -528,8 +530,9 @@ class ElectricCar(Car):        #类括号内若导入参数，则继承某一个
 
 my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
 print(my_tesla.get_descriptive_name())
-</code></pre><p>out：<br>    2016 Tesla Model S</p>
-<ol>
+</code></pre><p>out：</p>
+<pre><code>2016 Tesla Model S
+</code></pre><ol>
 <li>父类和子类必须要在同一文件中，且父类在子类前面。</li>
 <li>父类也称超类，名称 super 因此而得名。</li>
 </ol>
@@ -557,7 +560,10 @@ my_tesla.describe_battery()
 </code></pre><p>out：</p>
 <pre><code>2016 Tesla Model S
 This car has a 70-kWh battery.
-</code></pre><p>如果一个属性或方法是任何汽车都有的，而不是电动汽车特有的，就应将其加入到 Car 类而不是 ElectricCar 类中。<br>这样，使用 Car 类的人将获得相应的功能，而 ElectricCar 类只包含处理电动汽车特有属性和行为的代码。</p>
+</code></pre><ol>
+<li>如果一个属性或方法是任何汽车都有的，而不是电动汽车特有的，就应将其加入到 Car 类而不是 ElectricCar 类中。</li>
+<li>这样，使用 Car 类的人将获得相应的功能，而 ElectricCar 类只包含处理电动汽车特有属性和行为的代码。</li>
+</ol>
 <h1 id="重写父类"><a href="#重写父类" class="headerlink" title="重写父类"></a>重写父类</h1><p>假设 Car 类有一个名为 fill_gas_tank() 的方法，它对全电动汽车来说毫无意义，这时我们可以重写它：</p>
 <pre><code>def ElectricCar(Car):
     --snip--
@@ -570,8 +576,8 @@ This car has a 70-kWh battery.
 <pre><code>class Car():
     --snip--
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Battery():</span><br><span class="line">	&quot;&quot;&quot;一次模拟电动汽车电瓶的简单尝试&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">	def __init__(self, battery_size=70):</span><br><span class="line">		&quot;&quot;&quot;初始化电瓶的属性&quot;&quot;&quot;</span><br><span class="line">		self.battery_size = battery_size</span><br><span class="line"></span><br><span class="line">	def describe_battery(self):</span><br><span class="line">		&quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;</span><br><span class="line">		print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Battery():</span><br><span class="line">	&quot;&quot;&quot;一次模拟电动汽车电瓶的简单尝试&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">	def __init__(self, battery_size=70):</span><br><span class="line">		&quot;&quot;&quot;初始化电瓶的属性&quot;&quot;&quot;</span><br><span class="line">		self.battery_size = battery_size</span><br><span class="line"></span><br><span class="line">	def describe_battery(self):</span><br><span class="line">		&quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;</span><br><span class="line">		print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)</span><br></pre></td></tr></table></figure>
 
 class ElectricCar(Car):
     &quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;
