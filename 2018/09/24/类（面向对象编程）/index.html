@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  类的定义可以理解为 C 中的结构体，两者有点像，但又有不同。根据类来创建对象被称为实例化，这让你能够使用类的实例。 类的创建与使用创建类创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。 ex： class Stud">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-24T09:37:15.965Z">
+<meta property="og:updated_time" content="2018-09-27T06:53:51.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类（面向对象编程）">
 <meta name="twitter:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  类的定义可以理解为 C 中的结构体，两者有点像，但又有不同。根据类来创建对象被称为实例化，这让你能够使用类的实例。 类的创建与使用创建类创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。 ex： class Stud">
@@ -393,7 +393,7 @@
 <pre><code>class Student():    #首字母要大写，指的是类（约定的），括号空，是因为要从空白建立类
     &quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;
 
-    def _init_(self, name, age):    
+    def \_\_init\_\_(self, name, age):    
     #注意这里有个坑，默认方法构造书写格式是__init__，而不是_init_，即在init两侧都是双下划线，不是单下划线。 
         &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
         self.name = name
@@ -409,7 +409,7 @@
 
     def get_descriptive(self):
         &quot;&quot;&quot;返回学生信息&quot;&quot;&quot;
-        descriptive = self.name + &apos; &apos; + self.age
+        descriptive = self.name + &apos; &apos; + str(self.age)
         return descriptive.title()
 </code></pre><ol>
 <li>上述代码中，在类中出现的函数称为方法，如 3 个 def，与函数一样，只是名称发生了变化。</li>
@@ -676,6 +676,10 @@ Phil&apos;s favorite language is Python.
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/ganru.github.io/2018/09/27/文件与异常/" rel="prev" title="文件与异常">
+                文件与异常 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -751,7 +755,7 @@ Phil&apos;s favorite language is Python.
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
