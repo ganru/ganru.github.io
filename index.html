@@ -292,6 +292,333 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/28/代码测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/09/28/代码测试/" itemprop="url">代码测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-28T18:02:54+08:00">
+                2018-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><p>写在前面</p></strong></p>
+<hr>
+<blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<hr>
+<p>写完代码，总是要测试一遍以确保能够运行得到预期的答案。然而总不可能每次都要调后台输入实参，这时候我们可以使用 Python 提供的自动测试。</p>
+<hr>
+<h1 id="函数测试"><a href="#函数测试" class="headerlink" title="函数测试"></a>函数测试</h1><p>写一个模块：<br>name_function.py</p>
+<pre><code>def get_formatted_name(first, last):
+    &quot;&quot;&quot;Generate a neatly formatted full name.&quot;&quot;&quot;
+    full_name = first + &apos; &apos; + last
+    return full_name.title()
+</code></pre><p>测试：<br>test_name_ function.py</p>
+<pre><code>import unittest
+from name_function import get_formatted_name
+
+class NamesTestCase(unittest.TestCase):        #这里必须继承自 unittest.TestCase 类，让 Python 知道如何运行所编写的测试
+    &quot;&quot;&quot;测试name_function.py&quot;&quot;&quot;
+
+    def test_first_last_name(self):
+        &quot;&quot;&quot;能够正确地处理像Janis Joplin这样的姓名吗？ &quot;&quot;&quot;
+        formatted_name = get_formatted_name(&apos;janis&apos;, &apos;joplin&apos;)
+        self.assertEqual(formatted_name, &apos;Janis Joplin&apos;)
+
+unittest.main()        #让 Python 启动对此段代码的测试
+</code></pre><p>out：</p>
+<pre><code>.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+OK
+</code></pre><ol>
+<li>unittest 是 Python 标准库中的模块，它提供了代码测试工具。</li>
+<li>所有以 test_ 打头的方法都将自动运行。（继承自 unittest.TestCase 类）</li>
+<li>assertEqual()：断言方法。断言方法用来核实得到的结果是否与期望的结果一致。（属于 unittest 类）</li>
+<li>每完成一个单元测试， Python 都打印一个字符：测试通过时打印一个句点；测试引发错误时打印一个E；测试导致断言失败时打印一个F。</li>
+</ol>
+<p>当然，如果测试错误，将弹出以下报警：</p>
+<pre><code>F
+======================================================================
+FAIL: test_first_last_name (__main__.NamesTestCase)
+能够正确地处理像Janis Joplin这样的姓名吗？
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &quot;C:\Users\GR\Desktop\asd.py&quot;, line 10, in test_first_last_name
+    self.assertEqual(formatted_name, &apos;JanisJoplin&apos;)
+AssertionError: &apos;Janis Joplin&apos; != &apos;JanisJoplin&apos;
+- Janis Joplin
+?      -
++ JanisJoplin
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)
+</code></pre><p>匹配失败。<br>它指出测试失败的原因及源代码具体位置，还指出有多少错误（ FAILED (failures=1) ），方便调试。</p>
+<h1 id="测试未通过处理"><a href="#测试未通过处理" class="headerlink" title="测试未通过处理"></a>测试未通过处理</h1><p>这次，我们更新模块 name_function.py：</p>
+<pre><code>def get_formatted_name(first, middle, last):
+    &quot;&quot;&quot;生成整洁的姓名&quot;&quot;&quot;
+    full_name = first + &apos; &apos; + middle + &apos; &apos; + last
+    return full_name.title()
+</code></pre><p>如果我们还用上述的测试代码，明显通不过：</p>
+<pre><code>E
+======================================================================
+ERROR: test_first_last_name (__main__.NamesTestCase)
+能够正确地处理像Janis Joplin这样的姓名吗？
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &quot;C:\Users\GR\Desktop\asd.py&quot;, line 9, in test_first_last_name
+    formatted_name = get_formatted_name(&apos;janis&apos;, &apos;joplin&apos;)
+TypeError: get_formatted_name() missing 1 required positional argument: &apos;last&apos;
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
+</code></pre><p>匹配错误。<br>第一行字母 E 表示测试用例中有一个单元测试导致了错误。<br>第二行的 ERROR: 指出错的是哪个单元测试用例。</p>
+<p>这时候，不要忙着修复测试代码，而是先考虑修复导致测试不能通过的代码（新写的代码）。</p>
+<p>我们改一下 get_formatted_name 的代码：</p>
+<pre><code>def get_formatted_name(first, last, middle=&apos;&apos;):
+    &quot;&quot;&quot;生成整洁的姓名&quot;&quot;&quot;
+    if middle:
+        full_name = first + &apos; &apos; + middle + &apos; &apos; + last
+    else:
+        full_name = first + &apos; &apos; + last
+    return full_name.title()
+</code></pre><p>让中间名变为可选的变量。<br>结果当然的，能够通过。</p>
+<h1 id="添加新测试"><a href="#添加新测试" class="headerlink" title="添加新测试"></a>添加新测试</h1><p>可以看到，我们更新了 get_formatted_name 函数，但是不知道能否输出包含中间名的完整名字。<br>在上述的 NamesTestCase 类中，我们再加一段新的测试代码：</p>
+<pre><code>def test_first_last_middle_name(self):        #注意必须 test_ 打头，这样 Python 才会自动运行
+    &quot;&quot;&quot;能够正确地处理像Wolfgang Amadeus Mozart这样的姓名吗？ &quot;&quot;&quot;
+    formatted_name = get_formatted_name(
+        &apos;wolfgang&apos;, &apos;mozart&apos;, &apos;amadeus&apos;)
+    self.assertEqual(formatted_name, &apos;Wolfgang Amadeus Mozart&apos;)
+</code></pre><p>out：</p>
+<pre><code>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+</code></pre><h1 id="断言方法"><a href="#断言方法" class="headerlink" title="断言方法"></a>断言方法</h1><p>Python 在 unittest.TestCase 类中提供了很多断言方法。<br>以下为常用的断言方法：<br><img src="/ganru.github.io/2018/09/28/代码测试/1.png"></p>
+<h1 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h1><p>函数知道怎么测试了，现在看看类的测试。<br>写一个类模块：<br>survey.py</p>
+<pre><code>class AnonymousSurvey():
+    &quot;&quot;&quot;收集匿名调查问卷的答案&quot;&quot;&quot;
+
+    def __init__(self, question):
+        &quot;&quot;&quot;存储一个问题，并为存储答案做准备&quot;&quot;&quot;
+        self.question = question
+        self.responses = []
+
+    def show_question(self):
+        &quot;&quot;&quot;显示调查问卷&quot;&quot;&quot;
+        print(question)
+
+    def store_response(self, new_response):
+        &quot;&quot;&quot;存储单份调查答卷&quot;&quot;&quot;
+        self.responses.append(new_response)
+
+    def show_results(self):
+        &quot;&quot;&quot;显示收集到的所有答卷&quot;&quot;&quot;
+        print(&quot;Survey results:&quot;)
+        for response in responses:
+            print(&apos;- &apos; + response)
+</code></pre><p>测试代码：<br>test_survey.py</p>
+<pre><code>import unittest
+from survey import AnonymousSurvey
+
+class TestAnonmyousSurvey(unittest.TestCase):
+    &quot;&quot;&quot;针对AnonymousSurvey类的测试&quot;&quot;&quot;
+
+    def test_store_single_response(self):
+        &quot;&quot;&quot;测试单个答案会被妥善地存储&quot;&quot;&quot;
+        question = &quot;What language did you first learn to speak?&quot;
+        my_survey = AnonymousSurvey(question)
+        my_survey.store_response(&apos;English&apos;)
+
+        self.assertIn(&apos;English&apos;, my_survey.responses)
+
+    def test_store_three_responses(self):
+        &quot;&quot;&quot;测试三个答案会被妥善地存储&quot;&quot;&quot;
+        question = &quot;What language did you first learn to speak?&quot;
+        my_survey = AnonymousSurvey(question)
+        responses = [&apos;English&apos;, &apos;Spanish&apos;, &apos;Mandarin&apos;]
+        for response in responses:
+            my_survey.store_response(response)
+        for response in responses:
+            self.assertIn(response, my_survey.responses)
+
+unittest.main()
+</code></pre><p>out：</p>
+<pre><code>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+</code></pre><h1 id="方法-setUp"><a href="#方法-setUp" class="headerlink" title="方法 setUp()"></a>方法 setUp()</h1><p>unittest.TestCase 类包含方法 setUp()，让我们只需创建这些对象一次，并在每个测试方法中使用它们。<br>如果在 TestCase 类中包含了方法 setUp()， Python 将先运行它，再运行各个以 test_ 打头的方法。</p>
+<p>修改一下 class TestAnonmyousSurvey：</p>
+<pre><code>class TestAnonmyousSurvey(unittest.TestCase):
+    &quot;&quot;&quot;针对AnonymousSurvey类的测试&quot;&quot;&quot;
+
+    def setUp(self):
+        &quot;&quot;&quot;创建一个调查对象和一组答案，供使用的测试方法使用&quot;&quot;&quot;
+        question = &quot;What language did you first learn to speak?&quot;
+        self.my_survey = AnonymousSurvey(question)
+        self.responses = [&apos;English&apos;, &apos;Spanish&apos;, &apos;Mandarin&apos;]
+
+    def test_store_single_response(self):
+        &quot;&quot;&quot;测试单个答案会被妥善地存储&quot;&quot;&quot;
+        self.my_survey.store_response(self.responses[0])
+        self.assertIn(self.responses[0], self.my_survey.responses)
+
+    def test_store_three_responses(self):
+        &quot;&quot;&quot;测试三个答案会被妥善地存储&quot;&quot;&quot;
+        for response in self.responses:
+            self.my_survey.store_response(response)
+        for response in self.responses:
+            self.assertIn(response, self.my_survey.responses)
+</code></pre><p>运行结果相同。</p>
+<p>运用方法 setUp() 很省事，不用建立这么多对象一个一个测，减少内存占用率。</p>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
+<li>如何使用模块unittest中的工具来为函数和类编写测试</li>
+<li>如何编写继承unittest.TestCase的类</li>
+<li>如何使用方法setUp()</li>
+<li>注意编写重要行为的测试</li>
+<li>在项目早期，不要试图去编写全覆盖的测试用例，除非有充分的理由这样做，不然影响开发速度</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/27/文件与异常/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3861,236 +4188,186 @@ with open(filename) as f_obj:
 4. 文本分析与多文本分析
 5. 数据的存储与读取
 6. 代码重构
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
+</code></pre><h1 id="代码测试"><a href="#代码测试" class="headerlink" title="代码测试"></a>代码测试</h1><p>写完代码，总是要测试一遍以确保能够运行得到预期的答案。然而总不可能每次都要调后台输入实参，这时候我们可以使用 Python 提供的自动测试。</p>
+<h2 id="函数测试"><a href="#函数测试" class="headerlink" title="函数测试"></a>函数测试</h2><p>写一个模块：<br>name_function.py</p>
+<pre><code>def get_formatted_name(first, last):
+    &quot;&quot;&quot;Generate a neatly formatted full name.&quot;&quot;&quot;
+    full_name = first + &apos; &apos; + last
+    return full_name.title()
+</code></pre><p>测试：<br>test_name_ function.py</p>
+<pre><code>import unittest
+from name_function import get_formatted_name
 
-    
+class NamesTestCase(unittest.TestCase):        #这里必须继承自 unittest.TestCase 类，让 Python 知道如何运行所编写的测试
+    &quot;&quot;&quot;测试name_function.py&quot;&quot;&quot;
 
-    
+    def test_first_last_name(self):
+        &quot;&quot;&quot;能够正确地处理像Janis Joplin这样的姓名吗？ &quot;&quot;&quot;
+        formatted_name = get_formatted_name(&apos;janis&apos;, &apos;joplin&apos;)
+        self.assertEqual(formatted_name, &apos;Janis Joplin&apos;)
 
-    
+unittest.main()        #让 Python 启动对此段代码的测试
+</code></pre><p>out：</p>
+<pre><code>.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+OK
+</code></pre><ol>
+<li>unittest 是 Python 标准库中的模块，它提供了代码测试工具。</li>
+<li>所有以 test_ 打头的方法都将自动运行。（继承自 unittest.TestCase 类）</li>
+<li>assertEqual()：断言方法。断言方法用来核实得到的结果是否与期望的结果一致。（属于 unittest 类）</li>
+<li>每完成一个单元测试， Python 都打印一个字符：测试通过时打印一个句点；测试引发错误时打印一个E；测试导致断言失败时打印一个F。</li>
+</ol>
+<p>当然，如果测试错误，将弹出以下报警：</p>
+<pre><code>F
+======================================================================
+FAIL: test_first_last_name (__main__.NamesTestCase)
+能够正确地处理像Janis Joplin这样的姓名吗？
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &quot;C:\Users\GR\Desktop\asd.py&quot;, line 10, in test_first_last_name
+    self.assertEqual(formatted_name, &apos;JanisJoplin&apos;)
+AssertionError: &apos;Janis Joplin&apos; != &apos;JanisJoplin&apos;
+- Janis Joplin
+?      -
++ JanisJoplin
 
-    <footer class="post-footer">
-      
 
-      
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
 
-      
+FAILED (failures=1)
+</code></pre><p>匹配失败。<br>它指出测试失败的原因及源代码具体位置，还指出有多少错误（ FAILED (failures=1) ），方便调试。</p>
+<h2 id="测试未通过处理"><a href="#测试未通过处理" class="headerlink" title="测试未通过处理"></a>测试未通过处理</h2><p>这次，我们更新模块 name_function.py：</p>
+<pre><code>def get_formatted_name(first, middle, last):
+    &quot;&quot;&quot;生成整洁的姓名&quot;&quot;&quot;
+    full_name = first + &apos; &apos; + middle + &apos; &apos; + last
+    return full_name.title()
+</code></pre><p>如果我们还用上述的测试代码，明显通不过：</p>
+<pre><code>E
+======================================================================
+ERROR: test_first_last_name (__main__.NamesTestCase)
+能够正确地处理像Janis Joplin这样的姓名吗？
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &quot;C:\Users\GR\Desktop\asd.py&quot;, line 9, in test_first_last_name
+    formatted_name = get_formatted_name(&apos;janis&apos;, &apos;joplin&apos;)
+TypeError: get_formatted_name() missing 1 required positional argument: &apos;last&apos;
 
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
 
+FAILED (errors=1)
+</code></pre><p>匹配错误。<br>第一行字母 E 表示测试用例中有一个单元测试导致了错误。<br>第二行的 ERROR: 指出错的是哪个单元测试用例。</p>
+<p>这时候，不要忙着修复测试代码，而是先考虑修复导致测试不能通过的代码（新写的代码）。</p>
+<p>我们改一下 get_formatted_name 的代码：</p>
+<pre><code>def get_formatted_name(first, last, middle=&apos;&apos;):
+    &quot;&quot;&quot;生成整洁的姓名&quot;&quot;&quot;
+    if middle:
+        full_name = first + &apos; &apos; + middle + &apos; &apos; + last
+    else:
+        full_name = first + &apos; &apos; + last
+    return full_name.title()
+</code></pre><p>让中间名变为可选的变量。<br>结果当然的，能够通过。</p>
+<h2 id="添加新测试"><a href="#添加新测试" class="headerlink" title="添加新测试"></a>添加新测试</h2><p>可以看到，我们更新了 get_formatted_name 函数，但是不知道能否输出包含中间名的完整名字。<br>在上述的 NamesTestCase 类中，我们再加一段新的测试代码：</p>
+<pre><code>def test_first_last_middle_name(self):        #注意必须 test_ 打头，这样 Python 才会自动运行
+    &quot;&quot;&quot;能够正确地处理像Wolfgang Amadeus Mozart这样的姓名吗？ &quot;&quot;&quot;
+    formatted_name = get_formatted_name(
+        &apos;wolfgang&apos;, &apos;mozart&apos;, &apos;amadeus&apos;)
+    self.assertEqual(formatted_name, &apos;Wolfgang Amadeus Mozart&apos;)
+</code></pre><p>out：</p>
+<pre><code>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
 
-    
-      
+OK
+</code></pre><h2 id="断言方法"><a href="#断言方法" class="headerlink" title="断言方法"></a>断言方法</h2><p>Python 在 unittest.TestCase 类中提供了很多断言方法。<br>以下为常用的断言方法：<br><img src="/ganru.github.io/2018/09/06/Python-笔记/1.png"></p>
+<h2 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h2><p>函数知道怎么测试了，现在看看类的测试。<br>写一个类模块：<br>survey.py</p>
+<pre><code>class AnonymousSurvey():
+    &quot;&quot;&quot;收集匿名调查问卷的答案&quot;&quot;&quot;
 
-  
+    def __init__(self, question):
+        &quot;&quot;&quot;存储一个问题，并为存储答案做准备&quot;&quot;&quot;
+        self.question = question
+        self.responses = []
 
-  
-  
-  
+    def show_question(self):
+        &quot;&quot;&quot;显示调查问卷&quot;&quot;&quot;
+        print(question)
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/07/26/My-New-Post/">
+    def store_response(self, new_response):
+        &quot;&quot;&quot;存储单份调查答卷&quot;&quot;&quot;
+        self.responses.append(new_response)
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ganru">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
-    </span>
+    def show_results(self):
+        &quot;&quot;&quot;显示收集到的所有答卷&quot;&quot;&quot;
+        print(&quot;Survey results:&quot;)
+        for response in responses:
+            print(&apos;- &apos; + response)
+</code></pre><p>测试代码：<br>test_survey.py</p>
+<pre><code>import unittest
+from survey import AnonymousSurvey
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小黑屋">
-    </span>
+class TestAnonmyousSurvey(unittest.TestCase):
+    &quot;&quot;&quot;针对AnonymousSurvey类的测试&quot;&quot;&quot;
 
-    
-      <header class="post-header">
+    def test_store_single_response(self):
+        &quot;&quot;&quot;测试单个答案会被妥善地存储&quot;&quot;&quot;
+        question = &quot;What language did you first learn to speak?&quot;
+        my_survey = AnonymousSurvey(question)
+        my_survey.store_response(&apos;English&apos;)
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ganru.github.io/2018/07/26/My-New-Post/" itemprop="url">Github+Hexo 搭建个人博客</a></h1>
-        
+        self.assertIn(&apos;English&apos;, my_survey.responses)
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-26T18:54:46+08:00">
-                2018-07-26
-              </time>
-            
+    def test_store_three_responses(self):
+        &quot;&quot;&quot;测试三个答案会被妥善地存储&quot;&quot;&quot;
+        question = &quot;What language did you first learn to speak?&quot;
+        my_survey = AnonymousSurvey(question)
+        responses = [&apos;English&apos;, &apos;Spanish&apos;, &apos;Mandarin&apos;]
+        for response in responses:
+            my_survey.store_response(response)
+        for response in responses:
+            self.assertIn(response, my_survey.responses)
 
-            
+unittest.main()
+</code></pre><p>out：</p>
+<pre><code>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
 
-            
-          </span>
+OK
+</code></pre><h2 id="方法-setUp"><a href="#方法-setUp" class="headerlink" title="方法 setUp()"></a>方法 setUp()</h2><p>unittest.TestCase 类包含方法 setUp()，让我们只需创建这些对象一次，并在每个测试方法中使用它们。<br>如果在 TestCase 类中包含了方法 setUp()， Python 将先运行它，再运行各个以 test_ 打头的方法。</p>
+<p>修改一下 class TestAnonmyousSurvey：</p>
+<pre><code>class TestAnonmyousSurvey(unittest.TestCase):
+    &quot;&quot;&quot;针对AnonymousSurvey类的测试&quot;&quot;&quot;
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ganru.github.io/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
+    def setUp(self):
+        &quot;&quot;&quot;创建一个调查对象和一组答案，供使用的测试方法使用&quot;&quot;&quot;
+        question = &quot;What language did you first learn to speak?&quot;
+        self.my_survey = AnonymousSurvey(question)
+        self.responses = [&apos;English&apos;, &apos;Spanish&apos;, &apos;Mandarin&apos;]
 
-                
-                
-              
-            </span>
-          
+    def test_store_single_response(self):
+        &quot;&quot;&quot;测试单个答案会被妥善地存储&quot;&quot;&quot;
+        self.my_survey.store_response(self.responses[0])
+        self.assertIn(self.responses[0], self.my_survey.responses)
 
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这个博客搭了我一整天，老实讲其实不难，只是我太蠢了，没有好好看人家写的文章。</p>
-<p>写下这篇文章，旨在记录我搭建博客的过程，方便我下次想再复盘重新搭建一次博客时能少花点时间。如果你们有需要，也可参考参考，希望对你们有帮助。</p>
-<p>OS：Windows 10</p>
-<ul>
-<li><p><strong>1.环境准备</strong></p>
-<ul>
-<li>1.1 Git<br>  这个第一个安装，直接去<a href="https://git-scm.com/" title="Git" target="_blank" rel="noopener">官网</a>下载</li>
-<li>1.2 node.js<br>  一样，去<a href="https://nodejs.org/en/" title="Node.js" target="_blank" rel="noopener">官网</a>下载好后一键傻瓜式下一步，当然，英语好的话或者如果你有其他的想法，Google、百度能帮你解决问题。</li>
-<li>1.3 hexo<br>  这个对于某些人可能有点困难（比如我=_=）,我们在后面表述。</li>
-</ul>
-</li>
-<li><p><strong>2.创建 GitHub 域名与 SSH 密钥部署</strong></p>
-<ul>
-<li>2.1 注册 GitHub<br>  去<a href="https://github.com/" title="GitHub" target="_blank" rel="noopener">官网</a>注册，注意认真取 username，如果真心想好好玩的话，会方便很多。</li>
-<li><p>2.2 创建 Repository（存储库）</p>
-  <img src="/ganru.github.io/2018/07/26/My-New-Post/3.png">
-<p>  写 Repository name 时尽量与 Owner 一致，对下面操作会方便一些。</p>
-  <img src="/ganru.github.io/2018/07/26/My-New-Post/4.png">
-</li>
-<li><p>2.3 SSH 密钥部署<br>  在想放置的路径（我的是 D:\Hexo ）下右键打开 Git Bash Here ，输入：</p>
-<pre><code>git config --global user.name &quot;ganru&quot;    //写你注册时的 username。
-git config --global user.email &quot;ganr1988@gmail.com&quot;    //换成你自己的邮箱
-</code></pre><p>  上面的步骤是为了配置你的 GitHub 姓名与邮箱，下面开始绑定密钥。</p>
-<p>  输入代码：</p>
-<pre><code>ssh-keygen -t rsa
-</code></pre><p>  该带码表示指定 rsa 算法生成密钥，接着连续三个回车键（不需要输入密码） ，然后就会生成两个文件 id_rsa 和 id_rsa.pub ，而 id_rsa 是密钥，id_rsa.pub 就是公钥。win系统默认生成在 C:\Users\GR.ssh 下，注意文件是隐藏的。</p>
-<p>  用记事本之类的软件打开 id_rsa.pub ，复制其中的内容。</p>
-<p>  接下来如下图所示，进入SSH密钥页面</p>
-  <img src="/ganru.github.io/2018/07/26/My-New-Post/5.png">
-  <img src="/ganru.github.io/2018/07/26/My-New-Post/6.png">
-<p>  title 不用写。将所复制的内容粘贴入内。</p>
-<p>  此时返回 Git Bash Here ，输入代码验证下：</p>
-<pre><code>ssh -T git@github.com
-</code></pre><p>  至此密钥配对成功，以后就不用老是输入账户密码才能进 GitHub 进行终端操作了。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>3.hexo 的安装</strong><br>  安装成功 Git 之后，我们在想放置的路径（我的是 D:\Hexo ）下右键打开 Git Bash Here ，输入：</p>
-<pre><code>$ npm install -g hexo-cli
-</code></pre><p>  这行代码表示安装 hexo ，验证是否成功可输入 hexo -v ,成功后如下图：</p>
-  <img src="/ganru.github.io/2018/07/26/My-New-Post/2.png">
-</li>
-<li><p><strong>4.在本地建设博客</strong><br>  输入代码：</p>
-<pre><code>hexo init
-</code></pre><p>  该步骤是初始化的意思，会自动在目标文件夹（D:\Hexo）建立网站所需要的文件。</p>
-<pre><code>npm install
-</code></pre><p>  然后是安装 node_modules 到 D:\Hexo 目录中。这是建立 node 的模块，具体作用 Google。</p>
-<pre><code>hexo server
-</code></pre><p>  输入后，若出现这样的情况：</p>
-  <img src="/ganru.github.io/2018/07/26/My-New-Post/7.png">
-<p>  说明 Hexo Server 已经启动了，在浏览器中打开 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> ， 这时可以看到 Hexo 已为你生成了一篇 blog。（端口默认是4000）</p>
-<p>  按下 Ctrl+C 停止 Server，接下来我们开始写一篇新的文章。</p>
-  <img src="/ganru.github.io/2018/07/26/My-New-Post/8.png">
-<p>  可看到它的生成路径，我们可以使用一个支持 Markdown 语法的编辑器（比如 Sublime Text）尽情地编辑文件 My-New-Post.md 。</p>
-<p>  写完文章之后，将 md（My-New-Post）文件生成静态网页：</p>
-<pre><code>$ hexo generate 
-</code></pre><p>  该命令执行完后，会在 D:\Hexo\public\ 目录下生成一系列html，css等文件 </p>
-</li>
-<li><p><strong>5.部署文件到 GitHub</strong><br>  输入代码：</p>
-<pre><code>$ hexo deploy
-</code></pre><p>  可能会出错：</p>
-  <img src="/ganru.github.io/2018/07/26/My-New-Post/10.png">
-<p>  这是因为我们没有安装 hexo-deployer-git，我们输入代码：</p>
-<pre><code>npm install hexo-deployer-git –save 
-</code></pre><p>  在 D:\Hexo 目录下，可看到 _config.yml 文件，这个文件可以改博客主题、标题等等内容。现在我们直接找到并写成这段代码：</p>
-<pre><code>deploy:
-    type: git
-    repository: git@github.com:ganru/ganru.github.io //记得改成你的 Repository name 
-</code></pre><p>  注意：使用 SSH <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:ganru.github.io ，不要用 https，这个我也不明白为什么，网上很多人说弄 htpps，但我弄了好久没成功，这个倒成功了。（=_=）<br>  然后再改：</p>
-  <img src="/ganru.github.io/2018/07/26/My-New-Post/9.png">
-<p>  注意：所有的冒号之后要空一格。如：type: git。</p>
-<p>  执行代码：</p>
-<pre><code>$ hexo deploy 
-</code></pre><p>  这时候就开始把本地的博客打包部署到你的 GitHub Repository （比如我的 ganru.github.io）里面了。</p>
-</li>
-<li><p><strong>6.通过网络登录博客</strong><br>  打开浏览器，输入你的博客地址（<a href="https://ganru.github.io/），若正常显示，说明你的本地博客部署（上传）成功了。">https://ganru.github.io/），若正常显示，说明你的本地博客部署（上传）成功了。</a></p>
-</li>
-<li><p><strong>7.总结</strong><br>  以后写博客就轻松了，我们只要在这基础上写文章就行：</p>
-<pre><code>$ hexo new “......” //......表示文章的标题 
-</code></pre><p>  每次写完文章后，记得依次写这三个指令：</p>
-<pre><code>hexo clean //该代码表示清除缓存
-hexo generate （或者 hexo g）
-hexo deploy     （或者 hexo d）
-</code></pre><p>  文章才能上传到你的 GitHub 里面。</p>
-<p>  还有，如果上面查看本地博客有问题的话，有很大可能是你装了福昕阅读器，因为它占用了 4000 这个端口，贼蛋疼。。<br>  附解决方法（如果你用得到的话）：</p>
-<pre><code>$ hexo s -p 5000
-</code></pre><p>  然后打开 <a href="http://localhost:5000/" target="_blank" rel="noopener">http://localhost:5000/</a> 这个网址就行了。</p>
-</li>
-</ul>
+    def test_store_three_responses(self):
+        &quot;&quot;&quot;测试三个答案会被妥善地存储&quot;&quot;&quot;
+        for response in self.responses:
+            self.my_survey.store_response(response)
+        for response in self.responses:
+            self.assertIn(response, self.my_survey.responses)
+</code></pre><p>运行结果相同。</p>
+<p>运用方法 setUp() 很省事，不用建立这么多对象一个一个测，减少内存占用率。</p>
+<h2 id="学习要点-8"><a href="#学习要点-8" class="headerlink" title="学习要点"></a>学习要点</h2><ol>
+<li>如何使用模块unittest中的工具来为函数和类编写测试</li>
+<li>如何编写继承unittest.TestCase的类</li>
+<li>如何使用方法setUp()</li>
+<li>注意编写重要行为的测试</li>
+<li>在项目早期，不要试图去编写全覆盖的测试用例，除非有充分的理由这样做，不然影响开发速度</li>
+</ol>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>到此为止，Python 语法基础的学习结束。没有涉及到深层次的数据结构，书籍作者是完全为没有任何计算机基础的人而写的。在这里我只是尽量整理这本书的大纲以及学习内容，老实讲不太适合没看过书或没有学过一遍的人。仅仅是为了有时候忘了一些东西可以看看，或者感觉自己需要快速看一遍 Python 基础语法的人而准备的。当然，如果愿意花费少许时间，也可以看文章开头的前言所提供的下载资料，那里有更全的讲解。希望能帮助到你。</p>
 
           
         
@@ -4176,7 +4453,7 @@ hexo deploy     （或者 hexo d）
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
