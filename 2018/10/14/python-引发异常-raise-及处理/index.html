@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  用户输入函数 input() 的使用（类似于 gets）作用：接收用户键入的数据并保存为字符串。 ex：     message = input(&amp;quot;Tell me something, and I will repeat it back t">
+<meta name="description" content="我们要学习异常语句处理，比如在自写函数中引入异常报警机制、用户使用程序时友好的提出异常错误等等。  用 raise 语句来引发一个异常。异常/错误对象必须有一个名字，且它们应是 Error 或 Exception 类的子类。  Python用异常对象 (exception object) 表示异常情况，遇到错误后，会引发异常。如果异常对象并未被处理或捕捉，程序就会用所谓的回溯 (Traceback">
 <meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用户输入与 while 循环">
-<meta property="og:url" content="https://ganru.github.io/2018/09/17/用户输入与-while-循环/index.html">
+<meta property="og:title" content="python 引发异常 raise() 及处理">
+<meta property="og:url" content="https://ganru.github.io/2018/10/14/python-引发异常-raise-及处理/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  用户输入函数 input() 的使用（类似于 gets）作用：接收用户键入的数据并保存为字符串。 ex：     message = input(&amp;quot;Tell me something, and I will repeat it back t">
+<meta property="og:description" content="我们要学习异常语句处理，比如在自写函数中引入异常报警机制、用户使用程序时友好的提出异常错误等等。  用 raise 语句来引发一个异常。异常/错误对象必须有一个名字，且它们应是 Error 或 Exception 类的子类。  Python用异常对象 (exception object) 表示异常情况，遇到错误后，会引发异常。如果异常对象并未被处理或捕捉，程序就会用所谓的回溯 (Traceback">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-24T09:26:47.806Z">
+<meta property="og:updated_time" content="2018-10-14T09:27:36.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用户输入与 while 循环">
-<meta name="twitter:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  用户输入函数 input() 的使用（类似于 gets）作用：接收用户键入的数据并保存为字符串。 ex：     message = input(&amp;quot;Tell me something, and I will repeat it back t">
+<meta name="twitter:title" content="python 引发异常 raise() 及处理">
+<meta name="twitter:description" content="我们要学习异常语句处理，比如在自写函数中引入异常报警机制、用户使用程序时友好的提出异常错误等等。  用 raise 语句来引发一个异常。异常/错误对象必须有一个名字，且它们应是 Error 或 Exception 类的子类。  Python用异常对象 (exception object) 表示异常情况，遇到错误后，会引发异常。如果异常对象并未被处理或捕捉，程序就会用所谓的回溯 (Traceback">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://ganru.github.io/2018/09/17/用户输入与-while-循环/"/>
+  <link rel="canonical" href="https://ganru.github.io/2018/10/14/python-引发异常-raise-及处理/"/>
 
 
 
 
 
-  <title>用户输入与 while 循环 | 小黑屋</title>
+  <title>python 引发异常 raise() 及处理 | 小黑屋</title>
   
 
 
@@ -293,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/用户输入与-while-循环/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/10/14/python-引发异常-raise-及处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
@@ -310,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">用户输入与 while 循环</h1>
+          <h1 class="post-title" itemprop="name headline">python 引发异常 raise() 及处理</h1>
         
 
         <div class="post-meta">
@@ -322,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T16:10:18+08:00">
-                2018-09-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-14T16:37:31+08:00">
+                2018-10-14
               </time>
             
 
@@ -382,172 +382,21 @@
       
 
       
-        <p><strong><p>写在前面</p></strong></p>
-<hr>
+        <p>我们要学习异常语句处理，比如在自写函数中引入异常报警机制、用户使用程序时友好的提出异常错误等等。</p>
 <blockquote>
-<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+<p>用 raise 语句来引发一个异常。异常/错误对象必须有一个名字，且它们应是 <strong>Error</strong> 或<strong> Exception </strong>类的子类。</p>
+<blockquote>
+<p>Python用异常对象 (exception object) 表示异常情况，遇到错误后，会引发异常。如果异常对象并未被处理或捕捉，程序就会用所谓的回溯 (Traceback,一种错误信息) 终止执行。</p>
 </blockquote>
-<h1 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h1><h2 id="函数-input-的使用（类似于-gets）"><a href="#函数-input-的使用（类似于-gets）" class="headerlink" title="函数 input() 的使用（类似于 gets）"></a>函数 input() 的使用（类似于 gets）</h2><p>作用：接收用户键入的数据并保存为字符串。</p>
-<pre><code>ex：
-    message = input(&quot;Tell me something, and I will repeat it back to you: &quot;)
-    print(message)
-
-out：
-    Tell me something, and I will repeat it back to you: Hello everyone!
-    Hello everyone!
-</code></pre><p>input() 括号里面填写的是提示信息，给用户指示该如何键入。</p>
-<p>有时候如果提示信息太长，一行写不完，可以这么做：</p>
-<pre><code>ex：
-    prompt = &quot;If you tell us who you are, we can personalize the messages you see.&quot;
-    prompt += &quot;\nWhat is your first name? &quot;
-
-    name = input(prompt)
-    print(&quot;\nHello, &quot; + name + &quot;!&quot;)
-
-out：
-    If you tell us who you are, we can personalize the messages you see.
-    What is your first name? Ganru
-    Hello, Ganru!
-</code></pre><p>可看出：采用的是字符串拼接的方式。</p>
-<p>注意：这里 Python 接收到的用户键入的数据<strong>永远</strong>是字符串。</p>
-<h2 id="函数-int-的使用（类似于-putchar）"><a href="#函数-int-的使用（类似于-putchar）" class="headerlink" title="函数 int() 的使用（类似于 putchar）"></a>函数 int() 的使用（类似于 putchar）</h2><p>常见作用：</p>
-<ol>
-<li>接收用户键入的数据并保存为整型数值。（通常配合 input() 使用）</li>
-<li><p>将字符串转变为数值表示。</p>
-<p> ex：</p>
-<pre><code>height = input(&quot;How tall are you, in inches? &quot;)
-height = int(height)
-
-if height &gt;= 36:
-    print(&quot;\nYou&apos;re tall enough to ride!&quot;)
-else:
-    print(&quot;\nYou&apos;ll be able to ride when you&apos;re a little older.&quot;)
-</code></pre><p> out：</p>
-<pre><code>How tall are you, in inches? 71
-You&apos;re tall enough to ride!
-</code></pre></li>
-</ol>
-<h1 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h1><pre><code>ex：
-    current_number = 1
-    while current_number &lt;= 5:
-        print(current_number)
-        current_number += 1
-</code></pre><h2 id="用户自行中断"><a href="#用户自行中断" class="headerlink" title="用户自行中断"></a>用户自行中断</h2><pre><code>ex：
-    prompt = &quot;\nTell me something, and I will repeat it back to you:&quot;
-    prompt += &quot;\nEnter &apos;quit&apos; to end the program. &quot;
-    message = &quot;&quot;
-    while message != &apos;quit&apos;:
-        message = input(prompt)
-
-        if message != &apos;quit&apos;:
-            print(message)
-
-out：
-    Tell me something, and I will repeat it back to you:
-    Enter &apos;quit&apos; to end the program. Hello everyone!
-    Hello everyone!
-
-    Tell me something, and I will repeat it back to you:
-    Enter &apos;quit&apos; to end the program. Hello again.
-    Hello again.
-
-    Tell me something, and I will repeat it back to you:
-    Enter &apos;quit&apos; to end the program. quit
-</code></pre><h2 id="运行时中断-（break-语句的使用）"><a href="#运行时中断-（break-语句的使用）" class="headerlink" title="运行时中断 （break 语句的使用）"></a>运行时中断 （break 语句的使用）</h2><p>常见作用：</p>
-<ol>
-<li>让机器判断并跳出无限循环。</li>
-<li><p>让机器筛选特定值。</p>
-<p> ex：</p>
-<pre><code>prompt = &quot;\nwho are you?&quot;
-message = &quot;&quot;
-while True:
-    message = input(prompt)
-
-    if message == &apos;ganru&apos;:
-        break
-    else:
-        print(&quot;Hello, &quot; + message.title() + &quot;!&quot;)
-</code></pre></li>
-</ol>
-<h2 id="运行时-continue"><a href="#运行时-continue" class="headerlink" title="运行时 continue"></a>运行时 continue</h2><pre><code>ex：
-    current_number = 0
-    while current_number &lt; 10:
-     current_number += 1
-
-        if current_number % 2 == 0:
-            continue
-
-        print(current_number)        //打印奇数
-out：
-    1
-    3
-    5
-    7
-    9
-</code></pre><h1 id="while-与列表、字典的关系"><a href="#while-与列表、字典的关系" class="headerlink" title="while 与列表、字典的关系"></a>while 与列表、字典的关系</h1><p><strong>for 适合遍历列表，while 适合处理列表。</strong></p>
-<p>.<br>.</p>
-<h2 id="列表间元素移动"><a href="#列表间元素移动" class="headerlink" title="列表间元素移动"></a>列表间元素移动</h2><pre><code>ex：
-    unconfirmed_users = [&apos;alice&apos;, &apos;brian&apos;, &apos;candace&apos;]
-    confirmed_users = []
-
-    while unconfirmed_users:
-        current_user = unconfirmed_users.pop()
-
-        print(&quot;Verifying user: &quot; + current_user.title())
-        confirmed_users.append(current_user)
-
-    print(&quot;\nThe following users have been confirmed:&quot;)
-    for confirmed_user in confirmed_users:
-        print(confirmed_user.title())
-out：
-    Verifying user: Candace
-    Verifying user: Brian
-    Verifying user: Alice
-
-    The following users have been confirmed:
-    Candace
-    Brian
-    Alice
-</code></pre><h2 id="while-与-remove"><a href="#while-与-remove" class="headerlink" title="while 与 remove"></a>while 与 remove</h2><pre><code>ex：
-    names = [&apos;ganru&apos;,&apos;gandalf&apos;,&apos;gan&apos;,&apos;ganru&apos;,&apos;gandalf&apos;,&apos;ganru&apos;,&apos;gandalf&apos;]
-    print(names)
-
-    while &apos;gandalf&apos; in names:    //判断字符串 &apos;gandalf&apos; 是否在 names 列表中。
-        names.remove(&apos;gandalf&apos;)
-
-    print(names)
-out：
-    [&apos;ganru&apos;,&apos;gandalf&apos;,&apos;gan&apos;,&apos;ganru&apos;,&apos;gandalf&apos;,&apos;ganru&apos;,&apos;gandalf&apos;]
-    [&apos;ganru&apos;,&apos;gan&apos;,&apos;ganru&apos;,&apos;ganru&apos;,]
-</code></pre><h2 id="使用用户输入来填充字典"><a href="#使用用户输入来填充字典" class="headerlink" title="使用用户输入来填充字典"></a>使用用户输入来填充字典</h2><pre><code>ex：
-    responses = {}
-
-    # 设置一个标志，指出调查是否继续
-    polling_active = True
-
-    while polling_active:
-        # 提示输入被调查者的名字和回答
-        name = input(&quot;\nWhat is your name? &quot;)
-        response = input(&quot;Which mountain would you like to climb someday? &quot;)
-
-        # 将答卷存储在字典中
-        responses[name] = response
-
-        # 看看是否还有人要参与调查
-        repeat = input(&quot;Would you like to let another person respond? (yes/ no) &quot;)
-        if repeat == &apos;no&apos;:
-            polling_active = False
-
-        # 调查结束，显示结果
-        print(&quot;\n--- Poll Results ---&quot;)
-        for name, response in responses.items():
-            print(name + &quot; would like to climb &quot; + response + &quot;.&quot;)
-</code></pre><h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
-<li>input() 的使用</li>
-<li>int() 的使用</li>
-<li>while 循环时中断、continue 及其常见作用</li>
-<li>while 与列表、字典的配合</li>
-</ol>
+</blockquote>
+<h1 id="raise-语句格式"><a href="#raise-语句格式" class="headerlink" title="raise() 语句格式"></a>raise() 语句格式</h1><p>Python 中的 raise 关键字用于引发一个异常，基本上和 Java 中的 throw 关键字相同，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def Err():</span><br><span class="line">    raise Exception(&quot;抛出一个异常&quot;) </span><br><span class="line"># Exception: 抛出一个异常 </span><br><span class="line">Err()</span><br></pre></td></tr></table></figure></p>
+<p>raise 关键字后面是抛出是一个通用的异常类型 (Exception)，一般来说抛出的异常越详细越好，Python 在 exceptions 模块内建了很多的异常类型。</p>
+<h1 id="传递异常"><a href="#传递异常" class="headerlink" title="传递异常"></a>传递异常</h1><p>捕捉到了异常，但是又想重新引发它(传递异常)，可以使用不带参数的raise语句即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">	answer = int(first_number) / int(second_number)</span><br><span class="line">except ZeroDivisionError:</span><br><span class="line">	raise</span><br></pre></td></tr></table></figure></p>
+<h1 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h1><p>Python 中也可以自定义自己的特殊类型的异常，只需要要从 Exception 类继承(直接或间接)即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class err(Exception):</span><br><span class="line">	pass</span><br></pre></td></tr></table></figure></p>
+<h1 id="捕捉异常"><a href="#捕捉异常" class="headerlink" title="捕捉异常"></a>捕捉异常</h1><h2 id="捕捉一个异常"><a href="#捕捉一个异常" class="headerlink" title="捕捉一个异常"></a>捕捉一个异常</h2><p>Python 中使用 try/except 关键字来捕捉异常，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">	print(5/0)</span><br><span class="line">except ZeroDivisionError:</span><br><span class="line">	print(&quot;You can&apos;t divide by 0!&quot;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="捕捉多个异常"><a href="#捕捉多个异常" class="headerlink" title="捕捉多个异常"></a>捕捉多个异常</h2><p>在一个 except 语句只捕捉其后声明的异常类型，如果可能会抛出的是其他类型的异常就需要再增加一个 except 语句了，或者也可以指定一个更通用的异常类型比如：Exception，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">	print(5/0)</span><br><span class="line">except ZeroDivisionError:</span><br><span class="line">	print(&quot;You can&apos;t divide by 0!&quot;)</span><br><span class="line">except Exception:</span><br><span class="line">	print(&apos;其他类型异常&apos;)</span><br></pre></td></tr></table></figure></p>
+<h1 id="获取异常信息"><a href="#获取异常信息" class="headerlink" title="获取异常信息"></a>获取异常信息</h1><p>有时候引发了异常，但是我们需要记录这段异常信息，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">	print(5/0)</span><br><span class="line">except (ZeroDivisionError, Exception) as err:</span><br><span class="line">	print (err)</span><br></pre></td></tr></table></figure></p>
+<h1 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h1><p>finally 语句有点不同，它跟 try 语句相对独立：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(5/0)</span><br><span class="line">except (ZeroDivisionError, Exception):</span><br><span class="line">    print (&apos;发生了一个异常&apos;)</span><br><span class="line">finally:</span><br><span class="line">    print(&apos;不管是否发生异常都执行&apos;)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -578,8 +427,8 @@ out：
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/ganru.github.io/2018/09/17/字典/" rel="next" title="字典">
-                <i class="fa fa-chevron-left"></i> 字典
+              <a href="/ganru.github.io/2018/10/13/python-之装饰器解析/" rel="next" title="python 之装饰器解析">
+                <i class="fa fa-chevron-left"></i> python 之装饰器解析
               </a>
             
           </div>
@@ -588,8 +437,8 @@ out：
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/ganru.github.io/2018/09/22/函数专项/" rel="prev" title="函数专项">
-                函数专项 <i class="fa fa-chevron-right"></i>
+              <a href="/ganru.github.io/2018/10/19/数据可视化（第一部分）/" rel="prev" title="数据可视化（第一部分）">
+                数据可视化（第一部分） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -722,7 +571,7 @@ out：
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用户输入"><span class="nav-number">1.</span> <span class="nav-text">用户输入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数-input-的使用（类似于-gets）"><span class="nav-number">1.1.</span> <span class="nav-text">函数 input() 的使用（类似于 gets）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数-int-的使用（类似于-putchar）"><span class="nav-number">1.2.</span> <span class="nav-text">函数 int() 的使用（类似于 putchar）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#while-循环"><span class="nav-number">2.</span> <span class="nav-text">while 循环</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户自行中断"><span class="nav-number">2.1.</span> <span class="nav-text">用户自行中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时中断-（break-语句的使用）"><span class="nav-number">2.2.</span> <span class="nav-text">运行时中断 （break 语句的使用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时-continue"><span class="nav-number">2.3.</span> <span class="nav-text">运行时 continue</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#while-与列表、字典的关系"><span class="nav-number">3.</span> <span class="nav-text">while 与列表、字典的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列表间元素移动"><span class="nav-number">3.1.</span> <span class="nav-text">列表间元素移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#while-与-remove"><span class="nav-number">3.2.</span> <span class="nav-text">while 与 remove</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用用户输入来填充字典"><span class="nav-number">3.3.</span> <span class="nav-text">使用用户输入来填充字典</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习要点"><span class="nav-number">4.</span> <span class="nav-text">学习要点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#raise-语句格式"><span class="nav-number">1.</span> <span class="nav-text">raise() 语句格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#传递异常"><span class="nav-number">2.</span> <span class="nav-text">传递异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义异常"><span class="nav-number">3.</span> <span class="nav-text">自定义异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#捕捉异常"><span class="nav-number">4.</span> <span class="nav-text">捕捉异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#捕捉一个异常"><span class="nav-number">4.1.</span> <span class="nav-text">捕捉一个异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#捕捉多个异常"><span class="nav-number">4.2.</span> <span class="nav-text">捕捉多个异常</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取异常信息"><span class="nav-number">5.</span> <span class="nav-text">获取异常信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#finally"><span class="nav-number">6.</span> <span class="nav-text">finally</span></a></li></ol></div>
             
 
           </div>

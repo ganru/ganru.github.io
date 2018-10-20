@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/ganru.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/ganru.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/ganru.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/ganru.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/ganru.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/ganru.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/ganru.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  数据可视化指的是通过可视化表示来探索数据，它与数据挖掘紧密相关，而数据挖掘指的是使用代码来探索数据集的规律和关联。数据集可以是用一行代码就能表示的小型数字列表，也可以是数以几字节的数据。  项目简介：  基于随机漫步概念生成一个更有趣的数据集——根据一系列随机决">
+<meta name="keywords" content="学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据可视化（第一部分）">
+<meta property="og:url" content="https://ganru.github.io/2018/10/19/数据可视化（第一部分）/index.html">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  数据可视化指的是通过可视化表示来探索数据，它与数据挖掘紧密相关，而数据挖掘指的是使用代码来探索数据集的规律和关联。数据集可以是用一行代码就能表示的小型数字列表，也可以是数以几字节的数据。  项目简介：  基于随机漫步概念生成一个更有趣的数据集——根据一系列随机决">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/1.png">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/2.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/3.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/4.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/5.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/6.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/7.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/8.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/9.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/10.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/11.jpg">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/12.jpg">
+<meta property="og:updated_time" content="2018-10-19T14:40:45.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据可视化（第一部分）">
+<meta name="twitter:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  数据可视化指的是通过可视化表示来探索数据，它与数据挖掘紧密相关，而数据挖掘指的是使用代码来探索数据集的规律和关联。数据集可以是用一行代码就能表示的小型数字列表，也可以是数以几字节的数据。  项目简介：  基于随机漫步概念生成一个更有趣的数据集——根据一系列随机决">
+<meta name="twitter:image" content="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/ganru.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ganru.github.io/2018/10/19/数据可视化（第一部分）/"/>
+
+
+
+
+
+  <title>数据可视化（第一部分） | 小黑屋</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/ganru.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小黑屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/ganru.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/ganru.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/ganru.github.io/categories/随笔" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-write">
+          <a href="/ganru.github.io/categories/写作" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            写作
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read">
+          <a href="/ganru.github.io/categories/阅读" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            阅读
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-study">
+          <a href="/ganru.github.io/categories/学习" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            学习
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-code">
+          <a href="/ganru.github.io/categories/编程" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            编程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-py_code">
+          <a href="/ganru.github.io/categories/Python笔记" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据可视化（第一部分）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-19T21:54:28+08:00">
+                2018-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<p>数据可视化指的是通过可视化表示来探索数据，它与数据挖掘紧密相关，而数据挖掘指的是使用代码来探索数据集的规律和关联。数据集可以是用一行代码就能表示的小型数字列表，也可以是数以几字节的数据。</p>
+<blockquote>
+<p><strong>项目简介：</strong></p>
+<hr>
+<p><em>基于随机漫步概念生成一个更有趣的数据集——根据一系列随机决策生成的图表。</em><br><em>通过使用</em> <em>Pygal，可在用户与图表交互时突出元素以及调整其大小，还可轻松地调整整个图表的尺寸，使其适合在微型智能手表或巨型显示器上显示。使用</em> <em>Pygal</em> <em>以各种方式探索掷骰子的结果。</em></p>
+</blockquote>
+<p>准备工作：</p>
+<ol>
+<li>安装 matplotlib 库<br>打开 cmd，用命令 <code>pip install matplotlib</code> 安装。</li>
+<li>安装 pygal 库<br>打开 cmd，用命令 <code>pip install pygal</code> 安装。</li>
+</ol>
+<h1 id="绘制简单的折线图"><a href="#绘制简单的折线图" class="headerlink" title="绘制简单的折线图"></a>绘制简单的折线图</h1><p>安装好 matplotlib 库之后，我们简单的测试一下看看怎么用：<br><strong>mpl_squares.py</strong></p>
+<hr>
+<pre><code>import matplotlib.pyplot as plt
+
+squares = [1, 4, 9, 16, 25]
+
+plt.plot(squares)
+plt.show()
+</code></pre><p><code>plt.plot(squares)</code>：尝试根据这些数字绘制出有意义的图形<br><code>plt.show()</code>：打开matplotlib查看器，并显示绘制的图形<br>运行后如下图所示：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/1.png"></p>
+<h2 id="标签文字与线条粗细的修改"><a href="#标签文字与线条粗细的修改" class="headerlink" title="标签文字与线条粗细的修改"></a>标签文字与线条粗细的修改</h2><p>有没有觉得上图字体太小？眼睛怕是要瞎了。</p>
+<pre><code>import matplotlib.pyplot as plt
+
+# 这一部分可视情况而添加，用于显示中文
+from pylab import mpl  
+mpl.rcParams[&apos;font.sans-serif&apos;] = [&apos;SimHei&apos;]
+
+
+squares = [1, 4, 9, 16, 25]
+plt.plot(squares, linewidth=5)
+
+# 设置图表标题，并给坐标轴加上标签
+plt.title(&quot;平方数列&quot;, fontsize=24)
+plt.xlabel(&quot;值 &quot;, fontsize=14)
+plt.ylabel(&quot;值的平方&quot;, fontsize=14)
+
+# 设置刻度标记的大小
+plt.tick_params(axis=&apos;both&apos;, labelsize=14)
+
+plt.show()
+</code></pre><p>运行后效果如下：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/2.jpg"></p>
+<p><code>axis=&#39;both&#39;</code> 表示坐标刻度样式，<code>labelsize=14</code> 表示坐标刻度字体大小。</p>
+<p>注意：<br>x 轴标签显示可能有问题，如果字体显示不完整，在字符结尾添加空格符。（可能是中文字符问题，英文字符无须如此操作）</p>
+<h2 id="图形校正"><a href="#图形校正" class="headerlink" title="图形校正"></a>图形校正</h2><p>不知你们有没有注意到，4 的平方图像显示是 25。这是因为当我们向 plot() 提供一系列数字时，它假设第一个数据点对应的 x 坐标值为 0，但我们的第一个点对应的 x 值为 1。<br>为了改变这种行为，我们可以先加一些限定：</p>
+<pre><code>import matplotlib.pyplot as plt
+
+input_values = [1, 2, 3, 4, 5]
+squares = [1, 4, 9, 16, 25]
+plt.plot(input_values, squares, linewidth=5)
+
+# 设置图表标题并给坐标轴加上标签
+--snip--
+</code></pre><p>给 plot() 同时提供输入值和输出值。</p>
+<h2 id="使用-scatter-绘制散点图并设置其样式"><a href="#使用-scatter-绘制散点图并设置其样式" class="headerlink" title="使用 scatter() 绘制散点图并设置其样式"></a>使用 scatter() 绘制散点图并设置其样式</h2><p>有些数据可能不适合呈现出折线效果，像无规律离散视图，那么针对这种问题，我们可以用函数 scatter() 呈现。<br><strong>scatter_squares.py</strong></p>
+<hr>
+<pre><code>import matplotlib.pyplot as plt
+
+plt.scatter(2, 4)
+plt.show()
+</code></pre><p>运行后效果如下：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/3.jpg"></p>
+<p>图像有点无趣，加点功能：</p>
+<pre><code>import matplotlib.pyplot as plt
+
+from pylab import mpl  
+mpl.rcParams[&apos;font.sans-serif&apos;] = [&apos;SimHei&apos;]
+
+plt.scatter(2, 4, s=200)
+
+# 设置图表标题并给坐标轴加上标签
+plt.title(&quot;平方数列&quot;, fontsize=24)
+plt.xlabel(&quot;值 &quot;, fontsize=14)
+plt.ylabel(&quot;值的平方&quot;, fontsize=14)
+
+# 设置刻度标记的大小
+plt.tick_params(axis=&apos;both&apos;, which=&apos;major&apos;, labelsize=14)
+
+plt.show()
+</code></pre><p><code>plt.scatter(2, 4, s=200)</code>：使用实参 s 设置了绘制图形时使用的点的尺寸</p>
+<p>运行后效果如下：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/4.jpg"></p>
+<h2 id="用-scatter-进行多点绘制"><a href="#用-scatter-进行多点绘制" class="headerlink" title="用 scatter() 进行多点绘制"></a>用 scatter() 进行多点绘制</h2><p>知道怎么画点后，我们画多个点：</p>
+<pre><code>from pylab import mpl  
+mpl.rcParams[&apos;font.sans-serif&apos;] = [&apos;SimHei&apos;]
+
+x_values = [1, 2, 3, 4, 5]
+y_values = [1, 4, 9, 16, 25]
+
+plt.scatter(x_values, y_values, s=100)
+
+--snip--
+</code></pre><p>运行后效果如下：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/5.jpg"></p>
+<h2 id="自动计算数据"><a href="#自动计算数据" class="headerlink" title="自动计算数据"></a>自动计算数据</h2><p>现在知道怎么绘制离散点，但都是我们给定准确数值而画的，现在让 Python 自动计算数据：</p>
+<pre><code>from pylab import mpl  
+mpl.rcParams[&apos;font.sans-serif&apos;] = [&apos;SimHei&apos;]
+
+x_values = list(range(1, 1001))
+y_values = [x**2 for x in x_values]
+
+plt.scatter(x_values, y_values, s=40)
+
+# 设置每个坐标轴的取值范围
+plt.axis([0, 1100, 0, 1100000])
+
+--snip--
+</code></pre><p>运行后效果如下：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/6.jpg"></p>
+<p>有点怪怪的啊，好像生成了一条线？（点太多了哈哈）<br>函数 axis() 要求提供四个值： x 和 y 坐标轴的 <strong>最小值</strong> 和 <strong>最大值</strong>。</p>
+<h2 id="删除数据点的轮廓"><a href="#删除数据点的轮廓" class="headerlink" title="删除数据点的轮廓"></a>删除数据点的轮廓</h2><p>仔细看上图，是否发现，这些大量的点粘连在一起，虽然组成了线段但是还是有点不光滑？<br>是因为 matplotlib 给散点图中的各个点指定颜色，默认为蓝色点和黑色轮廓，在散点图包含的数据点不多时效果很好，但是点多的话就不太好了。</p>
+<p><code>plt.scatter(x_values, y_values, edgecolor=&#39;none&#39;, s=40)</code></p>
+<p>加上 <code>edgecolor=&#39;none&#39;</code> 这个参数，就可以删除这些轮廓，使线段变得光滑。<strong>如果数据点不多就无需这么做了。</strong><br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/7.jpg"></p>
+<h2 id="自定义颜色"><a href="#自定义颜色" class="headerlink" title="自定义颜色"></a>自定义颜色</h2><p>要修改数据点的颜色，可向 scatter() 传递参数 c，并将其设置为要使用的颜色的名称，如下：</p>
+<p><code>plt.scatter(x_values, y_values, c=&#39;red&#39;, edgecolor=&#39;none&#39;, s=40)</code></p>
+<p>当然，我们也还可以用 RGB 颜色模式自定义：</p>
+<p><code>c=(0, 0, 0.8)</code></p>
+<p>注意 c 的元组内各元素取值范围为 <strong>0 ~ 1</strong> 之间。分别表示 红色、绿色 和 蓝色 分量。值越接近 0，指定的颜色越深，值越接近 1，指定的颜色越浅。</p>
+<h2 id="使用颜色映射"><a href="#使用颜色映射" class="headerlink" title="使用颜色映射"></a>使用颜色映射</h2><p>颜色映射（colormap）：是一系列颜色，它们从起始颜色渐变到结束颜色。在可视化中，颜色映射用于突出<strong>数据的规律</strong>，例如，你可能用较浅的颜色来显示较小的值，并使用较深的颜色来显示较大的值。</p>
+<p><code>plt.scatter(x_values, y_values, c=y_values, cmap=plt.cm.Blues, edgecolor=&#39;none&#39;, s=40)</code></p>
+<p>我们将参数 c 设置成了一个 y 值列表，并使用参数 cmap 告诉 pyplot 使用哪个颜色映射。<br>参数 cmap 要配合 c 使用，不然不知道怎么分配颜色。</p>
+<img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/8.jpg">
+<h2 id="自动保存图表"><a href="#自动保存图表" class="headerlink" title="自动保存图表"></a>自动保存图表</h2><p>绘制好图像后，如果想要保存图像，那么老是截图就不好玩了，将对 plt.show() 的调用替换为对 plt.savefig() 的调用：</p>
+<p>将 <code>plt.show()</code> 替换为 <code>plt.savefig(&#39;squares_plot.png&#39;, bbox_inches=&#39;tight&#39;)</code></p>
+<p>它会自动生成图像保存在 .py 文件所在目录中。第二个实参指定将图表多余的空白区域裁剪掉。</p>
+<h1 id="随机漫步"><a href="#随机漫步" class="headerlink" title="随机漫步"></a>随机漫步</h1><p>随机漫步很有用处，比如我们抛硬币，正面出现多少次，反面出现多少次，全部由系统随机漫步生成，当然也远不仅如此。<br>我们模拟一下随机漫步的过程。</p>
+<h2 id="创建-RandomWalk-类"><a href="#创建-RandomWalk-类" class="headerlink" title="创建 RandomWalk() 类"></a>创建 RandomWalk() 类</h2><p>创建 RandomWalk() 类，它随机选择前进的方向。这个类需要三个属性，其中一个是存储随机漫步次数的变量，其他两个是列表，分别存储随机漫步经过的每个点的 x 和 y 坐标。<br><strong>random_walk.py</strong></p>
+<hr>
+<pre><code>from random import choice
+
+class RandomWalk():
+    &quot;&quot;&quot;一个生成随机漫步的类&quot;&quot;&quot;
+
+    def __init__(self, num_points=5000):
+        &quot;&quot;&quot;初始化随机漫步的属性&quot;&quot;&quot;
+        self.num_points = num_points
+
+        # 所有随机漫步都始于（0，0）
+        self.x_values = [0]
+        self.y_values = [0]
+</code></pre><p>每次做决策时都使用 choice() 来决定使用哪种选择。<br>漫步 5K 次，并设定漫步初始坐标。</p>
+<h2 id="选择方向"><a href="#选择方向" class="headerlink" title="选择方向"></a>选择方向</h2><p>我们将使用 fill_walk() 来生成漫步包含的点，并决定每次漫步的方向，如下：</p>
+<pre><code>def fill_walk(self):
+    &quot;&quot;&quot;计算随机漫步包含的所有点&quot;&quot;&quot;
+
+    # 不断漫步，直到达到指定的长度
+    while len(self.x_values) &lt; self.num_points:
+
+        # 决定前进方向以及沿这个方向前进的距离
+        x_direction = choice([1, -1])
+        x_distance = choice([0, 1, 2, 3, 4])
+        x_step = x_direction * x_distance
+
+        y_direction = choice([1, -1])
+        y_distance = choice([0, 1, 2, 3, 4])
+        y_step = y_direction * y_distance
+
+        # 拒绝原地踏步
+        if x_step == 0 and y_step == 0:
+            continue
+
+        # 计算下一个点的 x 、y 坐标 ([-1] 指列表最后一个元素)
+        next_x = self.x_values[-1] + x_step
+        next_y = self.y_values[-1] + y_step
+
+        self.x_values.append(next_x)
+        self.y_values.append(next_y)
+</code></pre><h2 id="绘制随机漫步图"><a href="#绘制随机漫步图" class="headerlink" title="绘制随机漫步图"></a>绘制随机漫步图</h2><p><strong>rw_visual.py</strong></p>
+<hr>
+<pre><code>import matplotlib.pyplot as plt
+
+from random_walk import RandomWalk
+
+# 创建一个RandomWalk实例，并将其包含的点都绘制出来
+rw = RandomWalk()
+rw.fill_walk()
+plt.scatter(rw.x_values, rw.y_values, s=15)
+plt.show()
+</code></pre><p>运行后效果如下：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/9.jpg"></p>
+<p>不过刚开始运行的时候，可能会碰到这个问题：</p>
+<p><code>SyntaxError: unexpected EOF while parsing</code></p>
+<p>关掉在运行一遍即可，如果还有，那可能就是代码错误（eg：语法有问题、PY3 的代码在 PY2 中运行）</p>
+<h2 id="模拟多次随机漫步"><a href="#模拟多次随机漫步" class="headerlink" title="模拟多次随机漫步"></a>模拟多次随机漫步</h2><p>如果我们想多次进行随机漫步，可以把这些代码加入 while 循环：</p>
+<pre><code>while True：
+    # 创建一个RandomWalk实例，并将其包含的点都绘制出来
+    rw = RandomWalk()
+    rw.fill_walk()
+    plt.scatter(rw.x_values, rw.y_values, s=15)
+    plt.show()
+
+    keep_running = input(&quot;Make another walk? (y/n): &quot;)
+    if keep_running == &apos;n&apos;:
+        break
+</code></pre><h2 id="设置随机漫步图的样式"><a href="#设置随机漫步图的样式" class="headerlink" title="设置随机漫步图的样式"></a>设置随机漫步图的样式</h2><p>我们定制图表，以突出每次漫步的重要特征，并让分散注意力的元素不那么显眼。为此，我们确定要突出的元素，如漫步的起点、终点和经过的路径。</p>
+<h3 id="给点着色"><a href="#给点着色" class="headerlink" title="给点着色"></a>给点着色</h3><p>在这里，我们要删除每个点的黑色轮廓、让最近的漫步颜色渐深：</p>
+<pre><code>while True:
+# 创建一个RandomWalk实例，并将其包含的点都绘制出来
+rw = RandomWalk()
+rw.fill_walk()
+
+point_numbers = list(range(rw.num_points))
+plt.scatter(rw.x_values, rw.y_values, c=point_numbers, cmap=plt.cm.Blues, edgecolor=&apos;none&apos;, s=15)
+</code></pre><p>运行后如下图所示：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/10.jpg"></p>
+<h3 id="重新绘制起点与终点"><a href="#重新绘制起点与终点" class="headerlink" title="重新绘制起点与终点"></a>重新绘制起点与终点</h3><p>我们让起点和终点变得更大，并显示为不同的颜色，以突出它们：</p>
+<pre><code># 突出起点和终点
+plt.scatter(0, 0, c=&apos;green&apos;, edgecolors=&apos;none&apos;, s=100)
+plt.scatter(rw.x_values[-1], rw.y_values[-1], c=&apos;red&apos;, edgecolors=&apos;none&apos;, s=100)
+</code></pre><h3 id="隐藏坐标轴"><a href="#隐藏坐标轴" class="headerlink" title="隐藏坐标轴"></a>隐藏坐标轴</h3><p>为了让观察者注意力更好的放在路径上而不会分散一些注意力在坐标轴上，我们可以认为隐藏坐标轴：</p>
+<pre><code># 隐藏坐标轴
+plt.axes().get_xaxis().set_visible(False)
+plt.axes().get_yaxis().set_visible(False)
+</code></pre><p>运行后如下图所示：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/11.jpg"></p>
+<h3 id="增加点数"><a href="#增加点数" class="headerlink" title="增加点数"></a>增加点数</h3><p>这次我们可以尝试将漫步次数加到 5W 次，不过记得让点的尺寸 (s) 变小一点。</p>
+<h3 id="调整窗口尺寸"><a href="#调整窗口尺寸" class="headerlink" title="调整窗口尺寸"></a>调整窗口尺寸</h3><pre><code># 设置绘图窗口的尺寸
+plt.figure(dpi=128, figsize=(10, 6))
+</code></pre><ol>
+<li>函数figure()用于指定图表的宽度、高度、分辨率和背景色。单位为 英寸。</li>
+<li>Python 假定屏幕分辨率为 80 像素/英寸，如果上述代码指定的图表尺寸不合适，可根据需要调整其中的数字。</li>
+<li>如果你知道自己的系统的分辨率，可使用形参 dpi 向 figure() 传递该分辨率（书中原话，不过我试验的时候用 1080 ，崩了，所以还是建议别传这么大的值）</li>
+</ol>
+<h3 id="代码重构"><a href="#代码重构" class="headerlink" title="代码重构"></a>代码重构</h3><p>有没有感觉 fill_walk() 有点长？试试重构？</p>
+<pre><code>def fill_walk(self):
+    &quot;&quot;&quot;计算随机漫步包含的所有点&quot;&quot;&quot;
+
+    # 不断漫步，直到达到指定的长度
+    while len(self.x_values) &lt; self.num_points:
+
+        # 决定前进方向以及沿这个方向前进的距离
+        x_step = self.get_step()
+        y_step = self.get_step()
+
+        # 拒绝原地踏步
+        if x_step == 0 and y_step == 0:
+            continue
+
+        # 计算下一个点的 x 、y 坐标 ([-1] 指列表最后一个元素)
+        next_x = self.x_values[-1] + x_step
+        next_y = self.y_values[-1] + y_step
+
+        self.x_values.append(next_x)
+        self.y_values.append(next_y)
+
+def get_step(self):
+    &quot;&quot;&quot;计算下一个点的可能前进距离&quot;&quot;&quot;
+    direction = choice([1, -1])
+    distance = choice([0, 1, 2, 3, 4])
+    step = direction * distance
+    return step
+</code></pre><h1 id="使用-Pygal-模拟掷骰子"><a href="#使用-Pygal-模拟掷骰子" class="headerlink" title="使用 Pygal 模拟掷骰子"></a>使用 Pygal 模拟掷骰子</h1><p>我们将使用 Python 可视化包 Pygal 来生成可缩放的矢量图形文件。对于需要在尺寸不同的屏幕上显示的图表，这很有用，因为它们将自动缩放，以适合观看者的屏幕。</p>
+<p>在此之前我们要先安装 Pygal 库：</p>
+<p><code>pip install pygal</code></p>
+<h2 id="创建-Die-类"><a href="#创建-Die-类" class="headerlink" title="创建 Die 类"></a>创建 Die 类</h2><p><strong>die.py</strong></p>
+<hr>
+<pre><code>from random import randint
+
+class Die():
+    &quot;&quot;&quot;表示一个骰子的类&quot;&quot;&quot;
+
+    def __init__(self, num_sides=6):
+        &quot;&quot;&quot;骰子有几面，不导入实参就默认六面&quot;&quot;&quot;
+        self.num_sides = num_sides
+
+    def roll(self):
+        &quot;&quot;&quot;返回一个位于1和骰子面数之间的随机值&quot;&quot;&quot;
+        return randint(1, self.num_sides)
+</code></pre><p>函数 randint() 来返回一个 1 和面数之间的随机数。</p>
+<h2 id="掷骰子"><a href="#掷骰子" class="headerlink" title="掷骰子"></a>掷骰子</h2><p><strong>die_visual.py</strong></p>
+<hr>
+<pre><code>from die import Die
+
+# 创建一个D6
+die = Die()
+
+# 掷几次骰子，并将结果存储在一个列表中
+results = []
+for roll_num in range(1000):
+    result = die.roll()
+    results.append(result)
+
+print(results)
+</code></pre><p>检验一下，输出大概没问题（有 1、6 也有 1 ~ 6 之间的数，没有其他数）</p>
+<h2 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h2><p>为分析掷一个D6骰子的结果，我们计算每个点数出现的次数：</p>
+<pre><code># 分析结果
+frequencies = []
+for value in range(1, die.num_sides+1):
+    frequency = results.count(value)
+    frequencies.append(frequency)
+
+print(frequencies)
+</code></pre><p>会看到这样的结果：</p>
+<pre><code>[173, 161, 165, 181, 158, 162]
+</code></pre><p>很合理，并没有哪个点超出某个点很多。接下来我们可视化这些数据。</p>
+<h2 id="绘制直方图"><a href="#绘制直方图" class="headerlink" title="绘制直方图"></a>绘制直方图</h2><p>有了上面提供的频率列表，绘制直方图就比较容易了。</p>
+<pre><code># 对结果进行可视化成条形图
+hist = pygal.Bar()
+
+hist.title = &quot;Results of rolling one D6 1000 times.&quot;
+hist.x_labels = [&apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;, &apos;6&apos;]
+hist.x_title = &quot;Results&quot;
+hist.y_title = &quot;Frequency of Result&quot;
+
+# 添加数据， 第一个参数是数据的标题
+hist.add(&apos;D6&apos;, frequencies)
+# 保存到本地，格式必须是 svg
+hist.render_to_file(&apos;die_visual.svg&apos;)
+</code></pre><h2 id="同时掷两个骰子"><a href="#同时掷两个骰子" class="headerlink" title="同时掷两个骰子"></a>同时掷两个骰子</h2><p>做两个骰子试下，，并将这两个得到的数值相加：</p>
+<pre><code># 创建两个D6骰子
+die_1 = Die()
+die_2 = Die()
+</code></pre><p>不过这样子得改动一下，毕竟最小值是 2，最大 12：</p>
+<pre><code># 掷几次骰子，并将结果存储在一个列表中
+results = []
+for roll_num in range(1000):
+    result = die_1.roll() + die_2.roll()
+    results.append(result)
+
+# 分析结果
+frequencies = []
+max_result = die_1.num_sides + die_2.num_sides
+# 这里尽量别写 range(2, 13)，我们要保证代码可适用于更多不同的面
+for value in range(2, max_result+1):
+    frequency = results.count(value)
+    frequencies.append(frequency)
+
+# 对结果进行可视化
+hist = pygal.Bar()
+
+hist.title = &quot;Results of rolling two D6 dice 1000 times.&quot;
+hist.x_labels = [&apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;, &apos;6&apos;, &apos;7&apos;, &apos;8&apos;, &apos;9&apos;, &apos;10&apos;, &apos;11&apos;, &apos;12&apos;]
+hist.x_title = &quot;Results&quot;
+hist.y_title = &quot;Frequency of Result&quot;
+
+hist.add(&apos;D6 + D6&apos;, frequencies)
+</code></pre><p>运行后如下图所示：<br><img src="/ganru.github.io/2018/10/19/数据可视化（第一部分）/12.jpg"></p>
+<h2 id="多面骰子"><a href="#多面骰子" class="headerlink" title="多面骰子"></a>多面骰子</h2><p><code>die_2 = Die(10)</code> 这样子试试？</p>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
+<li>如何生成数据集以及如何对其进行可视化</li>
+<li>折线图的绘制 <em>plt.plot()</em></li>
+<li>散点图的绘制 <em>plt.scatter()</em></li>
+<li>用随机漫步数据绘制散点图</li>
+<li>直方图的绘制 <em>pygal.Bar()</em></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/ganru.github.io/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/ganru.github.io/2018/10/14/python-引发异常-raise-及处理/" rel="next" title="python 引发异常 raise() 及处理">
+                <i class="fa fa-chevron-left"></i> python 引发异常 raise() 及处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ganru</p>
+              <p class="site-description motion-element" itemprop="description">学习一向都是孤独的，慢慢玩。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/ganru.github.io/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#绘制简单的折线图"><span class="nav-number">1.</span> <span class="nav-text">绘制简单的折线图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标签文字与线条粗细的修改"><span class="nav-number">1.1.</span> <span class="nav-text">标签文字与线条粗细的修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形校正"><span class="nav-number">1.2.</span> <span class="nav-text">图形校正</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-scatter-绘制散点图并设置其样式"><span class="nav-number">1.3.</span> <span class="nav-text">使用 scatter() 绘制散点图并设置其样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-scatter-进行多点绘制"><span class="nav-number">1.4.</span> <span class="nav-text">用 scatter() 进行多点绘制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动计算数据"><span class="nav-number">1.5.</span> <span class="nav-text">自动计算数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除数据点的轮廓"><span class="nav-number">1.6.</span> <span class="nav-text">删除数据点的轮廓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义颜色"><span class="nav-number">1.7.</span> <span class="nav-text">自定义颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用颜色映射"><span class="nav-number">1.8.</span> <span class="nav-text">使用颜色映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动保存图表"><span class="nav-number">1.9.</span> <span class="nav-text">自动保存图表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#随机漫步"><span class="nav-number">2.</span> <span class="nav-text">随机漫步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-RandomWalk-类"><span class="nav-number">2.1.</span> <span class="nav-text">创建 RandomWalk() 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择方向"><span class="nav-number">2.2.</span> <span class="nav-text">选择方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制随机漫步图"><span class="nav-number">2.3.</span> <span class="nav-text">绘制随机漫步图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟多次随机漫步"><span class="nav-number">2.4.</span> <span class="nav-text">模拟多次随机漫步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置随机漫步图的样式"><span class="nav-number">2.5.</span> <span class="nav-text">设置随机漫步图的样式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#给点着色"><span class="nav-number">2.5.1.</span> <span class="nav-text">给点着色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新绘制起点与终点"><span class="nav-number">2.5.2.</span> <span class="nav-text">重新绘制起点与终点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐藏坐标轴"><span class="nav-number">2.5.3.</span> <span class="nav-text">隐藏坐标轴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加点数"><span class="nav-number">2.5.4.</span> <span class="nav-text">增加点数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调整窗口尺寸"><span class="nav-number">2.5.5.</span> <span class="nav-text">调整窗口尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码重构"><span class="nav-number">2.5.6.</span> <span class="nav-text">代码重构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-Pygal-模拟掷骰子"><span class="nav-number">3.</span> <span class="nav-text">使用 Pygal 模拟掷骰子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-Die-类"><span class="nav-number">3.1.</span> <span class="nav-text">创建 Die 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#掷骰子"><span class="nav-number">3.2.</span> <span class="nav-text">掷骰子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果分析"><span class="nav-number">3.3.</span> <span class="nav-text">结果分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制直方图"><span class="nav-number">3.4.</span> <span class="nav-text">绘制直方图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同时掷两个骰子"><span class="nav-number">3.5.</span> <span class="nav-text">同时掷两个骰子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多面骰子"><span class="nav-number">3.6.</span> <span class="nav-text">多面骰子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习要点"><span class="nav-number">4.</span> <span class="nav-text">学习要点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ganru</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/ganru.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/ganru.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
