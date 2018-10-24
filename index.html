@@ -292,6 +292,553 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/10/24/数据可视化（第二部分）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/10/24/数据可视化（第二部分）/" itemprop="url">数据可视化（第二部分）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-24T16:51:08+08:00">
+                2018-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<p>上一部分我们学了如何生成数据，这一次，我们学习如何下载数据。</p>
+<ul>
+<li>数据可视化有两种常见的存储格式：CSV 和 JSON 。</li>
+<li>处理 CSV 数据，我们用 Python 自带的模块 csv 处理。</li>
+<li>处理 JSON 数据，我们用 模块 json 处理。</li>
+<li>这一环节，我们依然使用 matplotlib 库与 pygal 库进行数据可视化。</li>
+</ul>
+<h1 id="CSV-文件格式"><a href="#CSV-文件格式" class="headerlink" title="CSV 文件格式"></a>CSV 文件格式</h1><p>csv 文件称为 逗号分隔值文件。其形式如下：</p>
+<p><code>2014-1-5,61,44,26,18,7,-1,56,30,9,30.34,30.27,30.15,,,,10,4,,0.00,0,,195</code></p>
+<h2 id="分析-CSV-文件头"><a href="#分析-CSV-文件头" class="headerlink" title="分析 CSV 文件头"></a>分析 CSV 文件头</h2><p><strong>highs_lows.py</strong></p>
+<hr>
+<pre><code>import csv
+
+filename = &apos;sitka_weather_07-2014.csv&apos;
+with open(filename) as f:
+    reader = csv.reader(f)
+    header_row = next(reader)
+    print(header_row)
+</code></pre><ul>
+<li>文件名记得打 <strong>后缀</strong>。</li>
+<li>创建一个阅读器 (reader) 对象并将之与 csv 文件关联。</li>
+<li>模块 csv 包含函数 next()，调用它并将阅读器对象传递给它时，它将返回文件中的下一行。这里我们只调用第一行（头行）</li>
+</ul>
+<h2 id="打印文件头及其位置"><a href="#打印文件头及其位置" class="headerlink" title="打印文件头及其位置"></a>打印文件头及其位置</h2><p>为让文件头数据更容易理解，将列表中的每个文件头及其位置打印出来：</p>
+<pre><code>import csv
+
+filename = &apos;sitka_weather_07-2014.csv&apos;
+with open(filename) as f:
+    reader = csv.reader(f)
+    header_row = next(reader)
+
+    for index, column_header in enumerate(header_row):
+        print(index, column_header)
+</code></pre><ul>
+<li>enumerate() 是 python 的内置函数</li>
+<li>enumerate 在字典上是枚举、列举的意思</li>
+<li>对于一个可迭代的（iterable）/可遍历的对象（如列表、字符串），enumerate 将其组成一个索引序列，利用它可以同时获得索引和值</li>
+<li>enumerate 多用于在 for 循环中得到计数</li>
+</ul>
+<p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/1.png"></p>
+<p>利用 enumerate() 函数，可以看到，我们直观地展现出了 csv 文件的数据。</p>
+<p>文件头 AKDT 表示阿拉斯加时间（Alaska Daylight Time），其位置表明每行的第一个值都是日期或时间。文件头 Max TemperatureF 指出每行的第二个值都是当天的最高华氏温度。后面的自行翻译。。。</p>
+<h2 id="提取并读取数据"><a href="#提取并读取数据" class="headerlink" title="提取并读取数据"></a>提取并读取数据</h2><p>知道需要哪些列中的数据后，我们来读取一些数据。首先读取每天的最高气温：</p>
+<pre><code>with open(filename) as f:
+    reader = csv.reader(f)
+    header_row = next(reader)
+
+    highs = []
+    for row in reader:
+        # 将第一列的数据添加到列表 highs
+        highs.append(row[1])
+
+    print(highs)
+</code></pre><p>我们可以看到：</p>
+<p>[‘64’, ‘71’, ‘64’, ‘59’, ‘69’, ‘62’, ‘61’, ‘55’, ‘57’, ‘61’, ‘57’, ‘59’, ‘57’, ‘61’, ‘64’, ‘61’, ‘59’, ‘63’, ‘60’, ‘57’, ‘69’, ‘63’, ‘62’, ‘59’, ‘57’, ‘57’, ‘61’, ‘59’, ‘61’, ‘61’, ‘66’]</p>
+<p>有点儿不太好看，我们用 int() 将它们转换为数字，这样 matplotlib 才好访问它们：</p>
+<pre><code>highs = []
+for row in reader:
+    high = int(row[1])
+    highs.append(high)
+
+print(highs)
+</code></pre><p>这时候：</p>
+<p>[64, 71, 64, 59, 69, 62, 61, 55, 57, 61, 57, 59, 57, 61, 64, 61, 59, 63, 60, 57, 69, 63, 62, 59, 57, 57, 61, 59, 61, 61, 66]</p>
+<p>接下来将此数据可视化。</p>
+<h2 id="绘制气温图表"><a href="#绘制气温图表" class="headerlink" title="绘制气温图表"></a>绘制气温图表</h2><pre><code>from matplotlib import pyplot as plt
+
+# 根据数据绘制图形
+fig = plt.figure(dpi=128, figsize=(10, 6))
+plt.plot(highs, c=&apos;red&apos;)
+
+# 设置图形的格式
+plt.title(&quot;Daily high temperatures, July 2014&quot;, fontsize=24)
+plt.xlabel(&apos;&apos;, fontsize=16)
+plt.ylabel(&quot;Temperature (F)&quot;, fontsize=16)
+
+plt.show()
+</code></pre><p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/2.jpg"></p>
+<h2 id="模块-datetime"><a href="#模块-datetime" class="headerlink" title="模块 datetime"></a>模块 datetime</h2><p>画好大致的温度折线图，现在我们添加上日期。在此之前我们先了解下模块 datetime 的用法：</p>
+<pre><code>&gt;&gt;&gt; from datetime import datetime
+&gt;&gt;&gt; first_date = datetime.strptime(&apos;2014-7-1&apos;, &apos;%Y-%m-%d&apos;)
+&gt;&gt;&gt; print(first_date)
+2014-07-01 00:00:00
+</code></pre><p>在 IDLE 中编写，我们直观地看下它的做法：</p>
+<ul>
+<li>在这段演示中方法 strptime() 接收两个实参：前者是需要导入的日期的字符串，后者告诉 Python 如何设置日期的格式。</li>
+<li>‘%Y-‘ 让 Python 将字符串中第一个连字符 - 前面的部分视为四位的年份</li>
+<li>‘%m-‘ 让 Python 将第二个连字符 - 前面的部分视为表示月份的数字</li>
+<li>‘%d’ 让 Python 将字符串的最后一部分视为月份中的一天 (0~31)</li>
+</ul>
+<p>方法 strptime() 可接受各种实参，并根据它们来决定如何解读日期。具体看下表：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/3.jpg"></p>
+<p>现在我们尝试提取日期并导入绘制图中：</p>
+<pre><code>import csv
+from datetime import datetime
+
+from matplotlib import pyplot as plt
+
+with open(filename) as f:
+    --snip--
+
+    highs = []
+    dates = []
+    for row in reader:
+        current_date = datetime.strptime(row[0], &quot;%Y-%m-%d&quot;)
+        dates.append(current_date)
+
+        high = int(row[1])
+        highs.append(high)
+
+    # 根据数据绘制图形
+    fig = plt.figure(dpi=128, figsize=(10, 6))
+    plt.plot(dates, highs, c=&apos;red&apos;)    # 修改
+
+    --snip--
+</code></pre><p>做出来好像不太对劲：</p>
+<img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/4.jpg">
+<p>日期重叠了。这时候我们可以调用 <code>fig.autofmt_xdate()</code> 来绘制斜的日期标签，以免它们彼此重叠。</p>
+<pre><code># 设置图形的格式
+plt.title(&quot;Daily high temperatures, July 2014&quot;, fontsize=24)
+plt.xlabel(&apos;&apos;, fontsize=16)
+fig.autofmt_xdate()    # 新增
+
+--snip--
+</code></pre><p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/5.jpg"></p>
+<h2 id="涵盖更长时间"><a href="#涵盖更长时间" class="headerlink" title="涵盖更长时间"></a>涵盖更长时间</h2><p>现在，我们可以换另一个文件来读取了：</p>
+<pre><code>filename = &apos;sitka_weather_2014.csv&apos;
+# 设置图形的格式
+plt.title(&quot;Daily high temperatures - 2014&quot;, fontsize=24)
+</code></pre><p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/6.jpg"></p>
+<h2 id="再绘制一个数据系列"><a href="#再绘制一个数据系列" class="headerlink" title="再绘制一个数据系列"></a>再绘制一个数据系列</h2><p>这时候，我们再导入最低气温数据：</p>
+<pre><code>lows = []
+for row in reader:
+    --snip--
+    low = int(row[3])
+    lows.append(low)
+
+plt.plot(dates, highs, c=&apos;red&apos;)
+plt.plot(dates, lows, c=&apos;blue&apos;)
+
+# 设置图形的格式
+plt.title(&quot;Daily high and low temperatures - 2014&quot;, fontsize=24)
+</code></pre><p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/7.jpg"></p>
+<h2 id="绘图表区域着色"><a href="#绘图表区域着色" class="headerlink" title="绘图表区域着色"></a>绘图表区域着色</h2><p>使用方法 fill_between()，它接受一个 x 值系列和两个 y 值系列，并填充两个 y 值系列之间的空间：</p>
+<pre><code>plt.plot(dates, highs, c=&apos;red&apos;, alpha=0.5)
+plt.plot(dates, lows, c=&apos;blue&apos;, alpha=0.5)
+plt.fill_between(dates, highs, lows, facecolor=&apos;blue&apos;, alpha=0.1)
+</code></pre><ul>
+<li><code>alpha</code> 指颜色的透明度。Alpha 值为 0 表示完全透明，1（默认设置）表示完全不透明。</li>
+</ul>
+<img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/8.jpg">
+<p>我们看到，在俩温度之间填充了蓝色，并且俩条线颜色变浅了一些。</p>
+<h2 id="错误检查"><a href="#错误检查" class="headerlink" title="错误检查"></a>错误检查</h2><p>我们上面引用的数据，都是很全的，但是我们去网上下载数据过来的时候，却不一定有这么全的数据，这时候要学会错误检查。</p>
+<pre><code>filename = &apos;death_valley_2014.csv&apos;
+</code></pre><p>这是有错误的文件。我们可以看到：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/9.png"></p>
+<p>这时候，我们打开 csv 文件就知道了，这里有一天数据全无。它无法导入空字符串。<br>为了解决这种问题，我们用异常处理机制来解决：</p>
+<pre><code>for row in reader:
+    try:
+        low = int(row[3])
+        current_date = datetime.strptime(row[0], &quot;%Y-%m-%d&quot;)
+        high = int(row[1])
+    except ValueError:
+        print(current_date, &apos;missing data&apos;)
+    else:
+        lows.append(low)
+        dates.append(current_date)
+        highs.append(high)
+</code></pre><p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/10.png"></p>
+<p><strong>感觉不对啊，怎么输出这个？这天不是有数据么？</strong></p>
+<p>其实原因在这里：</p>
+<pre><code>try:
+    low = int(row[3])
+    current_date = datetime.strptime(row[0], &quot;%Y-%m-%d&quot;)
+    high = int(row[1])
+</code></pre><p>在这里，先执行 <code>low = int(row[3])</code> ，然后才执行 <code>current_date = datetime.strptime(row[0], &quot;%Y-%m-%d&quot;)</code> 语句，这里就出现问题了：<br>本身该行就没有数据，执行前者的时候就报错了，后面的自然就不会执行，所以这时候时间 current_date 还停留在上一个正确的时间，错误的时间并没有导入进 current_date。<br>所以，报错的时候传导的是什么对象，就先把那个对象放在第一行：</p>
+<pre><code>try:
+    current_date = datetime.strptime(row[0], &quot;%Y-%m-%d&quot;)
+    low = int(row[3])
+    high = int(row[1])
+</code></pre><p>再运行一下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/11.png"></p>
+<p>运行正确。</p>
+<p>其实不仅可以用 try-except-else 代码块来处理异常，在有些情况下，需要使用 continue 来跳过一些数据，或者使用 remove() 或 del 将已提取的数据删除。可采用任何管用的方法，只要能进行精确而有意义的可视化就好。</p>
+<h1 id="制作世界人口地图：JSON-格式"><a href="#制作世界人口地图：JSON-格式" class="headerlink" title="制作世界人口地图：JSON 格式"></a>制作世界人口地图：JSON 格式</h1><p>在这一块，我们使用 json 格式的文件来进行数据可视化。</p>
+<h2 id="数据提取"><a href="#数据提取" class="headerlink" title="数据提取"></a>数据提取</h2><p>我们打开 json 文件，可以看到：</p>
+<pre><code>[
+  {
+    &quot;Country Name&quot;: &quot;Arab World&quot;,
+    &quot;Country Code&quot;: &quot;ARB&quot;,
+    &quot;Year&quot;: &quot;1960&quot;,
+    &quot;Value&quot;: &quot;96388069&quot;
+  },
+  {
+    &quot;Country Name&quot;: &quot;Arab World&quot;,
+    &quot;Country Code&quot;: &quot;ARB&quot;,
+    &quot;Year&quot;: &quot;1961&quot;,
+    &quot;Value&quot;: &quot;98882541.4&quot;
+  },
+  --snip--
+]
+</code></pre><p>它相当于一个长长的 Python 列表，内嵌字典，字典中含有国家名、国别码、年份以及表示人口数量的值。</p>
+<p>我们首先先编写打印这些信息的程序：<br><strong>world_population.py</strong></p>
+<hr>
+<pre><code>import json
+
+# 将数据加载到一个列表中
+filename = &apos;population_data.json&apos;
+with open (filename) as f:
+    pop_data = json.load(f)
+
+# 打印每个国家2010年的人口数量
+for pop_dict in pop_data:
+    if pop_dict[&apos;Year&apos;] == &apos;2008&apos;:
+        country_name = pop_dict[&apos;Country Name&apos;]
+        population = pop_dict[&apos;Value&apos;]
+        print(country_name + &quot;: &quot; + population)
+</code></pre><ul>
+<li>函数json.load()将数据转换为Python能够处理的格式，这里是一个列表。</li>
+<li>检查字典的’Year’键对应的值是否是2008，这时候用引号括起来，因为观察得知 json 文件内这个是字符串而不是数值。</li>
+</ul>
+<p>这时候，我们可以看到它的输出：</p>
+<pre><code>Arab World: 342077516.074643
+Caribbean small states: 6802199
+East Asia &amp; Pacific (all income levels): 2172955169.8192
+East Asia &amp; Pacific (developing only): 1934412005
+Euro area: 329523413
+
+--snip--
+
+Zambia: 12379612
+Zimbabwe: 12451543
+</code></pre><p>看起来好像正确的。但是还不够，Python 要实现数据可视化需要数值来处理。</p>
+<pre><code>population = int(pop_dict[&apos;Value&apos;])
+print(country_name + &quot;: &quot; + str(population))
+</code></pre><p>出了点问题：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/12.png"></p>
+<p>原来还有小数点的限制，但是我们用 float 的话数据有点不好看，全都有小数点，而且对于人口统计这类，还是整数好点。</p>
+<p>将  <code>int(pop_dict[&#39;Value&#39;])</code> 变为 <code>int(float(pop_dict[&#39;Value&#39;]))</code></p>
+<p>这时候，离制作地图不远了。</p>
+<h2 id="获取两个字母的国别码"><a href="#获取两个字母的国别码" class="headerlink" title="获取两个字母的国别码"></a>获取两个字母的国别码</h2><p>制作地图前，还需要解决数据存在的最后一个问题。<br>Pygal 中的地图制作工具要求数据为特定的格式：用国别码表示国家，以及用数字表示人口数量。但是 json 文件中包含的是三个字母的国别码，但 Pygal 使用两个字母的国别码。<br>Pygal 使用的国别码存储在模块 i18n（internationalization 的缩写）中。字典 COUNTRIES 包含的键和值分别为两个字母的国别码和国家名。</p>
+<p>现在，我们的做法是，使用自带的国别码与 json 文件的国别码对应：<br><strong>countries.py</strong></p>
+<hr>
+<pre><code>from pygal.i18n import COUNTRIES
+
+for country_code in sorted(COUNTRIES.keys()):
+    print(country_code, COUNTRIES[country_code])
+</code></pre><p>sorted()：保留列表原始排序，同时以特定排序呈现原列表。<br>for 循环中，我们让 Python 将键按字母顺序排序（小到大）。</p>
+<p>运行后如下：</p>
+<pre><code>Traceback (most recent call last):
+  File &quot;C:\Users\GR\Desktop\数据可视化\countries.py&quot;, line 1, in &lt;module&gt;
+    from pygal.i18n import COUNTRIES
+ModuleNotFoundError: No module named &apos;pygal.i18n&apos;
+</code></pre><p>这里说没有这个模块？原书中，获取国别码是这个 pygal.i18n ，现在 pygal 没有这个模块了，我们只能这么做：</p>
+<p><code>pip install pygal_maps_world</code></p>
+<p>安装这个模块，然后将 <code>from pygal.i18n import COUNTRIES</code> 换成 <code>from pygal_maps_world.i18n import COUNTRIES</code> 就行了。<br>后面创建世界地图的时候也是，将库换一下。我们先看看 pygal_maps_world 库里面有什么：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/18.png"></p>
+<p>运行后如下：</p>
+<pre><code>ad Andorra
+ae United Arab Emirates
+
+--snip--
+
+ye Yemen
+yt Mayotte
+za South Africa
+zm Zambia
+zw Zimbabwe
+</code></pre><p>这时候我们自写一个函数用于国别码的对应：<br><strong>country_codes.py</strong></p>
+<hr>
+<pre><code>from pygal_maps_world.i18n import COUNTRIES
+
+def get_country_code(country_name):
+    &quot;&quot;&quot;根据指定的国家，返回Pygal使用的两个字母的国别码&quot;&quot;&quot;
+    for code, name in COUNTRIES.items():
+        if name == country_name:
+            return code
+    # 如果没有找到指定的国家，就返回 None
+    return None
+
+print(get_country_code(&apos;Andorra&apos;))
+print(get_country_code(&apos;United Arab Emirates&apos;))
+print(get_country_code(&apos;Afghanistan&apos;))
+</code></pre><p>能正常输出就没问题，接下来删掉 print 语句继续编写（在<strong> world_population.py </strong>文件写）：</p>
+<pre><code>from country_codes import get_country_code
+
+--snip--
+
+    population = int(float(pop_dict[&apos;Value&apos;]))
+    code = get_country_code(country_name)
+    if code:
+        print(code + &quot;: &quot; + str(population))
+    else:
+        print(&apos;ERROR - &apos; + country_name)
+</code></pre><p>运行后如下：</p>
+<pre><code>ERROR - Arab World
+ERROR - Caribbean small states
+ERROR - East Asia &amp; Pacific (all income levels)
+ERROR - East Asia &amp; Pacific (developing only)
+
+--snip--
+
+zm: 12379612
+zw: 12451543
+</code></pre><p>有错误信息和正确信息，因为有些统计指全球人口或者地区人口，这些是没有国别码的。现在我们先忽略它。</p>
+<h2 id="制作世界地图"><a href="#制作世界地图" class="headerlink" title="制作世界地图"></a>制作世界地图</h2><p>我们跟着书做一个北美地图：<br><strong>americas.py</strong></p>
+<hr>
+<pre><code>import pygal_maps_world.maps
+
+wm = pygal_maps_world.maps.World()
+wm.title = &apos;North, Central, and South America&apos;
+
+wm.add(&apos;North America&apos;, [&apos;ca&apos;, &apos;mx&apos;, &apos;us&apos;])
+wm.add(&apos;Central America&apos;, [&apos;bz&apos;, &apos;cr&apos;, &apos;gt&apos;, &apos;hn&apos;, &apos;ni&apos;, &apos;pa&apos;, &apos;sv&apos;])
+wm.add(&apos;South America&apos;, [&apos;ar&apos;, &apos;bo&apos;, &apos;br&apos;, &apos;cl&apos;, &apos;co&apos;, &apos;ec&apos;, &apos;gf&apos;,
+    &apos;gy&apos;, &apos;pe&apos;, &apos;py&apos;, &apos;sr&apos;, &apos;uy&apos;, &apos;ve&apos;])
+
+wm.render_to_file(&apos;americas.svg&apos;)
+</code></pre><ul>
+<li>使用方法 add()，它接受一个标签和一个列表，其中后者包含我们要突出的国家的国别码。每次调用 add() 都将为指定的国家选择一种新颜色，并在图表左边显示该颜色和指定的标签。</li>
+<li>不过在这里，我们要以同一种颜色显示整个北美地区，因此第一次调用 add() 时，在传递给它的列表中包含 ‘ca’、 ‘mx’ 和 ‘us’，以同时突出加拿大、墨西哥和美国。</li>
+</ul>
+<p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/13.png"></p>
+<h2 id="在世界地图上呈现数字数据"><a href="#在世界地图上呈现数字数据" class="headerlink" title="在世界地图上呈现数字数据"></a>在世界地图上呈现数字数据</h2><p><strong>na_populations.py</strong></p>
+<hr>
+<pre><code>import pygal_maps_world.maps
+
+wm = pygal_maps_world.maps.World()
+wm.title = &apos;Populations of Countries in North America&apos;
+wm.add(&apos;North America&apos;, {&apos;ca&apos;: 34126000, &apos;us&apos;: 309349000, &apos;mx&apos;: 113423000})
+
+wm.render_to_file(&apos;na_populations.svg&apos;)
+</code></pre><ul>
+<li>使用方法 add()，但这次通过第二个实参传递了一个字典而不是列表。</li>
+<li>这个字典将两个字母的国别码作为键，将人口数量作为值。</li>
+<li>Pygal 根据这些数字自动给不同国家着以深浅不一的颜色（人口最少的国家颜色最浅，人口最多的国家颜色最深）</li>
+</ul>
+<p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/14.png"></p>
+<p>这幅地图具有交互性：如果你将鼠标指向某个国家，将看到其人口数量。下面在这个地图中添加更多的数据。</p>
+<h2 id="绘制完整的世界人口地图"><a href="#绘制完整的世界人口地图" class="headerlink" title="绘制完整的世界人口地图"></a>绘制完整的世界人口地图</h2><p>把这个北美地图弄出来，世界地图也就不远了。<br>跳转到 <strong>world_population.py</strong>：</p>
+<pre><code>import pygal_maps_world.maps
+
+# 创建一个包含人口数量的字典
+cc_populations = {}
+
+--snip--
+
+    code = get_country_code(country_name)
+    if code:
+        cc_populations[code] = population
+
+wm = pygal_maps_world.maps.World()
+wm.title = &apos;World Population in 2008, by Country&apos;
+wm.add(&apos;2008&apos;, cc_populations)
+
+wm.render_to_file(&apos;world_population.svg&apos;)
+</code></pre><p>这里记得把之前的 print 语句删掉。</p>
+<p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/15.png"></p>
+<p>可以看到有些国家或地区没有统计到，这是因为上述没有国别码的原因造成的。现在先不管。</p>
+<h2 id="根据人口数量将国家分组"><a href="#根据人口数量将国家分组" class="headerlink" title="根据人口数量将国家分组"></a>根据人口数量将国家分组</h2><p>看看地图，中国人口这么多，但是直观上看感觉好像没多到哪里去？为了突出这一点，我们将人口数量分成三组——少于 1000 万的、介于 1000 万和 10 亿之间的以及超过 10 亿的：</p>
+<pre><code># 根据人口数量将所有的国家分成三组
+cc_pops_1, cc_pops_2, cc_pops_3 = {}, {}, {}
+for cc, pop in cc_populations.items():
+    if pop &lt; 10000000:
+        cc_pops_1[cc] = pop
+    elif pop &lt; 1000000000:
+        cc_pops_2[cc] = pop
+    else:
+        cc_pops_3[cc] = pop
+
+# 看看每组分别包含多少个国家
+print(len(cc_pops_1), len(cc_pops_2), len(cc_pops_3))
+
+wm.title = &apos;World Population in 2008, by Country&apos;
+wm.add(&apos;0-10m&apos;, cc_pops_1)
+wm.add(&apos;10m-1bn&apos;, cc_pops_2)
+wm.add(&apos;&gt;1bn&apos;, cc_pops_3)
+</code></pre><p>运行后如下：<br>    85 69 2<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/16.png"></p>
+<p>这样看起来就比较清晰了，但是我想让超过 10 亿人口的国家颜色为红色，怎么弄？</p>
+<h2 id="使用-pygal-设置世界地图的样式"><a href="#使用-pygal-设置世界地图的样式" class="headerlink" title="使用 pygal 设置世界地图的样式"></a>使用 pygal 设置世界地图的样式</h2><pre><code>from pygal.style import RotateStyle
+
+wm_style = RotateStyle(&apos;#336699&apos;)
+wm = pygal_maps_world.maps.World(style=wm_style)
+</code></pre><p>Pygal 样式存储在模块 style 中（这里注意下，不在 pygal_maps_world 库里面），我们从这个模块中导入了样式 RotateStyle ，这个实例需要一个实参——十六进制的 RGB 颜色。</p>
+<p>十六进制格式的 RGB 颜色是一个以井号（#）打头的字符串，后面跟着6个字符，其中前两个字符表示红色分量，接下来的两个表示绿色分量，最后两个表示蓝色分量。每个分量<br>的取值范围为 00（没有相应的颜色）~FF（包含最多的相应颜色）。如果你在线搜索 hex color chooser （十六进制颜色选择器），可找到让你能够尝试选择不同的颜色并显示其 RGB 值的工具。</p>
+<p>运行后如下：<br><img src="/ganru.github.io/2018/10/24/数据可视化（第二部分）/17.png"></p>
+<h2 id="加亮颜色主题"><a href="#加亮颜色主题" class="headerlink" title="加亮颜色主题"></a>加亮颜色主题</h2><p>Pygal 通常默认使用较暗的颜色主题。有时候为了方便印刷，得使用 LightColorizedStyle 加亮地图的颜色。这个类修改整个图表的主题，包括背景色、标签以及各个国家的颜色。要使用这个样式，先导入它：</p>
+<p><code>from pygal.style import LightColorizedStyle as LCS</code></p>
+<p>然后就可独立地使用 LightColorizedStyle 了，例如：</p>
+<p><code>wm_style = LCS</code></p>
+<p>然而使用这个类时，你不能直接控制使用的颜色， Pygal 将选择默认的基色。要设置颜色，可使用 RotateStyle，并将 LightColorizedStyle 作为基本样式。</p>
+<p>wm_style = RotateStyle(‘#336699’, base_style=LightColorizedStyle)</p>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
+<li>如何使用网上的数据集</li>
+<li>如何处理CSV和JSON文件，以及如何提取你感兴趣的数据</li>
+<li>如何使用 matplotlib 来处理以往的天气数据，包括如何使用模块 datetime，以及如何在同一个图表中绘制多个数据系列</li>
+<li>如何使用 Pygal 绘制呈现各国数据的世界地图，以及如何设置 Pygal 地图和图表的样式</li>
+</ol>
+<h1 id="各部分源码"><a href="#各部分源码" class="headerlink" title="各部分源码"></a>各部分源码</h1><h2 id="highs-lows-py"><a href="#highs-lows-py" class="headerlink" title="highs_lows.py"></a>highs_lows.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import csv</span><br><span class="line">from datetime import datetime</span><br><span class="line"></span><br><span class="line">from matplotlib import pyplot as plt</span><br><span class="line"></span><br><span class="line">filename = &apos;death_valley_2014.csv&apos;</span><br><span class="line">with open(filename) as f:</span><br><span class="line">	reader = csv.reader(f)</span><br><span class="line">	header_row = next(reader)</span><br><span class="line">	</span><br><span class="line">	for index, column_header in enumerate(header_row):</span><br><span class="line">		print(index, column_header)</span><br><span class="line">	</span><br><span class="line">	highs = []</span><br><span class="line">	dates = []</span><br><span class="line">	lows = []</span><br><span class="line">	for row in reader:</span><br><span class="line">		try:</span><br><span class="line">			current_date = datetime.strptime(row[0], &quot;%Y-%m-%d&quot;)</span><br><span class="line">			low = int(row[3])</span><br><span class="line">			high = int(row[1])</span><br><span class="line">		except ValueError:</span><br><span class="line">			print(current_date, &apos;missing data&apos;)</span><br><span class="line">		else:</span><br><span class="line">			lows.append(low)</span><br><span class="line">			dates.append(current_date)</span><br><span class="line">			highs.append(high)</span><br><span class="line">	</span><br><span class="line"># 根据数据绘制图形</span><br><span class="line">fig = plt.figure(dpi=128, figsize=(10, 6))</span><br><span class="line">plt.plot(dates, highs, c=&apos;red&apos;, alpha=0.5)</span><br><span class="line">plt.plot(dates, lows, c=&apos;blue&apos;, alpha=0.5)</span><br><span class="line">plt.fill_between(dates, highs, lows, facecolor=&apos;blue&apos;, alpha=0.1)</span><br><span class="line"></span><br><span class="line"># 设置图形的格式</span><br><span class="line">plt.title(&quot;Daily high and low temperatures - 2014&quot;, fontsize=24)</span><br><span class="line">plt.xlabel(&apos;&apos;, fontsize=16)</span><br><span class="line">fig.autofmt_xdate()</span><br><span class="line">plt.ylabel(&quot;Temperature (F)&quot;, fontsize=16)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="world-population-py"><a href="#world-population-py" class="headerlink" title="world_population.py"></a>world_population.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">import pygal_maps_world.maps</span><br><span class="line">import pygal</span><br><span class="line">from pygal.style import RotateStyle as RS, LightColorizedStyle as LCS</span><br><span class="line"></span><br><span class="line">from country_codes import get_country_code</span><br><span class="line"></span><br><span class="line"># 将数据加载到一个列表中</span><br><span class="line">filename = &apos;population_data.json&apos;</span><br><span class="line">with open (filename) as f:</span><br><span class="line">	pop_data = json.load(f)</span><br><span class="line">	</span><br><span class="line"># 创建一个包含人口数量的字典</span><br><span class="line">cc_populations = &#123;&#125;</span><br><span class="line"></span><br><span class="line"># 打印每个国家 2008 年的人口数量</span><br><span class="line">for pop_dict in pop_data:</span><br><span class="line">	if pop_dict[&apos;Year&apos;] == &apos;2008&apos;:</span><br><span class="line">		country_name = pop_dict[&apos;Country Name&apos;]</span><br><span class="line">		population = int(float(pop_dict[&apos;Value&apos;]))</span><br><span class="line">		code = get_country_code(country_name)</span><br><span class="line">		if code:</span><br><span class="line">			cc_populations[code] = population</span><br><span class="line"></span><br><span class="line"># 根据人口数量将所有的国家分成三组</span><br><span class="line">cc_pops_1, cc_pops_2, cc_pops_3 = &#123;&#125;, &#123;&#125;, &#123;&#125;</span><br><span class="line">for cc, pop in cc_populations.items():</span><br><span class="line">	if pop &lt; 10000000:</span><br><span class="line">		cc_pops_1[cc] = pop</span><br><span class="line">	elif pop &lt; 1000000000:</span><br><span class="line">		cc_pops_2[cc] = pop</span><br><span class="line">	else:</span><br><span class="line">		cc_pops_3[cc] = pop</span><br><span class="line"></span><br><span class="line"># 看看每组分别包含多少个国家</span><br><span class="line">print(len(cc_pops_1), len(cc_pops_2), len(cc_pops_3))</span><br><span class="line"></span><br><span class="line"># 自定义地图的颜色样式，并高亮颜色</span><br><span class="line">wm_style = RS(&apos;#336699&apos;, base_style=LCS)</span><br><span class="line">wm = pygal_maps_world.maps.World(style=wm_style)</span><br><span class="line">wm.title = &apos;World Population in 2008, by Country&apos;</span><br><span class="line">wm.add(&apos;0-10m&apos;, cc_pops_1)</span><br><span class="line">wm.add(&apos;10m-1bn&apos;, cc_pops_2)</span><br><span class="line">wm.add(&apos;&gt;1bn&apos;, cc_pops_3)</span><br><span class="line"></span><br><span class="line">wm.render_to_file(&apos;world_population.svg&apos;)</span><br></pre></td></tr></table></figure>
+<h2 id="country-codes-py"><a href="#country-codes-py" class="headerlink" title="country_codes.py"></a>country_codes.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from pygal_maps_world.i18n import COUNTRIES</span><br><span class="line"></span><br><span class="line">def get_country_code(country_name):</span><br><span class="line">	&quot;&quot;&quot;根据指定的国家，返回 Pygal 使用的两个字母的国别码&quot;&quot;&quot;</span><br><span class="line">	for code, name in COUNTRIES.items():</span><br><span class="line">		if name == country_name:</span><br><span class="line">			return code</span><br><span class="line">	# 如果没有找到指定的国家，就返回 None</span><br><span class="line">	return None</span><br></pre></td></tr></table></figure>
+<h2 id="americas-py"><a href="#americas-py" class="headerlink" title="americas.py"></a>americas.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import pygal_maps_world.maps</span><br><span class="line"></span><br><span class="line">wm = pygal_maps_world.maps.World()</span><br><span class="line">wm.title = &apos;North, Central, and South America&apos;</span><br><span class="line"></span><br><span class="line">wm.add(&apos;North America&apos;, [&apos;ca&apos;, &apos;mx&apos;, &apos;us&apos;])</span><br><span class="line">wm.add(&apos;Central America&apos;, [&apos;bz&apos;, &apos;cr&apos;, &apos;gt&apos;, &apos;hn&apos;, &apos;ni&apos;, &apos;pa&apos;, &apos;sv&apos;])</span><br><span class="line">wm.add(&apos;South America&apos;, [&apos;ar&apos;, &apos;bo&apos;, &apos;br&apos;, &apos;cl&apos;, &apos;co&apos;, &apos;ec&apos;, &apos;gf&apos;,</span><br><span class="line">	&apos;gy&apos;, &apos;pe&apos;, &apos;py&apos;, &apos;sr&apos;, &apos;uy&apos;, &apos;ve&apos;])</span><br><span class="line"></span><br><span class="line">wm.render_to_file(&apos;americas.svg&apos;)</span><br></pre></td></tr></table></figure>
+<h2 id="na-populations-py"><a href="#na-populations-py" class="headerlink" title="na_populations.py"></a>na_populations.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import pygal_maps_world.maps</span><br><span class="line"></span><br><span class="line">wm = pygal_maps_world.maps.World()</span><br><span class="line">wm.title = &apos;Populations of Countries in North America&apos;</span><br><span class="line">wm.add(&apos;North America&apos;, &#123;&apos;ca&apos;: 34126000, &apos;us&apos;: 309349000, &apos;mx&apos;: 113423000&#125;)</span><br><span class="line"></span><br><span class="line">wm.render_to_file(&apos;na_populations.svg&apos;)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/10/19/数据可视化（第一部分）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -725,7 +1272,18 @@ hist.add(&apos;D6 + D6&apos;, frequencies)
 <li>用随机漫步数据绘制散点图</li>
 <li>直方图的绘制 <em>pygal.Bar()</em></li>
 </ol>
-
+<h1 id="各组件源码"><a href="#各组件源码" class="headerlink" title="各组件源码"></a>各组件源码</h1><h2 id="mpl-squares-py"><a href="#mpl-squares-py" class="headerlink" title="mpl_squares.py"></a>mpl_squares.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">from pylab import mpl  </span><br><span class="line">mpl.rcParams[&apos;font.sans-serif&apos;] = [&apos;SimHei&apos;]</span><br><span class="line"></span><br><span class="line">input_values = [1, 2, 3, 4, 5]</span><br><span class="line">squares = [1, 4, 9, 16, 25]</span><br><span class="line">plt.plot(input_values, squares, linewidth=5)</span><br><span class="line"></span><br><span class="line"># 设置图表标题，并给坐标轴加上标签</span><br><span class="line">plt.title(&quot;平方数列&quot;, fontsize=24)</span><br><span class="line">plt.xlabel(&quot;值 &quot;, fontsize=14)</span><br><span class="line">plt.ylabel(&quot;值的平方&quot;, fontsize=14)</span><br><span class="line"></span><br><span class="line"># 设置刻度标记的大小</span><br><span class="line">plt.tick_params(axis=&apos;both&apos;, labelsize=14)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="scatter-squares-py"><a href="#scatter-squares-py" class="headerlink" title="scatter_squares.py"></a>scatter_squares.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">from pylab import mpl  </span><br><span class="line">mpl.rcParams[&apos;font.sans-serif&apos;] = [&apos;SimHei&apos;]</span><br><span class="line"></span><br><span class="line">x_values = list(range(1, 1001))</span><br><span class="line">y_values = [x**2 for x in x_values]</span><br><span class="line"></span><br><span class="line">plt.scatter(x_values, y_values, c=y_values, cmap=plt.cm.Blues, edgecolor=&apos;none&apos;, s=40)</span><br><span class="line"></span><br><span class="line"># 设置图表标题并给坐标轴加上标签</span><br><span class="line">plt.title(&quot;平方数列&quot;, fontsize=24)</span><br><span class="line">plt.xlabel(&quot;值 &quot;, fontsize=14)</span><br><span class="line">plt.ylabel(&quot;值的平方&quot;, fontsize=14)</span><br><span class="line"></span><br><span class="line"># 设置刻度标记的大小</span><br><span class="line">plt.tick_params(axis=&apos;both&apos;, which=&apos;major&apos;, labelsize=14)</span><br><span class="line"></span><br><span class="line"># 设置每个坐标轴的取值范围</span><br><span class="line">plt.axis([0, 1100, 0, 1100000])</span><br><span class="line"></span><br><span class="line">plt.savefig(&apos;squares_plot.png&apos;, bbox_inches=&apos;tight&apos;)</span><br></pre></td></tr></table></figure>
+<h2 id="random-walk-py"><a href="#random-walk-py" class="headerlink" title="random_walk.py"></a>random_walk.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">from random import choice</span><br><span class="line"></span><br><span class="line">class RandomWalk():</span><br><span class="line">	&quot;&quot;&quot;一个生成随机漫步的类&quot;&quot;&quot;</span><br><span class="line">	</span><br><span class="line">	def __init__(self, num_points=50000):</span><br><span class="line">		&quot;&quot;&quot;初始化随机漫步的属性&quot;&quot;&quot;</span><br><span class="line">		self.num_points = num_points</span><br><span class="line">		</span><br><span class="line">		# 所有随机漫步都始于（0，0）</span><br><span class="line">		self.x_values = [0]</span><br><span class="line">		self.y_values = [0]</span><br><span class="line">		</span><br><span class="line">	def fill_walk(self):</span><br><span class="line">		&quot;&quot;&quot;计算随机漫步包含的所有点&quot;&quot;&quot;</span><br><span class="line">		</span><br><span class="line">		# 不断漫步，直到达到指定的长度</span><br><span class="line">		while len(self.x_values) &lt; self.num_points:</span><br><span class="line">			</span><br><span class="line">			# 决定前进方向以及沿这个方向前进的距离</span><br><span class="line">			x_step = self.get_step()</span><br><span class="line">			y_step = self.get_step()</span><br><span class="line">			</span><br><span class="line">			# 拒绝原地踏步</span><br><span class="line">			if x_step == 0 and y_step == 0:</span><br><span class="line">				continue</span><br><span class="line">			</span><br><span class="line">			# 计算下一个点的 x 、y 坐标 ([-1] 指列表最后一个元素)</span><br><span class="line">			next_x = self.x_values[-1] + x_step</span><br><span class="line">			next_y = self.y_values[-1] + y_step</span><br><span class="line">			</span><br><span class="line">			self.x_values.append(next_x)</span><br><span class="line">			self.y_values.append(next_y)</span><br><span class="line">		</span><br><span class="line">	def get_step(self):</span><br><span class="line">		&quot;&quot;&quot;计算下一个点的可能前进距离&quot;&quot;&quot;</span><br><span class="line">		direction = choice([1, -1])</span><br><span class="line">		distance = choice([0, 1, 2, 3, 4])</span><br><span class="line">		step = direction * distance</span><br><span class="line">		return step</span><br></pre></td></tr></table></figure>
+<h2 id="rw-visual-py"><a href="#rw-visual-py" class="headerlink" title="rw_visual.py"></a>rw_visual.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">from random_walk import RandomWalk</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">	# 创建一个RandomWalk实例，并将其包含的点都绘制出来</span><br><span class="line">	rw = RandomWalk()</span><br><span class="line">	rw.fill_walk()</span><br><span class="line">	</span><br><span class="line">	# 设置绘图窗口的尺寸</span><br><span class="line">	plt.figure(dpi=256, figsize=(10, 6))</span><br><span class="line">	</span><br><span class="line">	point_numbers = list(range(rw.num_points))</span><br><span class="line">	plt.scatter(rw.x_values, rw.y_values, c=point_numbers, cmap=plt.cm.Blues, edgecolor=&apos;none&apos;, s=1)</span><br><span class="line">	</span><br><span class="line">	# 突出起点和终点</span><br><span class="line">	plt.scatter(0, 0, c=&apos;green&apos;, edgecolors=&apos;none&apos;, s=10)</span><br><span class="line">	plt.scatter(rw.x_values[-1], rw.y_values[-1], c=&apos;red&apos;, edgecolors=&apos;none&apos;, s=10)</span><br><span class="line">	</span><br><span class="line">	# 隐藏坐标轴</span><br><span class="line">	plt.axes().get_xaxis().set_visible(False)</span><br><span class="line">	plt.axes().get_yaxis().set_visible(False)</span><br><span class="line">	</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line">	keep_running = input(&quot;Make another walk? (y/n): &quot;)</span><br><span class="line">	if keep_running == &apos;n&apos;:</span><br><span class="line">		break</span><br></pre></td></tr></table></figure>
+<h2 id="die-py"><a href="#die-py" class="headerlink" title="die.py"></a>die.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from random import randint</span><br><span class="line"></span><br><span class="line">class Die():</span><br><span class="line">	&quot;&quot;&quot;表示一个骰子的类&quot;&quot;&quot;</span><br><span class="line">	</span><br><span class="line">	def __init__(self, num_sides=6):</span><br><span class="line">		&quot;&quot;&quot;骰子有几面，不导入实参就默认六面&quot;&quot;&quot;</span><br><span class="line">		self.num_sides = num_sides</span><br><span class="line">		</span><br><span class="line">	def roll(self):</span><br><span class="line">		&quot;&quot;&quot;返回一个位于 1 和骰子面数之间的随机值&quot;&quot;&quot;</span><br><span class="line">		return randint(1, self.num_sides)</span><br></pre></td></tr></table></figure>
+<h2 id="die-visual-py"><a href="#die-visual-py" class="headerlink" title="die_visual.py"></a>die_visual.py</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import pygal</span><br><span class="line"></span><br><span class="line">from die import Die</span><br><span class="line">from pylab import mpl  </span><br><span class="line">mpl.rcParams[&apos;font.sans-serif&apos;] = [&apos;SimHei&apos;]</span><br><span class="line"></span><br><span class="line"># 创建两个D6骰子</span><br><span class="line">die_1 = Die()</span><br><span class="line">die_2 = Die()</span><br><span class="line"></span><br><span class="line"># 掷几次骰子，并将结果存储在一个列表中</span><br><span class="line">results = []</span><br><span class="line">for roll_num in range(1000):</span><br><span class="line">	result = die_1.roll() + die_2.roll()</span><br><span class="line">	results.append(result)</span><br><span class="line"></span><br><span class="line"># 分析结果</span><br><span class="line">frequencies = []</span><br><span class="line">max_result = die_1.num_sides + die_2.num_sides</span><br><span class="line">for value in range(2, max_result+1):</span><br><span class="line">	frequency = results.count(value)</span><br><span class="line">	frequencies.append(frequency)</span><br><span class="line">	</span><br><span class="line"># 对结果进行可视化</span><br><span class="line">hist = pygal.Bar()</span><br><span class="line"></span><br><span class="line">hist.title = &quot;Results of rolling two D6 dice 1000 times.&quot;</span><br><span class="line">hist.x_labels = [&apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;, &apos;6&apos;, &apos;7&apos;, &apos;8&apos;, &apos;9&apos;, &apos;10&apos;, &apos;11&apos;, &apos;12&apos;]</span><br><span class="line">hist.x_title = &quot;Results&quot;</span><br><span class="line">hist.y_title = &quot;Frequency of Result&quot;</span><br><span class="line"></span><br><span class="line">hist.add(&apos;D6 + D6&apos;, frequencies)</span><br><span class="line">hist.render_to_file(&apos;die_visual.svg&apos;)</span><br><span class="line"></span><br><span class="line">print(frequencies)</span><br><span class="line">print(results)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -4035,428 +4593,6 @@ Phil&apos;s favorite language is Python.
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/22/函数专项/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ganru">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小黑屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ganru.github.io/2018/09/22/函数专项/" itemprop="url">函数专项</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-22T13:42:39+08:00">
-                2018-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">Python笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong><p>写在前面</p></strong></p>
-<hr>
-<blockquote>
-<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
-</blockquote>
-<h1 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h1><p>关键字 def 定义函数。</p>
-<pre><code>ex：
-    def hello(username):
-        &quot;&quot;&quot;此处写函数注释，建议每次都写，方便日后维护&quot;&quot;&quot;
-        print(username.title() + &quot;, Welcome to you!&quot;)
-
-    hello(&apos;ganru&apos;)    #要加单引号，不然编译器会检测为未定义对象而不是字符串变量。
-
-out：
-    ganru, Welcome to you!
-</code></pre><h1 id="实参与形参"><a href="#实参与形参" class="headerlink" title="实参与形参"></a>实参与形参</h1><p>如 hello() 的函数定义，括号里面的变量<strong> username </strong>是形参，只具有形式意义，而值<strong> ‘ganru’ </strong>是实参，具有实际意义。<br>如何判断：函数定义中的变量为形参，函数调用中的变量为实参。</p>
-<h1 id="实参的传递"><a href="#实参的传递" class="headerlink" title="实参的传递"></a>实参的传递</h1><h2 id="位置实参"><a href="#位置实参" class="headerlink" title="位置实参"></a>位置实参</h2><p>定义：基于实参的顺序将函数调用中的每个实参都关联到函数定义中的一个形参。</p>
-<pre><code>ex：
-    def student(name, sex):
-        .
-        .
-        .
-
-    student(&apos;garu&apos;,&apos;boy&apos;)    #这里的 &apos;garu&apos; 为第一顺序，&apos;boy&apos; 为第二顺序。
-</code></pre><h2 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h2><p>定义：传递给函数的名称—值对。无需考虑函数调用中的实参顺序，还清楚地指出了函数调用中各个值的用途。</p>
-<pre><code>ex：
-    def student(name, sex):
-        .
-        .
-        .
-
-    student(sex = &apos;boy&apos;, name = &apos;garu&apos;)    #顺序反了也没事
-</code></pre><p>注意：使用关键字实参时，务必准确地指定函数定义中的形参名。</p>
-<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h2><p>调用函数中给形参提供了实参时，Python 将使用指定的实参值；否则，将使用形参的默认值。<br>作用：给形参指定默认值后，可在函数调用中省略相应的实参。</p>
-<pre><code>ex：
-    def student(name, sex = &apos;boy&apos;):
-        .
-        .
-        .
-
-    student(name = &apos;garu&apos;)    #以后每次调用，如果没有显式提供实参给 sex，sex 都是 &apos;boy&apos;。
-</code></pre><p>注意：如果以后要用默认值，也就是考虑到可能不写值，则形参放最后面（如：sex），以免出现位置实参错误。</p>
-<h2 id="等效的函数调用"><a href="#等效的函数调用" class="headerlink" title="等效的函数调用"></a>等效的函数调用</h2><p>就是上面的实参调用方式可以混用。</p>
-<h1 id="return"><a href="#return" class="headerlink" title="return"></a>return</h1><pre><code>ex：
-    def add(first,second):
-        &quot;&quot;&quot;二值相加&quot;&quot;&quot;
-        value = first + second
-        return value
-
-    a = input(&quot;first value?&quot;)    #要将接收到的数据转变为数值，函数才有效
-    a = int(a)
-    b = input(&quot;second value?&quot;)
-    b = int(b)
-    result = add(a,b)
-    print(&quot;result is &quot; + str(result))    
-</code></pre><p>注意：输出时要给 result 打上str()。<br>否则会报警：can only concatenate str (not “int”) to str</p>
-<p>6.5 实参可选</p>
-<pre><code>ex：
-    def location(country, province, city):
-        &quot;&quot;&quot;个人居住地&quot;&quot;&quot;
-        my_location = country + &apos; &apos; + province + &apos; &apos; + city
-        return my_location.title()
-</code></pre><p>这种函数或许适用大多数情况，但是直辖市啥整？<br>可以试试：</p>
-<pre><code>def location(country, city, province = &apos;&apos;):    # province 放后面，以免出现位置实参错误
-    &quot;&quot;&quot;个人居住地&quot;&quot;&quot;
-    if province:    #如果是空字符串，Python 将解读为 False。
-        my_location = country + &apos; &apos; + province + &apos; &apos; + city
-    else:
-        my_location = country + &apos; &apos; + city
-    return my_location.title()
-</code></pre><p>新函数就是所说的实参可选。</p>
-<h1 id="字典的返回"><a href="#字典的返回" class="headerlink" title="字典的返回"></a>字典的返回</h1><pre><code>ex：
-    def location(country, province, city):
-        &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
-        my_location = {
-            &apos;country_name&apos;: country,
-            &apos;province_name&apos;: province,
-            &apos;city_name&apos;: city,
-            }
-        return my_location
-
-    mylocation = location(&apos;China&apos;, &apos;Guangdong&apos;, &apos;Shenzhen&apos;)
-    print(mylocation)
-
-out：
-    {&apos;country_name&apos;: &apos;China&apos;, &apos;province_name&apos;: &apos;Guangdong&apos;, &apos;city_name&apos;: &apos;Shenzhen&apos;}
-</code></pre><p>当然，直辖市我们也要考虑：</p>
-<pre><code>def location(country, city, province = &apos;&apos;):    #默认值放后面
-    &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
-    if province:
-        my_location = {
-            &apos;country_name&apos;: country,
-            &apos;province_name&apos;: province,
-            &apos;city_name&apos;: city,
-            }
-    else:
-        my_location = {
-            &apos;country_name&apos;: country,
-            &apos;city_name&apos;: city,
-            }
-    return my_location
-
-mylocation = location(country = &apos;China&apos;, city = &apos;Beijing&apos;)
-print(mylocation)
-</code></pre><h1 id="函数与-while"><a href="#函数与-while" class="headerlink" title="函数与 while"></a>函数与 while</h1><p>ex：</p>
-<pre><code>def location(country, city, province = &apos;&apos;):
-    &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
-    if province:
-        my_location = {
-            &apos;country_name&apos;: country,
-            &apos;province_name&apos;: province,
-            &apos;city_name&apos;: city,
-            }
-    else:
-        my_location = {
-            &apos;country_name&apos;: country,
-            &apos;city_name&apos;: city,
-            }
-    return my_location
-
-users_location = {}
-sign = True
-while sign:
-    print(&quot;\nPlease tell me your name and your location:&quot;)
-    us_name = input(&quot;your name:&quot;)
-    co_name = input(&quot;your country:&quot;)
-    pr_name = input(&quot;your province:&quot;)
-    ci_name = input(&quot;your city:&quot;)
-
-    user_location = location(country = co_name, province = pr_name, city = ci_name)
-    users_location[us_name] = user_location
-
-    symbol = input(&quot;Thank you, can you continue?(yes or no)&quot;)
-    if symbol == &apos;yes&apos;:
-        sign = True
-        print(users_location)
-    else:
-        sign = False
-
-print(&quot;Thank you!&quot;)
-</code></pre><p>小结：字典中的添加不涉及方法 append()。</p>
-<h1 id="向函数传递列表、字典"><a href="#向函数传递列表、字典" class="headerlink" title="向函数传递列表、字典"></a>向函数传递列表、字典</h1><pre><code>ex：
-    def users_language(language):    #实参有要求的，这里默认导入的实参为字典，若有其他需求，可以加个 if 语句控制实现需求
-        &quot;&quot;&quot;展现各个人分别喜欢的语言&quot;&quot;&quot;
-        for key, value in language.items():
-            print(&quot;\n&quot; + key + &quot;&apos;s favorite language is &quot; + value)
-
-    favorite_languages = {
-            &apos;jen&apos;: &apos;python&apos;,
-            &apos;sarah&apos;: &apos;c&apos;,
-            &apos;edward&apos;: &apos;ruby&apos;,
-            &apos;phil&apos;: &apos;python&apos;,
-            }
-
-    users_language(favorite_languages)
-
-out：
-    jen&apos;s favorite language is python
-
-    sarah&apos;s favorite language is c
-
-    edward&apos;s favorite language is ruby
-
-    phil&apos;s favorite language is python
-</code></pre><h1 id="用函数修改列表、字典"><a href="#用函数修改列表、字典" class="headerlink" title="用函数修改列表、字典"></a>用函数修改列表、字典</h1><pre><code>ex：
-    def print_models(unprinted_designs, completed_models):
-        &quot;&quot;&quot;
-        模拟打印每个设计，直到没有未打印的设计为止
-        打印每个设计后，都将其移到列表completed_models中
-        &quot;&quot;&quot;
-        while unprinted_designs:
-            current_design = unprinted_designs.pop()
-
-            # 模拟根据设计制作3D打印模型的过程
-            print(&quot;Printing model: &quot; + current_design)
-            completed_models.append(current_design)
-
-    def show_completed_models(completed_models):
-        &quot;&quot;&quot;显示打印好的所有模型&quot;&quot;&quot;
-        print(&quot;\nThe following models have been printed:&quot;)
-        for completed_model in completed_models:
-            print(completed_model)
-
-    unprinted_designs = [&apos;iphone case&apos;, &apos;robot pendant&apos;, &apos;dodecahedron&apos;]
-    completed_models = []
-
-    print_models(unprinted_designs, completed_models)
-    show_completed_models(completed_models)
-
-out：
-    Printing model: dodecahedron
-    Printing model: robot pendant
-    Printing model: iphone case
-
-    The following models have been printed:
-    dodecahedron
-    robot pendant
-    iphone case
-</code></pre><h1 id="禁止函数修改列表、字典"><a href="#禁止函数修改列表、字典" class="headerlink" title="禁止函数修改列表、字典"></a>禁止函数修改列表、字典</h1><p>根据上节的打印可知，unprinted_designs 打印完后列表变为空的了，若想保持其不变，我们可以建立一个列表副本：<br>    <code>print_models(unprinted_designs[:], completed_models)    #切片建立副本</code><br>但建议在有充分的理由需要传递副本的情况下这么做，毕竟多建一个列表，时间复杂度增加，内存使用率增大，不利于做大项目。</p>
-<h1 id="任意数量的实参传递"><a href="#任意数量的实参传递" class="headerlink" title="任意数量的实参传递"></a>任意数量的实参传递</h1><h2 id="传递任意数量的实参-（建立空元组）"><a href="#传递任意数量的实参-（建立空元组）" class="headerlink" title="传递任意数量的实参 （建立空元组）"></a>传递任意数量的实参 （建立空元组）</h2><p>常见作用：<br>有时候真不知道函数要接收多少个实参，这时候可以对形参名加个 * ，让 Python 创建一个空元组，并将收到的所有值都封装到这个元组中。</p>
-<pre><code>ex：
-    def make_pizza(*toppings):
-        &quot;&quot;&quot;概述要制作的比萨&quot;&quot;&quot;
-        print(&quot;\nMaking a pizza with the following toppings:&quot;)
-        for topping in toppings:
-            print(&quot;- &quot; + topping)
-
-    make_pizza(&apos;pepperoni&apos;)
-    make_pizza(&apos;mushrooms&apos;, &apos;green peppers&apos;, &apos;extra cheese&apos;)
-</code></pre><p>函数调用解析：<br>这时候 * 号调用作用于 tuple/list/str 前，意思是解包(unpack)tuple/list/str，解包后的 tuple/list/str 将不再是一个参数，而是每个元素都是一个函数参数，依次传递给函数。</p>
-<pre><code>out：
-    Making a pizza with the following toppings:
-    - pepperoni
-    Making a pizza with the following toppings:
-    - mushrooms
-    - green peppers
-    - extra cheese
-</code></pre><h2 id="结合使用位置实参和任意数量实参"><a href="#结合使用位置实参和任意数量实参" class="headerlink" title="结合使用位置实参和任意数量实参"></a>结合使用位置实参和任意数量实参</h2><pre><code>ex：
-    def make_pizza(size, *toppings):
-        &quot;&quot;&quot;概述要制作的比萨&quot;&quot;&quot;
-        print(&quot;\nMaking a &quot; + str(size) +
-            &quot;-inch pizza with the following toppings:&quot;)
-        for topping in toppings:
-            print(&quot;- &quot; + topping)
-
-    make_pizza(16, &apos;pepperoni&apos;)
-    make_pizza(12, &apos;mushrooms&apos;, &apos;green peppers&apos;, &apos;extra cheese&apos;)
-out：
-    Making a 16-inch pizza with the following toppings:
-    - pepperoni
-
-    Making a 12-inch pizza with the following toppings:
-    - mushrooms
-    - green peppers
-    - extra cheese
-</code></pre><h2 id="使用任意数量的关键字实参-（建立空字典）"><a href="#使用任意数量的关键字实参-（建立空字典）" class="headerlink" title="使用任意数量的关键字实参    （建立空字典）"></a>使用任意数量的关键字实参    （建立空字典）</h2><p>预先不知道传递给函数的会是什么样的信息，有多少个，这时可以用关键字实参调用。即接收任意数量的 键-值 对。<br>格式：对形参加 ** ，让Python创建一个空字典，并将收到的所有 键-值 对都封装到这个字典中。</p>
-<pre><code>ex：
-    def build_profile(first, last, **user_info):    #**号创建空字典
-        &quot;&quot;&quot;创建一个字典，其中包含我们知道的有关用户的一切&quot;&quot;&quot;
-        profile = {}
-        profile[&apos;first_name&apos;] = first
-        profile[&apos;last_name&apos;] = last
-        for key, value in user_info.items():
-            profile[key] = value
-        return profile
-
-    user_profile = build_profile(&apos;albert&apos;, &apos;einstein&apos;,
-                                location=&apos;princeton&apos;,
-                                field=&apos;physics&apos;)
-    print(user_profile)
-out：
-    {&apos;first_name&apos;: &apos;albert&apos;, &apos;last_name&apos;: &apos;einstein&apos;, &apos;location&apos;: &apos;princeton&apos;, &apos;field&apos;: &apos;physics&apos;}
-</code></pre><h1 id="函数与模块"><a href="#函数与模块" class="headerlink" title="函数与模块"></a>函数与模块</h1><h2 id="导入整个模块"><a href="#导入整个模块" class="headerlink" title="导入整个模块"></a>导入整个模块</h2><p>模块是后缀 .py 的子文件，在模块中写好函数（除函数外，其余都不要写），然后在主文件中用 import 导入整个模块。<br>ex：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">son.py		#模块名</span><br><span class="line"></span><br><span class="line">def users_language(language):	#实参有要求的，这里默认导入的实参为字典，若有其他需求，可以加个 if 语句控制实现需求</span><br><span class="line">&quot;&quot;&quot;展现各个人分别喜欢的语言&quot;&quot;&quot;</span><br><span class="line">for key, value in language.items():</span><br><span class="line">	print(&quot;\n&quot; + key + &quot;&apos;s favorite language is &quot; + value)</span><br></pre></td></tr></table></figure></p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">master.py		#主文件名</span><br><span class="line"></span><br><span class="line">favorite_languages = &#123;</span><br><span class="line">	&apos;jen&apos;: &apos;python&apos;,</span><br><span class="line">	&apos;sarah&apos;: &apos;c&apos;,</span><br><span class="line">	&apos;edward&apos;: &apos;ruby&apos;,</span><br><span class="line">	&apos;phil&apos;: &apos;python&apos;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">son.users_language(favorite_languages)</span><br></pre></td></tr></table></figure>
-</code></pre><p>out：</p>
-<pre><code>jen&apos;s favorite language is python
-
-sarah&apos;s favorite language is c
-
-edward&apos;s favorite language is ruby
-
-phil&apos;s favorite language is python
-</code></pre><h2 id="导入特定函数及给函数指定别名"><a href="#导入特定函数及给函数指定别名" class="headerlink" title="导入特定函数及给函数指定别名"></a>导入特定函数及给函数指定别名</h2><p>格式：<br><code>from module_name（.py 文件名） import function_name（在 .py 文件中的函数名）</code><br>导入多个函数：<br><code>from module_name import function_0, function_1, ...</code><br>若函数名太长或与程序现有名称冲突：（指定别名区分）<br><code>from module_name import function_0 as f_0</code></p>
-<h2 id="给模块指定别名"><a href="#给模块指定别名" class="headerlink" title="给模块指定别名"></a>给模块指定别名</h2><p>格式：<br><code>import son as s        #比如上述中的 son.py 函数文件</code></p>
-<p>使用的时候，<code>son.users_language(favorite_languages)</code> 可以这么写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 导入模块中的所有函数</span><br><span class="line">格式：</span><br><span class="line">`from module_name import *`</span><br><span class="line">\* 号运算符可以让 Python 导入模块中的所有函数。</span><br><span class="line"></span><br><span class="line"># 函数编写要点</span><br><span class="line">1. 尽量给函数指定描述性名称且只用小写字母与下划线，便于他人阅读。</span><br><span class="line">2. 每个函数都要有其功能注释，便于他人迅速理解该函数。</span><br><span class="line">3. 给形参指定默认值及时，等号两边不要有空格</span><br><span class="line">（这是约定，但我 C 写习惯了，没怎么注意，能运行就行，好看就行）</span><br><span class="line">4. 一行代码行不要超过79个字符，若形参很多，可以这样：</span><br></pre></td></tr></table></figure></p>
-<pre><code>def print_models(
-        unprinted_designs, completed_models)
-```
-</code></pre><p>输入左括号后换行，并输入两次 Tab ，便于观看。</p>
-<ol start="5">
-<li>如果模块很多函数，可以在两个函数之间换两次行。</li>
-<li>所有的import语句都应放在文件开头，唯一例外的情形是，在文件开头使用了注释来描述整个程序。</li>
-</ol>
-<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
-<li>实参形参的判断及使用</li>
-<li>函数与返回值</li>
-<li>实参可选</li>
-<li>函数与列表、字典、 if语句和while循环的结合</li>
-<li>切片建立列表副本（禁止函数修改列表）</li>
-<li>函数与模块</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4507,7 +4643,7 @@ phil&apos;s favorite language is python
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
