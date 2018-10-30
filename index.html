@@ -292,6 +292,432 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/10/30/数据可视化（第三部分）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/10/30/数据可视化（第三部分）/" itemprop="url">数据可视化（第三部分）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-30T11:03:44+08:00">
+                2018-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<p>上一部分学习了如何下载数据，这次学习如何使用 API。</p>
+<h1 id="使用-Web-API"><a href="#使用-Web-API" class="headerlink" title="使用 Web API"></a>使用 Web API</h1><p>我们这次使用的数据信息来自于 Github，我们编写一个程序，它自动下载 GitHub 上星级最高的 Python 项目的信息，并对这些信息进行可视化。<br>在此之前，我们先安装 requests 包：</p>
+<p><code>pip install --user requests</code></p>
+<h2 id="API-调用"><a href="#API-调用" class="headerlink" title="API 调用"></a>API 调用</h2><p>想要知道 API 调用啥样的，我们可以先在浏览器写入这个 URL：<a href="https://api.github.com/search/repositories?q=language:python&amp;sort=stars" target="_blank" rel="noopener">https://api.github.com/search/repositories?q=language:python&amp;sort=stars</a></p>
+<ul>
+<li>这个调用返回 GitHub 当前托管了多少个 Python 项目，还有有关最受欢迎的 Python 仓库的信息。下面来仔细研究这个调用。第一部分（<a href="https://api.github.com/" target="_blank" rel="noopener">https://api.github.com/</a> ）将请求发送到 GitHub 网站中响应 API 调用的部分；接下来的一部分（search/repositories）让 API 搜索 GitHub 上的所有仓库。</li>
+<li>repositories 后面的问号指出我们要传递一个实参。 q 表示查询，而等号让我们能够开始指定查询（q=）。通过使用 language:python，我们指出只想获取主要语言为 Python 的仓库的信息。最后一部分（&amp;sort=stars）指定将项目按其获得的星级进行排序。</li>
+</ul>
+<p>返回结果：</p>
+<pre><code>{
+    &quot;total_count&quot;: 3131505,
+    &quot;incomplete_results&quot;: false,
+    &quot;items&quot;: [
+        {
+            &quot;id&quot;: 21289110,
+            &quot;node_id&quot;: &quot;MDEwOlJlcG9zaXRvcnkyMTI4OTExMA==&quot;,
+            &quot;name&quot;: &quot;awesome-python&quot;,
+            &quot;full_name&quot;: &quot;vinta/awesome-python&quot;,
+            &quot;private&quot;: false,
+            &quot;owner&quot;: {
+            &quot;login&quot;: &quot;vinta&quot;,
+            &quot;id&quot;: 652070,
+            --snip--
+    ]
+    --snip--
+}
+</code></pre><p>从第二行输出可知，截止至 18.10.26，有 3131505 个 Python 项目，”incomplete_results” 的值为 false，据此我们知道请求是成功的（它并非不完整的）。倘若 GitHub 无法全面处理该 API，它返回的这个值将为 true。接下来的列表中显示了返回的 “items”，其中包含 GitHub 上最受欢迎的 Python 项目的详细信息。</p>
+<h2 id="处理-API-响应"><a href="#处理-API-响应" class="headerlink" title="处理 API 响应"></a>处理 API 响应</h2><p><strong>python_repos.py</strong></p>
+<hr>
+<pre><code>import requests
+
+# 执行 API 调用并存储响应
+url = &apos;https://api.github.com/search/repositories?q=language:python&amp;sort=stars&apos;
+r = requests.get(url)
+print(&quot;Status code: &quot;, r.status_code)
+
+# 将 API 响应存储在一个变量中
+response_dict = r.json()
+
+# 处理结果
+print(response_dict.keys())
+
+
+
+
+#-----------------------------
+输出结果：
+Status code:  200
+dict_keys([&apos;total_count&apos;, &apos;incomplete_results&apos;, &apos;items&apos;])
+</code></pre><p>这个 API 返回 JSON 格式的信息，因此我们使用方法 json() 将这些信息转换为一个 Python 字典。<br>状态码为 200，说明请求成功了。响应字典只包含三个键： ‘items’、 ‘total_count’ 和 ‘incomplete_results’。</p>
+<h2 id="处理响应字典"><a href="#处理响应字典" class="headerlink" title="处理响应字典"></a>处理响应字典</h2><p>将 API 调用返回的信息存储到字典中后，就可以处理这个字典中的数据了。</p>
+<pre><code># 指出 Github 共含有多少个 Python 库
+print(&quot;Total repositories:&quot;, response_dict[&apos;total_count&apos;])
+# total_count 指 API 返回调查到的 GitHub 有多少个 python 仓库
+
+# 探索有关仓库的信息
+repo_dicts = response_dict[&apos;items&apos;]
+print(&quot;Repositories returned:&quot;, len(repo_dicts))
+
+# 研究第一个仓库
+repo_dict = repo_dicts[0]
+print(&quot;\nKeys:&quot;, len(repo_dict))
+for key in sorted(repo_dict.keys()):
+    print(key)
+</code></pre><p>与 ‘items’ 相关联的值是一个列表，其中包含很多字典，而每个字典都包含有关一个 Python 仓库的信息。打印 repo_dicts 的长度，以获悉我们获得了多少个仓库的信息。</p>
+<p>运行后结果如下：</p>
+<pre><code>Status code:  200
+Total repositories: 3133850
+Repositories returned: 30
+# 注意：这里打印出来的 30 其实是我们所获得到的仓库数量，不可能全部仓库都给你展现出来
+
+Keys: 73
+archive_url
+archived
+assignees_url
+blobs_url
+branches_url
+clone_url
+collaborators_url
+--snip--
+url
+watchers
+watchers_count
+dict_keys([&apos;total_count&apos;, &apos;incomplete_results&apos;, &apos;items&apos;])
+</code></pre><p>可看到第一个仓库包含 73 个键，通过仔细查看这些键，可大致知道可提取有关项目的哪些信息（要准确地获悉API将返回哪些信息，要么阅读文档，要么像此处这样使用代码来查看这些信息）。</p>
+<p>接下来我们提取 repo_dict 中与一些键相关联的值：</p>
+<pre><code># 研究第一个仓库
+repo_dict = repo_dicts[0]
+
+print(&quot;\nSelected information about first repository:&quot;)
+print(&apos;Name:&apos;, repo_dict[&apos;name&apos;])
+print(&apos;Owner:&apos;, repo_dict[&apos;owner&apos;][&apos;login&apos;])
+print(&apos;Stars:&apos;, repo_dict[&apos;stargazers_count&apos;])
+print(&apos;Repository:&apos;, repo_dict[&apos;html_url&apos;])
+print(&apos;Created:&apos;, repo_dict[&apos;created_at&apos;])
+print(&apos;Updated:&apos;, repo_dict[&apos;updated_at&apos;])
+print(&apos;Description:&apos;, repo_dict[&apos;description&apos;])
+</code></pre><p>运行后结果如下：</p>
+<pre><code>Status code:  200
+Total repositories: 3133913
+Repositories returned: 30
+
+Selected information about first repository:
+Name: awesome-python
+Owner: vinta
+Stars: 56752
+Repository: https://github.com/vinta/awesome-python
+Created: 2014-06-27T21:00:06Z
+Updated: 2018-10-27T08:12:02Z
+Description: A curated list of awesome Python frameworks, libraries, software and resources
+</code></pre><p>从上述可知，写这篇文章时，GitHub 上星级最高的 Python 项目为 awesome-python。其所有者是 vinta。拿到了 56752 颗星星。以及该项目的 URL、创建日期以及最后更新日期。最后还描述了该项目用途。</p>
+<h2 id="概述最受欢迎的仓库"><a href="#概述最受欢迎的仓库" class="headerlink" title="概述最受欢迎的仓库"></a>概述最受欢迎的仓库</h2><p>现在，把上面的代码稍加修改一下，加个 for 循环以期输出 30 个仓库的信息：</p>
+<pre><code>for repo_dict in repo_dicts:
+    print(&apos;Name:&apos;, repo_dict[&apos;name&apos;])
+    print(&apos;Owner:&apos;, repo_dict[&apos;owner&apos;][&apos;login&apos;])
+    print(&apos;Stars:&apos;, repo_dict[&apos;stargazers_count&apos;])
+    print(&apos;Repository:&apos;, repo_dict[&apos;html_url&apos;])
+    print(&apos;Created:&apos;, repo_dict[&apos;created_at&apos;])
+    print(&apos;Updated:&apos;, repo_dict[&apos;updated_at&apos;])
+    print(&apos;Description:&apos;, repo_dict[&apos;description&apos;])
+</code></pre><p>运行无误的话应该是全都能显示，现在不细究这个。</p>
+<h2 id="监视-API-的速率限制"><a href="#监视-API-的速率限制" class="headerlink" title="监视 API 的速率限制"></a>监视 API 的速率限制</h2><p>大多数 API 都存在速率限制，即我们在特定时间内可执行的请求数存在限制。<br>要获悉我们是否接近了 GitHub 的限制，在浏览器中输入<a href="https://api.github.com/rate_limit" target="_blank" rel="noopener">https://api.github.com/rate_limit</a> ，我们将看到类似于下面的响应：</p>
+<pre><code>{
+  &quot;resources&quot;: {
+    &quot;core&quot;: {
+      &quot;limit&quot;: 60,
+      &quot;remaining&quot;: 60,
+      &quot;reset&quot;: 1540652828
+    },
+    &quot;search&quot;: {
+      &quot;limit&quot;: 10,
+      &quot;remaining&quot;: 10,
+      &quot;reset&quot;: 1540649288
+    },
+    &quot;graphql&quot;: {
+      &quot;limit&quot;: 0,
+      &quot;remaining&quot;: 0,
+      &quot;reset&quot;: 1540652828
+    }
+  },
+  &quot;rate&quot;: {
+    &quot;limit&quot;: 60,
+    &quot;remaining&quot;: 60,
+    &quot;reset&quot;: 1540652828
+  }
+}
+</code></pre><p>这里面，search 就是搜索速率的限制。可知：限制（limit）为每分钟 10 个请求，在当前这一分钟还余下 10 个请求能执行（remaining）。<br>reset 值指的是配额将重置的 Unix 时间或新纪元时间（1970年1月1日午夜后多少秒）。</p>
+<h1 id="使用-Pygal-可视化仓库"><a href="#使用-Pygal-可视化仓库" class="headerlink" title="使用 Pygal 可视化仓库"></a>使用 Pygal 可视化仓库</h1><p>这时候我们导入 Pygal 包：</p>
+<pre><code>import pygal
+from pygal.style import LightColorizedStyle as LCS, LightenStyle as LS
+
+names, stars = [], []
+for repo_dict in repo_dicts:
+    names.append(repo_dict[&apos;name&apos;])
+    stars.append(repo_dict[&apos;stargazers_count&apos;])
+
+# 直方图可视化
+my_style = LS(&apos;#333366&apos;, base_style=LCS)
+chart = pygal.Bar(style=my_style, x_label_rotation=45, show_legend=False)
+chart.title = &apos;Most-Starred Python Projects on GitHub&apos;
+chart.x_labels = names
+chart.add(&apos;&apos;, stars)
+chart.render_to_file(&apos;python_repos.svg&apos;)
+</code></pre><p>这里的 <code>x_label_rotation=45, show_legend=False</code> 指标签绕 x 轴旋转45°，并隐藏图例（show_legend=False 不写或相反则默认打开）<br><code>chart.add(&#39;&#39;, stars)</code> ：导入数据，因为我们不需要给这个数据系列添加标签，加空字符串。</p>
+<p>运行后结果如下：<br><img src="/ganru.github.io/2018/10/30/数据可视化（第三部分）/1.png"><br>至于上面说的隐藏图例是什么东西？看下图：<br><img src="/ganru.github.io/2018/10/30/数据可视化（第三部分）/2.png"></p>
+<h2 id="图表的改进"><a href="#图表的改进" class="headerlink" title="图表的改进"></a>图表的改进</h2><p>我们看到， Bar() 里面含许多参数，但是还不够，我们要改进图表的样式，所以我们先创建一个 Pygal 类 Config 的实例：</p>
+<pre><code># 表格式配置文件
+my_config = pygal.Config()    # 配置对象
+my_config.x_label_rotation = 45
+my_config.show_legend = False    # 是否展示图例
+my_config.title_font_size = 24    # 图表标题字体大小
+my_config.label_font_size = 14    # #副标签字体大小
+my_config.major_label_font_size = 18    # 主标签字体大小
+my_config.truncate_label = 15    # 将裁剪较长字符到15个
+my_config.show_y_guides = False    # 是否展示图标中水平线
+my_config.width = 1000    # 自定义图表宽度
+
+chart = pygal.Bar(my_config, style=my_style)    # my_config 必须在前，否则将会报错
+</code></pre><p>书里是这么写的，但是其实看起来没什么变化，特别是字体大小，我不太明白，因此我采用下述代码：</p>
+<pre><code>my_style.title_font_size = 24
+my_style.label_font_size = 14
+my_style.major_label_font_size = 18
+</code></pre><p>以顶替上面的相关值，不知道你们是否会这样，我这里这两个代码结果都不同的：<br><strong>书中的代码：</strong><br><img src="/ganru.github.io/2018/10/30/数据可视化（第三部分）/3.png"><br><strong>修改过的代码：</strong><br><img src="/ganru.github.io/2018/10/30/数据可视化（第三部分）/4.png"></p>
+<p>只有后面那个图跟书本相同。<br>如果你们也跟我一样，建议这样写配置代码。</p>
+<p>在这个图表中，副标签是 x 轴上的项目名以及 y 轴上的大部分数字。主标签是 y 轴上为 50000 整数倍的刻度。</p>
+<h2 id="添加自定义工具提示"><a href="#添加自定义工具提示" class="headerlink" title="添加自定义工具提示"></a>添加自定义工具提示</h2><p>在 Pygal 中，将鼠标指向条形将显示它表示的信息，这通常称为工具提示。<br>我们可以看到，我们导入数据的代码是 <code>chart.add(&#39;&#39;, stars)</code>，但是我们可以这么做：</p>
+<pre><code>names, plot_dicts = [], []
+
+for repo_dict in repo_dicts:
+    names.append(repo_dict[&apos;name&apos;])
+
+    &apos;&apos;&apos;
+    Pygal 根据与键 &apos;value&apos; 相关联的数字来确定条形的高度，
+    并使用与 &apos;label&apos; 相关联的字符串给条形创建工具提示。
+    &apos;&apos;&apos;
+    plot_dict = {
+        &apos;value&apos;: repo_dict[&apos;stargazers_count&apos;],
+        &apos;label&apos;: repo_dict[&apos;description&apos;],
+        }
+    plot_dicts.append(plot_dict)
+</code></pre><p>把这个 <code>stars</code> 变为 <code>plot_dicts</code>，表示接收字典，这样不仅导入了 stars 值，还导入了 label （项目描述）。实现更多数据的可视化。<br>最后注意代码转换：<code>chart.add(&#39;&#39;, plot_dicts)</code></p>
+<h2 id="在图表中添加可单击的链接"><a href="#在图表中添加可单击的链接" class="headerlink" title="在图表中添加可单击的链接"></a>在图表中添加可单击的链接</h2><p>我们要让图表可以与我们交互，比如，单击某一个条状，会在浏览器打开一个新的标签页，跳转到相应项目的 GitHub 页面。<br>很简单，加一行代码就行：</p>
+<pre><code>plot_dict = {
+    &apos;value&apos;: repo_dict[&apos;stargazers_count&apos;],
+    &apos;label&apos;: repo_dict[&apos;description&apos;],
+    &apos;xlink&apos;: repo_dict[&apos;html_url&apos;],
+    }
+</code></pre><h2 id="Hacker-News-API"><a href="#Hacker-News-API" class="headerlink" title="Hacker News API"></a>Hacker News API</h2><p>现在，我们探索如何使用其他网站的 API 调用。不过在此之前我们得了解一下 Hacker News API。<br>在 Hacker News 网站，用户分享编程和技术方面的文章，并就这些文章展开积极的讨论。 Hacker News 的 API 让我们能够访问有关该网站所有文章和评论的信息，且不要求我们通过注册获得密钥。<br>在浏览器看看这个网址：<a href="https://hacker-news.firebaseio.com/v0/item/9884165.json" target="_blank" rel="noopener">https://hacker-news.firebaseio.com/v0/item/9884165.json</a><br>注意，可能登不上去，需要 Over the wall（具体方法自行探索）<br>可以看到：</p>
+<pre><code>{
+&quot;by&quot;:&quot;nns&quot;,
+&quot;descendants&quot;:297,
+&quot;id&quot;:9884165,
+&quot;kids&quot;:[9885099,9884723,9885165,9884789,9885604,9884137,9886151,9885220,9885790,9884661,9885844,9885029,9884817,9887342,9884545,9884372,9884499,9884881,9884109,9886496,9884342,9887832,9885023,9884334,9884707,9887008,9885348,9885131,9887539,9885880,9884196,9884640,9886534,9885152],
+&quot;score&quot;:558,
+&quot;time&quot;:1436875181,
+&quot;title&quot;:&quot;New Horizons: Nasa spacecraft speeds past Pluto&quot;,
+&quot;type&quot;:&quot;story&quot;,
+&quot;url&quot;:&quot;http://www.bbc.co.uk/news/science-environment-33524589&quot;
+}
+</code></pre><p>这是一部字典。在这里 descendants 指文章被评论的次数。与键 ‘kids’ 相关联的值包含对文章所做的所有评论的 ID。</p>
+<p>下面来执行一个 API 调用，返回 Hacker News 上当前热门文章的 ID，再查看每篇排名靠前的文章：<br><strong>hn_submissions.py</strong></p>
+<hr>
+<pre><code>import requests
+
+from operator import itemgetter
+
+# 执行 API 调用并存储响应
+url = &apos;https://hacker-news.firebaseio.com/v0/topstories.json&apos;
+r = requests.get(url)
+print(&quot;Status code:&quot;, r.status_code)
+
+# 处理有关每篇文章的信息
+submission_ids = r.json()
+submission_dicts = []
+for submission_id in submission_ids[:30]:
+    # 对于每篇文章，都执行一个 API 调用
+    url = (&apos;https://hacker-news.firebaseio.com/v0/item/&apos; + 
+        str(submission_id) + &apos;.json&apos;)
+    submission_r = requests.get(url)
+    print(&quot;Status code:&quot;, submission_r.status_code)
+    # 检查下调用是否成功，成功则存储响应至变量
+    response_dict = submission_r.json()
+
+    submission_dict = {
+        &apos;title&apos;: response_dict[&apos;title&apos;],
+        &apos;link&apos;: &apos;http://news.ycombinator.com/item?id=&apos; + str(submission_id),
+        &apos;comments&apos;: response_dict.get(&apos;descendants&apos;, 0)
+        }
+    submission_dicts.append(submission_dict)
+
+submission_dicts = sorted(submission_dicts, key=itemgetter(&apos;comments&apos;), reverse=True)
+
+for submission_dict in submission_dicts:
+    print(&quot;\nTitle&quot;, submission_dict[&apos;title&apos;])
+    print(&quot;Discussion link:&quot;, submission_dict[&apos;link&apos;])
+    print(&quot;Comments&quot;, submission_dict[&apos;comments&apos;])
+</code></pre><p>在最热门的 500 篇文章中提取 30 篇文章，然后把这每篇文章进行一次 API 调用并保存于变量中。<br><code>&#39;comments&#39;: response_dict.get(&#39;descendants&#39;, 0)</code>： 这里做了一点考量，如果是刚发的文章，无评论，即没有 ‘descendants’ 键，则导入我们制定的 0 作为评论数。<br>对对象 <code>submission_dicts</code> 完成导入后，我们再进行一次排序，以 ‘comments’ 为考量，对其进行降序排列。这里我们使用了模块 operator 中的函数 itemgetter()，该函数可以提取与键 ‘comments’ 相关联的值。</p>
+<p>运行后结果如下：</p>
+<pre><code>Status code: 200
+Status code: 200
+Status code: 200
+--snip--
+
+Title Facebook exodus: Nearly half of young users have deleted the app
+Discussion link: http://news.ycombinator.com/item?id=18328750
+Comments 459
+
+Title With Proton and Steam Play, many Windows games now work on Linux
+Discussion link: http://news.ycombinator.com/item?id=18327342
+Comments 284
+
+Title Identifying QUIC deliverables
+Discussion link: http://news.ycombinator.com/item?id=18326658
+Comments 168
+--snip--
+</code></pre><p>API 调用的具体操作方式就是如此。写好 url，并保存响应 <code>r = requests.get(url)</code>，然后将它以 json 格式保存在一个变量中，后面就可以自己发挥了。</p>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
+<li>如何使用 API 来编写独立的程序，它们自动采集所需的数据并对其进行可视化</li>
+<li>使用 GitHub API 来探索 GitHub 上星级最高的 Python 项目</li>
+<li>如何使用 requests 包来自动执行 GitHub API 调用，以及如何处理调用的结果</li>
+<li>大致了解 Hacker News API</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/10/24/数据可视化（第二部分）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -4198,401 +4624,6 @@ with open(filename) as f_obj:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/24/类（面向对象编程）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ganru">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小黑屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ganru.github.io/2018/09/24/类（面向对象编程）/" itemprop="url">类（面向对象编程）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T17:18:18+08:00">
-                2018-09-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">Python笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong><p>写在前面</p></strong></p>
-<hr>
-<blockquote>
-<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
-</blockquote>
-<h1 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h1><p>可以理解为 C 中的结构体，两者有点像，但又有不同。<br>根据类来创建对象被称为实例化，这让你能够使用类的实例。</p>
-<h1 id="类的创建与使用"><a href="#类的创建与使用" class="headerlink" title="类的创建与使用"></a>类的创建与使用</h1><h2 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h2><p>创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。</p>
-<p>ex：</p>
-<pre><code>class Student():    #首字母要大写，指的是类（约定的），括号空，是因为要从空白建立类
-    &quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;
-
-    def \_\_init\_\_(self, name, age):    
-    #注意这里有个坑，默认方法构造书写格式是__init__，而不是_init_，即在init两侧都是双下划线，不是单下划线。 
-        &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
-        self.name = name
-        self.age = age
-
-    def study(self):
-        &quot;&quot;&quot;模拟学生学习&quot;&quot;&quot;
-        print(self.name.title() + &quot; is now learning.&quot;)
-
-    def sleep(self):
-        &quot;&quot;&quot;模拟学生睡觉&quot;&quot;&quot;
-        print(self.name.title() + &quot; is now sleeping.&quot;)
-
-    def get_descriptive(self):
-        &quot;&quot;&quot;返回学生信息&quot;&quot;&quot;
-        descriptive = self.name + &apos; &apos; + str(self.age)
-        return descriptive.title()
-</code></pre><ol>
-<li>上述代码中，在类中出现的函数称为方法，如 3 个 def，与函数一样，只是名称发生了变化。</li>
-<li>在类中，每当使用者用 Student 类创建新实例时，Python 就会自动运行方法 __init__()。每次写类都要初始化。</li>
-<li>方法也有不同，方法名首尾都有下划线的一般指 <strong>默认方法</strong>，这是为了避免Python默认方法与普通方法发生名称冲突。</li>
-<li>在 <em>init</em>() 中 self 必不可少，Python 调用这个方法来创建 Student 实例时，将自动传入实参 self。</li>
-<li>每个与类相关联的方法调用都自动传递实参 self，它是一个指向实例本身的引用，让实例能够访问类中的属性和方法。</li>
-<li>可通过实例访问的变量成为 属性（如：name、age）。</li>
-<li>每次新建实例时，只需写后面两个形参值。</li>
-<li>另外两个方法，由于不需要额外的信息，故只有一个形参 self。</li>
-<li>虽然没有写显式 return 语句，但 Python 会自动返回一个表示该学生的实例。</li>
-</ol>
-<h2 id="类的使用"><a href="#类的使用" class="headerlink" title="类的使用"></a>类的使用</h2><pre><code>class Student():
-    --snip--
-
-student_0 = Student(&apos;ganru&apos;, 20)
-
-print(&quot;student_0&apos;s name is &quot; + student_0.name.title() + &quot;.&quot;)
-print(&quot;student_0 is &quot; + str(student_0.age) + &quot; years old.&quot;)
-student_0.study()
-student_0.sleep()
-print(student_0.get_descriptive())
-</code></pre><p>out：</p>
-<pre><code>student_0&apos;s name is Ganru.
-student_0 is 20 years old.
-Ganru is now learning.
-Ganru is now sleeping.
-</code></pre><h1 id="给属性指定默认值"><a href="#给属性指定默认值" class="headerlink" title="给属性指定默认值"></a>给属性指定默认值</h1><p>还是原来的 Student() 类，我们指定学生学校默认为 JYU：</p>
-<pre><code>class Student():
-    &quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;
-
-    def _init_(self, name, age):    
-        &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
-        self.name = name
-        self.age = age
-        self.school = &apos;JYU&apos;        #改动在这里
-
-    def study(self):
-        --snip--
-
-    def sleep(self):
-        --snip--
-
-    def get_descriptive(self):
-        --snip--
-
-    def original_school(self):
-        &quot;&quot;&quot;打印一条学生原来学校的消息&quot;&quot;&quot;
-        print(&quot;The student from &quot; + self.school)
-
-student_0 = Student(&apos;ganru&apos;, 20)
-print(student_0.get_descriptive())
-student_0.original_school()
-</code></pre><h1 id="属性值的修改"><a href="#属性值的修改" class="headerlink" title="属性值的修改"></a>属性值的修改</h1><h2 id="直接修改"><a href="#直接修改" class="headerlink" title="直接修改"></a>直接修改</h2><pre><code>class Student():
-    --snip--
-
-student_0 = Student(&apos;ganru&apos;, 20)
-print(student_0.get_descriptive())
-student_0.school = &apos;THU&apos;    #改动在这里
-student_0.original_school()
-</code></pre><h2 id="通过方法修改属性的值"><a href="#通过方法修改属性的值" class="headerlink" title="通过方法修改属性的值"></a>通过方法修改属性的值</h2><p>若想无需直接访问属性，可将值传递给一个方法，由它在内部进行更新。<br>在原先类 Student() 的基础上，加上：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def update_school(self, value):</span><br><span class="line">	&quot;&quot;&quot;将学校名称改为指定值&quot;&quot;&quot;</span><br><span class="line">	self.school = value</span><br></pre></td></tr></table></figure></p>
-<pre><code>student_0 = Student(&apos;ganru&apos;, 20)
-print(student_0.get_descriptive())
-
-student_0.update_school(&apos;PKU&apos;)    #改动在这里
-student_0.original_school()
-</code></pre><p>还可以加一些功能，比如禁止属性值回调。<br>可参考书（P145）中的 <strong>里程表读数回调</strong>：</p>
-<pre><code>class Car():
-    --snip--
-
-    def update_odometer(self, mileage):
-        &quot;&quot;&quot;
-        将里程表读数设置为指定的值
-        禁止将里程表读数往回调
-        &quot;&quot;&quot;
-        if mileage &gt;= self.odometer_reading:
-            self.odometer_reading = mileage
-        else:
-            print(&quot;You can&apos;t roll back an odometer!&quot;)
-</code></pre><h2 id="通过方法对属性的值进行递增"><a href="#通过方法对属性的值进行递增" class="headerlink" title="通过方法对属性的值进行递增"></a>通过方法对属性的值进行递增</h2><p>比如上面的 Car 类，可以加一个 def：</p>
-<pre><code>def increment_odometer(self, miles):
-    &quot;&quot;&quot;将里程表读数在原来的基础上增加指定的量&quot;&quot;&quot;
-    self.odometer_reading += miles
-</code></pre><h1 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h1><p>有时候懒得写多几个重复项，想引用其他类并自定义自己的类，可用继承。原有类称父类，新类称子类。</p>
-<p>父类：</p>
-<pre><code>class Car():
-    &quot;&quot;&quot;一次模拟汽车的简单尝试&quot;&quot;&quot;
-    def __init__(self, make, model, year):
-        self.make = make
-        self.model = model
-        self.year = year
-        self.odometer_reading = 0
-
-    def get_descriptive_name(self):
-        long_name = str(self.year) + &apos; &apos; + self.make + &apos; &apos; + self.model
-        return long_name.title()
-
-    def read_odometer(self):
-        print(&quot;This car has &quot; + str(self.odometer_reading) + &quot; miles on it.&quot;)
-
-    def update_odometer(self, mileage):
-        if mileage &gt;= self.odometer_reading:
-            self.odometer_reading = mileage
-        else:
-            print(&quot;You can&apos;t roll back an odometer!&quot;)
-
-    def increment_odometer(self, miles):
-        self.odometer_reading += miles
-</code></pre><p>子类：</p>
-<pre><code>class ElectricCar(Car):        #类括号内若导入参数，则继承某一个类
-    &quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;
-
-    def __init__(self, make, model, year):
-        &quot;&quot;&quot;初始化父类的属性&quot;&quot;&quot;
-        super().__init__(make, model, year)        
-        #super 是一个特殊函数，让 Python 调用 ElectricCar 的父类的方法 __init__()，让 ElectricCar 实例包含父类的所有属性。
-
-
-my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
-print(my_tesla.get_descriptive_name())
-</code></pre><p>out：</p>
-<pre><code>2016 Tesla Model S
-</code></pre><ol>
-<li>父类和子类必须要在同一文件中，且父类在子类前面。</li>
-<li>父类也称超类，名称 super 因此而得名。</li>
-</ol>
-<h1 id="给子类定义属性和方法"><a href="#给子类定义属性和方法" class="headerlink" title="给子类定义属性和方法"></a>给子类定义属性和方法</h1><pre><code>class Car():
-    --snip--
-
-class ElectricCar(Car):
-    &quot;&quot;&quot;Represent aspects of a car, specific to electric vehicles.&quot;&quot;&quot;
-
-    def __init__(self, make, model, year):
-        &quot;&quot;&quot;
-        电动汽车的独特之处
-        初始化父类的属性，再初始化电动汽车特有的属性
-        &quot;&quot;&quot;
-        super().__init__(make, model, year)
-        self.battery_size = 70                #子类属性添加
-
-    def describe_battery(self):
-        &quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;
-        print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)
-
-my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
-print(my_tesla.get_descriptive_name())
-my_tesla.describe_battery()
-</code></pre><p>out：</p>
-<pre><code>2016 Tesla Model S
-This car has a 70-kWh battery.
-</code></pre><ol>
-<li>如果一个属性或方法是任何汽车都有的，而不是电动汽车特有的，就应将其加入到 Car 类而不是 ElectricCar 类中。</li>
-<li>这样，使用 Car 类的人将获得相应的功能，而 ElectricCar 类只包含处理电动汽车特有属性和行为的代码。</li>
-</ol>
-<h1 id="重写父类"><a href="#重写父类" class="headerlink" title="重写父类"></a>重写父类</h1><p>假设 Car 类有一个名为 fill_gas_tank() 的方法，它对全电动汽车来说毫无意义，这时我们可以重写它：</p>
-<pre><code>def ElectricCar(Car):
-    --snip--
-
-    def fill_gas_tank():
-        &quot;&quot;&quot;电动汽车没有油箱&quot;&quot;&quot;
-        print(&quot;This car doesn&apos;t need a gas tank!&quot;)
-</code></pre><p>这时候，如果我们再次调用方法 fill_gas_tank()，则 Python 不会使用父类的方法，而是我们在子类新写的方法。</p>
-<h1 id="将实例用作属性（属性中的属性或方法）"><a href="#将实例用作属性（属性中的属性或方法）" class="headerlink" title="将实例用作属性（属性中的属性或方法）"></a>将实例用作属性（属性中的属性或方法）</h1><p>有时候类太大，可能会比较复杂，可以将大类拆分成小类。</p>
-<pre><code>class Car():
-    --snip--
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Battery():</span><br><span class="line">	&quot;&quot;&quot;一次模拟电动汽车电瓶的简单尝试&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">	def __init__(self, battery_size=70):</span><br><span class="line">		&quot;&quot;&quot;初始化电瓶的属性&quot;&quot;&quot;</span><br><span class="line">		self.battery_size = battery_size</span><br><span class="line"></span><br><span class="line">	def describe_battery(self):</span><br><span class="line">		&quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;</span><br><span class="line">		print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)</span><br></pre></td></tr></table></figure>
-
-class ElectricCar(Car):
-    &quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;
-
-    def __init__(self, make, model, year):
-        &quot;&quot;&quot;
-        初始化父类的属性，再初始化电动汽车特有的属性
-        &quot;&quot;&quot;
-        super().__init__(make, model, year)
-        self.battery = Battery()        #将实例用作属性
-
-my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
-print(my_tesla.get_descriptive_name())
-my_tesla.battery.describe_battery()
-</code></pre><p>out：</p>
-<pre><code>2016 Tesla Model S
-This car has a 70-kWh battery.
-</code></pre><h1 id="类的导入"><a href="#类的导入" class="headerlink" title="类的导入"></a>类的导入</h1><p>跟函数模块差不多，将类写入一个 .py 文件。<br>导入格式：</p>
-<p>import module_name（.py 文件名）<br>from module_name（.py 文件名） import class_name（在 .py 文件中的类名）<br>from module_name import class_0, class_1, …</p>
-<p>如果模块与模块之间有联系，则这两个模块都要导入同一个文件中，不然创建实例时将引发错误。</p>
-<h1 id="Python-标准库"><a href="#Python-标准库" class="headerlink" title="Python 标准库"></a>Python 标准库</h1><p>Python标准库是一组模块，安装的Python都包含它。大致理解类之后，就可以使用他人的模块了。</p>
-<p>尝试：<br>如果在以前，我们可能这么写：favorite_languages = {}<br>字典能够将信息关联起来，但不记录添加键—值对的顺序。要创建字典并记录其添加顺序，可使用模块 collections 中的 OrderedDict 类。</p>
-<pre><code>from collections import OrderedDict
-
-favorite_languages = OrderedDict()
-
-favorite_languages[&apos;jen&apos;] = &apos;python&apos;
-favorite_languages[&apos;sarah&apos;] = &apos;c&apos;
-favorite_languages[&apos;edward&apos;] = &apos;ruby&apos;
-favorite_languages[&apos;phil&apos;] = &apos;python&apos;
-
-for name, language in favorite_languages.items():
-    print(name.title() + &quot;&apos;s favorite language is &quot; +
-        language.title() + &quot;.&quot;)
-</code></pre><p>out：</p>
-<pre><code>Jen&apos;s favorite language is Python.
-Sarah&apos;s favorite language is C.
-Edward&apos;s favorite language is Ruby.
-Phil&apos;s favorite language is Python.
-</code></pre><h1 id="类编码风格"><a href="#类编码风格" class="headerlink" title="类编码风格"></a>类编码风格</h1><ol>
-<li><p>驼峰命名法：类名中的每个单词的首字母都大写，而不使用下划线。<br>ex：<br>class Car():<br>class Student():<br>…</p>
-</li>
-<li><p>实例名和模块名都采用小写格式，并在单词之间加上下划线。<br>ex：<br>my_tesla<br>student_0<br>son.py<br>…</p>
-</li>
-<li><p>对于每个类，都写类注释。</p>
-</li>
-<li>在类中，可使用一个空行来分隔方法；而在模块中，可使用两个空行来分隔类。</li>
-<li>需要同时导入标准库中的模块和你编写的模块时，先编写导入标准库模块的 import 语句，再添加一个空行，然后编写导入你自己编写的模块的 import 语句。</li>
-</ol>
-<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
-<li>类的创建于使用（类的建立一定要初始化）</li>
-<li>实例属性的修改</li>
-<li>类的继承</li>
-<li>重写父类</li>
-<li>将实例用作属性（属性中的属性或方法）</li>
-<li>类的导入</li>
-<li>类编码的规约</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4643,7 +4674,7 @@ Phil&apos;s favorite language is Python.
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
