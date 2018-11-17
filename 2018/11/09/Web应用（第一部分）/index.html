@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/11/09/Web应用（第一部分）/6.png">
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/11/09/Web应用（第一部分）/7.png">
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/11/09/Web应用（第一部分）/8.png">
-<meta property="og:updated_time" content="2018-11-17T03:14:41.627Z">
+<meta property="og:updated_time" content="2018-11-17T03:32:04.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web应用（第一部分）">
 <meta name="twitter:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup   项目简介：这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning">
@@ -512,7 +512,7 @@ python manage.py startapp learning_logs
         return self.text
 </code></pre><p>创建一个名 Topic 的类，并让它继承于 Model —— 这是 Django 中一个定义了模型基本功能的类。<br>我们让 Topic 类只有两个属性： text 和 date_added。<br><code>CharField</code>：由字符或文本组成的数据。<br>需要存储少量的文本，如名称、标题或城市时，可使用 CharField。定义 CharField 属性时，必须告诉 Django 该在数据库中预留多少空间，如我们将 max_length 设置成了 200（即 200 个字符）</p>
 <p><code>DateTimeField</code>：记录日期和时间的数据。<br>我们传递了实参 auto_now_add=True，每当用户创建新主题时，这都让 Django 将这个属性自动设置成当前日期和时间。</p>
-<p>就当前而言，我们不用全部了解，故上面两个只做基础介绍，若想了解更多可在模型中使用的各种字段，参阅 (Django Model Field Reference)[<a href="https://docs.djangoproject.com/en/2.1/ref/models/fields/]" target="_blank" rel="noopener">https://docs.djangoproject.com/en/2.1/ref/models/fields/]</a> （目前是 2.1 版本）</p>
+<p>就当前而言，我们不用全部了解，故上面两个只做基础介绍，若想了解更多可在模型中使用的各种字段，参阅 <a href="https://docs.djangoproject.com/en/2.1/ref/models/fields/" target="_blank" rel="noopener">Django Model Field Reference</a> （目前是 2.1 版本）</p>
 <p>写完两个属性后，让 Django 调用方法 <strong>str</strong>() 来显示模型的简单表示。</p>
 <h2 id="激活模型"><a href="#激活模型" class="headerlink" title="激活模型"></a>激活模型</h2><p>定义完模型，开始使用。此时必须让 Django 将应用程序包含到项目中。<br>打开路径 ..\learning_log 中的 settings.py 并找寻到这个片段：</p>
 <pre><code>--snip--
@@ -688,7 +688,7 @@ urlpatterns = [
     &quot;&quot;&quot;学习笔记的主页&quot;&quot;&quot;
     return render(request, &apos;learning_logs/index.html&apos;)
 </code></pre><p>URL 请求与我们刚才定义的模式匹配时， Django 将在文件 views.py 中查找函数 index()，再将请求对象传递给这个视图函数。在这里，我们不需要处理任何数据，因此这个函数只包含调用 render() 的代码。这里向函数 render() 提供了两个实参：原始请求对象以及一个可用于创建网页的模板。<br>这里注意，<code>&#39;learning_logs/index.html&#39;</code>不是在 learning_logs 文件夹里面，而是在这个文件里面另建的文件，具体看后面的操作。</p>
-<p>补充：<br>render() 其实是 Django 的快捷函数，这里贴出(官方文档)[<a href="https://docs.djangoproject.com/zh-hans/2.1/topics/http/shortcuts/#django.shortcuts.render]" target="_blank" rel="noopener">https://docs.djangoproject.com/zh-hans/2.1/topics/http/shortcuts/#django.shortcuts.render]</a> 。<br>render 函数的形式是<code>render(request, template_name, context=None, content_type=None, status=None, using=None)</code>。首先前面两个是必须写的参数，request 用于生成此响应的请求对象。template_name 要使用的模板的全名或模板名称的序列。如果给定一个序列，则将使用存在的第一个模板。</p>
+<p>补充：<br>render() 其实是 Django 的快捷函数，这里贴出<a href="https://docs.djangoproject.com/zh-hans/2.1/topics/http/shortcuts/#django.shortcuts.render" target="_blank" rel="noopener">官方文档</a> 。<br>render 函数的形式是<code>render(request, template_name, context=None, content_type=None, status=None, using=None)</code>。首先前面两个是必须写的参数，request 用于生成此响应的请求对象。template_name 要使用的模板的全名或模板名称的序列。如果给定一个序列，则将使用存在的第一个模板。</p>
 <h2 id="编写模板"><a href="#编写模板" class="headerlink" title="编写模板"></a>编写模板</h2><p>在文件夹 learning_logs 中新建一个文件夹，并将其命名为 templates 。在文件夹 templates 中，再新建一个文件夹，并将其命名为 learning_logs 。这好像有点多余（我们在文件夹 learning_logs 中创建了文件夹 templates，又在这个文件夹中创建了文件夹 learning_logs），但建立了 Django 能够明确解读的结构，即便项目很大，包含很多应用程序亦如此。</p>
 <p>书里面的大白话是这么讲的，可能有些人还不能理解这种行为，换句话讲，其实就是一种规范。 Django 遍历模板的时候是要在文件夹 templates 中遍历的。而在这个文件夹中又建立一个子文件夹，还跟应用程序 learning_logs 同名，这是因为后续我们使用模板路径的时候，是像这样这么用的：<code>render(request, &#39;learning_logs/index.html&#39;)</code>，而这个路径 Django 又是从文件夹 templates 中遍历的。所以为了方便，我们就这么做了。（我是这么理解的）</p>
 <p>在最里面的文件夹 learning_logs 中，新建一个文件，并将其命名为 index.html，然后在里面写 HTML ：</p>
@@ -821,14 +821,21 @@ path(&apos;topics/(?P&lt;topic_id&gt;\d+)/&apos;, views.topic, name=&apos;topic&
 			{% endfor %}
 		</ul>
 	{% endblock content %}
-</code></pre><p><code>&lt;p&gt;Topic: &amp;#123&amp;#123 topic &amp;#125&amp;#125&lt;/p&gt;</code>中的 topic 和<code>&amp;#123 % for entry in entries % &amp;#125</code>中的 entries 来自 context 上下文，是刚刚由 render 函数传递过来的。</p>
+</code></pre><p><code>&lt;p&gt;Topic: \{\{ topic \}\} &lt;/p&gt;</code>中的 topic 和<code>\{ % for entry in entries %\}</code>中的 entries 来自 context 上下文，是刚刚由 render 函数传递过来的。</p>
 <p>竖线 | 表示模板过滤器。</p>
-<p>最后，修改 topics.html，把 { { topic } } 修改为<code>&lt;a href=&quot;&amp;#123 % url &#39;learning_logs:topic&#39; topic.id % &amp;#125 &quot;&gt;&amp;#123&amp;#123 topic &amp;#125&amp;#125 &lt;/a&gt;</code>让每个主题都成为链接，链接到相应的主题详情页面：</p>
+<p>最后，修改 topics.html，把 { { topic } } 修改为<code>&lt;a href=&quot;\{ % url &#39;learning_logs:topic&#39; topic.id %\} &quot;&gt;\{\{ topic \}\} &lt;/a&gt;</code>让每个主题都成为链接，链接到相应的主题详情页面：</p>
 <pre><code>&lt;li&gt;
     &lt;a href=&quot;{% url 'learning_logs:topic' topic.id %}&quot;&gt;{{ topic }}&lt;/a&gt;
 &lt;/li&gt;
 </code></pre><p>我们最后可以看到这个界面：<br><img src="/ganru.github.io/2018/11/09/Web应用（第一部分）/8.png"></p>
-<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
+<li>虚拟环境及 Django 框架安装</li>
+<li>应用程序的创建流程</li>
+<li>Django shell</li>
+<li>网页的创建及其流程</li>
+<li>模板继承</li>
+</ol>
+
       
     </div>
     
