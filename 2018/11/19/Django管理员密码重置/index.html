@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  if 语句的使用cars = [&amp;apos;audi&amp;apos;, &amp;apos;bmw&amp;apos;, &amp;apos;subaru&amp;apos;, &amp;apos;toyota&amp;apos;] for car in cars:     if car == &amp;ap">
+<meta name="description" content="代码敲着敲着突然忘了 Django 管理员密码，有点尬，以下是重置的方法，不过要在本机后台弄：  In [1]: from django.contrib.auth.models import User  In [2]: u = User.objects.get(username=&amp;apos;你忘记的管理员账户&amp;apos;)  In [3]: u.set_password(&amp;apos;密码重设&amp;a">
 <meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="条件语句">
-<meta property="og:url" content="https://ganru.github.io/2018/09/17/条件语句/index.html">
+<meta property="og:title" content="Django管理员密码重置">
+<meta property="og:url" content="https://ganru.github.io/2018/11/19/Django管理员密码重置/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  if 语句的使用cars = [&amp;apos;audi&amp;apos;, &amp;apos;bmw&amp;apos;, &amp;apos;subaru&amp;apos;, &amp;apos;toyota&amp;apos;] for car in cars:     if car == &amp;ap">
+<meta property="og:description" content="代码敲着敲着突然忘了 Django 管理员密码，有点尬，以下是重置的方法，不过要在本机后台弄：  In [1]: from django.contrib.auth.models import User  In [2]: u = User.objects.get(username=&amp;apos;你忘记的管理员账户&amp;apos;)  In [3]: u.set_password(&amp;apos;密码重设&amp;a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-24T09:27:18.148Z">
+<meta property="og:updated_time" content="2018-11-19T07:09:46.245Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="条件语句">
-<meta name="twitter:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  if 语句的使用cars = [&amp;apos;audi&amp;apos;, &amp;apos;bmw&amp;apos;, &amp;apos;subaru&amp;apos;, &amp;apos;toyota&amp;apos;] for car in cars:     if car == &amp;ap">
+<meta name="twitter:title" content="Django管理员密码重置">
+<meta name="twitter:description" content="代码敲着敲着突然忘了 Django 管理员密码，有点尬，以下是重置的方法，不过要在本机后台弄：  In [1]: from django.contrib.auth.models import User  In [2]: u = User.objects.get(username=&amp;apos;你忘记的管理员账户&amp;apos;)  In [3]: u.set_password(&amp;apos;密码重设&amp;a">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://ganru.github.io/2018/09/17/条件语句/"/>
+  <link rel="canonical" href="https://ganru.github.io/2018/11/19/Django管理员密码重置/"/>
 
 
 
 
 
-  <title>条件语句 | 小黑屋</title>
+  <title>Django管理员密码重置 | 小黑屋</title>
   
 
 
@@ -293,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/条件语句/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/11/19/Django管理员密码重置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
@@ -310,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">条件语句</h1>
+          <h1 class="post-title" itemprop="name headline">Django管理员密码重置</h1>
         
 
         <div class="post-meta">
@@ -322,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T16:06:01+08:00">
-                2018-09-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T15:05:40+08:00">
+                2018-11-19
               </time>
             
 
@@ -382,40 +382,20 @@
       
 
       
-        <p><strong><p>写在前面</p></strong></p>
-<hr>
-<blockquote>
-<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+        <blockquote>
+<p>代码敲着敲着突然忘了 Django 管理员密码，有点尬，以下是重置的方法，不过要在本机后台弄：</p>
 </blockquote>
-<h1 id="if-语句的使用"><a href="#if-语句的使用" class="headerlink" title="if 语句的使用"></a>if 语句的使用</h1><pre><code>cars = [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
-for car in cars:
-    if car == &apos;bmw&apos;:
-        print(car.upper())
-    elif car == &apos;audi&apos;:
-        print(car.title() + &quot; is very good!&quot;)                
-    else:
-        print(car.title())
-out：
-    Audi is very good!
-    BMW
-    Subaru
-    Toyota
-</code></pre><h1 id="常用的判断符号"><a href="#常用的判断符号" class="headerlink" title="常用的判断符号"></a>常用的判断符号</h1><pre><code>== 判断是否相等
-!= 判断是否不等
-and 判断两条件是否同时为 True 。（相当于 &amp;&amp; ）
-or 判断是否有一个条件为 True 。（相当于 ||）
-in 判断特定值是否已在列表中
-    ex：
-        Array = [&apos;gan&apos;,&apos;GG&apos;]
-        &apos;gan&apos; in Array
-    out：
-        True
-not in 判断特定值是否不在列表中
-</code></pre><h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
-<li>if-elif-else 结构的使用</li>
-<li>if 与 for 的混合使用</li>
-<li>对特定元素的筛选</li>
-</ol>
+<pre><code>In [1]: from django.contrib.auth.models import User
+
+In [2]: u = User.objects.get(username=&apos;你忘记的管理员账户&apos;)
+
+In [3]: u.set_password(&apos;密码重设&apos;)
+
+In [4]: u.save()
+</code></pre><p>而且这还有个好处，就是你不用怕碰到这些限制：</p>
+<p>**<br>This password is too short. It must contain at least 8 characters.</p>
+<p>This password is too common.</p>
+<p>This password is entirely numeric.<br>**</p>
 
       
     </div>
@@ -446,8 +426,8 @@ not in 判断特定值是否不在列表中
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/ganru.github.io/2018/09/17/列表的使用/" rel="next" title="列表的使用">
-                <i class="fa fa-chevron-left"></i> 列表的使用
+              <a href="/ganru.github.io/2018/11/09/Web应用（第一部分）/" rel="next" title="Web应用（第一部分）">
+                <i class="fa fa-chevron-left"></i> Web应用（第一部分）
               </a>
             
           </div>
@@ -456,8 +436,8 @@ not in 判断特定值是否不在列表中
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/ganru.github.io/2018/09/17/字典/" rel="prev" title="字典">
-                字典 <i class="fa fa-chevron-right"></i>
+              <a href="/ganru.github.io/2018/11/22/Web应用（第二部分）/" rel="prev" title="Web应用（第二部分）">
+                Web应用（第二部分） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -510,17 +490,8 @@ not in 判断特定值是否不在列表中
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -580,22 +551,6 @@ not in 判断特定值是否不在列表中
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#if-语句的使用"><span class="nav-number">1.</span> <span class="nav-text">if 语句的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用的判断符号"><span class="nav-number">2.</span> <span class="nav-text">常用的判断符号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习要点"><span class="nav-number">3.</span> <span class="nav-text">学习要点</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

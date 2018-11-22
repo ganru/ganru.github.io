@@ -88,7 +88,7 @@
 <meta property="og:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  变量和简单数据类型字符串拼接first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_nam">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/09/06/Python-笔记/1.png">
-<meta property="og:updated_time" content="2018-09-28T10:11:18.869Z">
+<meta property="og:updated_time" content="2018-11-19T04:46:35.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 笔记">
 <meta name="twitter:description" content="写在前面   该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup  变量和简单数据类型字符串拼接first_name = &amp;quot;ada&amp;quot; last_name = &amp;quot;lovelace&amp;quot; full_name = first_name + &amp;quot; &amp;quot; + last_nam">
@@ -895,13 +895,31 @@ out：
 out：
     ganru, Welcome to you!
 </code></pre><h2 id="实参与形参"><a href="#实参与形参" class="headerlink" title="实参与形参"></a>实参与形参</h2><p>如 hello() 的函数定义，括号里面的变量<strong> username </strong>是形参，只具有形式意义，而值<strong> ‘ganru’ </strong>是实参，具有实际意义。<br>如何判断：函数定义中的变量为形参，函数调用中的变量为实参。</p>
-<h2 id="实参的传递"><a href="#实参的传递" class="headerlink" title="实参的传递"></a>实参的传递</h2><h3 id="位置实参"><a href="#位置实参" class="headerlink" title="位置实参"></a>位置实参</h3><p>定义：基于实参的顺序将函数调用中的每个实参都关联到函数定义中的一个形参。<br>    ex：<br>        def student(name, sex):<br>            .<br>            .<br>            .</p>
-<pre><code>student(&apos;garu&apos;,&apos;boy&apos;)    #这里的 &apos;garu&apos; 为第一顺序，&apos;boy&apos; 为第二顺序。
-</code></pre><h3 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h3><p>定义：传递给函数的名称—值对。无需考虑函数调用中的实参顺序，还清楚地指出了函数调用中各个值的用途。<br>    ex：<br>        def student(name, sex):<br>            .<br>            .<br>            .</p>
-<pre><code>student(sex = &apos;boy&apos;, name = &apos;garu&apos;)    #顺序反了也没事
+<h2 id="实参的传递"><a href="#实参的传递" class="headerlink" title="实参的传递"></a>实参的传递</h2><h3 id="位置实参"><a href="#位置实参" class="headerlink" title="位置实参"></a>位置实参</h3><p>定义：基于实参的顺序将函数调用中的每个实参都关联到函数定义中的一个形参。</p>
+<pre><code>ex：
+    def student(name, sex):
+        .
+        .
+        .
+
+    student(&apos;garu&apos;,&apos;boy&apos;)    #这里的 &apos;garu&apos; 为第一顺序，&apos;boy&apos; 为第二顺序。
+</code></pre><h3 id="关键字实参"><a href="#关键字实参" class="headerlink" title="关键字实参"></a>关键字实参</h3><p>定义：传递给函数的名称—值对。无需考虑函数调用中的实参顺序，还清楚地指出了函数调用中各个值的用途。</p>
+<pre><code>ex：
+    def student(name, sex):
+        .
+        .
+        .
+
+    student(sex = &apos;boy&apos;, name = &apos;garu&apos;)    #顺序反了也没事
 </code></pre><p>注意：使用关键字实参时，务必准确地指定函数定义中的形参名。</p>
-<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>调用函数中给形参提供了实参时，Python 将使用指定的实参值；否则，将使用形参的默认值。<br>作用：给形参指定默认值后，可在函数调用中省略相应的实参。<br>    ex：<br>        def student(name, sex = ‘boy’):<br>            .<br>            .<br>            .</p>
-<pre><code>student(name = &apos;garu&apos;)    #以后每次调用，如果没有显式提供实参给 sex，sex 都是 &apos;boy&apos;。
+<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>调用函数中给形参提供了实参时，Python 将使用指定的实参值；否则，将使用形参的默认值。<br>作用：给形参指定默认值后，可在函数调用中省略相应的实参。</p>
+<pre><code>ex：
+    def student(name, sex = &apos;boy&apos;):
+        .
+        .
+        .
+
+    student(name = &apos;garu&apos;)    #以后每次调用，如果没有显式提供实参给 sex，sex 都是 &apos;boy&apos;。
 </code></pre><p>注意：如果以后要用默认值，也就是考虑到可能不写值，则形参放最后面（如：sex），以免出现位置实参错误。</p>
 <h3 id="等效的函数调用"><a href="#等效的函数调用" class="headerlink" title="等效的函数调用"></a>等效的函数调用</h3><p>就是上面的实参调用方式可以混用。</p>
 <h2 id="return"><a href="#return" class="headerlink" title="return"></a>return</h2><pre><code>ex：
@@ -917,8 +935,21 @@ out：
     result = add(a,b)
     print(&quot;result is &quot; + str(result))    
 </code></pre><p>注意：输出时要给 result 打上str()。<br>否则会报警：can only concatenate str (not “int”) to str</p>
-<p>6.5 实参可选<br>    ex：<br>        def location(country, province, city):<br>            “””个人居住地”””<br>            my_location = country + ‘ ‘ + province + ‘ ‘ + city<br>            return my_location.title()</p>
-<p>这种函数或许适用大多数情况，但是直辖市啥整？<br>可以试试：<br>    def location(country, city, province = ‘’):    # province 放后面，以免出现位置实参错误<br>        “””个人居住地”””<br>        if province:    #如果是空字符串，Python 将解读为 False。<br>            my_location = country + ‘ ‘ + province + ‘ ‘ + city<br>        else:<br>            my_location = country + ‘ ‘ + city<br>        return my_location.title()<br>新函数就是所说的实参可选。</p>
+<p>6.5 实参可选</p>
+<pre><code>ex：
+    def location(country, province, city):
+        &quot;&quot;&quot;个人居住地&quot;&quot;&quot;
+        my_location = country + &apos; &apos; + province + &apos; &apos; + city
+        return my_location.title()
+</code></pre><p>这种函数或许适用大多数情况，但是直辖市啥整？<br>可以试试：</p>
+<pre><code>def location(country, city, province = &apos;&apos;):    # province 放后面，以免出现位置实参错误
+    &quot;&quot;&quot;个人居住地&quot;&quot;&quot;
+    if province:    #如果是空字符串，Python 将解读为 False。
+        my_location = country + &apos; &apos; + province + &apos; &apos; + city
+    else:
+        my_location = country + &apos; &apos; + city
+    return my_location.title()
+</code></pre><p>新函数就是所说的实参可选。</p>
 <h2 id="字典的返回"><a href="#字典的返回" class="headerlink" title="字典的返回"></a>字典的返回</h2><pre><code>ex：
     def location(country, province, city):
         &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
@@ -934,8 +965,23 @@ out：
 
 out：
     {&apos;country_name&apos;: &apos;China&apos;, &apos;province_name&apos;: &apos;Guangdong&apos;, &apos;city_name&apos;: &apos;Shenzhen&apos;}
-</code></pre><p>当然，直辖市我们也要考虑：<br>    def location(country, city, province = ‘’):    #默认值放后面<br>        “””返回一个字典，其中包含一个人的位置所在地”””<br>        if province:<br>            my_location = {<br>                ‘country_name’: country,<br>                ‘province_name’: province,<br>                ‘city_name’: city,<br>                }<br>        else:<br>            my_location = {<br>                ‘country_name’: country,<br>                ‘city_name’: city,<br>                }<br>        return my_location</p>
-<pre><code>mylocation = location(country = &apos;China&apos;, city = &apos;Beijing&apos;)
+</code></pre><p>当然，直辖市我们也要考虑：</p>
+<pre><code>def location(country, city, province = &apos;&apos;):    #默认值放后面
+    &quot;&quot;&quot;返回一个字典，其中包含一个人的位置所在地&quot;&quot;&quot;
+    if province:
+        my_location = {
+            &apos;country_name&apos;: country,
+            &apos;province_name&apos;: province,
+            &apos;city_name&apos;: city,
+            }
+    else:
+        my_location = {
+            &apos;country_name&apos;: country,
+            &apos;city_name&apos;: city,
+            }
+    return my_location
+
+mylocation = location(country = &apos;China&apos;, city = &apos;Beijing&apos;)
 print(mylocation)
 </code></pre><h2 id="函数与-while"><a href="#函数与-while" class="headerlink" title="函数与 while"></a>函数与 while</h2><pre><code>ex：
     def location(country, city, province = &apos;&apos;):
@@ -1032,9 +1078,16 @@ out：
     robot pendant
     iphone case
 </code></pre><h2 id="禁止函数修改列表、字典"><a href="#禁止函数修改列表、字典" class="headerlink" title="禁止函数修改列表、字典"></a>禁止函数修改列表、字典</h2><p>根据上节的打印可知，unprinted_designs 打印完后列表变为空的了，若想保持其不变，我们可以建立一个列表副本：<br>    <code>print_models(unprinted_designs[:], completed_models)    #切片建立副本</code><br>但建议在有充分的理由需要传递副本的情况下这么做，毕竟多建一个列表，时间复杂度增加，内存使用率增大，不利于做大项目。</p>
-<h2 id="任意数量的实参传递"><a href="#任意数量的实参传递" class="headerlink" title="任意数量的实参传递"></a>任意数量的实参传递</h2><h3 id="传递任意数量的实参-（建立空元组）"><a href="#传递任意数量的实参-（建立空元组）" class="headerlink" title="传递任意数量的实参 （建立空元组）"></a>传递任意数量的实参 （建立空元组）</h3><p>常见作用：<br>有时候真不知道函数要接收多少个实参，这时候可以对形参名加个 * ，让 Python 创建一个空元组，并将收到的所有值都封装到这个元组中。<br>    ex：<br>        def make_pizza(*toppings):<br>            “””概述要制作的比萨”””<br>            print(“\nMaking a pizza with the following toppings:”)<br>            for topping in toppings:<br>                print(“- “ + topping)</p>
-<pre><code>make_pizza(&apos;pepperoni&apos;)
-make_pizza(&apos;mushrooms&apos;, &apos;green peppers&apos;, &apos;extra cheese&apos;)
+<h2 id="任意数量的实参传递"><a href="#任意数量的实参传递" class="headerlink" title="任意数量的实参传递"></a>任意数量的实参传递</h2><h3 id="传递任意数量的实参-（建立空元组）"><a href="#传递任意数量的实参-（建立空元组）" class="headerlink" title="传递任意数量的实参 （建立空元组）"></a>传递任意数量的实参 （建立空元组）</h3><p>常见作用：<br>有时候真不知道函数要接收多少个实参，这时候可以对形参名加个 * ，让 Python 创建一个空元组，并将收到的所有值都封装到这个元组中。</p>
+<pre><code>ex：
+    def make_pizza(*toppings):
+        &quot;&quot;&quot;概述要制作的比萨&quot;&quot;&quot;
+        print(&quot;\nMaking a pizza with the following toppings:&quot;)
+        for topping in toppings:
+            print(&quot;- &quot; + topping)
+
+    make_pizza(&apos;pepperoni&apos;)
+    make_pizza(&apos;mushrooms&apos;, &apos;green peppers&apos;, &apos;extra cheese&apos;)
 </code></pre><p>函数调用解析：<br>这时候 * 号调用作用于 tuple/list/str 前，意思是解包(unpack)tuple/list/str，解包后的 tuple/list/str 将不再是一个参数，而是每个元素都是一个函数参数，依次传递给函数。</p>
 <pre><code>out：
     Making a pizza with the following toppings:
@@ -1061,8 +1114,18 @@ out：
     - mushrooms
     - green peppers
     - extra cheese
-</code></pre><h3 id="使用任意数量的关键字实参-（建立空字典）"><a href="#使用任意数量的关键字实参-（建立空字典）" class="headerlink" title="使用任意数量的关键字实参    （建立空字典）"></a>使用任意数量的关键字实参    （建立空字典）</h3><p>预先不知道传递给函数的会是什么样的信息，有多少个，这时可以用关键字实参调用。即接收任意数量的 键-值 对。<br>格式：对形参加 ** ，让Python创建一个空字典，并将收到的所有 键-值 对都封装到这个字典中。<br>    ex：<br>        def build_profile(first, last, <strong>user_info):    #</strong>号创建空字典<br>            “””创建一个字典，其中包含我们知道的有关用户的一切”””<br>            profile = {}<br>            profile[‘first_name’] = first<br>            profile[‘last_name’] = last<br>            for key, value in user_info.items():<br>                profile[key] = value<br>            return profile</p>
-<pre><code>    user_profile = build_profile(&apos;albert&apos;, &apos;einstein&apos;,
+</code></pre><h3 id="使用任意数量的关键字实参-（建立空字典）"><a href="#使用任意数量的关键字实参-（建立空字典）" class="headerlink" title="使用任意数量的关键字实参    （建立空字典）"></a>使用任意数量的关键字实参    （建立空字典）</h3><p>预先不知道传递给函数的会是什么样的信息，有多少个，这时可以用关键字实参调用。即接收任意数量的 键-值 对。<br>格式：对形参加 ** ，让Python创建一个空字典，并将收到的所有 键-值 对都封装到这个字典中。</p>
+<pre><code>ex：
+    def build_profile(first, last, **user_info):    #**号创建空字典
+        &quot;&quot;&quot;创建一个字典，其中包含我们知道的有关用户的一切&quot;&quot;&quot;
+        profile = {}
+        profile[&apos;first_name&apos;] = first
+        profile[&apos;last_name&apos;] = last
+        for key, value in user_info.items():
+            profile[key] = value
+        return profile
+
+    user_profile = build_profile(&apos;albert&apos;, &apos;einstein&apos;,
                                 location=&apos;princeton&apos;,
                                 field=&apos;physics&apos;)
     print(user_profile)
@@ -1070,8 +1133,10 @@ out：
     {&apos;first_name&apos;: &apos;albert&apos;, &apos;last_name&apos;: &apos;einstein&apos;, &apos;location&apos;: &apos;princeton&apos;, &apos;field&apos;: &apos;physics&apos;}
 </code></pre><h2 id="函数与模块"><a href="#函数与模块" class="headerlink" title="函数与模块"></a>函数与模块</h2><h3 id="导入整个模块"><a href="#导入整个模块" class="headerlink" title="导入整个模块"></a>导入整个模块</h3><p>模块是后缀 .py 的子文件，在模块中写好函数（除函数外，其余都不要写），然后在主文件中用 import 导入整个模块。<br>ex：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">son.py		#模块名</span><br><span class="line"></span><br><span class="line">def users_language(language):	#实参有要求的，这里默认导入的实参为字典，若有其他需求，可以加个 if 语句控制实现需求</span><br><span class="line">&quot;&quot;&quot;展现各个人分别喜欢的语言&quot;&quot;&quot;</span><br><span class="line">for key, value in language.items():</span><br><span class="line">	print(&quot;\n&quot; + key + &quot;&apos;s favorite language is &quot; + value)</span><br></pre></td></tr></table></figure></p>
 <pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">master.py		#主文件名</span><br><span class="line"></span><br><span class="line">favorite_languages = &#123;</span><br><span class="line">	&apos;jen&apos;: &apos;python&apos;,</span><br><span class="line">	&apos;sarah&apos;: &apos;c&apos;,</span><br><span class="line">	&apos;edward&apos;: &apos;ruby&apos;,</span><br><span class="line">	&apos;phil&apos;: &apos;python&apos;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">son.users_language(favorite_languages)</span><br></pre></td></tr></table></figure>
-</code></pre><p>out：<br>    jen’s favorite language is python</p>
-<pre><code>sarah&apos;s favorite language is c
+</code></pre><p>out：</p>
+<pre><code>jen&apos;s favorite language is python
+
+sarah&apos;s favorite language is c
 
 edward&apos;s favorite language is ruby
 
@@ -1102,25 +1167,28 @@ phil&apos;s favorite language is python
 </ol>
 <h1 id="类（面向对象编程）"><a href="#类（面向对象编程）" class="headerlink" title="类（面向对象编程）"></a>类（面向对象编程）</h1><h2 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h2><p>可以理解为 C 中的结构体，两者有点像，但又有不同。<br>根据类来创建对象被称为实例化，这让你能够使用类的实例。</p>
 <h2 id="类的创建与使用"><a href="#类的创建与使用" class="headerlink" title="类的创建与使用"></a>类的创建与使用</h2><h3 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h3><p>创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。</p>
-<p>ex：<br>    class Student():    #首字母要大写，指的是类（约定的），括号空，是因为要从空白建立类<br>        “””学生类的模拟”””</p>
-<pre><code>def \_\_init\_\_(self, name, age):    
-#注意这里有个坑，默认方法构造书写格式是__init__，而不是_init_，即在init两侧都是双下划线，不是单下划线。 
-    &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
-    self.name = name
-    self.age = age
+<p>ex：</p>
+<pre><code>class Student():    #首字母要大写，指的是类（约定的），括号空，是因为要从空白建立类
+    &quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;
 
-def study(self):
-    &quot;&quot;&quot;模拟学生学习&quot;&quot;&quot;
-    print(self.name.title() + &quot; is now learning.&quot;)
+    def \_\_init\_\_(self, name, age):    
+    #注意这里有个坑，默认方法构造书写格式是__init__，而不是_init_，即在init两侧都是双下划线，不是单下划线。 
+        &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
+        self.name = name
+        self.age = age
 
-def sleep(self):
-    &quot;&quot;&quot;模拟学生睡觉&quot;&quot;&quot;
-    print(self.name.title() + &quot; is now sleeping.&quot;)
+    def study(self):
+        &quot;&quot;&quot;模拟学生学习&quot;&quot;&quot;
+        print(self.name.title() + &quot; is now learning.&quot;)
 
-def get_descriptive(self):
-    &quot;&quot;&quot;返回学生信息&quot;&quot;&quot;
-    descriptive = self.name + &apos; &apos; + str(self.age)
-    return descriptive.title()
+    def sleep(self):
+        &quot;&quot;&quot;模拟学生睡觉&quot;&quot;&quot;
+        print(self.name.title() + &quot; is now sleeping.&quot;)
+
+    def get_descriptive(self):
+        &quot;&quot;&quot;返回学生信息&quot;&quot;&quot;
+        descriptive = self.name + &apos; &apos; + str(self.age)
+        return descriptive.title()
 </code></pre><ol>
 <li>上述代码中，在类中出现的函数称为方法，如 3 个 def，与函数一样，只是名称发生了变化。</li>
 <li>在类中，每当使用者用 Student 类创建新实例时，Python 就会自动运行方法 __init__()。每次写类都要初始化。</li>
@@ -1241,8 +1309,9 @@ class ElectricCar(Car):        #类括号内若导入参数，则继承某一个
 
 my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
 print(my_tesla.get_descriptive_name())
-</code></pre><p>out：<br>    2016 Tesla Model S</p>
-<ol>
+</code></pre><p>out：</p>
+<pre><code>2016 Tesla Model S
+</code></pre><ol>
 <li>父类和子类必须要在同一文件中，且父类在子类前面。</li>
 <li>父类也称超类，名称 super 因此而得名。</li>
 </ol>
@@ -1806,7 +1875,7 @@ OK
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
