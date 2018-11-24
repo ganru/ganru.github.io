@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/11/09/Web应用（第一部分）/6.png">
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/11/09/Web应用（第一部分）/7.png">
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/11/09/Web应用（第一部分）/8.png">
-<meta property="og:updated_time" content="2018-11-17T03:32:04.785Z">
+<meta property="og:updated_time" content="2018-11-24T07:41:56.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web应用（第一部分）">
 <meta name="twitter:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup   项目简介：这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning">
@@ -661,7 +661,7 @@ urlpatterns = [
     path(&apos;admin/&apos;, admin.site.urls),
 ]
 </code></pre><p>前两行导入了为项目和管理网站管理 URL 的函数和模块，这个文件的主体定义了变量 urlpatterns 。在这个针对整个项目的urls.py 文件中，变量 urlpatterns 包含项目中的应用程序的 URL 。</p>
-<p>现在，我们需要基础 URL（<a href="http://localhost:8000/）：" target="_blank" rel="noopener">http://localhost:8000/）：</a></p>
+<p>现在，我们需要基础 URL（<a href="http://localhost:8000/" target="_blank" rel="noopener">http://localhost:8000/</a> ）：</p>
 <pre><code>url(r&apos;&apos;, include(&apos;learning_logs.urls&apos;, namespace=&apos;learning_logs&apos;)),
 // 上面是书中的代码，这里我改为：
 path(&apos;&apos;, include(&apos;learning_logs.urls&apos;, namespace=&apos;learning_logs&apos;)),
@@ -679,7 +679,7 @@ urlpatterns = [
     path(&apos;&apos;, views.index, name=&apos;index&apos;),
 ]
 </code></pre><p>为弄清楚当前位于哪个 urls.py 文件中，我们在这个文件开头添加了一个文档字符串。接下来，我们导入了函数 path ，因为我们需要使用它来将 URL 映射到视图。我们还导入了模块 views ，其中的句点让 Python 从当前的 urls.py 模块所在的文件夹中导入视图。在这个模块中，变量 urlpatterns 是一个列表，包含可在应用程序 learning_logs 中请求的网页。</p>
-<p>书里面是有正则表达式 r’^$’ 的，不过我改为了 ‘’ 。这是为了匹配基础 URL（<a href="http://localhost:8000/），因为我们前面包含基础" target="_blank" rel="noopener">http://localhost:8000/），因为我们前面包含基础</a> URL（<a href="http://localhost:8000/）时就是这么干的。第二个实参指定了要调用的视图函数。请求的" target="_blank" rel="noopener">http://localhost:8000/）时就是这么干的。第二个实参指定了要调用的视图函数。请求的</a> URL 与前述正则表达式匹配时，Django 将调用 views.index（这个视图函数将在下一节编写）。第三个实参将这个 URL 模式的名称指定为 index ，让我们能够在代码的其他地方引用它。每当需要提供到这个主页的链接时，我们都将使用这个名称，而不编写 URL 。</p>
+<p>书里面是有正则表达式 r’^$’ 的，不过我改为了 ‘’ 。这是为了匹配基础 URL（<a href="http://localhost:8000/" target="_blank" rel="noopener">http://localhost:8000/</a> ），因为我们前面包含基础 URL（<a href="http://localhost:8000/" target="_blank" rel="noopener">http://localhost:8000/</a> ）时就是这么干的。第二个实参指定了要调用的视图函数。请求的 URL 与前述正则表达式匹配时，Django 将调用 views.index（这个视图函数将在下一节编写）。第三个实参将这个 URL 模式的名称指定为 index ，让我们能够在代码的其他地方引用它。每当需要提供到这个主页的链接时，我们都将使用这个名称，而不编写 URL 。</p>
 <h2 id="编写视图"><a href="#编写视图" class="headerlink" title="编写视图"></a>编写视图</h2><p>视图函数接受请求中的信息，准备好生成网页所需的数据，再将这些数据发送给浏览器——这通常是使用定义了网页是什么样的模板实现的。<br>这次我们打开文件 views.py 看看里面有什么：</p>
 <pre><code>from django.shortcuts import render
 # Create your views here.
@@ -691,53 +691,15 @@ urlpatterns = [
 <p>补充：<br>render() 其实是 Django 的快捷函数，这里贴出<a href="https://docs.djangoproject.com/zh-hans/2.1/topics/http/shortcuts/#django.shortcuts.render" target="_blank" rel="noopener">官方文档</a> 。<br>render 函数的形式是<code>render(request, template_name, context=None, content_type=None, status=None, using=None)</code>。首先前面两个是必须写的参数，request 用于生成此响应的请求对象。template_name 要使用的模板的全名或模板名称的序列。如果给定一个序列，则将使用存在的第一个模板。</p>
 <h2 id="编写模板"><a href="#编写模板" class="headerlink" title="编写模板"></a>编写模板</h2><p>在文件夹 learning_logs 中新建一个文件夹，并将其命名为 templates 。在文件夹 templates 中，再新建一个文件夹，并将其命名为 learning_logs 。这好像有点多余（我们在文件夹 learning_logs 中创建了文件夹 templates，又在这个文件夹中创建了文件夹 learning_logs），但建立了 Django 能够明确解读的结构，即便项目很大，包含很多应用程序亦如此。</p>
 <p>书里面的大白话是这么讲的，可能有些人还不能理解这种行为，换句话讲，其实就是一种规范。 Django 遍历模板的时候是要在文件夹 templates 中遍历的。而在这个文件夹中又建立一个子文件夹，还跟应用程序 learning_logs 同名，这是因为后续我们使用模板路径的时候，是像这样这么用的：<code>render(request, &#39;learning_logs/index.html&#39;)</code>，而这个路径 Django 又是从文件夹 templates 中遍历的。所以为了方便，我们就这么做了。（我是这么理解的）</p>
-<p>在最里面的文件夹 learning_logs 中，新建一个文件，并将其命名为 index.html，然后在里面写 HTML ：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Home&lt;/title&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-    &lt;p&gt;Learning Log&lt;/p&gt;
-    &lt;p&gt;Learning Log helps you keep track of your learning, 
-    for any topic you&apos;re learning about.&lt;/p&gt;
-&lt;/body&gt;
-
-&lt;/html&gt;
-</code></pre><p>这个时候，我们就可以在浏览器打开基础 URL 了，不过得注意，这个时候记得先把 Django 服务关掉在重开一遍。然后我们就可以在网站上看到我们写的这两行代码。</p>
+<p>在最里面的文件夹 learning_logs 中，新建一个文件，并将其命名为 index.html，然后在里面写 HTML ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">	&lt;title&gt;Home&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;p&gt;Learning Log&lt;/p&gt;</span><br><span class="line">	&lt;p&gt;Learning Log helps you keep track of your learning, </span><br><span class="line">	for any topic you&apos;re learning about.&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这个时候，我们就可以在浏览器打开基础 URL 了，不过得注意，这个时候记得先把 Django 服务关掉在重开一遍。然后我们就可以在网站上看到我们写的这两行代码。</p>
 <h1 id="创建其他网页"><a href="#创建其他网页" class="headerlink" title="创建其他网页"></a>创建其他网页</h1><p>制定创建网页的流程后，可以开始扩充“学习笔记”项目了。我们将创建两个显示数据的网页，其中一个列出所有的主题，另一个显示特定主题的所有条目。对于每个网页，我们都将指定 URL 模式，编写一个视图函数，并编写一个模板。但这样做之前，我们先创建一个父模板，项目中的其他模板都将继承它。</p>
 <h2 id="模板继承"><a href="#模板继承" class="headerlink" title="模板继承"></a>模板继承</h2><p>模板继承存在的意义，是为了避免通用元素被重复定义，类比于我们学习的父类继承。</p>
-<h3 id="父模板"><a href="#父模板" class="headerlink" title="父模板"></a>父模板</h3><p>我们首先来创建一个名为 base.html 的模板，并将其存储在 index.html 所在的目录中。这个文件包含所有页面都有的元素；其他的模板都继承 base.html。<br>因为每个网页都有顶端标题，所以我们把这个元素写进父模板内（这里以及下一段我简略了 html 的代码）：</p>
-<pre><code>&lt;p&gt;
-    &lt;a href = &quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;
-&lt;/p&gt;
-
-{% block content %}{% endblock content %}
-	// 这是一个块标签，
-	// 表示一个名为content的块，
-	// 其中的内容需要由子模块指定。
-	// 可以在base.html中定义多个块，但是子模块可以只指定其中的一个或几个，不是必须全部指定。
-	
-这里写的超链接方式采用的是模板标签，它是用大括号和百分号（\{ % % \}）表示的。
-模板标签 \{ % url 'learning_logs:index' % \} 生成一个 URL，该 URL 与 learning_logs/urls.py 中定义的名为 index 的 URL 模式匹配。
-learning_logs 是一个命名空间，就是我们在映射 URL 里面写的` path('', include('learning_logs.urls', namespace='learning_logs')), `，而 index 是在 /learning_logs/urls.py 中的 urlpatterns 中定义的。
-
-我们插入了一对块标签。这个块名为 content，是一个占位符，其中包含的信息将由子模板指定。
-
-### 子模板
-
-现在，需要重新编写 index.html，使其继承 base.html ：
-
-	{% extends "learning_logs/base.html" %}
-
-	{% block content %}
-	  <p>Learning Log</p>
-	  <p>Learning Log helps you keep track of your learning, for any topic you're learning about.</p>
-	{% endblock content %}
-</code></pre><p>第一行表示继承于哪个模板。我们插入了一个名为 content 的 { % block % } 标签，以定义 content 块。不是从父模板继承的内容都包含在 content 块中，在这里是一个描述项目“学习笔记”的段落。最后我们使用标签 { % endblock content % } 指出了内容定义的结束位置。</p>
+<h3 id="父模板"><a href="#父模板" class="headerlink" title="父模板"></a>父模板</h3><p>我们首先来创建一个名为 base.html 的模板，并将其存储在 index.html 所在的目录中。这个文件包含所有页面都有的元素；其他的模板都继承 base.html。<br>因为每个网页都有顶端标题，所以我们把这个元素写进父模板内（这里以及下一段我简略了 html 的代码）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">	&lt;a href = &quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot;&gt;Learning Log&lt;/a&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;&#123;% endblock content %&#125;</span><br><span class="line">// 这是一个块标签，</span><br><span class="line">// 表示一个名为content的块，</span><br><span class="line">// 其中的内容需要由子模块指定。</span><br><span class="line">// 可以在base.html中定义多个块，但是子模块可以只指定其中的一个或几个，不是必须全部指定。</span><br></pre></td></tr></table></figure></p>
+<p>这里写的超链接方式采用的是模板标签，它是用大括号和百分号（{ % % }）表示的。<br>模板标签 { % url ‘learning_logs:index’ % } 生成一个 URL，该 URL 与 learning_logs/urls.py 中定义的名为 index 的 URL 模式匹配。<br>learning_logs 是一个命名空间，就是我们在映射 URL 里面写的<code>path(&#39;&#39;, include(&#39;learning_logs.urls&#39;, namespace=&#39;learning_logs&#39;)),</code>，而 index 是在 /learning_logs/urls.py 中的 urlpatterns 中定义的。</p>
+<p>我们插入了一对块标签。这个块名为 content，是一个占位符，其中包含的信息将由子模板指定。</p>
+<h3 id="子模板"><a href="#子模板" class="headerlink" title="子模板"></a>子模板</h3><p>现在，需要重新编写 index.html，使其继承 base.html ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">  &lt;p&gt;Learning Log&lt;/p&gt;</span><br><span class="line">  &lt;p&gt;Learning Log helps you keep track of your learning, for any topic you&apos;re learning about.&lt;/p&gt;</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第一行表示继承于哪个模板。我们插入了一个名为 content 的 { % block % } 标签，以定义 content 块。不是从父模板继承的内容都包含在 content 块中，在这里是一个描述项目“学习笔记”的段落。最后我们使用标签 { % endblock content % } 指出了内容定义的结束位置。</p>
 <h2 id="显示所有主题的页面"><a href="#显示所有主题的页面" class="headerlink" title="显示所有主题的页面"></a>显示所有主题的页面</h2><p>模板继承，让我们能够高效的完成网页群创建，现在我们要开始专注俩个网页：显示全部主题的网页以及显示特定主题中条目的网页。</p>
 <h3 id="URL-模式"><a href="#URL-模式" class="headerlink" title="URL 模式"></a>URL 模式</h3><p>首先定义显示所有主题的页面的 URL 。</p>
 <p>跳转到 learning_logs/urls.py ，在 urlpatterns 列表内加上这一段：</p>
@@ -770,24 +732,11 @@ def topics(request):
     return render(request, &apos;learning_logs/topics.html&apos;, context)
 </code></pre><p>context = { ‘topics’: topics } 定义了一个上下文，它是一个字典。其中的键是我们将在模板中用来访问数据的名称，而值是我们要发送给模板的数据。<br>这个上下文马上会通过 render 发送到 learning_logs/topics.html 中，用于数据的操作。</p>
 <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>现在新建一个模板 topics.html ：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-		<p>Topics</p>
-		
-		<ul>
-			{% for topic in topics %}
-				<li>{{ topic }}</li>
-			{% empty %}
-				<li>No topics have been added yet.</li>
-			{% endfor %}
-		</ul>
-		
-	{% endblock content %}
-</code></pre><p>在这里我们使用了一个相当于 for 循环的模板标签，它遍历字典 context 中的列表 topics 。注意这里有区别，每个for循环都必须使用 { % endfor % } 标签来显式地指出其结束位置。</p>
-<p>在循环中，我们要将每个主题转换为一个项目列表项（ <li></li> ），转化为 html 语言格式方便网站建设。要在模板中打印变量，需要将变量名用双花括号括起来。每次循环时，代码 { { topic } } 都被替换为 topic 的当前值。这些花括号不会出现在网页中，它们只是用于告诉 Django 我们使用了一个模板变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;Topics&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;ul&gt;</span><br><span class="line">		&#123;% for topic in topics %&#125;</span><br><span class="line">			&lt;li&gt;&#123;&#123; topic &#125;&#125;&lt;/li&gt;</span><br><span class="line">		&#123;% empty %&#125;</span><br><span class="line">			&lt;li&gt;No topics have been added yet.&lt;/li&gt;</span><br><span class="line">		&#123;% endfor %&#125;</span><br><span class="line">	&lt;/ul&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里我们使用了一个相当于 for 循环的模板标签，它遍历字典 context 中的列表 topics 。注意这里有区别，每个for循环都必须使用 { % endfor % } 标签来显式地指出其结束位置。</p>
+<p>在循环中，我们要将每个主题转换为一个项目列表项（<code>&lt;li&gt;&lt;/li&gt;</code>），转化为 html 语言格式方便网站建设。要在模板中打印变量，需要将变量名用双花括号括起来。每次循环时，代码 { { topic } } 都被替换为 topic 的当前值。这些花括号不会出现在网页中，它们只是用于告诉 Django 我们使用了一个模板变量。</p>
 <p>现在修改父模板，使其包含到显示所有主题的页面的链接：</p>
-<pre><code>&lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt; -
+<pre><code>&lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt; -
 &lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;
 </code></pre><p>现在刷新一下页面，可以看到：<br><img src="/ganru.github.io/2018/11/09/Web应用（第一部分）/7.png"></p>
 <h2 id="显示特定主题的页面"><a href="#显示特定主题的页面" class="headerlink" title="显示特定主题的页面"></a>显示特定主题的页面</h2><p>老规矩，三步： URL 映射、视图函数编写、模板编写。</p>
@@ -803,31 +752,11 @@ path(&apos;topics/(?P&lt;topic_id&gt;\d+)/&apos;, views.topic, name=&apos;topic&
     context = {&apos;topic&apos;: topic, &apos;entries&apos;:entries}
     return render(request, &apos;learning_logs/topic.html&apos;, context)
 </code></pre><p>这个函数包含一个形参 topic_id ，<strong>-</strong>date_added 前的减号表示降序排列，把主题和条目都存在 context 字典中，<br>把上下文 context 传递给 topic.html 。</p>
-<h3 id="模板-1"><a href="#模板-1" class="headerlink" title="模板"></a>模板</h3><p>创建一个新的网页 topic.html :</p>
-<pre><code>{% extends 'learning_logs/base.html' %}
-{% block content %}
-		<p>Topic: {{ topic }}</p>
-		<p>Entries</p>
-		<ul>
-			{% for entry in entries %}
-				<li>
-					<p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
-					<p>{{ entry.text|linebreaks }}</p>
-				</li>
-			{% empty %}
-				<li>
-					There are no entries for this topic yet.
-				</li>
-			{% endfor %}
-		</ul>
-	{% endblock content %}
-</code></pre><p><code>&lt;p&gt;Topic: \{\{ topic \}\} &lt;/p&gt;</code>中的 topic 和<code>\{ % for entry in entries %\}</code>中的 entries 来自 context 上下文，是刚刚由 render 函数传递过来的。</p>
+<h3 id="模板-1"><a href="#模板-1" class="headerlink" title="模板"></a>模板</h3><p>创建一个新的网页 topic.html :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &apos;learning_logs/base.html&apos; %&#125;</span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;Topic: &#123;&#123; topic &#125;&#125;&lt;/p&gt;</span><br><span class="line">	&lt;p&gt;Entries&lt;/p&gt;</span><br><span class="line">	&lt;ul&gt;</span><br><span class="line">		&#123;% for entry in entries %&#125;</span><br><span class="line">			&lt;li&gt;</span><br><span class="line">				&lt;p&gt;&#123;&#123; entry.date_added|date:&apos;M d, Y H:i&apos; &#125;&#125;&lt;/p&gt;</span><br><span class="line">				&lt;p&gt;&#123;&#123; entry.text|linebreaks &#125;&#125;&lt;/p&gt;</span><br><span class="line">			&lt;/li&gt;</span><br><span class="line">		&#123;% empty %&#125;</span><br><span class="line">			&lt;li&gt;</span><br><span class="line">				There are no entries for this topic yet.</span><br><span class="line">			&lt;/li&gt;</span><br><span class="line">		&#123;% endfor %&#125;</span><br><span class="line">	&lt;/ul&gt;</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>&lt;p&gt;Topic:  &lt;/p&gt;</code>中的 topic 和<code>{ % for entry in entries %}</code>中的 entries 来自 context 上下文，是刚刚由 render 函数传递过来的。</p>
 <p>竖线 | 表示模板过滤器。</p>
-<p>最后，修改 topics.html，把 { { topic } } 修改为<code>&lt;a href=&quot;\{ % url &#39;learning_logs:topic&#39; topic.id %\} &quot;&gt;\{\{ topic \}\} &lt;/a&gt;</code>让每个主题都成为链接，链接到相应的主题详情页面：</p>
-<pre><code>&lt;li&gt;
-    &lt;a href=&quot;{% url 'learning_logs:topic' topic.id %}&quot;&gt;{{ topic }}&lt;/a&gt;
-&lt;/li&gt;
-</code></pre><p>我们最后可以看到这个界面：<br><img src="/ganru.github.io/2018/11/09/Web应用（第一部分）/8.png"></p>
+<p>最后，修改 topics.html，把 { { topic } } 修改为<code>&lt;a href=&quot;{ % url &#39;learning_logs:topic&#39; topic.id %} &quot;&gt;  &lt;/a&gt;</code>让每个主题都成为链接，链接到相应的主题详情页面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;</span><br><span class="line">&lt;/li&gt;</span><br></pre></td></tr></table></figure></p>
+<p>我们最后可以看到这个界面：<br><img src="/ganru.github.io/2018/11/09/Web应用（第一部分）/8.png"></p>
 <h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
 <li>虚拟环境及 Django 框架安装</li>
 <li>应用程序的创建流程</li>
@@ -954,7 +883,7 @@ path(&apos;topics/(?P&lt;topic_id&gt;\d+)/&apos;, views.topic, name=&apos;topic&
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1009,7 +938,7 @@ path(&apos;topics/(?P&lt;topic_id&gt;\d+)/&apos;, views.topic, name=&apos;topic&
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建应用程序"><span class="nav-number">2.</span> <span class="nav-text">创建应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义模型"><span class="nav-number">2.1.</span> <span class="nav-text">定义模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激活模型"><span class="nav-number">2.2.</span> <span class="nav-text">激活模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django-管理网站"><span class="nav-number">2.3.</span> <span class="nav-text">Django 管理网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义模型-Entry"><span class="nav-number">2.4.</span> <span class="nav-text">定义模型 Entry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移模型-Entry"><span class="nav-number">2.5.</span> <span class="nav-text">迁移模型 Entry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向管理网站注册-Entry"><span class="nav-number">2.6.</span> <span class="nav-text">向管理网站注册 Entry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django-shell"><span class="nav-number">2.7.</span> <span class="nav-text">Django shell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建网页：学习笔记主页"><span class="nav-number">3.</span> <span class="nav-text">创建网页：学习笔记主页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#映射-URL"><span class="nav-number">3.1.</span> <span class="nav-text">映射 URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写视图"><span class="nav-number">3.2.</span> <span class="nav-text">编写视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写模板"><span class="nav-number">3.3.</span> <span class="nav-text">编写模板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建其他网页"><span class="nav-number">4.</span> <span class="nav-text">创建其他网页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模板继承"><span class="nav-number">4.1.</span> <span class="nav-text">模板继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父模板"><span class="nav-number">4.1.1.</span> <span class="nav-text">父模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示所有主题的页面"><span class="nav-number">4.2.</span> <span class="nav-text">显示所有主题的页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-模式"><span class="nav-number">4.2.1.</span> <span class="nav-text">URL 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图"><span class="nav-number">4.2.2.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板"><span class="nav-number">4.2.3.</span> <span class="nav-text">模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示特定主题的页面"><span class="nav-number">4.3.</span> <span class="nav-text">显示特定主题的页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-模式-1"><span class="nav-number">4.3.1.</span> <span class="nav-text">URL 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图-1"><span class="nav-number">4.3.2.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板-1"><span class="nav-number">4.3.3.</span> <span class="nav-text">模板</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习要点"><span class="nav-number">5.</span> <span class="nav-text">学习要点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建应用程序"><span class="nav-number">2.</span> <span class="nav-text">创建应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义模型"><span class="nav-number">2.1.</span> <span class="nav-text">定义模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激活模型"><span class="nav-number">2.2.</span> <span class="nav-text">激活模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django-管理网站"><span class="nav-number">2.3.</span> <span class="nav-text">Django 管理网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义模型-Entry"><span class="nav-number">2.4.</span> <span class="nav-text">定义模型 Entry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移模型-Entry"><span class="nav-number">2.5.</span> <span class="nav-text">迁移模型 Entry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向管理网站注册-Entry"><span class="nav-number">2.6.</span> <span class="nav-text">向管理网站注册 Entry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django-shell"><span class="nav-number">2.7.</span> <span class="nav-text">Django shell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建网页：学习笔记主页"><span class="nav-number">3.</span> <span class="nav-text">创建网页：学习笔记主页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#映射-URL"><span class="nav-number">3.1.</span> <span class="nav-text">映射 URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写视图"><span class="nav-number">3.2.</span> <span class="nav-text">编写视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写模板"><span class="nav-number">3.3.</span> <span class="nav-text">编写模板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建其他网页"><span class="nav-number">4.</span> <span class="nav-text">创建其他网页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模板继承"><span class="nav-number">4.1.</span> <span class="nav-text">模板继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父模板"><span class="nav-number">4.1.1.</span> <span class="nav-text">父模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子模板"><span class="nav-number">4.1.2.</span> <span class="nav-text">子模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示所有主题的页面"><span class="nav-number">4.2.</span> <span class="nav-text">显示所有主题的页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-模式"><span class="nav-number">4.2.1.</span> <span class="nav-text">URL 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图"><span class="nav-number">4.2.2.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板"><span class="nav-number">4.2.3.</span> <span class="nav-text">模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示特定主题的页面"><span class="nav-number">4.3.</span> <span class="nav-text">显示特定主题的页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-模式-1"><span class="nav-number">4.3.1.</span> <span class="nav-text">URL 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图-1"><span class="nav-number">4.3.2.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板-1"><span class="nav-number">4.3.3.</span> <span class="nav-text">模板</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习要点"><span class="nav-number">5.</span> <span class="nav-text">学习要点</span></a></li></ol></div>
             
 
           </div>

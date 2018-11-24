@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/11/22/Web应用（第二部分）/4.png">
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/11/22/Web应用（第二部分）/5.png">
 <meta property="og:image" content="https://ganru.github.io/ganru.github.io/2018/11/22/Web应用（第二部分）/6.png">
-<meta property="og:updated_time" content="2018-11-22T15:14:18.297Z">
+<meta property="og:updated_time" content="2018-11-24T07:50:45.346Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web应用（第二部分）">
 <meta name="twitter:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup   项目简介：这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning">
@@ -448,22 +448,8 @@ def new_topic(request):
 <p><code>if request.method != &#39;POST&#39;:</code>测试确定请求方法是 GET 还是 POST 。如果请求方法不是 POST ，请求就可能是 GET ，因此我们需要返回一个空表单（即便请求是其他类型的，返回一个空表单也不会有任何问题）。由于实例化 TopicForm 时我们没有指定任何实参， Django 将创建一个可供用户填写的空表单。<br>如果请求方法为 POST ，将执行 else 代码块，对提交的表单数据进行处理。我们使用用户输入的数据（它们存储在 request.POST 中）创建一个 TopicForm 实例，这样对象 form 将包含用户提交的信息。</p>
 <p>要将提交的信息保存到数据库，必须先通过检查确定它们是有效的。函数 is_valid() 核实用户填写了所有必不可少的字段（表单字段默认都是必不可少的），且输入的数据与要求的<br>字段类型一致（例如，字段 text 少于 200 个字符，这是我们在上一章节中的 models.py 中指定的），这种自动验证避免了我们去做大量的工作。如果所有字段都有效，我们就可调用 save() ，将表单中的数据写入数据库。</p>
 <p>保存数据后，就可离开这个页面了。我们使用 reverse() 获取页面 topics 的 URL ，并将其传递给 HttpResponseRedirect() ，后者将用户的浏览器重定向到页面 topics 。在页面 topics 中，用户将在主题列表中看到他刚输入的主题。</p>
-<h3 id="模板-new-topic"><a href="#模板-new-topic" class="headerlink" title="模板 new_topic"></a>模板 new_topic</h3><p>下面来创建新模板 new_topic.html ，用于显示我们刚创建的表单：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-		<p>Add a new topic:</p>
-		
-		// 定义一个表单
-		<form action="{% url 'learning_logs:new_topic' %}" method="post">
-		
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button name="submit">add topic</button>
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>实参 action 告诉服务器将提交的表单数据发送到哪里，这里我们将它发回给视图函数 new_topic() 。<br>实参 method 让浏览器以 POST 请求的方式提交数据。</p>
+<h3 id="模板-new-topic"><a href="#模板-new-topic" class="headerlink" title="模板 new_topic"></a>模板 new_topic</h3><p>下面来创建新模板 new_topic.html ，用于显示我们刚创建的表单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;Add a new topic:&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	// 定义一个表单</span><br><span class="line">	&lt;form action=&quot;&#123;% url &apos;learning_logs:new_topic&apos; %&#125;&quot; method=&apos;post&apos;&gt;</span><br><span class="line">	</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		&lt;button name=&quot;submit&quot;&gt;add topic&lt;/button&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实参 action 告诉服务器将提交的表单数据发送到哪里，这里我们将它发回给视图函数 new_topic() 。<br>实参 method 让浏览器以 POST 请求的方式提交数据。</p>
 <p>Django 使用模板标签 { % csrf_token % } 来防止攻击者利用表单来获得对服务器未经授权的访问（这种攻击被称为跨站请求伪造）。<br>显示表单：我们只需包含模板变量{ { form.as_p } }，就可让 Django 自动创建显示表单所需的全部字段。修饰符 as_p 让 Django 以段落格式渲染所有表单元素，这是一种整洁地显示表单的简单方式。</p>
 <p>Django 不会为表单创建提交按钮，因此我们定义了一个这样的按钮。</p>
 <h3 id="链接到页面-new-topic"><a href="#链接到页面-new-topic" class="headerlink" title="链接到页面 new_topic"></a>链接到页面 new_topic</h3><p>接下来，我们在页面 topics 中添加一个到页面 new_topic 的链接：</p>
@@ -509,33 +495,10 @@ def new_entry(request, topic_id):
 <p>创建一个 EntryForm 实例，使用 request 对象中的 POST 数据来填充它；再检查表单是否有效，如果有效，就设置条目对象的属性 topic ，再将条目对象保存到数据库。</p>
 <p>调用 save() 时，我们传递了实参 commit=False ，让 Django 创建一个新的条目对象，并将其存储到 new_entry 中，但不将它保存到数据库中。我们将 new_entry 的属性 topic 设置为在这个函数开头从数据库中获取的主题，然后调用 save() ，且不指定任何实参。这将把条目保存到数据库，并将其与正确的主题相关联。</p>
 <p>然后我们将用户重定向到显示相关主题的页面。调用 reverse() 时，需要提供两个实参：<br>要根据它来生成 URL 的 URL 模式的名称；列表 args ，其中包含要包含在 URL 中的所有实参。在这里，列表 args 只有一个元素——topic_id 。接下来，调用 HttpResponseRedirect() 将用户重定向到显示新增条目所属主题的页面，用户将在该页面的条目列表中看到新添加的条目。</p>
-<h3 id="模板-new-entry"><a href="#模板-new-entry" class="headerlink" title="模板 new_entry"></a>模板 new_entry</h3><p>模板 new_entry 类似于模板 new_topic ：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-		<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
-		<!--在页面顶端显示主题-->
-		
-		<p>Add a new entry:</p>
-		
-		<form action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button name="submit">add entry</button>
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>表单的实参 action 包含 URL 中的 topic_id 值，让视图函数能够将新条目关联到正确的主题。</p>
-<h3 id="链接到页面-new-entry"><a href="#链接到页面-new-entry" class="headerlink" title="链接到页面 new_entry"></a>链接到页面 new_entry</h3><p>跳转到 topic.html ：</p>
-<pre><code>&lt;p&gt;Entries:&lt;/p&gt;
-&lt;p&gt;
-    &lt;a href=&quot;{% url 'learning_logs:new_entry' topic.id %}&quot;&gt;add new entry&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;ul&gt;
-    --snip—-
-&lt;/ul&gt;
-</code></pre><h2 id="编辑条目"><a href="#编辑条目" class="headerlink" title="编辑条目"></a>编辑条目</h2><p>下面来创建一个页面，让用户能够编辑既有的条目。</p>
+<h3 id="模板-new-entry"><a href="#模板-new-entry" class="headerlink" title="模板 new_entry"></a>模板 new_entry</h3><p>模板 new_entry 类似于模板 new_topic ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">	&lt;!--在页面顶端显示主题--&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;p&gt;Add a new entry:&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;form action=&quot;&#123;% url &apos;learning_logs:new_entry&apos; topic.id %&#125;&quot; method=&apos;post&apos;&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		&lt;button name=&apos;submit&apos;&gt;add entry&lt;/button&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>表单的实参 action 包含 URL 中的 topic_id 值，让视图函数能够将新条目关联到正确的主题。</p>
+<h3 id="链接到页面-new-entry"><a href="#链接到页面-new-entry" class="headerlink" title="链接到页面 new_entry"></a>链接到页面 new_entry</h3><p>跳转到 topic.html ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Entries:&lt;/p&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;learning_logs:new_entry&apos; topic.id %&#125;&quot;&gt;add new entry&lt;/a&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">	--snip—-</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="编辑条目"><a href="#编辑条目" class="headerlink" title="编辑条目"></a>编辑条目</h2><p>下面来创建一个页面，让用户能够编辑既有的条目。</p>
 <h3 id="URL-模式-edit-entry"><a href="#URL-模式-edit-entry" class="headerlink" title="URL 模式 edit_entry"></a>URL 模式 edit_entry</h3><p>跳转到 learning_logs/urls.py :</p>
 <pre><code># 用于编辑条目的页面
 url(&apos;edit_entry/(?P&lt;entry_id&gt;\d+)/&apos;, views.edit_entry, name=&apos;edit_entry&apos;),
@@ -559,21 +522,8 @@ url(&apos;edit_entry/(?P&lt;entry_id&gt;\d+)/&apos;, views.edit_entry, name=&apo
     return render(request, &apos;learning_logs/edit_entry.html&apos;, context)
 </code></pre><p>初次请求，基本都是 get ，我们使用实参 instance=entry 创建一个 EntryForm 实例。这个实参让 Django 创建一个表单，并使用既有条目对象中的信息填充它。用户将看到既有的数据，并能够编辑它们。</p>
 <p>处理 POST 请求时，我们传递实参 instance=entry 和 data=request.POST ，让 Django 根据既有条目对象创建一个表单实例，并根据 request.POST 中的相关数据对其进行修改。然后，我们检查表单是否有效，如果有效，就调用 save() ，且不指定任何实参。接下来，我们重定向到显示条目所属主题的页面，用户将在其中看到其编辑的条目的新版本。</p>
-<h3 id="模板-edit-entry"><a href="#模板-edit-entry" class="headerlink" title="模板 edit_entry"></a>模板 edit_entry</h3><pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-		<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
-		
-		<p>Edit entry:</p>
-		
-		<form action="{% url 'learning_logs:edit_entry' entry.id %}" method="post">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button name="submit">save changes</button>
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>实参 action 将表单发回给函数 edit_entry() 进行处理。在标签{ % url % } 中，我们将条目 ID 作为一个实参，让视图对象能够修改正确的条目对象。我们将提交按钮命名为 save changes ，以提醒用户：单击该按钮将保存所做的编辑，而不是创建一个新条目。</p>
+<h3 id="模板-edit-entry"><a href="#模板-edit-entry" class="headerlink" title="模板 edit_entry"></a>模板 edit_entry</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;p&gt;Edit entry:&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;form action=&quot;&#123;% url &apos;learning_logs:edit_entry&apos; entry.id %&#125;&quot; method=&apos;post&apos;&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		&lt;button name=&apos;submit&apos;&gt;save changes&lt;/button&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>实参 action 将表单发回给函数 edit_entry() 进行处理。在标签{ % url % } 中，我们将条目 ID 作为一个实参，让视图对象能够修改正确的条目对象。我们将提交按钮命名为 save changes ，以提醒用户：单击该按钮将保存所做的编辑，而不是创建一个新条目。</p>
 <h3 id="链接到页面-edit-entry"><a href="#链接到页面-edit-entry" class="headerlink" title="链接到页面 edit_entry"></a>链接到页面 edit_entry</h3><p>现在，在显示特定主题的页面中，需要给每个条目添加到页面 edit_entry 的链接：</p>
 <pre><code>&lt;p&gt;{{ entry.date_added|date:'M d, Y H:i' }}&lt;/p&gt;
 &lt;p&gt;{{ entry.text|linebreaks }}&lt;/p&gt;
@@ -617,36 +567,11 @@ urlpatterns = [
   path(&apos;login/&apos;, LoginView.as_view(template_name=&apos;users/login.html&apos;), name=&quot;login&quot;),
 ]
 </code></pre><h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>鉴于我们没有编写自己的视图函数，我们传递了一个字典，告诉 Django 去哪里查找我们将编写的模板。这个模板包含在应用程序 users 而不是 learning_logs 中。所以这里的步骤稍有不同，直接写模板。</p>
-<p>模板 login.html ，应将其存储到目录<strong> users/templates/users/ </strong>中：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-&lt;!--请注意，一个应用程序中的模板可继承另一个应用程序中的模板。--&gt;
-
-{% block content %}
-
-		{% if form.errors %}
-		<p>Your username and password didn't match. Please try again.</p>
-		{% endif %}
-		
-		<form method="post" action="{% url 'users:login' %}">
-		<!--login 是登陆视图函数的名称-->
-			{% csrf_token %}
-			{{ form.as_p }}
-			
-			<button name="submit">log in</button>
-			<input type="hidden" name="next" value="{% url 'learning_logs:index' %}">
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>如果表单的 errors 属性被设置，我们就显示一条错误消息，指出输入的用户名——密码对与数据库中存储的任何用户名——密码对都不匹配。</p>
+<p>模板 login.html ，应将其存储到目录<strong> users/templates/users/ </strong>中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line">&lt;!--请注意，一个应用程序中的模板可继承另一个应用程序中的模板。--&gt;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line">	&#123;% if form.errors %&#125;</span><br><span class="line">	&lt;p&gt;Your username and password didn&apos;t match. Please try again.&lt;/p&gt;</span><br><span class="line">	&#123;% endif %&#125;</span><br><span class="line">	</span><br><span class="line">	&lt;form method=&quot;post&quot; action=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot;&gt;</span><br><span class="line">	&lt;!--login 是登陆视图函数的名称--&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		</span><br><span class="line">		&lt;button name=&quot;submit&quot;&gt;log in&lt;/button&gt;</span><br><span class="line">		&lt;input type=&quot;hidden&quot; name=&quot;next&quot; value=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot; /&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果表单的 errors 属性被设置，我们就显示一条错误消息，指出输入的用户名——密码对与数据库中存储的任何用户名——密码对都不匹配。</p>
 <p>我们要让登录视图处理表单，因此将实参 action 设置为登录页面的 URL 。登录视图将一个表单发送给模板，在模板中，我们显示这个表单并添加一个提交按钮。我们包含了一个隐藏的表单元素—— ‘next’ ，其中的实参 value 告诉 Django 在用户成功登录后将其重定向到什么地方——在这里是主页。</p>
-<p>然后就是把它链接到登陆页面。因为我们要让这个设置起到一个效果：未登陆时，所有的页面都有它，登陆过后，就没有这个设置，所以我们要将它链接到基础模板里面：</p>
-<pre><code>&lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt; -
-{% if user.is_authenticated %}
-		Hello, {{ user.username }}.
-	{% else %}
-		<a href="{% url 'users:login' %}">log in</a>
-	{% endif %}
-</code></pre><p>在 Django 身份验证系统中，每个模板都可使用变量 user ，这个变量有一个 is_authenticated 属性：如果用户已登录，该属性将为 True ，否则为 False 。这让你能够向已通过身份验证的用户显示一条消息，而向未通过身份验证的用户显示另一条消息。</p>
+<p>然后就是把它链接到登陆页面。因为我们要让这个设置起到一个效果：未登陆时，所有的页面都有它，登陆过后，就没有这个设置，所以我们要将它链接到基础模板里面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&#123;% url &apos;learning_logs:topics&apos; %&#125;&quot;&gt;Topics&lt;/a&gt; -</span><br><span class="line">&#123;% if user.is_authenticated %&#125;</span><br><span class="line">	Hello, &#123;&#123; user.username &#125;&#125;.</span><br><span class="line">&#123;% else %&#125;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot;&gt;log in&lt;/a&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在 Django 身份验证系统中，每个模板都可使用变量 user ，这个变量有一个 is_authenticated 属性：如果用户已登录，该属性将为 True ，否则为 False 。这让你能够向已通过身份验证的用户显示一条消息，而向未通过身份验证的用户显示另一条消息。</p>
 <p>可以看到：<br><img src="/ganru.github.io/2018/11/22/Web应用（第二部分）/3.png"></p>
 <p>如果看到的是已登录页面，打开管理员网站 <a href="http://localhost:8000/admin/" target="_blank" rel="noopener">http://localhost:8000/admin/</a> 退出登录。</p>
 <h2 id="注销"><a href="#注销" class="headerlink" title="注销"></a>注销</h2><p>在这里我们不用建立注销页面（注销都要走流程你烦我也烦…），所以我们只要建立一个链接一键注销并且返回主页就行了。</p>
@@ -697,21 +622,8 @@ def register(request):
     context = {&apos;form&apos;: form}
     return render(request, &apos;users/register.html&apos;, context)
 </code></pre><p>导入包，其中 authenticate 用于验证用户，验证无误返回 True ，否则返回 False 。</p>
-<h3 id="注册模板"><a href="#注册模板" class="headerlink" title="注册模板"></a>注册模板</h3><p>注册页面的模板与登录页面的模板类似：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-
-		<form method="post" action="{% url 'users:register' %}">
-			{% csrf_token %}
-			{{ form.as_p }}
-			
-			<button name="submit">register</button>
-			<input type="hidden" name="next" value="{% url 'learning_logs:index' %}">
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>方法 as_p ，让 Django 在表单中正确地显示所有的字段，包括错误消息——如果用户没有正确地填写表单。</p>
+<h3 id="注册模板"><a href="#注册模板" class="headerlink" title="注册模板"></a>注册模板</h3><p>注册页面的模板与登录页面的模板类似：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line">	&lt;form method=&quot;post&quot; action=&quot;&#123;% url &apos;users:register&apos; %&#125;&quot;&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		</span><br><span class="line">		&lt;button name=&quot;submit&quot;&gt;register&lt;/button&gt;</span><br><span class="line">		&lt;input type=&quot;hidden&quot; name=&quot;next&quot; value=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot; /&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法 as_p ，让 Django 在表单中正确地显示所有的字段，包括错误消息——如果用户没有正确地填写表单。</p>
 <h3 id="链接到注册页面"><a href="#链接到注册页面" class="headerlink" title="链接到注册页面"></a>链接到注册页面</h3><p>我们将它放在标签{ % else % } 中，使得我们在用户没有登录时看到它 (base.html) ：</p>
 <pre><code>&lt;a href=&quot;{% url 'users:register' %}&quot;&gt;register&lt;/a&gt; -
 </code></pre><h1 id="授予用户写数据的权限"><a href="#授予用户写数据的权限" class="headerlink" title="授予用户写数据的权限"></a>授予用户写数据的权限</h1><p>注册了之后，用户需要有在这个项目写东西的能力。<br>我们将修改模型 Topic ，让每个主题都归属于特定用户。这也将影响条目，因为每个条目都属于特定的主题。我们先来限制对一些页面的访问。</p>
@@ -888,6 +800,10 @@ else:
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/ganru.github.io/2018/11/24/Web应用（第三部分）/" rel="prev" title="Web应用（第三部分）">
+                Web应用（第三部分） <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -963,7 +879,7 @@ else:
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

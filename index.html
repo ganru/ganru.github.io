@@ -292,6 +292,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/11/24/Web应用（第三部分）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/2018/11/24/Web应用（第三部分）/" itemprop="url">Web应用（第三部分）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-24T15:20:48+08:00">
+                2018-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<blockquote>
+<p>项目简介：<br>这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。<br>在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning Log）的项目，这是一个在线日志系统，让我们能够记录所学习的有关特定主题的知识。</p>
+</blockquote>
+<blockquote>
+<p>Django 简介：<br>Django 是一个 Web 框架——一套用于帮助开发交互式网站的工具。Django 能够响应网页请求，还能让我们更轻松地读写数据库、管理用户等。</p>
+</blockquote>
+<p>承接上次学习的内容，此次学学设置应用程序的样式并对其进行部署。</p>
+<h1 id="设置项目“学习笔记”的样式"><a href="#设置项目“学习笔记”的样式" class="headerlink" title="设置项目“学习笔记”的样式"></a>设置项目“学习笔记”的样式</h1><p>前面一路走来，所创建的网站非常的简单，页面就几个链接和文字，颇似 00 年代古老网站和论坛的风格，这是因为这些内容是骨干核心，只有网站能正确运行并具有相应的功能，我们才好在上面加皮肤。</p>
+<h2 id="应用程序-django-bootstrap3"><a href="#应用程序-django-bootstrap3" class="headerlink" title="应用程序 django-bootstrap3"></a>应用程序 django-bootstrap3</h2><p>为安装 django-bootstrap3 ，在活动的虚拟环境中执行如下命令：</p>
+<pre><code>pip install django-bootstrap3
+</code></pre><p>需要在 settings.py 的 INSTALLED_APPS 中添加如下代码，在项目中包含应用程序 django-boostrap3：</p>
+<pre><code># 我的应用程序
+&apos;learning_logs&apos;,
+&apos;users&apos;,
+
+# 第三方应用程序
+&apos;bootstrap3&apos;,
+</code></pre><p>我们需要让 django-bootstrap3 包含 jQuery ，这是一个 JavaScript 库，让我们能够使用 Bootstrap 模板提供的一些交互式元素。在 settings.py 的末尾添加如下代码：</p>
+<pre><code># 我的设置
+LOGIN_URL = &apos;/users/login/&apos;
+
+# django-bootstrap3 的设置
+BOOTSTRAP3 = {
+    &apos;include_jquery&apos;: True,
+    }
+</code></pre><p>这样，我们就无需手工下载 jQuery 并将其放到正确的地方。</p>
+<h2 id="使用-Bootstrap-来设置项目“学习笔记”的样式"><a href="#使用-Bootstrap-来设置项目“学习笔记”的样式" class="headerlink" title="使用 Bootstrap 来设置项目“学习笔记”的样式"></a>使用 Bootstrap 来设置项目“学习笔记”的样式</h2><p>Bootstrap 基本上就是一个大型的样式设置工具集，它还提供了大量的模板，我们可将它们应用于项目以创建独特的总体风格。</p>
+<p>要查看 Bootstrap 提供的模板，可访问 <a href="http://getbootstrap.com/" target="_blank" rel="noopener">http://getbootstrap.com/</a> ，单击 Getting Started ，再向下滚动到 Examples 部分，并找到 Navbars in action 。我们将使用模板 Static top navbar ，它提供了简单的顶部导航条、页面标题和用于放置页面内容的容器。</p>
+<h2 id="修改-base-html"><a href="#修改-base-html" class="headerlink" title="修改 base.html"></a>修改 base.html</h2><p>三步：</p>
+<ol>
+<li>定义 HTML 头部</li>
+<li>定义导航栏</li>
+<li>定义页面的主要部分</li>
+</ol>
+<h3 id="定义-HTML-头部"><a href="#定义-HTML-头部" class="headerlink" title="定义 HTML 头部"></a>定义 HTML 头部</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">现在，我们要重新设计文件 base.html 了，删掉其中的**全部**代码，重新构造：</span><br><span class="line"></span><br><span class="line">	&#123;% load bootstrap3 %&#125;  &lt;!--加载 django-bootstrap3 中的模板标签集--&gt;</span><br><span class="line"></span><br><span class="line">	&lt;!DOCTYPE html&gt;</span><br><span class="line">	&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">		&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span><br><span class="line">		&lt;title&gt;Learning Log&lt;/title&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;!--让 Django 包含所有的 Bootstrap 样式文件--&gt;</span><br><span class="line">		&#123;% bootstrap_css %&#125;</span><br><span class="line">		&#123;% bootstrap_javascript %&#125;</span><br><span class="line">		</span><br><span class="line">	&lt;/head&gt;</span><br></pre></td></tr></table></figure>
+<p>先写这一块。</p>
+<h3 id="定义导航栏"><a href="#定义导航栏" class="headerlink" title="定义导航栏"></a>定义导航栏</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;!-- Static navbar --&gt;</span><br><span class="line">	&lt;nav class=&quot;navbar navbar-default navbar-static-top&quot;&gt;</span><br><span class="line">	  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">		  </span><br><span class="line">		&lt;div class=&quot;navbar-header&quot;&gt;</span><br><span class="line">		  &lt;button type=&quot;button&quot; class=&quot;navbar-toggle collapsed&quot;</span><br><span class="line">			  data-toggle=&quot;collapse&quot; data-target=&quot;#navbar&quot;</span><br><span class="line">			  aria-expanded=&quot;false&quot; aria-controls=&quot;navbar&quot;&gt;</span><br><span class="line">		  &lt;/button&gt;</span><br><span class="line">		  &lt;a class=&quot;navbar-brand&quot; href=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot;&gt;</span><br><span class="line">			  Learning Log&lt;/a&gt;</span><br><span class="line">		  &lt;!--我们在导航栏的最左边显示项目名，并将其设置为到主页的链接，</span><br><span class="line">		  因为它将出现在这个项目的每个页面中。--&gt;</span><br><span class="line">			</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;div id=&quot;navbar&quot; class=&quot;navbar-collapse collapse&quot;&gt;</span><br><span class="line">		  &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span><br><span class="line">			&lt;li&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:topics&apos; %&#125;&quot;&gt;Topics&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">		  &lt;/ul&gt;</span><br><span class="line">		  </span><br><span class="line">		  &lt;ul class=&quot;nav navbar-nav navbar-right&quot;&gt;</span><br><span class="line">			&#123;% if user.is_authenticated %&#125;</span><br><span class="line">			  &lt;li&gt;&lt;a&gt;Hello, &#123;&#123; user.username &#125;&#125;.&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">			  &lt;li&gt;&lt;a href=&quot;&#123;% url &apos;users:logout&apos; %&#125;&quot;&gt;log out&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">			&#123;% else %&#125;</span><br><span class="line">			  &lt;li&gt;&lt;a href=&quot;&#123;% url &apos;users:register&apos; %&#125;&quot;&gt;register&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">			  &lt;li&gt;&lt;a href=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot;&gt;log in&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">			&#123;% endif %&#125;</span><br><span class="line">		  &lt;/ul&gt;</span><br><span class="line">		&lt;/div&gt;&lt;!--/.nav-collapse --&gt;</span><br><span class="line">		</span><br><span class="line">	  &lt;/div&gt;</span><br><span class="line">	&lt;/nav&gt;</span><br><span class="line">	</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p> &lt; nav > 元素，表示页面的导航链接部分。对于这个元素内的所有内容，都将根据选择器 （selector）navbar、 navbar-default 和 navbar-static-top 定义的 Bootstrap 样式规则来设置样式。选择器决定了特定样式规则将应用于页面上的哪些元素。</p>
+<p>定义按钮，它将在浏览器窗口太窄、无法水平显示整个导航栏时显示出来。如果用户单击这个按钮，将出现一个下拉列表，其中包含所有的导航元素。</p>
+<p><code>id=&quot;navbar&quot;</code>这段 div 代码，定义了一组让用户能够在网站中导航的链接。导航栏其实就是一个以 \&lt; ul> 打头<br>的列表，其中每个链接都是一个列表项（\&lt; li > ）。要添加更多的链接，可插入更多类似的列表项。</p>
+<p>选择器 navbar-right 设置一组链接的样式，使其出现在导航栏右边——登录链接和注册链接通常出现在这里。</p>
+<h3 id="定义页面的主要部分"><a href="#定义页面的主要部分" class="headerlink" title="定义页面的主要部分"></a>定义页面的主要部分</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div class=&quot;page-header&quot;&gt;</span><br><span class="line">    &#123;% block header %&#125;&#123;% endblock %&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/div&gt; &lt;!-- /container --&gt;</span><br></pre></td></tr></table></figure>
+<p>这一块内容与上一个章节部分相似，区别在于 header 块的内容告诉用户页面包含哪些信息以及用户可在页面上执行哪些操作；其 class 属性值 page-header 将一系列样式应用于这个块。content 块是一个独立的 div ，未使用 class 属性指定样式。</p>
+<h2 id="使用-jumbotron-设置主页的样式"><a href="#使用-jumbotron-设置主页的样式" class="headerlink" title="使用 jumbotron 设置主页的样式"></a>使用 jumbotron 设置主页的样式</h2><p>打开 index.html ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;div class=&apos;jumbotron&apos;&gt;</span><br><span class="line">	  &lt;h1&gt;Track your learning.&lt;/h1&gt;        </span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">  &lt;h2&gt;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;users:register&apos; %&#125;&quot;&gt;Register an account&lt;/a&gt; to make </span><br><span class="line">	your own Learning Log, and list the topics you&apos;re learning about.</span><br><span class="line">  &lt;/h2&gt;</span><br><span class="line">  &lt;h2&gt;</span><br><span class="line">	Whenever you learn something new about a topic, make an entry </span><br><span class="line">	summarizing what you&apos;ve learned.</span><br><span class="line">  &lt;/h2&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>成型后页面如图所示：<br><img src="/ganru.github.io/2018/11/24/Web应用（第三部分）/1.png"></p>
+<h2 id="设置登录页面的样式"><a href="#设置登录页面的样式" class="headerlink" title="设置登录页面的样式"></a>设置登录页面的样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line">&#123;% load bootstrap3 %&#125;</span><br><span class="line">&lt;!--加载 bootstrap3 模板标签--&gt;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;h2&gt;Log in to your account.&lt;/h2&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	</span><br><span class="line">  &lt;form method=&quot;post&quot; action=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot; class=&quot;form&quot;&gt;</span><br><span class="line">	&#123;% csrf_token %&#125;</span><br><span class="line">	&#123;% bootstrap_form form %&#125;</span><br><span class="line">	&lt;!--将 Bootstrap 样式规则应用于各个表单元素，以显示表单，</span><br><span class="line">	替换了在第 19 章使用的标签 &#123;&#123; form.as_p &#125;&#125;--&gt;</span><br><span class="line"></span><br><span class="line">	&#123;% buttons %&#125;</span><br><span class="line">	  &lt;button name=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;log in&lt;/button&gt;</span><br><span class="line">	&#123;% endbuttons %&#125;</span><br><span class="line">	</span><br><span class="line">	&lt;input type=&quot;hidden&quot; name=&quot;next&quot; value=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot; /&gt;</span><br><span class="line">  &lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：我们从这个模板中删除了 { % if form.errors %} 代码块，因为 django-bootstrap3 已经可以实现相应的功能（会自动管理表单错误）。</p>
+<h2 id="设置-new-topic-页面的样式"><a href="#设置-new-topic-页面的样式" class="headerlink" title="设置 new_topic 页面的样式"></a>设置 new_topic 页面的样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line">&#123;% load bootstrap3 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;h2&gt;Add a new topic:&lt;/h2&gt;</span><br><span class="line">&#123;% endblock header %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	</span><br><span class="line">  &lt;form action=&quot;&#123;% url &apos;learning_logs:new_topic&apos; %&#125;&quot; method=&apos;post&apos;</span><br><span class="line">	  class=&quot;form&quot;&gt;</span><br><span class="line">	  </span><br><span class="line">	&#123;% csrf_token %&#125;</span><br><span class="line">	&#123;% bootstrap_form form %&#125;</span><br><span class="line">	</span><br><span class="line">	&#123;% buttons %&#125;</span><br><span class="line">	  &lt;button name=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;add topic&lt;/button&gt;</span><br><span class="line">	&#123;% endbuttons %&#125;</span><br><span class="line">	</span><br><span class="line">  &lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="设置-topics-页面的样式"><a href="#设置-topics-页面的样式" class="headerlink" title="设置 topics 页面的样式"></a>设置 topics 页面的样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;h1&gt;Topics&lt;/h1&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line">  &lt;ul&gt;</span><br><span class="line">	&#123;% for topic in topics %&#125;</span><br><span class="line">	  &lt;li&gt;</span><br><span class="line">		&lt;h3&gt;</span><br><span class="line">		  &lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;</span><br><span class="line">		&lt;/h3&gt;</span><br><span class="line">	  &lt;/li&gt;</span><br><span class="line">	&#123;% empty %&#125;</span><br><span class="line">	  &lt;li&gt;No topics have been added yet.&lt;/li&gt;</span><br><span class="line">	&#123;% endfor %&#125;</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;h3&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:new_topic&apos; %&#125;&quot;&gt;Add new topic&lt;/h3&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>这里注意，不用导入标签{ % load bootstrap3 % } ，因为我们没有用到它的标签集。</p>
+<h2 id="设置-topic-页面中条目的样式"><a href="#设置-topic-页面中条目的样式" class="headerlink" title="设置 topic 页面中条目的样式"></a>设置 topic 页面中条目的样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &apos;learning_logs/base.html&apos; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;h2&gt;&#123;&#123; topic &#125;&#125;&lt;/h2&gt;</span><br><span class="line">&#123;% endblock header %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">  &lt;p&gt;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;learning_logs:new_entry&apos; topic.id %&#125;&quot;&gt;add new entry&lt;/a&gt;</span><br><span class="line">  &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">  &#123;% for entry in entries %&#125;</span><br><span class="line">	&lt;div class=&quot;panel panel-default&quot;&gt;</span><br><span class="line">	&lt;!--使用 Bootstrap 面板（panel）来突出每个条目--&gt;</span><br><span class="line">	  &lt;div class=&quot;panel-heading&quot;&gt;  &lt;!--面板标题--&gt;</span><br><span class="line">		&lt;h3&gt;</span><br><span class="line">		  &#123;&#123; entry.date_added|date:&apos;M d, Y H:i&apos; &#125;&#125;</span><br><span class="line">		  &lt;small&gt;  &lt;!--使其比时间戳小些--&gt;</span><br><span class="line">			&lt;a href=&quot;&#123;% url &apos;learning_logs:edit_entry&apos; entry.id %&#125;&quot;&gt;</span><br><span class="line">			  edit entry&lt;/a&gt;</span><br><span class="line">		  &lt;/small&gt;</span><br><span class="line">		&lt;/h3&gt;</span><br><span class="line">	  &lt;/div&gt;</span><br><span class="line">	  &lt;div class=&quot;panel-body&quot;&gt;  &lt;!--面板主体--&gt;</span><br><span class="line">		&#123;&#123; entry.text|linebreaks &#125;&#125;</span><br><span class="line">	  &lt;/div&gt;</span><br><span class="line">	&lt;/div&gt; &lt;!-- panel --&gt;</span><br><span class="line">  &#123;% empty %&#125;</span><br><span class="line">	There are no entries for this topic yet.</span><br><span class="line">  &#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>到此为止，本地博客网站建立完毕。</p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>具体建议参考原书步骤。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/11/22/Web应用（第二部分）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -444,22 +641,8 @@ def new_topic(request):
 <p><code>if request.method != &#39;POST&#39;:</code>测试确定请求方法是 GET 还是 POST 。如果请求方法不是 POST ，请求就可能是 GET ，因此我们需要返回一个空表单（即便请求是其他类型的，返回一个空表单也不会有任何问题）。由于实例化 TopicForm 时我们没有指定任何实参， Django 将创建一个可供用户填写的空表单。<br>如果请求方法为 POST ，将执行 else 代码块，对提交的表单数据进行处理。我们使用用户输入的数据（它们存储在 request.POST 中）创建一个 TopicForm 实例，这样对象 form 将包含用户提交的信息。</p>
 <p>要将提交的信息保存到数据库，必须先通过检查确定它们是有效的。函数 is_valid() 核实用户填写了所有必不可少的字段（表单字段默认都是必不可少的），且输入的数据与要求的<br>字段类型一致（例如，字段 text 少于 200 个字符，这是我们在上一章节中的 models.py 中指定的），这种自动验证避免了我们去做大量的工作。如果所有字段都有效，我们就可调用 save() ，将表单中的数据写入数据库。</p>
 <p>保存数据后，就可离开这个页面了。我们使用 reverse() 获取页面 topics 的 URL ，并将其传递给 HttpResponseRedirect() ，后者将用户的浏览器重定向到页面 topics 。在页面 topics 中，用户将在主题列表中看到他刚输入的主题。</p>
-<h3 id="模板-new-topic"><a href="#模板-new-topic" class="headerlink" title="模板 new_topic"></a>模板 new_topic</h3><p>下面来创建新模板 new_topic.html ，用于显示我们刚创建的表单：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-		<p>Add a new topic:</p>
-		
-		// 定义一个表单
-		<form action="{% url 'learning_logs:new_topic' %}" method="post">
-		
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button name="submit">add topic</button>
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>实参 action 告诉服务器将提交的表单数据发送到哪里，这里我们将它发回给视图函数 new_topic() 。<br>实参 method 让浏览器以 POST 请求的方式提交数据。</p>
+<h3 id="模板-new-topic"><a href="#模板-new-topic" class="headerlink" title="模板 new_topic"></a>模板 new_topic</h3><p>下面来创建新模板 new_topic.html ，用于显示我们刚创建的表单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;Add a new topic:&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	// 定义一个表单</span><br><span class="line">	&lt;form action=&quot;&#123;% url &apos;learning_logs:new_topic&apos; %&#125;&quot; method=&apos;post&apos;&gt;</span><br><span class="line">	</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		&lt;button name=&quot;submit&quot;&gt;add topic&lt;/button&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实参 action 告诉服务器将提交的表单数据发送到哪里，这里我们将它发回给视图函数 new_topic() 。<br>实参 method 让浏览器以 POST 请求的方式提交数据。</p>
 <p>Django 使用模板标签 { % csrf_token % } 来防止攻击者利用表单来获得对服务器未经授权的访问（这种攻击被称为跨站请求伪造）。<br>显示表单：我们只需包含模板变量{ { form.as_p } }，就可让 Django 自动创建显示表单所需的全部字段。修饰符 as_p 让 Django 以段落格式渲染所有表单元素，这是一种整洁地显示表单的简单方式。</p>
 <p>Django 不会为表单创建提交按钮，因此我们定义了一个这样的按钮。</p>
 <h3 id="链接到页面-new-topic"><a href="#链接到页面-new-topic" class="headerlink" title="链接到页面 new_topic"></a>链接到页面 new_topic</h3><p>接下来，我们在页面 topics 中添加一个到页面 new_topic 的链接：</p>
@@ -505,33 +688,10 @@ def new_entry(request, topic_id):
 <p>创建一个 EntryForm 实例，使用 request 对象中的 POST 数据来填充它；再检查表单是否有效，如果有效，就设置条目对象的属性 topic ，再将条目对象保存到数据库。</p>
 <p>调用 save() 时，我们传递了实参 commit=False ，让 Django 创建一个新的条目对象，并将其存储到 new_entry 中，但不将它保存到数据库中。我们将 new_entry 的属性 topic 设置为在这个函数开头从数据库中获取的主题，然后调用 save() ，且不指定任何实参。这将把条目保存到数据库，并将其与正确的主题相关联。</p>
 <p>然后我们将用户重定向到显示相关主题的页面。调用 reverse() 时，需要提供两个实参：<br>要根据它来生成 URL 的 URL 模式的名称；列表 args ，其中包含要包含在 URL 中的所有实参。在这里，列表 args 只有一个元素——topic_id 。接下来，调用 HttpResponseRedirect() 将用户重定向到显示新增条目所属主题的页面，用户将在该页面的条目列表中看到新添加的条目。</p>
-<h3 id="模板-new-entry"><a href="#模板-new-entry" class="headerlink" title="模板 new_entry"></a>模板 new_entry</h3><p>模板 new_entry 类似于模板 new_topic ：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-		<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
-		<!--在页面顶端显示主题-->
-		
-		<p>Add a new entry:</p>
-		
-		<form action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button name="submit">add entry</button>
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>表单的实参 action 包含 URL 中的 topic_id 值，让视图函数能够将新条目关联到正确的主题。</p>
-<h3 id="链接到页面-new-entry"><a href="#链接到页面-new-entry" class="headerlink" title="链接到页面 new_entry"></a>链接到页面 new_entry</h3><p>跳转到 topic.html ：</p>
-<pre><code>&lt;p&gt;Entries:&lt;/p&gt;
-&lt;p&gt;
-    &lt;a href=&quot;{% url 'learning_logs:new_entry' topic.id %}&quot;&gt;add new entry&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;ul&gt;
-    --snip—-
-&lt;/ul&gt;
-</code></pre><h2 id="编辑条目"><a href="#编辑条目" class="headerlink" title="编辑条目"></a>编辑条目</h2><p>下面来创建一个页面，让用户能够编辑既有的条目。</p>
+<h3 id="模板-new-entry"><a href="#模板-new-entry" class="headerlink" title="模板 new_entry"></a>模板 new_entry</h3><p>模板 new_entry 类似于模板 new_topic ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">	&lt;!--在页面顶端显示主题--&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;p&gt;Add a new entry:&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;form action=&quot;&#123;% url &apos;learning_logs:new_entry&apos; topic.id %&#125;&quot; method=&apos;post&apos;&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		&lt;button name=&apos;submit&apos;&gt;add entry&lt;/button&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>表单的实参 action 包含 URL 中的 topic_id 值，让视图函数能够将新条目关联到正确的主题。</p>
+<h3 id="链接到页面-new-entry"><a href="#链接到页面-new-entry" class="headerlink" title="链接到页面 new_entry"></a>链接到页面 new_entry</h3><p>跳转到 topic.html ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Entries:&lt;/p&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;learning_logs:new_entry&apos; topic.id %&#125;&quot;&gt;add new entry&lt;/a&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">	--snip—-</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="编辑条目"><a href="#编辑条目" class="headerlink" title="编辑条目"></a>编辑条目</h2><p>下面来创建一个页面，让用户能够编辑既有的条目。</p>
 <h3 id="URL-模式-edit-entry"><a href="#URL-模式-edit-entry" class="headerlink" title="URL 模式 edit_entry"></a>URL 模式 edit_entry</h3><p>跳转到 learning_logs/urls.py :</p>
 <pre><code># 用于编辑条目的页面
 url(&apos;edit_entry/(?P&lt;entry_id&gt;\d+)/&apos;, views.edit_entry, name=&apos;edit_entry&apos;),
@@ -555,21 +715,8 @@ url(&apos;edit_entry/(?P&lt;entry_id&gt;\d+)/&apos;, views.edit_entry, name=&apo
     return render(request, &apos;learning_logs/edit_entry.html&apos;, context)
 </code></pre><p>初次请求，基本都是 get ，我们使用实参 instance=entry 创建一个 EntryForm 实例。这个实参让 Django 创建一个表单，并使用既有条目对象中的信息填充它。用户将看到既有的数据，并能够编辑它们。</p>
 <p>处理 POST 请求时，我们传递实参 instance=entry 和 data=request.POST ，让 Django 根据既有条目对象创建一个表单实例，并根据 request.POST 中的相关数据对其进行修改。然后，我们检查表单是否有效，如果有效，就调用 save() ，且不指定任何实参。接下来，我们重定向到显示条目所属主题的页面，用户将在其中看到其编辑的条目的新版本。</p>
-<h3 id="模板-edit-entry"><a href="#模板-edit-entry" class="headerlink" title="模板 edit_entry"></a>模板 edit_entry</h3><pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-		<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
-		
-		<p>Edit entry:</p>
-		
-		<form action="{% url 'learning_logs:edit_entry' entry.id %}" method="post">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button name="submit">save changes</button>
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>实参 action 将表单发回给函数 edit_entry() 进行处理。在标签{ % url % } 中，我们将条目 ID 作为一个实参，让视图对象能够修改正确的条目对象。我们将提交按钮命名为 save changes ，以提醒用户：单击该按钮将保存所做的编辑，而不是创建一个新条目。</p>
+<h3 id="模板-edit-entry"><a href="#模板-edit-entry" class="headerlink" title="模板 edit_entry"></a>模板 edit_entry</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;p&gt;Edit entry:&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;form action=&quot;&#123;% url &apos;learning_logs:edit_entry&apos; entry.id %&#125;&quot; method=&apos;post&apos;&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		&lt;button name=&apos;submit&apos;&gt;save changes&lt;/button&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>实参 action 将表单发回给函数 edit_entry() 进行处理。在标签{ % url % } 中，我们将条目 ID 作为一个实参，让视图对象能够修改正确的条目对象。我们将提交按钮命名为 save changes ，以提醒用户：单击该按钮将保存所做的编辑，而不是创建一个新条目。</p>
 <h3 id="链接到页面-edit-entry"><a href="#链接到页面-edit-entry" class="headerlink" title="链接到页面 edit_entry"></a>链接到页面 edit_entry</h3><p>现在，在显示特定主题的页面中，需要给每个条目添加到页面 edit_entry 的链接：</p>
 <pre><code>&lt;p&gt;{{ entry.date_added|date:'M d, Y H:i' }}&lt;/p&gt;
 &lt;p&gt;{{ entry.text|linebreaks }}&lt;/p&gt;
@@ -613,36 +760,11 @@ urlpatterns = [
   path(&apos;login/&apos;, LoginView.as_view(template_name=&apos;users/login.html&apos;), name=&quot;login&quot;),
 ]
 </code></pre><h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>鉴于我们没有编写自己的视图函数，我们传递了一个字典，告诉 Django 去哪里查找我们将编写的模板。这个模板包含在应用程序 users 而不是 learning_logs 中。所以这里的步骤稍有不同，直接写模板。</p>
-<p>模板 login.html ，应将其存储到目录<strong> users/templates/users/ </strong>中：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-&lt;!--请注意，一个应用程序中的模板可继承另一个应用程序中的模板。--&gt;
-
-{% block content %}
-
-		{% if form.errors %}
-		<p>Your username and password didn't match. Please try again.</p>
-		{% endif %}
-		
-		<form method="post" action="{% url 'users:login' %}">
-		<!--login 是登陆视图函数的名称-->
-			{% csrf_token %}
-			{{ form.as_p }}
-			
-			<button name="submit">log in</button>
-			<input type="hidden" name="next" value="{% url 'learning_logs:index' %}">
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>如果表单的 errors 属性被设置，我们就显示一条错误消息，指出输入的用户名——密码对与数据库中存储的任何用户名——密码对都不匹配。</p>
+<p>模板 login.html ，应将其存储到目录<strong> users/templates/users/ </strong>中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line">&lt;!--请注意，一个应用程序中的模板可继承另一个应用程序中的模板。--&gt;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line">	&#123;% if form.errors %&#125;</span><br><span class="line">	&lt;p&gt;Your username and password didn&apos;t match. Please try again.&lt;/p&gt;</span><br><span class="line">	&#123;% endif %&#125;</span><br><span class="line">	</span><br><span class="line">	&lt;form method=&quot;post&quot; action=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot;&gt;</span><br><span class="line">	&lt;!--login 是登陆视图函数的名称--&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		</span><br><span class="line">		&lt;button name=&quot;submit&quot;&gt;log in&lt;/button&gt;</span><br><span class="line">		&lt;input type=&quot;hidden&quot; name=&quot;next&quot; value=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot; /&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果表单的 errors 属性被设置，我们就显示一条错误消息，指出输入的用户名——密码对与数据库中存储的任何用户名——密码对都不匹配。</p>
 <p>我们要让登录视图处理表单，因此将实参 action 设置为登录页面的 URL 。登录视图将一个表单发送给模板，在模板中，我们显示这个表单并添加一个提交按钮。我们包含了一个隐藏的表单元素—— ‘next’ ，其中的实参 value 告诉 Django 在用户成功登录后将其重定向到什么地方——在这里是主页。</p>
-<p>然后就是把它链接到登陆页面。因为我们要让这个设置起到一个效果：未登陆时，所有的页面都有它，登陆过后，就没有这个设置，所以我们要将它链接到基础模板里面：</p>
-<pre><code>&lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt; -
-{% if user.is_authenticated %}
-		Hello, {{ user.username }}.
-	{% else %}
-		<a href="{% url 'users:login' %}">log in</a>
-	{% endif %}
-</code></pre><p>在 Django 身份验证系统中，每个模板都可使用变量 user ，这个变量有一个 is_authenticated 属性：如果用户已登录，该属性将为 True ，否则为 False 。这让你能够向已通过身份验证的用户显示一条消息，而向未通过身份验证的用户显示另一条消息。</p>
+<p>然后就是把它链接到登陆页面。因为我们要让这个设置起到一个效果：未登陆时，所有的页面都有它，登陆过后，就没有这个设置，所以我们要将它链接到基础模板里面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&#123;% url &apos;learning_logs:topics&apos; %&#125;&quot;&gt;Topics&lt;/a&gt; -</span><br><span class="line">&#123;% if user.is_authenticated %&#125;</span><br><span class="line">	Hello, &#123;&#123; user.username &#125;&#125;.</span><br><span class="line">&#123;% else %&#125;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot;&gt;log in&lt;/a&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在 Django 身份验证系统中，每个模板都可使用变量 user ，这个变量有一个 is_authenticated 属性：如果用户已登录，该属性将为 True ，否则为 False 。这让你能够向已通过身份验证的用户显示一条消息，而向未通过身份验证的用户显示另一条消息。</p>
 <p>可以看到：<br><img src="/ganru.github.io/2018/11/22/Web应用（第二部分）/3.png"></p>
 <p>如果看到的是已登录页面，打开管理员网站 <a href="http://localhost:8000/admin/" target="_blank" rel="noopener">http://localhost:8000/admin/</a> 退出登录。</p>
 <h2 id="注销"><a href="#注销" class="headerlink" title="注销"></a>注销</h2><p>在这里我们不用建立注销页面（注销都要走流程你烦我也烦…），所以我们只要建立一个链接一键注销并且返回主页就行了。</p>
@@ -693,21 +815,8 @@ def register(request):
     context = {&apos;form&apos;: form}
     return render(request, &apos;users/register.html&apos;, context)
 </code></pre><p>导入包，其中 authenticate 用于验证用户，验证无误返回 True ，否则返回 False 。</p>
-<h3 id="注册模板"><a href="#注册模板" class="headerlink" title="注册模板"></a>注册模板</h3><p>注册页面的模板与登录页面的模板类似：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-
-		<form method="post" action="{% url 'users:register' %}">
-			{% csrf_token %}
-			{{ form.as_p }}
-			
-			<button name="submit">register</button>
-			<input type="hidden" name="next" value="{% url 'learning_logs:index' %}">
-		</form>
-		
-	{% endblock content %}
-</code></pre><p>方法 as_p ，让 Django 在表单中正确地显示所有的字段，包括错误消息——如果用户没有正确地填写表单。</p>
+<h3 id="注册模板"><a href="#注册模板" class="headerlink" title="注册模板"></a>注册模板</h3><p>注册页面的模板与登录页面的模板类似：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line">	&lt;form method=&quot;post&quot; action=&quot;&#123;% url &apos;users:register&apos; %&#125;&quot;&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		</span><br><span class="line">		&lt;button name=&quot;submit&quot;&gt;register&lt;/button&gt;</span><br><span class="line">		&lt;input type=&quot;hidden&quot; name=&quot;next&quot; value=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot; /&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法 as_p ，让 Django 在表单中正确地显示所有的字段，包括错误消息——如果用户没有正确地填写表单。</p>
 <h3 id="链接到注册页面"><a href="#链接到注册页面" class="headerlink" title="链接到注册页面"></a>链接到注册页面</h3><p>我们将它放在标签{ % else % } 中，使得我们在用户没有登录时看到它 (base.html) ：</p>
 <pre><code>&lt;a href=&quot;{% url 'users:register' %}&quot;&gt;register&lt;/a&gt; -
 </code></pre><h1 id="授予用户写数据的权限"><a href="#授予用户写数据的权限" class="headerlink" title="授予用户写数据的权限"></a>授予用户写数据的权限</h1><p>注册了之后，用户需要有在这个项目写东西的能力。<br>我们将修改模型 Topic ，让每个主题都归属于特定用户。这也将影响条目，因为每个条目都属于特定的主题。我们先来限制对一些页面的访问。</p>
@@ -1410,7 +1519,7 @@ urlpatterns = [
     path(&apos;admin/&apos;, admin.site.urls),
 ]
 </code></pre><p>前两行导入了为项目和管理网站管理 URL 的函数和模块，这个文件的主体定义了变量 urlpatterns 。在这个针对整个项目的urls.py 文件中，变量 urlpatterns 包含项目中的应用程序的 URL 。</p>
-<p>现在，我们需要基础 URL（<a href="http://localhost:8000/）：" target="_blank" rel="noopener">http://localhost:8000/）：</a></p>
+<p>现在，我们需要基础 URL（<a href="http://localhost:8000/" target="_blank" rel="noopener">http://localhost:8000/</a> ）：</p>
 <pre><code>url(r&apos;&apos;, include(&apos;learning_logs.urls&apos;, namespace=&apos;learning_logs&apos;)),
 // 上面是书中的代码，这里我改为：
 path(&apos;&apos;, include(&apos;learning_logs.urls&apos;, namespace=&apos;learning_logs&apos;)),
@@ -1428,7 +1537,7 @@ urlpatterns = [
     path(&apos;&apos;, views.index, name=&apos;index&apos;),
 ]
 </code></pre><p>为弄清楚当前位于哪个 urls.py 文件中，我们在这个文件开头添加了一个文档字符串。接下来，我们导入了函数 path ，因为我们需要使用它来将 URL 映射到视图。我们还导入了模块 views ，其中的句点让 Python 从当前的 urls.py 模块所在的文件夹中导入视图。在这个模块中，变量 urlpatterns 是一个列表，包含可在应用程序 learning_logs 中请求的网页。</p>
-<p>书里面是有正则表达式 r’^$’ 的，不过我改为了 ‘’ 。这是为了匹配基础 URL（<a href="http://localhost:8000/），因为我们前面包含基础" target="_blank" rel="noopener">http://localhost:8000/），因为我们前面包含基础</a> URL（<a href="http://localhost:8000/）时就是这么干的。第二个实参指定了要调用的视图函数。请求的" target="_blank" rel="noopener">http://localhost:8000/）时就是这么干的。第二个实参指定了要调用的视图函数。请求的</a> URL 与前述正则表达式匹配时，Django 将调用 views.index（这个视图函数将在下一节编写）。第三个实参将这个 URL 模式的名称指定为 index ，让我们能够在代码的其他地方引用它。每当需要提供到这个主页的链接时，我们都将使用这个名称，而不编写 URL 。</p>
+<p>书里面是有正则表达式 r’^$’ 的，不过我改为了 ‘’ 。这是为了匹配基础 URL（<a href="http://localhost:8000/" target="_blank" rel="noopener">http://localhost:8000/</a> ），因为我们前面包含基础 URL（<a href="http://localhost:8000/" target="_blank" rel="noopener">http://localhost:8000/</a> ）时就是这么干的。第二个实参指定了要调用的视图函数。请求的 URL 与前述正则表达式匹配时，Django 将调用 views.index（这个视图函数将在下一节编写）。第三个实参将这个 URL 模式的名称指定为 index ，让我们能够在代码的其他地方引用它。每当需要提供到这个主页的链接时，我们都将使用这个名称，而不编写 URL 。</p>
 <h2 id="编写视图"><a href="#编写视图" class="headerlink" title="编写视图"></a>编写视图</h2><p>视图函数接受请求中的信息，准备好生成网页所需的数据，再将这些数据发送给浏览器——这通常是使用定义了网页是什么样的模板实现的。<br>这次我们打开文件 views.py 看看里面有什么：</p>
 <pre><code>from django.shortcuts import render
 # Create your views here.
@@ -1440,53 +1549,15 @@ urlpatterns = [
 <p>补充：<br>render() 其实是 Django 的快捷函数，这里贴出<a href="https://docs.djangoproject.com/zh-hans/2.1/topics/http/shortcuts/#django.shortcuts.render" target="_blank" rel="noopener">官方文档</a> 。<br>render 函数的形式是<code>render(request, template_name, context=None, content_type=None, status=None, using=None)</code>。首先前面两个是必须写的参数，request 用于生成此响应的请求对象。template_name 要使用的模板的全名或模板名称的序列。如果给定一个序列，则将使用存在的第一个模板。</p>
 <h2 id="编写模板"><a href="#编写模板" class="headerlink" title="编写模板"></a>编写模板</h2><p>在文件夹 learning_logs 中新建一个文件夹，并将其命名为 templates 。在文件夹 templates 中，再新建一个文件夹，并将其命名为 learning_logs 。这好像有点多余（我们在文件夹 learning_logs 中创建了文件夹 templates，又在这个文件夹中创建了文件夹 learning_logs），但建立了 Django 能够明确解读的结构，即便项目很大，包含很多应用程序亦如此。</p>
 <p>书里面的大白话是这么讲的，可能有些人还不能理解这种行为，换句话讲，其实就是一种规范。 Django 遍历模板的时候是要在文件夹 templates 中遍历的。而在这个文件夹中又建立一个子文件夹，还跟应用程序 learning_logs 同名，这是因为后续我们使用模板路径的时候，是像这样这么用的：<code>render(request, &#39;learning_logs/index.html&#39;)</code>，而这个路径 Django 又是从文件夹 templates 中遍历的。所以为了方便，我们就这么做了。（我是这么理解的）</p>
-<p>在最里面的文件夹 learning_logs 中，新建一个文件，并将其命名为 index.html，然后在里面写 HTML ：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Home&lt;/title&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-    &lt;p&gt;Learning Log&lt;/p&gt;
-    &lt;p&gt;Learning Log helps you keep track of your learning, 
-    for any topic you&apos;re learning about.&lt;/p&gt;
-&lt;/body&gt;
-
-&lt;/html&gt;
-</code></pre><p>这个时候，我们就可以在浏览器打开基础 URL 了，不过得注意，这个时候记得先把 Django 服务关掉在重开一遍。然后我们就可以在网站上看到我们写的这两行代码。</p>
+<p>在最里面的文件夹 learning_logs 中，新建一个文件，并将其命名为 index.html，然后在里面写 HTML ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">	&lt;title&gt;Home&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;p&gt;Learning Log&lt;/p&gt;</span><br><span class="line">	&lt;p&gt;Learning Log helps you keep track of your learning, </span><br><span class="line">	for any topic you&apos;re learning about.&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这个时候，我们就可以在浏览器打开基础 URL 了，不过得注意，这个时候记得先把 Django 服务关掉在重开一遍。然后我们就可以在网站上看到我们写的这两行代码。</p>
 <h1 id="创建其他网页"><a href="#创建其他网页" class="headerlink" title="创建其他网页"></a>创建其他网页</h1><p>制定创建网页的流程后，可以开始扩充“学习笔记”项目了。我们将创建两个显示数据的网页，其中一个列出所有的主题，另一个显示特定主题的所有条目。对于每个网页，我们都将指定 URL 模式，编写一个视图函数，并编写一个模板。但这样做之前，我们先创建一个父模板，项目中的其他模板都将继承它。</p>
 <h2 id="模板继承"><a href="#模板继承" class="headerlink" title="模板继承"></a>模板继承</h2><p>模板继承存在的意义，是为了避免通用元素被重复定义，类比于我们学习的父类继承。</p>
-<h3 id="父模板"><a href="#父模板" class="headerlink" title="父模板"></a>父模板</h3><p>我们首先来创建一个名为 base.html 的模板，并将其存储在 index.html 所在的目录中。这个文件包含所有页面都有的元素；其他的模板都继承 base.html。<br>因为每个网页都有顶端标题，所以我们把这个元素写进父模板内（这里以及下一段我简略了 html 的代码）：</p>
-<pre><code>&lt;p&gt;
-    &lt;a href = &quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;
-&lt;/p&gt;
-
-{% block content %}{% endblock content %}
-	// 这是一个块标签，
-	// 表示一个名为content的块，
-	// 其中的内容需要由子模块指定。
-	// 可以在base.html中定义多个块，但是子模块可以只指定其中的一个或几个，不是必须全部指定。
-	
-这里写的超链接方式采用的是模板标签，它是用大括号和百分号（\{ % % \}）表示的。
-模板标签 \{ % url 'learning_logs:index' % \} 生成一个 URL，该 URL 与 learning_logs/urls.py 中定义的名为 index 的 URL 模式匹配。
-learning_logs 是一个命名空间，就是我们在映射 URL 里面写的` path('', include('learning_logs.urls', namespace='learning_logs')), `，而 index 是在 /learning_logs/urls.py 中的 urlpatterns 中定义的。
-
-我们插入了一对块标签。这个块名为 content，是一个占位符，其中包含的信息将由子模板指定。
-
-### 子模板
-
-现在，需要重新编写 index.html，使其继承 base.html ：
-
-	{% extends "learning_logs/base.html" %}
-
-	{% block content %}
-	  <p>Learning Log</p>
-	  <p>Learning Log helps you keep track of your learning, for any topic you're learning about.</p>
-	{% endblock content %}
-</code></pre><p>第一行表示继承于哪个模板。我们插入了一个名为 content 的 { % block % } 标签，以定义 content 块。不是从父模板继承的内容都包含在 content 块中，在这里是一个描述项目“学习笔记”的段落。最后我们使用标签 { % endblock content % } 指出了内容定义的结束位置。</p>
+<h3 id="父模板"><a href="#父模板" class="headerlink" title="父模板"></a>父模板</h3><p>我们首先来创建一个名为 base.html 的模板，并将其存储在 index.html 所在的目录中。这个文件包含所有页面都有的元素；其他的模板都继承 base.html。<br>因为每个网页都有顶端标题，所以我们把这个元素写进父模板内（这里以及下一段我简略了 html 的代码）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">	&lt;a href = &quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot;&gt;Learning Log&lt;/a&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;&#123;% endblock content %&#125;</span><br><span class="line">// 这是一个块标签，</span><br><span class="line">// 表示一个名为content的块，</span><br><span class="line">// 其中的内容需要由子模块指定。</span><br><span class="line">// 可以在base.html中定义多个块，但是子模块可以只指定其中的一个或几个，不是必须全部指定。</span><br></pre></td></tr></table></figure></p>
+<p>这里写的超链接方式采用的是模板标签，它是用大括号和百分号（{ % % }）表示的。<br>模板标签 { % url ‘learning_logs:index’ % } 生成一个 URL，该 URL 与 learning_logs/urls.py 中定义的名为 index 的 URL 模式匹配。<br>learning_logs 是一个命名空间，就是我们在映射 URL 里面写的<code>path(&#39;&#39;, include(&#39;learning_logs.urls&#39;, namespace=&#39;learning_logs&#39;)),</code>，而 index 是在 /learning_logs/urls.py 中的 urlpatterns 中定义的。</p>
+<p>我们插入了一对块标签。这个块名为 content，是一个占位符，其中包含的信息将由子模板指定。</p>
+<h3 id="子模板"><a href="#子模板" class="headerlink" title="子模板"></a>子模板</h3><p>现在，需要重新编写 index.html，使其继承 base.html ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">  &lt;p&gt;Learning Log&lt;/p&gt;</span><br><span class="line">  &lt;p&gt;Learning Log helps you keep track of your learning, for any topic you&apos;re learning about.&lt;/p&gt;</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第一行表示继承于哪个模板。我们插入了一个名为 content 的 { % block % } 标签，以定义 content 块。不是从父模板继承的内容都包含在 content 块中，在这里是一个描述项目“学习笔记”的段落。最后我们使用标签 { % endblock content % } 指出了内容定义的结束位置。</p>
 <h2 id="显示所有主题的页面"><a href="#显示所有主题的页面" class="headerlink" title="显示所有主题的页面"></a>显示所有主题的页面</h2><p>模板继承，让我们能够高效的完成网页群创建，现在我们要开始专注俩个网页：显示全部主题的网页以及显示特定主题中条目的网页。</p>
 <h3 id="URL-模式"><a href="#URL-模式" class="headerlink" title="URL 模式"></a>URL 模式</h3><p>首先定义显示所有主题的页面的 URL 。</p>
 <p>跳转到 learning_logs/urls.py ，在 urlpatterns 列表内加上这一段：</p>
@@ -1519,24 +1590,11 @@ def topics(request):
     return render(request, &apos;learning_logs/topics.html&apos;, context)
 </code></pre><p>context = { ‘topics’: topics } 定义了一个上下文，它是一个字典。其中的键是我们将在模板中用来访问数据的名称，而值是我们要发送给模板的数据。<br>这个上下文马上会通过 render 发送到 learning_logs/topics.html 中，用于数据的操作。</p>
 <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>现在新建一个模板 topics.html ：</p>
-<pre><code>{% extends "learning_logs/base.html" %}
-
-{% block content %}
-		<p>Topics</p>
-		
-		<ul>
-			{% for topic in topics %}
-				<li>{{ topic }}</li>
-			{% empty %}
-				<li>No topics have been added yet.</li>
-			{% endfor %}
-		</ul>
-		
-	{% endblock content %}
-</code></pre><p>在这里我们使用了一个相当于 for 循环的模板标签，它遍历字典 context 中的列表 topics 。注意这里有区别，每个for循环都必须使用 { % endfor % } 标签来显式地指出其结束位置。</p>
-<p>在循环中，我们要将每个主题转换为一个项目列表项（ <li></li> ），转化为 html 语言格式方便网站建设。要在模板中打印变量，需要将变量名用双花括号括起来。每次循环时，代码 { { topic } } 都被替换为 topic 的当前值。这些花括号不会出现在网页中，它们只是用于告诉 Django 我们使用了一个模板变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;Topics&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;ul&gt;</span><br><span class="line">		&#123;% for topic in topics %&#125;</span><br><span class="line">			&lt;li&gt;&#123;&#123; topic &#125;&#125;&lt;/li&gt;</span><br><span class="line">		&#123;% empty %&#125;</span><br><span class="line">			&lt;li&gt;No topics have been added yet.&lt;/li&gt;</span><br><span class="line">		&#123;% endfor %&#125;</span><br><span class="line">	&lt;/ul&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里我们使用了一个相当于 for 循环的模板标签，它遍历字典 context 中的列表 topics 。注意这里有区别，每个for循环都必须使用 { % endfor % } 标签来显式地指出其结束位置。</p>
+<p>在循环中，我们要将每个主题转换为一个项目列表项（<code>&lt;li&gt;&lt;/li&gt;</code>），转化为 html 语言格式方便网站建设。要在模板中打印变量，需要将变量名用双花括号括起来。每次循环时，代码 { { topic } } 都被替换为 topic 的当前值。这些花括号不会出现在网页中，它们只是用于告诉 Django 我们使用了一个模板变量。</p>
 <p>现在修改父模板，使其包含到显示所有主题的页面的链接：</p>
-<pre><code>&lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt; -
+<pre><code>&lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt; -
 &lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;
 </code></pre><p>现在刷新一下页面，可以看到：<br><img src="/ganru.github.io/2018/11/09/Web应用（第一部分）/7.png"></p>
 <h2 id="显示特定主题的页面"><a href="#显示特定主题的页面" class="headerlink" title="显示特定主题的页面"></a>显示特定主题的页面</h2><p>老规矩，三步： URL 映射、视图函数编写、模板编写。</p>
@@ -1552,31 +1610,11 @@ path(&apos;topics/(?P&lt;topic_id&gt;\d+)/&apos;, views.topic, name=&apos;topic&
     context = {&apos;topic&apos;: topic, &apos;entries&apos;:entries}
     return render(request, &apos;learning_logs/topic.html&apos;, context)
 </code></pre><p>这个函数包含一个形参 topic_id ，<strong>-</strong>date_added 前的减号表示降序排列，把主题和条目都存在 context 字典中，<br>把上下文 context 传递给 topic.html 。</p>
-<h3 id="模板-1"><a href="#模板-1" class="headerlink" title="模板"></a>模板</h3><p>创建一个新的网页 topic.html :</p>
-<pre><code>{% extends 'learning_logs/base.html' %}
-{% block content %}
-		<p>Topic: {{ topic }}</p>
-		<p>Entries</p>
-		<ul>
-			{% for entry in entries %}
-				<li>
-					<p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
-					<p>{{ entry.text|linebreaks }}</p>
-				</li>
-			{% empty %}
-				<li>
-					There are no entries for this topic yet.
-				</li>
-			{% endfor %}
-		</ul>
-	{% endblock content %}
-</code></pre><p><code>&lt;p&gt;Topic: \{\{ topic \}\} &lt;/p&gt;</code>中的 topic 和<code>\{ % for entry in entries %\}</code>中的 entries 来自 context 上下文，是刚刚由 render 函数传递过来的。</p>
+<h3 id="模板-1"><a href="#模板-1" class="headerlink" title="模板"></a>模板</h3><p>创建一个新的网页 topic.html :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &apos;learning_logs/base.html&apos; %&#125;</span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;Topic: &#123;&#123; topic &#125;&#125;&lt;/p&gt;</span><br><span class="line">	&lt;p&gt;Entries&lt;/p&gt;</span><br><span class="line">	&lt;ul&gt;</span><br><span class="line">		&#123;% for entry in entries %&#125;</span><br><span class="line">			&lt;li&gt;</span><br><span class="line">				&lt;p&gt;&#123;&#123; entry.date_added|date:&apos;M d, Y H:i&apos; &#125;&#125;&lt;/p&gt;</span><br><span class="line">				&lt;p&gt;&#123;&#123; entry.text|linebreaks &#125;&#125;&lt;/p&gt;</span><br><span class="line">			&lt;/li&gt;</span><br><span class="line">		&#123;% empty %&#125;</span><br><span class="line">			&lt;li&gt;</span><br><span class="line">				There are no entries for this topic yet.</span><br><span class="line">			&lt;/li&gt;</span><br><span class="line">		&#123;% endfor %&#125;</span><br><span class="line">	&lt;/ul&gt;</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>&lt;p&gt;Topic:  &lt;/p&gt;</code>中的 topic 和<code>{ % for entry in entries %}</code>中的 entries 来自 context 上下文，是刚刚由 render 函数传递过来的。</p>
 <p>竖线 | 表示模板过滤器。</p>
-<p>最后，修改 topics.html，把 { { topic } } 修改为<code>&lt;a href=&quot;\{ % url &#39;learning_logs:topic&#39; topic.id %\} &quot;&gt;\{\{ topic \}\} &lt;/a&gt;</code>让每个主题都成为链接，链接到相应的主题详情页面：</p>
-<pre><code>&lt;li&gt;
-    &lt;a href=&quot;{% url 'learning_logs:topic' topic.id %}&quot;&gt;{{ topic }}&lt;/a&gt;
-&lt;/li&gt;
-</code></pre><p>我们最后可以看到这个界面：<br><img src="/ganru.github.io/2018/11/09/Web应用（第一部分）/8.png"></p>
+<p>最后，修改 topics.html，把 { { topic } } 修改为<code>&lt;a href=&quot;{ % url &#39;learning_logs:topic&#39; topic.id %} &quot;&gt;  &lt;/a&gt;</code>让每个主题都成为链接，链接到相应的主题详情页面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;</span><br><span class="line">&lt;/li&gt;</span><br></pre></td></tr></table></figure></p>
+<p>我们最后可以看到这个界面：<br><img src="/ganru.github.io/2018/11/09/Web应用（第一部分）/8.png"></p>
 <h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
 <li>虚拟环境及 Django 框架安装</li>
 <li>应用程序的创建流程</li>
@@ -4069,537 +4107,6 @@ def ship_hit(ai_settings, stats, `sb`, screen, ship, aliens, bullets):
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ganru">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小黑屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/" itemprop="url">小游戏之外星人入侵（第二部分）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T18:28:47+08:00">
-                2018-10-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">Python笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong><p>写在前面</p></strong></p>
-<hr>
-<blockquote>
-<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
-</blockquote>
-<blockquote>
-<p><em>游戏简介：</em><br>  <em>在游戏《外星人入侵》中，玩家控制着一艘最初出现在屏幕底部中央的飞船。玩家可以使用箭头键左右移动飞船，还可使用空格键进行射击。游戏开始时，一群外星人出现在天空中，他们在屏幕中向下移动。玩家的任务是射杀这些外星人。玩家将所有外星人都消灭干净后，将出现一群新的外星人，他们移动的速度更快。只要有外星人撞到了玩家的飞船或到达了屏幕底部，玩家就损失一艘飞船。玩家损失三艘飞船后，游戏结束。</em></p>
-</blockquote>
-<h1 id="项目回顾"><a href="#项目回顾" class="headerlink" title="项目回顾"></a>项目回顾</h1><p>先别急着上手第二部分开发，回顾下之前的既有代码以及制定开发计划。<br>开发步骤：</p>
-<ol>
-<li>研究既有代码，确定实现新功能前是否要进行重构。</li>
-<li>在屏幕左上角添加一个外星人，并指定合适的边距。</li>
-<li>根据第一个外星人的边距和屏幕尺寸计算屏幕上可容纳多少个外星人。我们将编写一个循环来创建一系列外星人，这些外星人填满了屏幕的上半部分。</li>
-<li>让外星人群向两边和下方移动，直到外星人被全部击落，有外星人撞到飞船，或有外星人抵达屏幕底端。如果整群外星人都被击落，我们将再创建一群外星人。如果有外星人撞到了飞船或抵达屏幕底端，我们将销毁飞船并再创建一群外星人。</li>
-<li>限制玩家可用的飞船数量，配给的飞船用完后，游戏结束。</li>
-</ol>
-<h1 id="创建外星人"><a href="#创建外星人" class="headerlink" title="创建外星人"></a>创建外星人</h1><h2 id="设置快捷键快速退出游戏（可选）"><a href="#设置快捷键快速退出游戏（可选）" class="headerlink" title="设置快捷键快速退出游戏（可选）"></a>设置快捷键快速退出游戏（可选）</h2><p>有点不想每次测试完都点一点鼠标退出游戏，加个按键 Q 让它快速退出。</p>
-<pre><code>def check_keydown_events(event, ai_settings, screen, ship, bullets):
-    --snip--
-    elif event.key == pygame.K_q:
-        sys.exit()
-</code></pre><h2 id="创建第一个外星人"><a href="#创建第一个外星人" class="headerlink" title="创建第一个外星人"></a>创建第一个外星人</h2><p>我们新建一个模块 Alien 类，方便管理外星人：<br><strong>Alien.py</strong></p>
-<hr>
-<pre><code>import pygame
-from pygame.sprite import Sprite
-
-class Alien(Sprite):
-    &quot;&quot;&quot;表示单个外星人的类&quot;&quot;&quot;
-    def __init__(self, ai_settings, screen):
-        &quot;&quot;&quot;初始化外星人并设置其起始位置&quot;&quot;&quot;
-        super().__init__()
-        self.screen = screen
-        self.ai_settings = ai_settings
-
-        # 加载外星人的图像并矩形化
-        self.image = pygame.image.load(&apos;images/alien.bmp&apos;)
-        self.rect = self.image.get_rect()
-
-        # 设置外星人的左边距、上边距
-        self.rect.x = self.rect.width
-        self.rect.y = self.rect.height
-
-        # 存储外星人的准确位置
-        self.x = float(self.rect.x)
-
-    def blitme(self):
-        &quot;&quot;&quot;在指定位置绘制外星人&quot;&quot;&quot;
-        self.screen.blit(self.image, self.rect)
-</code></pre><p>然后就是在主程序中创建外星人实例：<br>记得导入模块 Alien 。</p>
-<pre><code>from alien import Alien
-
-def run_game():
-    --snip--
-    # 创建一个外星人
-    alien = Alien(ai_settings, screen)
-
-    # 开始游戏主循环
-    while True:
-    ...
-    gf.update_screen(ai_settings, screen, ship, alien, bullets)    #这行先加进去
-</code></pre><p>然后在 game_functions.py 中修改：</p>
-<pre><code>def update_screen(ai_settings, screen, ship, alien, bullets):
-    --snip--
-    # 在飞船和外星人后面重绘所有的子弹
-    for bullet in bullets:
-    bullet.draw_bullet()
-    ship.blitme()
-    alien.blitme()    # 这是新增加的
-</code></pre><p>最后试试运行游戏，如果像这样：<br><img src="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/1.png"><br>那就成功了，接下来就可以试试建一群外星人。</p>
-<h2 id="创建一群外星人"><a href="#创建一群外星人" class="headerlink" title="创建一群外星人"></a>创建一群外星人</h2><p>我们预判一下一行坐标可用空间有多少，因为我们设定两边都有外星人宽度的空白地带，所以：</p>
-<p><code>available_space_x = ai_settings.screen_width – (2 * alien_width)</code></p>
-<p>可容纳空间弄出来了，接下来看看能放几个外星人：</p>
-<p><code>number_aliens_x = available_space_x / (2 * alien_width)</code>（每两个外星人隔一个外星人间距）</p>
-<p>公式导出来了，接下来就是写写写了。</p>
-<p>主程序中加入一个 alien 编组，存放外星人。</p>
-<p><code>aliens = Group()</code></p>
-<p>记得删掉之前在主程序的建立外星人的相关代码，我们接下来要建一群。<br>不过在此之前我们得更新下 game_functions 的代码，让外星人群能够显示：</p>
-<pre><code>def update_screen(ai_settings, screen, ship, aliens, bullets):
-    --snip--
-    ship.blitme()
-    aliens.draw(screen)    # 括号记得导入窗口参数
-</code></pre><p>然后返回主程序新建：</p>
-<pre><code># 创建外星人群
-gf.create_fleet(ai_settings, screen, aliens)
-</code></pre><p>主循环中修改代码：<code>gf.update_screen(ai_settings, screen, ship, aliens, bullets)</code></p>
-<p>然后对函数模块新建一个函数：<br>记得导入 alien.py 。</p>
-<pre><code>from alien import Alien
-
-def create_fleet(ai_settings, screen, aliens):
-    &quot;&quot;&quot;创建外星人群&quot;&quot;&quot;
-    # 创建一个外星人，并计算一行可容纳多少个外星人
-    # 外星人间距为外星人宽度
-    alien = Alien(ai_settings, screen)
-    alien_width = alien.rect.width    # 获取宽度，以免之后的代码反复访问 rect 属性
-    available_space_x = ai_settings.screen_width - 2 * alien_width
-    number_aliens_x = int(available_space_x / (2 * alien_width))    # 记得变为整型，我们建立的是浮点坐标
-
-    # 创建第一行外星人
-    for alien_number in range(number_aliens_x):
-        # 创建一个外星人并将其加入当前行
-        alien = Alien(ai_settings, screen)
-
-        # 不要两句并一句，因为在 Alien 类中，我们设定了 alien.x 可以保存小数值
-        alien.x = alien_width + 2 * alien_width * alien_number
-        alien.rect.x = alien.x
-
-        aliens.add(alien)
-</code></pre><p>这时候运行结果是这样：<br><img src="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/2.png"></p>
-<h2 id="代码重构"><a href="#代码重构" class="headerlink" title="代码重构"></a>代码重构</h2><p>函数 create_fleet(ai_settings, screen, aliens) 有点繁杂，重构一下：<br>新建两个函数：</p>
-<pre><code>def get_number_aliens_x(ai_settings, alien_width):
-    &quot;&quot;&quot;计算每行可容纳多少个外星人&quot;&quot;&quot;
-    available_space_x = ai_settings.screen_width - 2 * alien_width
-    number_aliens_x = int(available_space_x / (2 * alien_width))
-    return number_aliens_x
-
-def create_alien(ai_settings, screen, aliens, alien_number):
-    &quot;&quot;&quot;创建一个外星人并将其放在当前行&quot;&quot;&quot;
-    alien = Alien(ai_settings, screen)
-    alien_width = alien.rect.width
-
-    # 不要两句并一句，因为在 Alien 类中，我们设定了 alien.x 可以保存小数值
-    alien.x = alien_width + 2 * alien_width * alien_number
-    alien.rect.x = alien.x
-
-    aliens.add(alien)
-</code></pre><p>原先的函数修改一下：</p>
-<pre><code>def create_fleet(ai_settings, screen, aliens):
-    &quot;&quot;&quot;创建外星人群&quot;&quot;&quot;
-    # 创建一个外星人，并计算一行可容纳多少个外星人
-    # 外星人间距为外星人宽度
-    alien = Alien(ai_settings, screen)
-    number_aliens_x = get_number_aliens_x(ai_settings, alien.rect.width)
-    # 创建第一行外星人
-
-    for alien_number in range(number_aliens_x):
-        # 创建一个外星人并将其加入当前行
-        create_alien(ai_settings, screen, aliens, alien_number)
-</code></pre><h2 id="复建外星人行"><a href="#复建外星人行" class="headerlink" title="复建外星人行"></a>复建外星人行</h2><p>为计算可容纳的行数，我们这样计算可用垂直空间：将屏幕高度减去第一行外星人的上边距（外星人高度）、飞船的高度以及最初外星人群与飞船的距离（外星人高度的两倍）：</p>
-<p><code>available_space_y = ai_settings.screen_height – 3 * alien_height – ship_height</code></p>
-<p>每行下方都要留出一定的空白区域，并将其设置为外星人的高度。为计算可容纳的行数，我们将可用垂直空间除以外星人高度的两倍（同样，如果这样的计算不对，我们马上就能发现，继而将间距调整为合理的值）。</p>
-<p><code>number_rows = available_height_y / (2 * alien_height)</code></p>
-<p>知道可容纳多少行后，便可重复执行创建一行外星人的代码：</p>
-<pre><code>def get_number_rows(ai_settings, ship_height, alien_height):
-    &quot;&quot;&quot;计算屏幕可容纳多少行外星人&quot;&quot;&quot;
-    available_space_y = (ai_settings.screen_height - 
-        (3 * alien_height) - ship_height)
-    number_rows = int(available_space_y / (2 * alien_height))
-    return number_rows
-
-def create_alien(ai_settings, screen, aliens, alien_number, row_number):
-    --snip--
-    alien.rect.x = alien.x
-    alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
-    aliens.add(alien)
-
-def create_fleet(ai_settings, screen, ship, aliens):
-    --snip--
-    number_aliens_x = get_number_aliens_x(ai_settings, alien.rect.width)
-    number_rows = get_number_rows(ai_settings, ship.rect.height,
-        alien.rect.height)
-
-    for row_number in range(number_rows):
-        for alien_number in range(number_aliens_x):
-            # 创建一个外星人并将其加入当前行
-            create_alien(ai_settings, screen, aliens, alien_number, row_number)
-</code></pre><p>这时候转回主程序修改：</p>
-<p><code>gf.create_fleet(ai_settings, screen, ship, aliens)</code></p>
-<p>加多个 ship 形参。</p>
-<p>如果想好玩点，可以像这样操作：</p>
-<pre><code>from random import randint
-random_number = randint(-10,10)
-</code></pre><p>让外星人随机分布。</p>
-<h2 id="让外星人群移动"><a href="#让外星人群移动" class="headerlink" title="让外星人群移动"></a>让外星人群移动</h2><h3 id="右移外星人"><a href="#右移外星人" class="headerlink" title="右移外星人"></a>右移外星人</h3><p>要让外星人移动，得添加个外星人速度设置：<br>在 settings.py 中添加：</p>
-<pre><code>def __init__(self):
-    --snip--
-    # 外星人设置
-    self.alien_speed_factor = 1
-</code></pre><p>然后，在模块 alien.py 中添加：</p>
-<pre><code>def update(self):
-    &quot;&quot;&quot;向右移动外星人&quot;&quot;&quot;
-    self.x += self.ai_settings.alien_speed_factor
-    self.rect.x = self.x
-</code></pre><p>写完后，在主程序 while 循环中加入刷新代码：</p>
-<p><code>gf.update_aliens(aliens)</code></p>
-<p>要加载到子弹更新之后，因为我们待会还要加入子弹与外星人碰撞检定功能。<br>最后，更新位置（在 <strong>game_functions.py*</strong> 添加）：</p>
-<pre><code>def update_aliens(aliens):
-    &quot;&quot;&quot;更新外星人群中所有外星人的位置&quot;&quot;&quot;
-    aliens.update()
-</code></pre><h3 id="创建表示外星人移动方向的设置"><a href="#创建表示外星人移动方向的设置" class="headerlink" title="创建表示外星人移动方向的设置"></a>创建表示外星人移动方向的设置</h3><p>在 settings.py 中添加：</p>
-<pre><code># 外星人设置
-self.alien_speed_factor = 1
-self.fleet_drop_speed = 10
-# fleet_direction为1表示向右移，为-1表示向左移
-self.fleet_direction = 1
-</code></pre><p>设置 fleet_drop_speed 指定了有外星人撞到屏幕边缘时，外星人群向下移动的速度。<br>要实现fleet_direction设置，可以将其设置为文本值，如’left’或’right’，但这样就必须编写 if-elif 语句来检查外星人群的移动方向。鉴于只有两个可能的方向，我们使用值 1 和 -1 来表示它们，并在外星人群改变方向时在这两个值之间切换。另外，鉴于向右移动时需要增大每个外星人的 x 坐标，而向左移动时需要减小每个外星人的 x 坐标，使用数字来表示方向更合理。</p>
-<h3 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h3><p>如果外星人撞到左右屏幕：<br>我们在 alien.py 中添加：</p>
-<pre><code>def check_edges(self):
-    &quot;&quot;&quot;如果外星人位于屏幕边缘，就返回True&quot;&quot;&quot;
-    screen_rect = self.screen.get_rect()
-    if self.rect.right &gt;= screen_rect.right:
-        return True
-    elif self.rect.left &lt;= 0:
-        return True
-</code></pre><p>修改：</p>
-<pre><code>def update(self):
-    &quot;&quot;&quot;向左或向右移动外星人&quot;&quot;&quot;
-    self.x += (self.ai_settings.alien_speed_factor * self.ai_settings.fleet_direction)
-    self.rect.x = self.x
-</code></pre><h3 id="向下移动外星人群"><a href="#向下移动外星人群" class="headerlink" title="向下移动外星人群"></a>向下移动外星人群</h3><p>这时候要做的动静可能比较大，我们在模块 game_functions.py 中添加：</p>
-<pre><code>def check_fleet_edges(ai_settings, aliens):
-    &quot;&quot;&quot;有外星人到达边缘时采取相应的措施&quot;&quot;&quot;
-    for alien in aliens.sprites():
-        if alien.check_edges():
-            change_fleet_direction(ai_settings, aliens)
-            break
-
-def change_fleet_direction(ai_settings, aliens):
-    &quot;&quot;&quot;将整群外星人下移，并改变它们的方向&quot;&quot;&quot;
-    for alien in aliens.sprites():
-        alien.rect.y += ai_settings.fleet_drop_speed
-    ai_settings.fleet_direction *= -1
-
-def update_aliens(ai_settings, aliens):
-    &quot;&quot;&quot;检查是否有外星人位于屏幕边缘，并更新整群外星人的位置&quot;&quot;&quot;
-    check_fleet_edges(ai_settings, aliens)
-    aliens.update()
-</code></pre><h2 id="射杀外星人"><a href="#射杀外星人" class="headerlink" title="射杀外星人"></a>射杀外星人</h2><p>方法 sprite.groupcollide() 将每颗子弹的 rect 同每个外星人的 rect 进行比较，并返回一个字典，其中包含发生了碰撞的子弹和外星人。<br>在 bullet.py 模块中，加入代码检测碰撞：</p>
-<pre><code>def update_bullets(aliens, bullets):
-    &quot;&quot;&quot;更新子弹的位置，并删除已消失的子弹&quot;&quot;&quot;
-    --snip--
-    # 检查是否有子弹击中了外星人
-    # 如果是这样，就删除相应的子弹和外星人
-    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
-</code></pre><p>两个 True 告诉 Pygame 删除发生碰撞的子弹和外星人。<br>（要模拟能够穿行到屏幕顶端的高能子弹——消灭它击中的每个外星人，可将第一个布尔实参设置为 False，并让第二个布尔实参为 True。这样被击中的外星人将消失，但所有的子弹都始终有效，直到抵达屏幕顶端后消失。）<br>这时候运行射击结果是这样：<br><img src="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/3.jpg"></p>
-<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>我们最后要试试能不能杀掉全部外星人，那么不太可能一个一个干掉，太繁琐，我们可以做个大子弹：<br>将 settings.py 中的 <code>self.bullet_width = 300</code>，看看能不能消灭。<br>当然，别忘了改回来。</p>
-<h2 id="复建一群外星人"><a href="#复建一群外星人" class="headerlink" title="复建一群外星人"></a>复建一群外星人</h2><p>打完后，不可能游戏就结束，我们在做一群。<br>首先，检查下外星人库 aliens 是否为空。<br>我们在模块 game_functions 中的 update_bullets 中添加：</p>
-<pre><code>if len(aliens) == 0:
-    # 删除现有的子弹并新建一群外星人
-    bullets.empty()
-    create_fleet(ai_settings, screen, ship, aliens)
-</code></pre><h2 id="代码重构-1"><a href="#代码重构-1" class="headerlink" title="代码重构"></a>代码重构</h2><p>做到这一步，有没有感觉 game_functions 里的代码有点杂？<br>我们重构一下 update_bullets ，这里加了太多东西了。</p>
-<pre><code>def update_bullets(ai_settings, screen, ship, aliens, bullets):
-    &quot;&quot;&quot;更新子弹的位置，并删除已消失的子弹&quot;&quot;&quot;
-    # 更新子弹的位置
-    bullets.update()    # 这步看不懂的话注意一下模块 game_functions.check_keydown_events() 函数
-
-    # 删除已消失的子弹
-    for bullet in bullets.copy():
-        if bullet.rect.bottom &lt;= 0:
-            bullets.remove(bullet)
-
-    # 响应子弹与外星人的碰撞
-    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)
-</code></pre><p>然后再建一个函数：</p>
-<pre><code>def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
-    &quot;&quot;&quot;响应子弹和外星人的碰撞&quot;&quot;&quot;
-    # 删除发生碰撞的子弹和外星人
-    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
-
-    if len(aliens) == 0:
-        # 删除现有的所有子弹，并创建一个新的外星人群
-        bullets.empty()
-        create_fleet(ai_settings, screen, ship, aliens)
-</code></pre><h2 id="游戏结束"><a href="#游戏结束" class="headerlink" title="游戏结束"></a>游戏结束</h2><h3 id="碰撞检测-1"><a href="#碰撞检测-1" class="headerlink" title="碰撞检测"></a>碰撞检测</h3><p>外星人碰到飞船怎么办？那就游戏结束了。<br>方法 spritecollideany() 接受两个实参：一个精灵和一个编组。它检查编组是否有成员与精灵发生了碰撞，并在找到与精灵发生了碰撞的成员后就停止遍历编组。<br>在这里，它遍历编组 aliens，并返回它找到的第一个与飞船发生了碰撞的外星人。</p>
-<pre><code>game_functions.py
-* * *
-def update_aliens(ai_settings, ship, aliens):
-    &quot;&quot;&quot;检查是否有外星人位于屏幕边缘，并更新整群外星人的位置&quot;&quot;&quot;
-    check_fleet_edges(ai_settings, aliens)
-    aliens.update()
-
-    # 检测外星人和飞船之间的碰撞
-    if pygame.sprite.spritecollideany(ship, aliens):
-        print(&quot;Ship hit!!!&quot;)
-</code></pre><p>如果没有发生碰撞， spritecollideany() 将返回 None，因此 if 代码块不会执行。如果找到了与飞船发生碰撞的外星人，它就返回这个外星人，因此if代码块将执行：打印“Ship hit!!!”<br>我们运行试试：<br><img src="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/4.jpg"></p>
-<h3 id="响应飞船与外星人的碰撞"><a href="#响应飞船与外星人的碰撞" class="headerlink" title="响应飞船与外星人的碰撞"></a>响应飞船与外星人的碰撞</h3><p>上面的 <code>print(&quot;Ship hit!!!&quot;)</code> 可以删了，现在我们做一个新的类：</p>
-<p><strong>game_stats.py</strong></p>
-<hr>
-<pre><code>class GameStats():
-    &quot;&quot;&quot;跟踪游戏的统计信息&quot;&quot;&quot;
-
-    def __init__(self, ai_settings):
-        &quot;&quot;&quot;初始化统计信息&quot;&quot;&quot;
-        self.ai_settings = ai_settings
-        self.reset_stats()
-
-    def reset_stats(self):
-        &quot;&quot;&quot;初始化在游戏运行期间可能变化的统计信息&quot;&quot;&quot;
-        self.ships_left = self.ai_settings.ship_limit
-</code></pre><p>这个类有助于我们统计游戏进度，还方便统计后面要做的计分模式。<br>目前我们只统计飞船的生命，在 settings 中添加：</p>
-<p><code>self.ship_limit = 3</code></p>
-<p>然后对主程序修改导包：</p>
-<pre><code>from game_stats import GameStats
-
-def run_game():
-    --snip--
-    # 创建一个用于存储游戏统计信息的实例
-    stats = GameStats(ai_settings)
-
-    while True:
-        gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
-</code></pre><p>有外星人撞到飞船时，我们将余下的飞船数减 1，创建一群新的外星人，并将飞船重新放置到屏幕底端中央（我们还将让游戏暂停一段时间，让玩家在新外星人群出现前注意到发生了碰撞，并将重新创建外星人群）。</p>
-<p>在 game_functions 新建 ship_hit() 函数：<br>先导入包：</p>
-<pre><code>from time import sleep
-
-def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
-    &quot;&quot;&quot;响应被外星人撞到的飞船&quot;&quot;&quot;
-    # 将ships_left减1
-    stats.ships_left -= 1
-
-    # 清空外星人列表和子弹列表
-    aliens.empty()
-    bullets.empty()
-
-    # 创建一群新的外星人，并将飞船放到屏幕底端中央
-    create_fleet(ai_settings, screen, ship, aliens)
-    ship.center_ship()
-
-    # 暂停
-    sleep(0.5)
-
-def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
-    # 检测外星人和飞船碰撞
-    if pygame.sprite.spritecollideany(ship, aliens):
-        ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
-</code></pre><p>然后我们在 ship.py 中添加新方法：</p>
-<pre><code>def center_ship(self):
-    &quot;&quot;&quot;让飞船在屏幕上居中&quot;&quot;&quot;
-    self.center = self.screen_rect.centerx
-</code></pre><h3 id="外星人与底部的碰撞"><a href="#外星人与底部的碰撞" class="headerlink" title="外星人与底部的碰撞"></a>外星人与底部的碰撞</h3><p>碰到底部也一样，game over。<br>在 game_functions 中添加新函数：</p>
-<pre><code>def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
-    &quot;&quot;&quot;检查是否有外星人到达了屏幕底端&quot;&quot;&quot;
-    screen_rect = screen.get_rect()
-    for alien in aliens.sprites():
-        if alien.rect.bottom &gt;= screen_rect.bottom:
-            # 像飞船被撞到一样进行处理
-            ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
-            break
-</code></pre><p>修改函数：</p>
-<pre><code>def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
-    --snip--
-    # 检查是否有外星人到达屏幕底端
-    check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
-</code></pre><h3 id="飞船生命归零"><a href="#飞船生命归零" class="headerlink" title="飞船生命归零"></a>飞船生命归零</h3><p>我们在 game_stats 模块中加入一个标志：</p>
-<pre><code>def __init__(self, settings):
-    --snip--
-    # 游戏刚启动时处于活动状态
-    self.game_active = True
-</code></pre><p>这个标志将在玩家用完飞船后变为 False，游戏结束。</p>
-<p>修改 game_functions :</p>
-<pre><code>def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
-    &quot;&quot;&quot;响应飞船被外星人撞到&quot;&quot;&quot;
-    if stats.ships_left &gt; 0:
-        # 将ships_left减1
-        stats.ships_left -= 1
-
-        --snip--
-
-        #暂停一会儿
-        sleep(0.5)
-
-    else:
-        stats.game_active = False
-</code></pre><p>游戏结束，标志为 False，那就不在运行游戏元素。<br>在主程序 while 循环中：</p>
-<pre><code>if stats.game_active:
-    ship.update()
-    gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
-    gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
-</code></pre><p>游戏结束，窗口将静止。</p>
-<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
-<li>如何在游戏中添加大量相同的元素，如创建一群外星人</li>
-<li>如何使用嵌套循环来创建元素网格，还通过调用每个元素的方法 update() 移动了大量的元素</li>
-<li>如何控制对象在屏幕上移动的方向，以及如何响应事件，如有外星人到达屏幕边缘</li>
-<li>如何检测和响应子弹和外星人碰撞以及外星人和飞船碰撞</li>
-<li>如何在游戏中跟踪统计信息，以及如何使用标志 game_active 来判断游戏是否结束了</li>
-</ol>
-<h1 id="此部分各组件源码"><a href="#此部分各组件源码" class="headerlink" title="此部分各组件源码"></a>此部分各组件源码</h1><h2 id="alien-invasion-py"><a href="#alien-invasion-py" class="headerlink" title="alien_invasion.py"></a>alien_invasion.py</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import pygame</span><br><span class="line"></span><br><span class="line">from pygame.sprite import Group</span><br><span class="line">from settings import Settings</span><br><span class="line">from ship import Ship</span><br><span class="line">from game_stats import GameStats</span><br><span class="line">import game_functions as gf</span><br><span class="line"></span><br><span class="line">def run_game():</span><br><span class="line">	# 初始化游戏并创建一个屏幕对象</span><br><span class="line">	pygame.init()</span><br><span class="line">	ai_settings = Settings()</span><br><span class="line">	screen = pygame.display.set_mode(</span><br><span class="line">		(ai_settings.screen_width, ai_settings.screen_height))</span><br><span class="line">	pygame.display.set_caption(&quot;Alien Invasion&quot;)	#窗口名称</span><br><span class="line">	</span><br><span class="line">	# 创建一个用于存储游戏统计信息的实例</span><br><span class="line">	stats = GameStats(ai_settings)</span><br><span class="line">	</span><br><span class="line">	# 创建飞船</span><br><span class="line">	ship = Ship(ai_settings, screen)</span><br><span class="line">	</span><br><span class="line">	# 创建一个用于存储子弹的编组</span><br><span class="line">	bullets = Group()</span><br><span class="line">	</span><br><span class="line">	# 创建外星人编组</span><br><span class="line">	aliens = Group()</span><br><span class="line">	</span><br><span class="line">	# 创建外星人群</span><br><span class="line">	gf.create_fleet(ai_settings, screen, ship, aliens)</span><br><span class="line">	</span><br><span class="line">	# 开始游戏的主循环</span><br><span class="line">	while True:</span><br><span class="line">		gf.check_events(ai_settings, screen, ship, bullets)</span><br><span class="line">		</span><br><span class="line">		if stats.game_active:</span><br><span class="line">			ship.update()	# 飞船的位置将在检测到键盘事件后（但在更新屏幕前）更新</span><br><span class="line">			gf.update_bullets(ai_settings, screen, ship, aliens, bullets)</span><br><span class="line">			gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)</span><br><span class="line">		</span><br><span class="line">		gf.update_screen(ai_settings, screen, ship, aliens, bullets)</span><br><span class="line"></span><br><span class="line">run_game()</span><br></pre></td></tr></table></figure>
-<h2 id="game-functions-py"><a href="#game-functions-py" class="headerlink" title="game_functions.py"></a>game_functions.py</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">import pygame</span><br><span class="line">from bullet import Bullet</span><br><span class="line">from alien import Alien</span><br><span class="line">from time import sleep</span><br><span class="line"></span><br><span class="line">def check_keydown_events(event, ai_settings, screen, ship, bullets):</span><br><span class="line">	&quot;&quot;&quot;响应按键&quot;&quot;&quot;</span><br><span class="line">	if event.key == pygame.K_RIGHT:</span><br><span class="line">		ship.moving_right = True</span><br><span class="line">	elif event.key == pygame.K_LEFT:</span><br><span class="line">		ship.moving_left = True</span><br><span class="line">	elif event.key == pygame.K_SPACE:</span><br><span class="line">		fire_bullet(ai_settings, screen, ship, bullets)</span><br><span class="line">	elif event.key == pygame.K_q:</span><br><span class="line">		sys.exit()</span><br><span class="line"></span><br><span class="line">def check_keyup_events(event, ship):</span><br><span class="line">	&quot;&quot;&quot;响应松开&quot;&quot;&quot;</span><br><span class="line">	if event.key == pygame.K_RIGHT:</span><br><span class="line">		ship.moving_right = False</span><br><span class="line">	elif event.key == pygame.K_LEFT:</span><br><span class="line">		ship.moving_left = False</span><br><span class="line"></span><br><span class="line">def check_events(ai_settings, screen, ship, bullets):</span><br><span class="line">	&quot;&quot;&quot;响应按键和鼠标事件&quot;&quot;&quot;</span><br><span class="line">	for event in pygame.event.get():</span><br><span class="line">		if event.type == pygame.QUIT:</span><br><span class="line">			sys.exit()</span><br><span class="line">			</span><br><span class="line">		elif event.type == pygame.KEYDOWN:</span><br><span class="line">			check_keydown_events(event, ai_settings, screen, ship, bullets)</span><br><span class="line">		elif event.type == pygame.KEYUP:</span><br><span class="line">			check_keyup_events(event, ship)</span><br><span class="line"></span><br><span class="line">def update_screen(ai_settings, screen, ship, aliens, bullets):</span><br><span class="line">	&quot;&quot;&quot;更新屏幕上的图像，并切换到新屏幕&quot;&quot;&quot;</span><br><span class="line">	# 每次循环时都重绘屏幕</span><br><span class="line">	screen.fill(ai_settings.bg_color)</span><br><span class="line">	# 重绘所有子弹</span><br><span class="line">	for bullet in bullets.sprites():</span><br><span class="line">		bullet.draw_bullet()</span><br><span class="line">	ship.blitme()</span><br><span class="line">	aliens.draw(screen)	# 括号记得导入窗口参数</span><br><span class="line"></span><br><span class="line">	# 让最近绘制的屏幕可见</span><br><span class="line">	pygame.display.flip()</span><br><span class="line"></span><br><span class="line">def update_bullets(ai_settings, screen, ship, aliens, bullets):</span><br><span class="line">	&quot;&quot;&quot;更新子弹的位置，并删除已消失的子弹&quot;&quot;&quot;</span><br><span class="line">	# 更新子弹的位置</span><br><span class="line">	bullets.update()	# 这步看不懂的话注意一下模块 game_functions.check_keydown_events() 函数</span><br><span class="line">	</span><br><span class="line">	# 删除已消失的子弹</span><br><span class="line">	for bullet in bullets.copy():</span><br><span class="line">		if bullet.rect.bottom &lt;= 0:</span><br><span class="line">			bullets.remove(bullet)</span><br><span class="line">	</span><br><span class="line">	# 响应子弹与外星人的碰撞</span><br><span class="line">	check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)</span><br><span class="line"></span><br><span class="line">def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):</span><br><span class="line">	&quot;&quot;&quot;响应子弹和外星人的碰撞&quot;&quot;&quot;</span><br><span class="line">	# 删除发生碰撞的子弹和外星人</span><br><span class="line">	collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)</span><br><span class="line">	</span><br><span class="line">	if len(aliens) == 0:</span><br><span class="line">		# 删除现有的所有子弹，并创建一个新的外星人群</span><br><span class="line">		bullets.empty()</span><br><span class="line">		create_fleet(ai_settings, screen, ship, aliens)</span><br><span class="line"></span><br><span class="line">def fire_bullet(ai_settings, screen, ship, bullets):</span><br><span class="line">	&quot;&quot;&quot;如果还没有到达限制，就发射一颗子弹&quot;&quot;&quot;</span><br><span class="line">	#创建新子弹，并将其加入到编组bullets中</span><br><span class="line">	if len(bullets) &lt; ai_settings.bullets_allowed:</span><br><span class="line">		new_bullet = Bullet(ai_settings, screen, ship)</span><br><span class="line">		bullets.add(new_bullet)</span><br><span class="line"></span><br><span class="line">def get_number_aliens_x(ai_settings, alien_width):</span><br><span class="line">	&quot;&quot;&quot;计算每行可容纳多少个外星人&quot;&quot;&quot;</span><br><span class="line">	available_space_x = ai_settings.screen_width - 2 * alien_width</span><br><span class="line">	number_aliens_x = int(available_space_x / (2 * alien_width))</span><br><span class="line">	return number_aliens_x</span><br><span class="line"></span><br><span class="line">def get_number_rows(ai_settings, ship_height, alien_height):</span><br><span class="line">	&quot;&quot;&quot;计算屏幕可容纳多少行外星人&quot;&quot;&quot;</span><br><span class="line">	available_space_y = (ai_settings.screen_height - </span><br><span class="line">		(3 * alien_height) - ship_height)</span><br><span class="line">	number_rows = int(available_space_y / (2 * alien_height))</span><br><span class="line">	return number_rows</span><br><span class="line"></span><br><span class="line">def create_alien(ai_settings, screen, aliens, alien_number, row_number):</span><br><span class="line">	&quot;&quot;&quot;创建一个外星人并将其放在当前行&quot;&quot;&quot;</span><br><span class="line">	alien = Alien(ai_settings, screen)</span><br><span class="line">	alien_width = alien.rect.width</span><br><span class="line">	</span><br><span class="line">	# 不要两句并一句，因为在 Alien 类中，我们设定了 alien.x 可以保存小数值</span><br><span class="line">	alien.x = alien_width + 2 * alien_width * alien_number</span><br><span class="line">	alien.rect.x = alien.x</span><br><span class="line">	</span><br><span class="line">	alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number</span><br><span class="line">	aliens.add(alien)</span><br><span class="line"></span><br><span class="line">def create_fleet(ai_settings, screen, ship, aliens):</span><br><span class="line">	&quot;&quot;&quot;创建外星人群&quot;&quot;&quot;</span><br><span class="line">	# 创建一个外星人，并计算一行可容纳多少个外星人</span><br><span class="line">	# 外星人间距为外星人宽度</span><br><span class="line">	alien = Alien(ai_settings, screen)</span><br><span class="line">	number_aliens_x = get_number_aliens_x(ai_settings, alien.rect.width)</span><br><span class="line">	number_rows = get_number_rows(</span><br><span class="line">		ai_settings, ship.rect.height, alien.rect.height)</span><br><span class="line">	# 创建第一行外星人</span><br><span class="line">	</span><br><span class="line">	for row_number in range(number_rows):</span><br><span class="line">		for alien_number in range(number_aliens_x):</span><br><span class="line">			# 创建一个外星人并将其加入当前行</span><br><span class="line">			create_alien(ai_settings, screen, aliens, alien_number, row_number)</span><br><span class="line">	</span><br><span class="line">def check_fleet_edges(ai_settings, aliens):</span><br><span class="line">	&quot;&quot;&quot;有外星人到达边缘时采取相应的措施&quot;&quot;&quot;</span><br><span class="line">	for alien in aliens.sprites():</span><br><span class="line">		if alien.check_edges():</span><br><span class="line">			change_fleet_direction(ai_settings, aliens)</span><br><span class="line">			break</span><br><span class="line"></span><br><span class="line">def change_fleet_direction(ai_settings, aliens):</span><br><span class="line">	&quot;&quot;&quot;将整群外星人下移，并改变它们的方向&quot;&quot;&quot;</span><br><span class="line">	for alien in aliens.sprites():</span><br><span class="line">		alien.rect.y += ai_settings.fleet_drop_speed</span><br><span class="line">	ai_settings.fleet_direction *= -1</span><br><span class="line">	</span><br><span class="line">def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):</span><br><span class="line">	&quot;&quot;&quot;检查是否有外星人位于屏幕边缘，并更新整群外星人的位置&quot;&quot;&quot;</span><br><span class="line">	check_fleet_edges(ai_settings, aliens)</span><br><span class="line">	aliens.update()</span><br><span class="line">	</span><br><span class="line">	# 检测外星人和飞船之间的碰撞</span><br><span class="line">	if pygame.sprite.spritecollideany(ship, aliens):</span><br><span class="line">		ship_hit(ai_settings, stats, screen, ship, aliens, bullets)</span><br><span class="line">	</span><br><span class="line">	# 检查是否有外星人到达屏幕底端</span><br><span class="line">	check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)</span><br><span class="line"></span><br><span class="line">def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):</span><br><span class="line">	&quot;&quot;&quot;检查是否有外星人到达了屏幕底端&quot;&quot;&quot;</span><br><span class="line">	screen_rect = screen.get_rect()</span><br><span class="line">	for alien in aliens.sprites():</span><br><span class="line">		if alien.rect.bottom &gt;= screen_rect.bottom:</span><br><span class="line">			# 像飞船被撞到一样进行处理</span><br><span class="line">			ship_hit(ai_settings, stats, screen, ship, aliens, bullets)</span><br><span class="line">			break</span><br><span class="line"></span><br><span class="line">def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):</span><br><span class="line">	&quot;&quot;&quot;响应被外星人撞到的飞船&quot;&quot;&quot;</span><br><span class="line">	if stats.ships_left &gt; 0:</span><br><span class="line">		# 将ships_left减 1</span><br><span class="line">		stats.ships_left -= 1</span><br><span class="line">		</span><br><span class="line">		# 清空外星人列表和子弹列表</span><br><span class="line">		aliens.empty()</span><br><span class="line">		bullets.empty()</span><br><span class="line">		</span><br><span class="line">		# 创建一群新的外星人，并将飞船放到屏幕底端中央</span><br><span class="line">		create_fleet(ai_settings, screen, ship, aliens)</span><br><span class="line">		ship.center_ship()</span><br><span class="line">		</span><br><span class="line">		# 暂停</span><br><span class="line">		sleep(0.5)</span><br><span class="line">	</span><br><span class="line">	else:</span><br><span class="line">		stats.game_active = False</span><br></pre></td></tr></table></figure>
-<h2 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py"></a>settings.py</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Settings():</span><br><span class="line">	&quot;&quot;&quot;存储《外星人入侵》的所有设置的类&quot;&quot;&quot;</span><br><span class="line">	</span><br><span class="line">	def __init__(self):</span><br><span class="line">		&quot;&quot;&quot;初始化游戏的设置&quot;&quot;&quot;</span><br><span class="line">		# 屏幕设置</span><br><span class="line">		self.screen_width = 1200</span><br><span class="line">		self.screen_height = 800</span><br><span class="line">		self.bg_color = (230, 230, 230)</span><br><span class="line">		</span><br><span class="line">		# 飞船的设置</span><br><span class="line">		self.ship_speed_factor = 1.5</span><br><span class="line">		self.ship_limit = 3</span><br><span class="line">		</span><br><span class="line">		# 子弹设置</span><br><span class="line">		self.bullet_speed_factor = 1</span><br><span class="line">		self.bullet_width = 3</span><br><span class="line">		self.bullet_height = 15</span><br><span class="line">		self.bullet_color = 60, 60, 60</span><br><span class="line">		self.bullets_allowed = 3</span><br><span class="line">		</span><br><span class="line">		# 外星人设置</span><br><span class="line">		self.alien_speed_factor = 1</span><br><span class="line">		self.fleet_drop_speed = 10</span><br><span class="line">		# fleet_direction 为 1 表示向右移，为 - 1 表示向左移</span><br><span class="line">		self.fleet_direction = 1</span><br></pre></td></tr></table></figure>
-<h2 id="ship-py"><a href="#ship-py" class="headerlink" title="ship.py"></a>ship.py</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import pygame</span><br><span class="line"></span><br><span class="line">class Ship():</span><br><span class="line"></span><br><span class="line">	def __init__(self, ai_settings, screen):</span><br><span class="line">		&quot;&quot;&quot;初始化飞船并设置其初始位置&quot;&quot;&quot;</span><br><span class="line">		self.screen = screen</span><br><span class="line">		self.ai_settings = ai_settings</span><br><span class="line">		</span><br><span class="line">		# 加载飞船图像并获取其外接矩形</span><br><span class="line">		self.image = pygame.image.load(&apos;images/ship.bmp&apos;)</span><br><span class="line">		self.rect = self.image.get_rect()</span><br><span class="line">		self.screen_rect = screen.get_rect()</span><br><span class="line">		</span><br><span class="line">		# 将每艘新飞船放在屏幕底部中央</span><br><span class="line">		self.rect.centerx = self.screen_rect.centerx</span><br><span class="line">		self.rect.bottom = self.screen_rect.bottom</span><br><span class="line">		</span><br><span class="line">		# 在飞船的属性center中存储小数值</span><br><span class="line">		self.center = float(self.rect.centerx)</span><br><span class="line">		</span><br><span class="line">		# 移动标志</span><br><span class="line">		self.moving_right = False</span><br><span class="line">		self.moving_left = False</span><br><span class="line">		</span><br><span class="line">	def update(self):</span><br><span class="line">		&quot;&quot;&quot;根据移动标志调整飞船的位置&quot;&quot;&quot;</span><br><span class="line">		# 更新飞船的 center 值，而不是 rect</span><br><span class="line">		if self.moving_right and self.rect.right &lt; self.screen_rect.right:</span><br><span class="line">		# self.rect.right 是飞船图案的右边坐标</span><br><span class="line">			self.center += self.ai_settings.ship_speed_factor</span><br><span class="line">		if self.moving_left and self.rect.left &gt; 0:</span><br><span class="line">			self.center -= self.ai_settings.ship_speed_factor</span><br><span class="line">			</span><br><span class="line">		# 根据self.center更新rect对象</span><br><span class="line">		self.rect.centerx = self.center</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	def blitme(self):</span><br><span class="line">		&quot;&quot;&quot;在指定位置绘制飞船&quot;&quot;&quot;</span><br><span class="line">		self.screen.blit(self.image, self.rect)</span><br><span class="line"></span><br><span class="line">	def center_ship(self):</span><br><span class="line">		&quot;&quot;&quot;让飞船在屏幕上居中&quot;&quot;&quot;</span><br><span class="line">		self.center = self.screen_rect.centerx</span><br></pre></td></tr></table></figure>
-<h2 id="bullet-py"><a href="#bullet-py" class="headerlink" title="bullet.py"></a>bullet.py</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import pygame</span><br><span class="line">from pygame.sprite import Sprite</span><br><span class="line"></span><br><span class="line">class Bullet(Sprite):</span><br><span class="line">	&quot;&quot;&quot;一个对飞船发射的子弹进行管理的类&quot;&quot;&quot;</span><br><span class="line">	</span><br><span class="line">	def __init__(self, ai_settings, screen, ship):</span><br><span class="line">		&quot;&quot;&quot;在飞船所处的位置创建一个子弹对象&quot;&quot;&quot;</span><br><span class="line">		super().__init__()</span><br><span class="line">		self.screen = screen</span><br><span class="line">		</span><br><span class="line">		# 在(0,0)处创建一个表示子弹的矩形，再设置正确的位置</span><br><span class="line">		self.rect = pygame.Rect(0, 0, ai_settings.bullet_width, ai_settings.bullet_height)</span><br><span class="line">		self.rect.centerx = ship.rect.centerx</span><br><span class="line">		self.rect.top = ship.rect.top</span><br><span class="line">		</span><br><span class="line">		#存储用小数表示的子弹位置</span><br><span class="line">		self.y = float(self.rect.y)</span><br><span class="line">		self.color = ai_settings.bullet_color</span><br><span class="line">		self.speed_factor = ai_settings.bullet_speed_factor</span><br><span class="line">	</span><br><span class="line">	def update(self):</span><br><span class="line">		&quot;&quot;&quot;向上移动子弹&quot;&quot;&quot;</span><br><span class="line">		#更新表示子弹位置的小数值</span><br><span class="line">		self.y -= self.speed_factor</span><br><span class="line">		#更新表示子弹的rect的位置</span><br><span class="line">		self.rect.y = self.y</span><br><span class="line">		</span><br><span class="line">	def draw_bullet(self):</span><br><span class="line">		&quot;&quot;&quot;在屏幕上绘制子弹&quot;&quot;&quot;</span><br><span class="line">		pygame.draw.rect(self.screen, self.color, self.rect)</span><br></pre></td></tr></table></figure>
-<h2 id="alien-py"><a href="#alien-py" class="headerlink" title="alien.py"></a>alien.py</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import pygame</span><br><span class="line"></span><br><span class="line">from pygame.sprite import Sprite</span><br><span class="line"></span><br><span class="line">class Alien(Sprite):</span><br><span class="line">	&quot;&quot;&quot;表示单个外星人的类&quot;&quot;&quot;</span><br><span class="line">	def __init__(self, ai_settings, screen):</span><br><span class="line">		&quot;&quot;&quot;初始化外星人并设置其起始位置&quot;&quot;&quot;</span><br><span class="line">		super().__init__()</span><br><span class="line">		self.screen = screen</span><br><span class="line">		self.ai_settings = ai_settings</span><br><span class="line">		</span><br><span class="line">		# 加载外星人的图像并矩形化</span><br><span class="line">		self.image = pygame.image.load(&apos;images/alien.bmp&apos;)</span><br><span class="line">		self.rect = self.image.get_rect()</span><br><span class="line">		</span><br><span class="line">		# 设置外星人的左边距、上边距</span><br><span class="line">		#（其实就是令外星人图像左上角的坐标点该位于何方）</span><br><span class="line">		self.rect.x = self.rect.width</span><br><span class="line">		self.rect.y = self.rect.height</span><br><span class="line">		</span><br><span class="line">		# 存储外星人的准确位置</span><br><span class="line">		self.x = float(self.rect.x)</span><br><span class="line">	</span><br><span class="line">	def blitme(self):</span><br><span class="line">		&quot;&quot;&quot;在指定位置绘制外星人&quot;&quot;&quot;</span><br><span class="line">		self.screen.blit(self.image, self.rect)</span><br><span class="line"></span><br><span class="line">	def update(self):</span><br><span class="line">		&quot;&quot;&quot;左右移动外星人&quot;&quot;&quot;</span><br><span class="line">		self.x += (self.ai_settings.alien_speed_factor * self.ai_settings.fleet_direction)</span><br><span class="line">		self.rect.x = self.x</span><br><span class="line">	</span><br><span class="line">	def check_edges(self):</span><br><span class="line">		&quot;&quot;&quot;如果外星人位于屏幕边缘，就返回True&quot;&quot;&quot;</span><br><span class="line">		screen_rect = self.screen.get_rect()</span><br><span class="line">		if self.rect.right &gt;= screen_rect.right:</span><br><span class="line">			return True</span><br><span class="line">		elif self.rect.left &lt;= 0:</span><br><span class="line">			return True</span><br></pre></td></tr></table></figure>
-<h2 id="game-stats-py"><a href="#game-stats-py" class="headerlink" title="game_stats.py"></a>game_stats.py</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class GameStats():</span><br><span class="line">	&quot;&quot;&quot;跟踪游戏的统计信息&quot;&quot;&quot;</span><br><span class="line">	</span><br><span class="line">	def __init__(self, ai_settings):</span><br><span class="line">		&quot;&quot;&quot;初始化统计信息&quot;&quot;&quot;</span><br><span class="line">		self.ai_settings = ai_settings</span><br><span class="line">		self.reset_stats()</span><br><span class="line">		</span><br><span class="line">		# 游戏刚启动时处于活动状态</span><br><span class="line">		self.game_active = True</span><br><span class="line">	</span><br><span class="line">	def reset_stats(self):</span><br><span class="line">		&quot;&quot;&quot;初始化在游戏运行期间可能变化的统计信息&quot;&quot;&quot;</span><br><span class="line">		self.ships_left = self.ai_settings.ship_limit</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4650,7 +4157,7 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
