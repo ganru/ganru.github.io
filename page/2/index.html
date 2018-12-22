@@ -292,12 +292,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-10-07-小游戏之外星人入侵（第二部分）.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -311,7 +311,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/" itemprop="url">小游戏之外星人入侵（第二部分）</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-10-07-小游戏之外星人入侵（第二部分）.html" itemprop="url">小游戏之外星人入侵（第二部分）</a></h1>
         
 
         <div class="post-meta">
@@ -453,7 +453,7 @@ def run_game():
     bullet.draw_bullet()
     ship.blitme()
     alien.blitme()    # 这是新增加的
-</code></pre><p>最后试试运行游戏，如果像这样：<br><img src="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/1.png"><br>那就成功了，接下来就可以试试建一群外星人。</p>
+</code></pre><p>最后试试运行游戏，如果像这样：<br><img src="/ganru.github.io/posts/Python笔记/2018-10-07-小游戏之外星人入侵（第二部分）/1.png"><br>那就成功了，接下来就可以试试建一群外星人。</p>
 <h2 id="创建一群外星人"><a href="#创建一群外星人" class="headerlink" title="创建一群外星人"></a>创建一群外星人</h2><p>我们预判一下一行坐标可用空间有多少，因为我们设定两边都有外星人宽度的空白地带，所以：</p>
 <p><code>available_space_x = ai_settings.screen_width – (2 * alien_width)</code></p>
 <p>可容纳空间弄出来了，接下来看看能放几个外星人：</p>
@@ -492,7 +492,7 @@ def create_fleet(ai_settings, screen, aliens):
         alien.rect.x = alien.x
 
         aliens.add(alien)
-</code></pre><p>这时候运行结果是这样：<br><img src="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/2.png"></p>
+</code></pre><p>这时候运行结果是这样：<br><img src="/ganru.github.io/posts/Python笔记/2018-10-07-小游戏之外星人入侵（第二部分）/2.png"></p>
 <h2 id="代码重构"><a href="#代码重构" class="headerlink" title="代码重构"></a>代码重构</h2><p>函数 create_fleet(ai_settings, screen, aliens) 有点繁杂，重构一下：<br>新建两个函数：</p>
 <pre><code>def get_number_aliens_x(ai_settings, alien_width):
     &quot;&quot;&quot;计算每行可容纳多少个外星人&quot;&quot;&quot;
@@ -618,7 +618,7 @@ def update_aliens(ai_settings, aliens):
     # 检查是否有子弹击中了外星人
     # 如果是这样，就删除相应的子弹和外星人
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
-</code></pre><p>两个 True 告诉 Pygame 删除发生碰撞的子弹和外星人。<br>（要模拟能够穿行到屏幕顶端的高能子弹——消灭它击中的每个外星人，可将第一个布尔实参设置为 False，并让第二个布尔实参为 True。这样被击中的外星人将消失，但所有的子弹都始终有效，直到抵达屏幕顶端后消失。）<br>这时候运行射击结果是这样：<br><img src="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/3.jpg"></p>
+</code></pre><p>两个 True 告诉 Pygame 删除发生碰撞的子弹和外星人。<br>（要模拟能够穿行到屏幕顶端的高能子弹——消灭它击中的每个外星人，可将第一个布尔实参设置为 False，并让第二个布尔实参为 True。这样被击中的外星人将消失，但所有的子弹都始终有效，直到抵达屏幕顶端后消失。）<br>这时候运行射击结果是这样：<br><img src="/ganru.github.io/posts/Python笔记/2018-10-07-小游戏之外星人入侵（第二部分）/3.jpg"></p>
 <h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>我们最后要试试能不能杀掉全部外星人，那么不太可能一个一个干掉，太繁琐，我们可以做个大子弹：<br>将 settings.py 中的 <code>self.bullet_width = 300</code>，看看能不能消灭。<br>当然，别忘了改回来。</p>
 <h2 id="复建一群外星人"><a href="#复建一群外星人" class="headerlink" title="复建一群外星人"></a>复建一群外星人</h2><p>打完后，不可能游戏就结束，我们在做一群。<br>首先，检查下外星人库 aliens 是否为空。<br>我们在模块 game_functions 中的 update_bullets 中添加：</p>
 <pre><code>if len(aliens) == 0:
@@ -659,7 +659,7 @@ def update_aliens(ai_settings, ship, aliens):
     # 检测外星人和飞船之间的碰撞
     if pygame.sprite.spritecollideany(ship, aliens):
         print(&quot;Ship hit!!!&quot;)
-</code></pre><p>如果没有发生碰撞， spritecollideany() 将返回 None，因此 if 代码块不会执行。如果找到了与飞船发生碰撞的外星人，它就返回这个外星人，因此if代码块将执行：打印“Ship hit!!!”<br>我们运行试试：<br><img src="/ganru.github.io/2018/10/07/小游戏之外星人入侵（第二部分）/4.jpg"></p>
+</code></pre><p>如果没有发生碰撞， spritecollideany() 将返回 None，因此 if 代码块不会执行。如果找到了与飞船发生碰撞的外星人，它就返回这个外星人，因此if代码块将执行：打印“Ship hit!!!”<br>我们运行试试：<br><img src="/ganru.github.io/posts/Python笔记/2018-10-07-小游戏之外星人入侵（第二部分）/4.jpg"></p>
 <h3 id="响应飞船与外星人的碰撞"><a href="#响应飞船与外星人的碰撞" class="headerlink" title="响应飞船与外星人的碰撞"></a>响应飞船与外星人的碰撞</h3><p>上面的 <code>print(&quot;Ship hit!!!&quot;)</code> 可以删了，现在我们做一个新的类：</p>
 <p><strong>game_stats.py</strong></p>
 <hr>
@@ -823,12 +823,12 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/10/02/小游戏之外星人入侵（第一部分）/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-10-02-小游戏之外星人入侵（第一部分）.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -842,7 +842,7 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/10/02/小游戏之外星人入侵（第一部分）/" itemprop="url">小游戏之外星人入侵（第一部分）</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-10-02-小游戏之外星人入侵（第一部分）.html" itemprop="url">小游戏之外星人入侵（第一部分）</a></h1>
         
 
         <div class="post-meta">
@@ -1549,12 +1549,12 @@ print(len(bullets))
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/28/代码测试/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-28-代码测试.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1568,7 +1568,7 @@ print(len(bullets))
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/09/28/代码测试/" itemprop="url">代码测试</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-28-代码测试.html" itemprop="url">代码测试</a></h1>
         
 
         <div class="post-meta">
@@ -1742,7 +1742,7 @@ FAILED (errors=1)
 Ran 2 tests in 0.000s
 
 OK
-</code></pre><h1 id="断言方法"><a href="#断言方法" class="headerlink" title="断言方法"></a>断言方法</h1><p>Python 在 unittest.TestCase 类中提供了很多断言方法。<br>以下为常用的断言方法：<br><img src="/ganru.github.io/2018/09/28/代码测试/1.png"></p>
+</code></pre><h1 id="断言方法"><a href="#断言方法" class="headerlink" title="断言方法"></a>断言方法</h1><p>Python 在 unittest.TestCase 类中提供了很多断言方法。<br>以下为常用的断言方法：<br><img src="/ganru.github.io/posts/Python笔记/2018-09-28-代码测试/1.png"></p>
 <h1 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h1><p>函数知道怎么测试了，现在看看类的测试。<br>写一个类模块：<br>survey.py</p>
 <pre><code>class AnonymousSurvey():
     &quot;&quot;&quot;收集匿名调查问卷的答案&quot;&quot;&quot;
@@ -1876,12 +1876,12 @@ OK
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/27/文件与异常/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-27-文件与异常.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1895,7 +1895,7 @@ OK
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/09/27/文件与异常/" itemprop="url">文件与异常</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-27-文件与异常.html" itemprop="url">文件与异常</a></h1>
         
 
         <div class="post-meta">
@@ -2187,12 +2187,12 @@ with open(filename) as f_obj:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/24/类（面向对象编程）/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-24-类（面向对象编程）.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2206,7 +2206,7 @@ with open(filename) as f_obj:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/09/24/类（面向对象编程）/" itemprop="url">类（面向对象编程）</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-24-类（面向对象编程）.html" itemprop="url">类（面向对象编程）</a></h1>
         
 
         <div class="post-meta">
@@ -2582,12 +2582,12 @@ Phil&apos;s favorite language is Python.
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/22/函数专项/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-22-函数专项.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2601,7 +2601,7 @@ Phil&apos;s favorite language is Python.
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/09/22/函数专项/" itemprop="url">函数专项</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-22-函数专项.html" itemprop="url">函数专项</a></h1>
         
 
         <div class="post-meta">
@@ -3004,12 +3004,12 @@ phil&apos;s favorite language is python
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/用户输入与-while-循环/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-17-用户输入与-while-循环.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -3023,7 +3023,7 @@ phil&apos;s favorite language is python
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/09/17/用户输入与-while-循环/" itemprop="url">用户输入与 while 循环</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-17-用户输入与-while-循环.html" itemprop="url">用户输入与 while 循环</a></h1>
         
 
         <div class="post-meta">
@@ -3311,12 +3311,12 @@ out：
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/字典/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-17-字典.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -3330,7 +3330,7 @@ out：
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/09/17/字典/" itemprop="url">字典</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-17-字典.html" itemprop="url">字典</a></h1>
         
 
         <div class="post-meta">
@@ -3606,12 +3606,12 @@ out：
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/条件语句/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-17-条件语句.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -3625,7 +3625,7 @@ out：
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/09/17/条件语句/" itemprop="url">条件语句</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-17-条件语句.html" itemprop="url">条件语句</a></h1>
         
 
         <div class="post-meta">
@@ -3781,12 +3781,12 @@ not in 判断特定值是否不在列表中
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/2018/09/17/列表的使用/">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-17-列表的使用.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ganru">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -3800,7 +3800,7 @@ not in 判断特定值是否不在列表中
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/ganru.github.io/2018/09/17/列表的使用/" itemprop="url">列表的使用</a></h1>
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-17-列表的使用.html" itemprop="url">列表的使用</a></h1>
         
 
         <div class="post-meta">
@@ -4086,6 +4086,10 @@ out：
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/ganru.github.io/images/avatar.png"
+                alt="Ganru" />
             
               <p class="site-author-name" itemprop="name">Ganru</p>
               <p class="site-description motion-element" itemprop="description">学习一向都是孤独的，慢慢玩。</p>

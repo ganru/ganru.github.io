@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/ganru.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/ganru.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/ganru.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/ganru.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/ganru.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/ganru.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/ganru.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup   项目简介：这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning">
+<meta name="keywords" content="学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web应用（第二部分）">
+<meta property="og:url" content="https://ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）.html">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup   项目简介：这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/1.png">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/2.png">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/3.png">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/4.png">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/5.png">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/6.png">
+<meta property="og:updated_time" content="2018-11-24T07:50:45.346Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web应用（第二部分）">
+<meta name="twitter:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup   项目简介：这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning">
+<meta name="twitter:image" content="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/ganru.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）.html"/>
+
+
+
+
+
+  <title>Web应用（第二部分） | 小黑屋</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/ganru.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小黑屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/ganru.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/ganru.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/ganru.github.io/categories/随笔" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-write">
+          <a href="/ganru.github.io/categories/写作" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            写作
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read">
+          <a href="/ganru.github.io/categories/阅读" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            阅读
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-study">
+          <a href="/ganru.github.io/categories/学习" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            学习
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-code">
+          <a href="/ganru.github.io/categories/编程" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            编程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-py_code">
+          <a href="/ganru.github.io/categories/Python笔记" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web应用（第二部分）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-22T23:13:35+08:00">
+                2018-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<blockquote>
+<p>项目简介：<br>这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。<br>在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning Log）的项目，这是一个在线日志系统，让我们能够记录所学习的有关特定主题的知识。</p>
+</blockquote>
+<blockquote>
+<p>Django 简介：<br>Django 是一个 Web 框架——一套用于帮助开发交互式网站的工具。Django 能够响应网页请求，还能让我们更轻松地读写数据库、管理用户等。</p>
+</blockquote>
+<p>承接上一节内容，这次我们主要做用户账户。</p>
+<h1 id="授予用户能够输入数据的权限"><a href="#授予用户能够输入数据的权限" class="headerlink" title="授予用户能够输入数据的权限"></a>授予用户能够输入数据的权限</h1><p>目前，只有超级用户（站长）有这个权限，现在，我们建立几个页面，让用户也能够输入数据。</p>
+<h2 id="添加新主题"><a href="#添加新主题" class="headerlink" title="添加新主题"></a>添加新主题</h2><p>跟前面的一样，三步：</p>
+<ol>
+<li>映射 URL</li>
+<li>编写视图函数</li>
+<li>编写模板</li>
+</ol>
+<p>这里的主要区别是，我们需要导入包含表单的模块 form.py 。</p>
+<h3 id="用于添加主题的表单"><a href="#用于添加主题的表单" class="headerlink" title="用于添加主题的表单"></a>用于添加主题的表单</h3><p>让用户输入并提交信息的页面都是表单，虽然它看起来不像表单。用户输入信息时，我们需要进行验证，确认提供的信息是正确的数据类型，且不是恶意的信息，如中断服务器的代码。然后，我们再对这些有效信息进行处理，并将其保存到数据库的合适地方。这些工作很多都是由 Django 自动完成的。</p>
+<p>在 Django 中，创建表单的最简单方式是使用 ModelForm ，它根据我们在上一部分定义的模型中的信息自动创建表单。创建一个名为 forms.py 的文件，将其存储到 models.py 所在的目录中，并在其中编写第一个表单：</p>
+<pre><code>from django import forms
+
+from .models import Topic
+
+class TopicForm(forms.ModelForm):
+    class Meta:
+        model = Topic
+        fields = [&apos;text&apos;]
+        labels = {&apos;text&apos;: &apos;&apos;}
+</code></pre><p>我们首先导入了模块 forms 以及要使用的模型 Topic ，并创建一个类，使它继承 forms.ModelForm 。<br>这里最简单的 ModelForm 版本只包含一个内嵌的 Meta 类，它告诉 Django 根据哪个模型创建表单，以及在表单中包含哪些字段。我们根据模型 Topic 创建一个表单，该表单只包含字段 text 。最后一处的代码让 Django 不要为字段 text 生成标签。</p>
+<h3 id="URL-模式：-new-topic"><a href="#URL-模式：-new-topic" class="headerlink" title="URL 模式： new_topic"></a>URL 模式： new_topic</h3><p>这个新网页的 URL 应简短而具有描述性，因此当用户要添加新主题时，我们将切换到 <a href="http://localhost:8000/new_topic/" target="_blank" rel="noopener">http://localhost:8000/new_topic/</a> 。 下面是网页 new_topic 的 URL 模式，我们将其添加到 learning_logs/urls.py 中：</p>
+<pre><code># 用于添加新主题的网页
+path(&apos;new_topic/&apos;, views.new_topic, name=&apos;new_topic&apos;),
+</code></pre><h3 id="视图函数-new-topic"><a href="#视图函数-new-topic" class="headerlink" title="视图函数 new_topic()"></a>视图函数 new_topic()</h3><p>函数 new_topic() 需要处理两种情形：刚进入 new_topic 网页（在这种情况下，它应显示一个空表单）；对提交的表单数据进行处理，并将用户重定向到网页 topics ：</p>
+<pre><code>from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .forms import TopicForm, EntryForm
+
+def new_topic(request):
+    &quot;&quot;&quot;添加新主题&quot;&quot;&quot;
+    if request.method != &apos;POST&apos;:
+        # 未提交数据：创建一个新表单
+        form = TopicForm()
+    else:
+        # POST提交的数据,对数据进行处理
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse(&apos;learning_logs:topics&apos;))
+
+    context = {&apos;form&apos;: form}
+    return render(request, &apos;learning_logs/new_topic.html&apos;, context)
+</code></pre><p>我们导入了 HttpResponseRedirect 类，用户提交主题后我们将使用这个类将用户重定向到网页 topics 。函数 reverse() 根据指定的 URL 模型确定 URL ，这意味着 Django 将在页面被请求时生成 URL 。我们还导入了刚才创建的表单 TopicForm 。</p>
+<p><strong> GET 请求和 POST 请求</strong></p>
+<p>创建 Web 应用程序时，将用到的两种主要请求类型是 GET 请求和 POST 请求。<br>对于只是从服务器读取数据的页面，使用 GET 请求；<br>在用户需要通过表单提交信息时，通常使用 POST 请求。<br>处理所有表单时，我们都将指定使用 POST 方法。还有一些其他类型的请求，但这个项目没有使用。</p>
+<p>函数 new_topic() 将请求对象作为参数。用户初次请求该网页时，其浏览器将发送 GET 请求；<br>用户填写并提交表单时，其浏览器将发送 POST 请求。根据请求的类型，我们可以确定用户请求的是空表单（ GET 请求）还是要求对填写好的表单进行处理（ POST 请求）。</p>
+<p><code>if request.method != &#39;POST&#39;:</code>测试确定请求方法是 GET 还是 POST 。如果请求方法不是 POST ，请求就可能是 GET ，因此我们需要返回一个空表单（即便请求是其他类型的，返回一个空表单也不会有任何问题）。由于实例化 TopicForm 时我们没有指定任何实参， Django 将创建一个可供用户填写的空表单。<br>如果请求方法为 POST ，将执行 else 代码块，对提交的表单数据进行处理。我们使用用户输入的数据（它们存储在 request.POST 中）创建一个 TopicForm 实例，这样对象 form 将包含用户提交的信息。</p>
+<p>要将提交的信息保存到数据库，必须先通过检查确定它们是有效的。函数 is_valid() 核实用户填写了所有必不可少的字段（表单字段默认都是必不可少的），且输入的数据与要求的<br>字段类型一致（例如，字段 text 少于 200 个字符，这是我们在上一章节中的 models.py 中指定的），这种自动验证避免了我们去做大量的工作。如果所有字段都有效，我们就可调用 save() ，将表单中的数据写入数据库。</p>
+<p>保存数据后，就可离开这个页面了。我们使用 reverse() 获取页面 topics 的 URL ，并将其传递给 HttpResponseRedirect() ，后者将用户的浏览器重定向到页面 topics 。在页面 topics 中，用户将在主题列表中看到他刚输入的主题。</p>
+<h3 id="模板-new-topic"><a href="#模板-new-topic" class="headerlink" title="模板 new_topic"></a>模板 new_topic</h3><p>下面来创建新模板 new_topic.html ，用于显示我们刚创建的表单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;Add a new topic:&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	// 定义一个表单</span><br><span class="line">	&lt;form action=&quot;&#123;% url &apos;learning_logs:new_topic&apos; %&#125;&quot; method=&apos;post&apos;&gt;</span><br><span class="line">	</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		&lt;button name=&quot;submit&quot;&gt;add topic&lt;/button&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实参 action 告诉服务器将提交的表单数据发送到哪里，这里我们将它发回给视图函数 new_topic() 。<br>实参 method 让浏览器以 POST 请求的方式提交数据。</p>
+<p>Django 使用模板标签 { % csrf_token % } 来防止攻击者利用表单来获得对服务器未经授权的访问（这种攻击被称为跨站请求伪造）。<br>显示表单：我们只需包含模板变量{ { form.as_p } }，就可让 Django 自动创建显示表单所需的全部字段。修饰符 as_p 让 Django 以段落格式渲染所有表单元素，这是一种整洁地显示表单的简单方式。</p>
+<p>Django 不会为表单创建提交按钮，因此我们定义了一个这样的按钮。</p>
+<h3 id="链接到页面-new-topic"><a href="#链接到页面-new-topic" class="headerlink" title="链接到页面 new_topic"></a>链接到页面 new_topic</h3><p>接下来，我们在页面 topics 中添加一个到页面 new_topic 的链接：</p>
+<pre><code>&lt;a href=&quot;{% url 'learning_logs:new_topic' %}&quot;&gt;Add a new topic:&lt;/a&gt;
+</code></pre><p>可看到：<br><img src="/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/1.png"></p>
+<h2 id="添加新条目"><a href="#添加新条目" class="headerlink" title="添加新条目"></a>添加新条目</h2><p>在此之前，我们需要在 forms.py 中再添加一个类。</p>
+<h3 id="用于添加新条目的表单"><a href="#用于添加新条目的表单" class="headerlink" title="用于添加新条目的表单"></a>用于添加新条目的表单</h3><p>我们需要创建一个与模型 Entry 相关联的表单，但这个表单的定制程度比 TopicForm 要高些：</p>
+<pre><code>from .models import Topic, Entry
+
+class EntryForm(forms.ModelForm):
+    class Meta:
+        model = Entry
+        fields = [&apos;text&apos;]
+        labels = {&apos;text&apos;: &apos;&apos;}
+        widgets = {&apos;text&apos;: forms.Textarea(attrs={&apos;cols&apos;: 80})}
+</code></pre><p>小部件（widget）是一个 HTML 表单元素，如单行文本框、多行文本区域或下拉列表。通过设置属性 widgets ，可覆盖 Django 选择的默认小部件。通过让 Django 使用 forms.Textarea ，我们定制了字段 ‘text’ 的输入小部件，将文本区域的宽度设置为 80 列，而不是默认的 40 列。这给用户提供了足够的空间，可以编写有意义的条目。</p>
+<h3 id="URL-模式-new-entry"><a href="#URL-模式-new-entry" class="headerlink" title="URL 模式 new_entry"></a>URL 模式 new_entry</h3><p>跳转到 learning_logs/urls :</p>
+<pre><code># 用于添加新条目的页面
+path(&apos;new_entry/(?P&lt;topic_id&gt;\d+)/&apos;, views.new_entry, name=&apos;new_entry&apos;),
+</code></pre><h3 id="视图函数-new-entry"><a href="#视图函数-new-entry" class="headerlink" title="视图函数 new_entry()"></a>视图函数 new_entry()</h3><p>跳转到 views.py :</p>
+<pre><code>from .forms import TopicForm, EntryForm
+
+def new_entry(request, topic_id):
+    &quot;&quot;&quot;在特定的主题中添加新条目&quot;&quot;&quot;
+    topic = Topic.objects.get(id=topic_id)
+
+    if request.method != &apos;POST&apos;:
+        # 未提交数据：创建一个空表单
+        form = EntryForm()
+    else:
+        # POST 提交的数据,对数据进行处理
+        form = EntryForm(data=request.POST)
+        if form.is_valid():
+            new_entry = form.save(commit=False)
+            new_entry.topic = topic
+            new_entry.save()
+            return HttpResponseRedirect(reverse(&apos;learning_logs:topic&apos;, 
+                args=[topic_id]))
+
+    context = {&apos;topic&apos;: topic, &apos;form&apos;: form}
+    return render(request, &apos;learning_logs/new_entry.html&apos;, context)
+</code></pre><p>new_entry() 的定义包含形参 topic_id ，用于存储从 URL 中获得的值。渲染页面以及处理表单数据时，都需要知道针对的是哪个主题，因此我们使用 topic_id 来获得正确的主题。</p>
+<p>创建一个 EntryForm 实例，使用 request 对象中的 POST 数据来填充它；再检查表单是否有效，如果有效，就设置条目对象的属性 topic ，再将条目对象保存到数据库。</p>
+<p>调用 save() 时，我们传递了实参 commit=False ，让 Django 创建一个新的条目对象，并将其存储到 new_entry 中，但不将它保存到数据库中。我们将 new_entry 的属性 topic 设置为在这个函数开头从数据库中获取的主题，然后调用 save() ，且不指定任何实参。这将把条目保存到数据库，并将其与正确的主题相关联。</p>
+<p>然后我们将用户重定向到显示相关主题的页面。调用 reverse() 时，需要提供两个实参：<br>要根据它来生成 URL 的 URL 模式的名称；列表 args ，其中包含要包含在 URL 中的所有实参。在这里，列表 args 只有一个元素——topic_id 。接下来，调用 HttpResponseRedirect() 将用户重定向到显示新增条目所属主题的页面，用户将在该页面的条目列表中看到新添加的条目。</p>
+<h3 id="模板-new-entry"><a href="#模板-new-entry" class="headerlink" title="模板 new_entry"></a>模板 new_entry</h3><p>模板 new_entry 类似于模板 new_topic ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">	&lt;!--在页面顶端显示主题--&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;p&gt;Add a new entry:&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;form action=&quot;&#123;% url &apos;learning_logs:new_entry&apos; topic.id %&#125;&quot; method=&apos;post&apos;&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		&lt;button name=&apos;submit&apos;&gt;add entry&lt;/button&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>表单的实参 action 包含 URL 中的 topic_id 值，让视图函数能够将新条目关联到正确的主题。</p>
+<h3 id="链接到页面-new-entry"><a href="#链接到页面-new-entry" class="headerlink" title="链接到页面 new_entry"></a>链接到页面 new_entry</h3><p>跳转到 topic.html ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Entries:&lt;/p&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;learning_logs:new_entry&apos; topic.id %&#125;&quot;&gt;add new entry&lt;/a&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">	--snip—-</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="编辑条目"><a href="#编辑条目" class="headerlink" title="编辑条目"></a>编辑条目</h2><p>下面来创建一个页面，让用户能够编辑既有的条目。</p>
+<h3 id="URL-模式-edit-entry"><a href="#URL-模式-edit-entry" class="headerlink" title="URL 模式 edit_entry"></a>URL 模式 edit_entry</h3><p>跳转到 learning_logs/urls.py :</p>
+<pre><code># 用于编辑条目的页面
+url(&apos;edit_entry/(?P&lt;entry_id&gt;\d+)/&apos;, views.edit_entry, name=&apos;edit_entry&apos;),
+</code></pre><h3 id="视图函数-edit-entry"><a href="#视图函数-edit-entry" class="headerlink" title="视图函数 edit_entry()"></a>视图函数 edit_entry()</h3><pre><code>def edit_entry(request, entry_id):
+    &quot;&quot;&quot;编辑既有条目&quot;&quot;&quot;
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+
+    if request.method != &apos;POST&apos;:
+        # 初次请求，使用当前条目填充表单
+        form = EntryForm(instance=entry)
+    else:
+        # POST 提交的数据，对数据进行处理
+        form = EntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse(&apos;learning_logs:topic&apos;,
+                args=[topic.id]))
+
+    context = {&apos;entry&apos;: entry, &apos;topic&apos;: topic, &apos;form&apos;: form}
+    return render(request, &apos;learning_logs/edit_entry.html&apos;, context)
+</code></pre><p>初次请求，基本都是 get ，我们使用实参 instance=entry 创建一个 EntryForm 实例。这个实参让 Django 创建一个表单，并使用既有条目对象中的信息填充它。用户将看到既有的数据，并能够编辑它们。</p>
+<p>处理 POST 请求时，我们传递实参 instance=entry 和 data=request.POST ，让 Django 根据既有条目对象创建一个表单实例，并根据 request.POST 中的相关数据对其进行修改。然后，我们检查表单是否有效，如果有效，就调用 save() ，且不指定任何实参。接下来，我们重定向到显示条目所属主题的页面，用户将在其中看到其编辑的条目的新版本。</p>
+<h3 id="模板-edit-entry"><a href="#模板-edit-entry" class="headerlink" title="模板 edit_entry"></a>模板 edit_entry</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	&lt;p&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;p&gt;Edit entry:&lt;/p&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;form action=&quot;&#123;% url &apos;learning_logs:edit_entry&apos; entry.id %&#125;&quot; method=&apos;post&apos;&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		&lt;button name=&apos;submit&apos;&gt;save changes&lt;/button&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>实参 action 将表单发回给函数 edit_entry() 进行处理。在标签{ % url % } 中，我们将条目 ID 作为一个实参，让视图对象能够修改正确的条目对象。我们将提交按钮命名为 save changes ，以提醒用户：单击该按钮将保存所做的编辑，而不是创建一个新条目。</p>
+<h3 id="链接到页面-edit-entry"><a href="#链接到页面-edit-entry" class="headerlink" title="链接到页面 edit_entry"></a>链接到页面 edit_entry</h3><p>现在，在显示特定主题的页面中，需要给每个条目添加到页面 edit_entry 的链接：</p>
+<pre><code>&lt;p&gt;{{ entry.date_added|date:'M d, Y H:i' }}&lt;/p&gt;
+&lt;p&gt;{{ entry.text|linebreaks }}&lt;/p&gt;
+&lt;p&gt;
+    &lt;a href=&quot;{% url 'learning_logs:edit_entry' entry.id %}&quot;&gt;edit entry&lt;/a&gt;
+&lt;/p&gt;
+</code></pre><p>最终效果：<br><img src="/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/2.png"></p>
+<h1 id="创建用户账户"><a href="#创建用户账户" class="headerlink" title="创建用户账户"></a>创建用户账户</h1><p>现在我们建立会员制。</p>
+<h2 id="新建应用程序-users"><a href="#新建应用程序-users" class="headerlink" title="新建应用程序 users"></a>新建应用程序 users</h2><ol>
+<li><p>终端输入命令<code>python manage.py startapp users</code>，得到的结果应该与初建应用程序 learning_logs 相同。</p>
+</li>
+<li><p>然后将应用程序添加到 settings.py 中，这样，Django 将把应用程序 users 包含到项目中。</p>
+</li>
+<li><p>让项目包含应用程序的 URL<br><code>path(&#39;users/&#39;, include(&#39;users.urls&#39;, namespace=&#39;users&#39;)),</code></p>
+</li>
+</ol>
+<h2 id="登陆页面"><a href="#登陆页面" class="headerlink" title="登陆页面"></a>登陆页面</h2><p>我们将使用 Django 提供的默认登录视图，因此 URL 模式会稍有不同。</p>
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><pre><code>&quot;&quot;&quot;为应用程序 users 定义 URL 模式&quot;&quot;&quot;
+
+from django.urls import path
+from django.contrib.auth import login
+
+from . import views
+
+app_name = &apos;users&apos;
+
+urlpatterns = [
+    # 登录页面
+    path(&apos;login/&apos;, login, {&apos;template_name&apos;: &apos;users/login.html&apos;},
+         name=&apos;login&apos;)
+]
+</code></pre><p>这里注意，版本不同的原因，我们不能按照书上的来导入 login 模块，我尝试改了一下。但是运行会报错，得到一个意外的参数 template_name ，因为我是对照 Django 2.0 版本的文档写的，嘿嘿….</p>
+<p>网上查了一下，要这么写：</p>
+<pre><code>from django.urls import path
+from django.contrib.auth.views import LoginView
+
+from . import views
+
+app_name = &quot;users&quot;
+urlpatterns = [
+  path(&apos;login/&apos;, LoginView.as_view(template_name=&apos;users/login.html&apos;), name=&quot;login&quot;),
+]
+</code></pre><h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>鉴于我们没有编写自己的视图函数，我们传递了一个字典，告诉 Django 去哪里查找我们将编写的模板。这个模板包含在应用程序 users 而不是 learning_logs 中。所以这里的步骤稍有不同，直接写模板。</p>
+<p>模板 login.html ，应将其存储到目录<strong> users/templates/users/ </strong>中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line">&lt;!--请注意，一个应用程序中的模板可继承另一个应用程序中的模板。--&gt;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line">	&#123;% if form.errors %&#125;</span><br><span class="line">	&lt;p&gt;Your username and password didn&apos;t match. Please try again.&lt;/p&gt;</span><br><span class="line">	&#123;% endif %&#125;</span><br><span class="line">	</span><br><span class="line">	&lt;form method=&quot;post&quot; action=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot;&gt;</span><br><span class="line">	&lt;!--login 是登陆视图函数的名称--&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		</span><br><span class="line">		&lt;button name=&quot;submit&quot;&gt;log in&lt;/button&gt;</span><br><span class="line">		&lt;input type=&quot;hidden&quot; name=&quot;next&quot; value=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot; /&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果表单的 errors 属性被设置，我们就显示一条错误消息，指出输入的用户名——密码对与数据库中存储的任何用户名——密码对都不匹配。</p>
+<p>我们要让登录视图处理表单，因此将实参 action 设置为登录页面的 URL 。登录视图将一个表单发送给模板，在模板中，我们显示这个表单并添加一个提交按钮。我们包含了一个隐藏的表单元素—— ‘next’ ，其中的实参 value 告诉 Django 在用户成功登录后将其重定向到什么地方——在这里是主页。</p>
+<p>然后就是把它链接到登陆页面。因为我们要让这个设置起到一个效果：未登陆时，所有的页面都有它，登陆过后，就没有这个设置，所以我们要将它链接到基础模板里面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&#123;% url &apos;learning_logs:topics&apos; %&#125;&quot;&gt;Topics&lt;/a&gt; -</span><br><span class="line">&#123;% if user.is_authenticated %&#125;</span><br><span class="line">	Hello, &#123;&#123; user.username &#125;&#125;.</span><br><span class="line">&#123;% else %&#125;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot;&gt;log in&lt;/a&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在 Django 身份验证系统中，每个模板都可使用变量 user ，这个变量有一个 is_authenticated 属性：如果用户已登录，该属性将为 True ，否则为 False 。这让你能够向已通过身份验证的用户显示一条消息，而向未通过身份验证的用户显示另一条消息。</p>
+<p>可以看到：<br><img src="/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/3.png"></p>
+<p>如果看到的是已登录页面，打开管理员网站 <a href="http://localhost:8000/admin/" target="_blank" rel="noopener">http://localhost:8000/admin/</a> 退出登录。</p>
+<h2 id="注销"><a href="#注销" class="headerlink" title="注销"></a>注销</h2><p>在这里我们不用建立注销页面（注销都要走流程你烦我也烦…），所以我们只要建立一个链接一键注销并且返回主页就行了。</p>
+<p>为此，我们将为注销链接定义一个 URL 模式，编写一个视图函数，并在 base.html 中添加一个注销链接。</p>
+<h3 id="注销-URL"><a href="#注销-URL" class="headerlink" title="注销 URL"></a>注销 URL</h3><p>在 users/urls.py 修改：</p>
+<pre><code># 注销
+url(&apos;logout/&apos;, views.logout_view, name=&apos;logout&apos;),
+</code></pre><h3 id="视图函数-logout-view"><a href="#视图函数-logout-view" class="headerlink" title="视图函数 logout_view()"></a>视图函数 logout_view()</h3><pre><code>from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth import logout
+
+# Create your views here.
+
+def logout_view(request):
+    &quot;&quot;&quot;注销用户&quot;&quot;&quot;
+    logout(request)
+    return HttpResponseRedirect(reverse(&apos;learning_logs:index&apos;))
+</code></pre><h3 id="链接到注销视图"><a href="#链接到注销视图" class="headerlink" title="链接到注销视图"></a>链接到注销视图</h3><p>我们将它放在标签{ % if user.is_authenticated % } 中，使得仅当用户登录后才能看到它 (base.html) ：</p>
+<pre><code>&lt;a href=&quot;{% url 'users:logout' %}&quot;&gt;log out&lt;/a&gt;
+</code></pre><p>呈现的效果：<br><img src="/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/4.png"></p>
+<h2 id="注册页面"><a href="#注册页面" class="headerlink" title="注册页面"></a>注册页面</h2><p>我们将使用 Django 提供的表单 UserCreationForm ，但视图函数和模板自己编写。</p>
+<h3 id="定义-URL"><a href="#定义-URL" class="headerlink" title="定义 URL"></a>定义 URL</h3><pre><code># 注册页面
+path(&apos;register/&apos;, views.register, name=&apos;register&apos;),
+</code></pre><h3 id="视图函数-register"><a href="#视图函数-register" class="headerlink" title="视图函数 register()"></a>视图函数 register()</h3><pre><code>from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render
+
+def register(request):
+    &quot;&quot;&quot;注册新用户&quot;&quot;&quot;
+    if request.method != &apos;POST&apos;:
+        # 显示空的注册表单
+        form = UserCreationForm()
+    else:
+        # 处理填写好的表单
+        form = UserCreationForm(data=request.POST)
+
+        if form.is_valid():
+        &lt;!--就这里而言，是用户名未包含非法字符，输入的两个密码相同，以及
+            用户没有试图做恶意的事情。--&gt;
+            new_user = form.save()
+            # 让用户自动登录，再重定向到主页
+            authenticated_user = authenticate(username=new_user.username,
+                password=request.POST[&apos;password1&apos;])
+            login(request, authenticated_user)
+            return HttpResponseRedirect(reverse(&apos;learning_logs:index&apos;))
+
+    context = {&apos;form&apos;: form}
+    return render(request, &apos;users/register.html&apos;, context)
+</code></pre><p>导入包，其中 authenticate 用于验证用户，验证无误返回 True ，否则返回 False 。</p>
+<h3 id="注册模板"><a href="#注册模板" class="headerlink" title="注册模板"></a>注册模板</h3><p>注册页面的模板与登录页面的模板类似：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line">	&lt;form method=&quot;post&quot; action=&quot;&#123;% url &apos;users:register&apos; %&#125;&quot;&gt;</span><br><span class="line">		&#123;% csrf_token %&#125;</span><br><span class="line">		&#123;&#123; form.as_p &#125;&#125;</span><br><span class="line">		</span><br><span class="line">		&lt;button name=&quot;submit&quot;&gt;register&lt;/button&gt;</span><br><span class="line">		&lt;input type=&quot;hidden&quot; name=&quot;next&quot; value=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot; /&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法 as_p ，让 Django 在表单中正确地显示所有的字段，包括错误消息——如果用户没有正确地填写表单。</p>
+<h3 id="链接到注册页面"><a href="#链接到注册页面" class="headerlink" title="链接到注册页面"></a>链接到注册页面</h3><p>我们将它放在标签{ % else % } 中，使得我们在用户没有登录时看到它 (base.html) ：</p>
+<pre><code>&lt;a href=&quot;{% url 'users:register' %}&quot;&gt;register&lt;/a&gt; -
+</code></pre><h1 id="授予用户写数据的权限"><a href="#授予用户写数据的权限" class="headerlink" title="授予用户写数据的权限"></a>授予用户写数据的权限</h1><p>注册了之后，用户需要有在这个项目写东西的能力。<br>我们将修改模型 Topic ，让每个主题都归属于特定用户。这也将影响条目，因为每个条目都属于特定的主题。我们先来限制对一些页面的访问。</p>
+<h2 id="使用装饰器-login-required-限制访问"><a href="#使用装饰器-login-required-限制访问" class="headerlink" title="使用装饰器 @login_required 限制访问"></a>使用装饰器 @login_required 限制访问</h2><p><code>@login_required</code>是 Django 提供的它能实现这个目标：对于某些页面，只允许已登录的用户访问。</p>
+<p>关于装饰器，可查看之前的<a href="https://ganru.github.io/ganru.github.io/2018/10/13/python-%E4%B9%8B%E8%A3%85%E9%A5%B0%E5%99%A8%E8%A7%A3%E6%9E%90/">文章解析</a> 。</p>
+<h3 id="限制对-topics-页面的访问"><a href="#限制对-topics-页面的访问" class="headerlink" title="限制对 topics 页面的访问"></a>限制对 topics 页面的访问</h3><p>每个主题都归特定用户所有，因此应只允许已登录的用户请求 topics 页面。为此，在 learning_logs/views.py 中添加如下代码：</p>
+<pre><code>from django.contrib.auth.decorators import login_required
+
+@login_required
+def topics(request):
+    --snip—-
+</code></pre><p>login_required() 的代码检查用户是否已登录，仅当用户已登录时， Django 才运行 topics() 的代码。如果用户未登录，就重定向到登录页面。<br>这样的话，为了实现这个重定向，我们应该在 settings.py 末尾添加如下代码：</p>
+<pre><code># 我的设置
+LOGIN_URL = &apos;/users/login/&apos;
+</code></pre><h3 id="全面限制对项目“学习笔记”的访问"><a href="#全面限制对项目“学习笔记”的访问" class="headerlink" title="全面限制对项目“学习笔记”的访问"></a>全面限制对项目“学习笔记”的访问</h3><p>现在，我们不限制对主页、注册、注销页面的访问，而限制对其他所有页面的访问。</p>
+<p>在 learning_logs/views.py 中，除了 index() 意外，每个视图都加上 @login_required 。</p>
+<pre><code>--snip--
+@login_required
+def topics(request):
+    --snip--
+
+@login_required
+def topic(request, topic_id):
+    --snip--
+
+@login_required
+def new_topic(request):
+    --snip--
+
+@login_required
+def new_entry(request, topic_id):
+    --snip--
+
+@login_required
+def edit_entry(request, entry_id):
+    --snip--
+</code></pre><p>这样有助于提高网站安全性。</p>
+<h2 id="将数据关联到用户"><a href="#将数据关联到用户" class="headerlink" title="将数据关联到用户"></a>将数据关联到用户</h2><p>现在，需要将数据关联到提交它们的用户。</p>
+<p>步骤：</p>
+<ol>
+<li>修改模型 Topic ，添加一个关联到用户的外键 (ForeignKey)</li>
+<li>对数据库进行迁移</li>
+<li>最后对部分视图进行修改，使其只显示与当前用户登录的相关联的数据</li>
+</ol>
+<h3 id="修改模型-Topic"><a href="#修改模型-Topic" class="headerlink" title="修改模型 Topic"></a>修改模型 Topic</h3><p>修改 learning_logs/models.py ：</p>
+<pre><code>from django.contrib.auth.models import User # 添加新的模块
+
+class Topic(models.Model):
+    text = models.CharField(max_length=200)
+    date_added = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)    # 添加这一行
+</code></pre><h3 id="确定当前有哪些用户"><a href="#确定当前有哪些用户" class="headerlink" title="确定当前有哪些用户"></a>确定当前有哪些用户</h3><p>接下来是迁移，不过在此之前，Django 需要知道该将各个既有主题关联到哪个用户。为了简单，我们将既有主题都关联到超级用户上，先确定超级用户的 id 。</p>
+<p>打开 shell 并输入以下代码：</p>
+<pre><code>from django.contrib.auth.models import User
+User.objects.all()    // 查看到目前为止都创建了哪些用户
+for user in User.objects.all():
+    # 遍历用户列表，并打印每位用户的用户名和 ID
+    print(user.username, user.id)
+</code></pre><p>可以看到，我们获取到的信息：<br><img src="/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/5.png"></p>
+<h3 id="迁移数据库"><a href="#迁移数据库" class="headerlink" title="迁移数据库"></a>迁移数据库</h3><p>获取 id 之后，迁移数据库。</p>
+<p>输入指令<code>python manage.py makemigrations learning_logs</code>，正确运行的话，会看到：</p>
+<pre><code>You are trying to add a non-nullable field &apos;owner&apos; to topic without a default;
+we can&apos;t do that (the database needs something to populate existing rows).
+// Django 指出我们试图给既有模型 Topic 添加一个必不可少（不可为空）的字段 (owner) ，
+    而该字段没有默认值。
+
+Please select a fix:
+    1) Provide a one-off default now (will be set on all existing rows)
+    2) Quit, and let me add a default in models.py
+Select an option: 
+// Django 给我们提供了两种选择：要么现在提供默认值，
+    要么退出并在 models.py 中添加默认值。
+</code></pre><p>输入 1 ，然后会出现这段：</p>
+<pre><code>Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type &apos;exit&apos; to exit this prompt
+&gt;&gt;&gt; 
+</code></pre><p>Django 让我们输入默认值，或者输入 exit 以退出。<br>继续输入 1 （用户 ID 值，并非必须使用超级用户，而可使用已创建的任何用户的 ID ），可以得到：</p>
+<pre><code>Migrations for &apos;learning_logs&apos;:
+  learning_logs\migrations\0003_topic_owner.py
+    - Add field owner to topic
+</code></pre><p>Django 使用这个值来迁移数据库，并生成了迁移文件 0003_topic_owner.py ，它在模型 Topic 中添加字段 owner 。</p>
+<p>最后，开始迁移。</p>
+<p><code>python manage.py migrate</code></p>
+<p>若要判断是否迁移成功，打开 Django shell:</p>
+<pre><code>from learning_logs.models import Topic
+&gt;&gt;&gt; for topic in Topic.objects.all():
+...     print(topic, topic.owner)
+...
+</code></pre><p>如果出现类似于这样的结果，则迁移成功。(gandalf 是我的用户 ID 值)<br><img src="/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）/6.png"></p>
+<p><strong>注意：</strong> 可以重置数据库而不是迁移它，但如果这样做，既有的数据都将丢失。一种不错的做法是，学习如何在迁移数据库的同时确保用户数据的完整性。如果确实想要一个全新的数据库，可执行命令<code>python manage.py flush</code>，这将重建数据库的结构。如果这样做，就必须重新创建超级用户，且原来的所有数据都将丢失。</p>
+<h2 id="只允许用户访问自己的主题"><a href="#只允许用户访问自己的主题" class="headerlink" title="只允许用户访问自己的主题"></a>只允许用户访问自己的主题</h2><p>很简单，在 views.py 中的 topics() 函数内改变这一行：</p>
+<pre><code>topics = Topic.objects.order_by(&apos;date_added&apos;)
+</code></pre><p>替换为：</p>
+<pre><code>topics = Topic.objects.filter(owner=request.user).order_by(&apos;date_added&apos;)
+</code></pre><p>这样，用户登录后， request 对象将有一个 user 属性，这个属性存储了有关该用户的信息。代码 Topic.objects.filter(owner=request.user) 让 Django 只从数据库中获取 owner 属性为当前用户的 Topic 对象。由于我们没有修改主题的显示方式，因此无需对页面 topics 的模板做任何修改。要查看结果，以所有既有主题关联到的用户的身份登录，并访问 topics 页面，你将看到所有的主题。然后，注销并以另一个用户的身份登录， topics 页面将不会列出任何主题。</p>
+<h2 id="保护用户的主题"><a href="#保护用户的主题" class="headerlink" title="保护用户的主题"></a>保护用户的主题</h2><p>我们还没有限制对显示单个主题的页面的访问，因此任何已登录的用户都可输入类似于 <a href="http://localhost:8000/topics/1/" target="_blank" rel="noopener">http://localhost:8000/topics/1/</a> 的 URL ，来访问显示相应主题的页面。</p>
+<p>为修复这种问题，我们在视图函数 topic() 获取请求的条目前执行检查：</p>
+<pre><code>from django.http import HttpResponseRedirect, Http404
+
+def topic(request, topic_id):
+    &quot;&quot;&quot;显示单个主题及其所有的条目&quot;&quot;&quot;
+    topic = Topic.objects.get(id=topic_id)
+
+
+    # 确认请求的主题属于当前用户
+    if topic.owner != request.user:
+        raise Http404
+</code></pre><h2 id="保护页面-edit-entry"><a href="#保护页面-edit-entry" class="headerlink" title="保护页面 edit_entry"></a>保护页面 edit_entry</h2><p>页面 edit_entry 的 URL 为 <a href="http://localhost:8000/edit_entry/entry_id/" target="_blank" rel="noopener">http://localhost:8000/edit_entry/entry_id/</a> ，其中 entry_id 是一个数字。跟上面一样的操作：</p>
+<pre><code>def edit_entry(request, entry_id):
+    &quot;&quot;&quot;编辑既有条目&quot;&quot;&quot;
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+    if topic.owner != request.user:
+        raise Http404
+</code></pre><h2 id="将新主题关联到当前用户"><a href="#将新主题关联到当前用户" class="headerlink" title="将新主题关联到当前用户"></a>将新主题关联到当前用户</h2><p>因为我们前面的修改，导致创建新主题时，必须指定其 owner 字段的值。否则将引发错误。</p>
+<p>def new_topic(request):<br>    “””添加新主题”””<br>    if request.method != ‘POST’:</p>
+<pre><code>    # 未提交数据：创建一个新表单
+    form = TopicForm()
+else:
+    # POST 提交的数据,对数据进行处理
+    form = TopicForm(request.POST)
+    if form.is_valid():
+
+        # 这一块是修改部分，并且把原来的 form.save() 删了
+        new_topic = form.save(commit=False)
+        new_topic.owner = request.user
+        new_topic.save()
+
+        return HttpResponseRedirect(reverse(&apos;learning_logs:topics&apos;))
+</code></pre><p>我们首先调用 form.save() ，并传递实参 commit=False ，这是因为我们先修改新主题，再将其保存到数据库中。接下来，将新主题的 owner 属性设置为当前用户。最后，对刚定义的主题实例调用 save() 。现在主题包含所有必不可少的数据，将被成功地保存。</p>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
+<li>实现用户账户</li>
+<li>权限的授予与限制</li>
+<li>装饰器的使用</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/ganru.github.io/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/ganru.github.io/posts/Python笔记/2018-11-19-Django管理员密码重置.html" rel="next" title="Django管理员密码重置">
+                <i class="fa fa-chevron-left"></i> Django管理员密码重置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/ganru.github.io/posts/Python笔记/2018-11-24-Web应用（第三部分）.html" rel="prev" title="Web应用（第三部分）">
+                Web应用（第三部分） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/ganru.github.io/images/avatar.png"
+                alt="Ganru" />
+            
+              <p class="site-author-name" itemprop="name">Ganru</p>
+              <p class="site-description motion-element" itemprop="description">学习一向都是孤独的，慢慢玩。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/ganru.github.io/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#授予用户能够输入数据的权限"><span class="nav-number">1.</span> <span class="nav-text">授予用户能够输入数据的权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加新主题"><span class="nav-number">1.1.</span> <span class="nav-text">添加新主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用于添加主题的表单"><span class="nav-number">1.1.1.</span> <span class="nav-text">用于添加主题的表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-模式：-new-topic"><span class="nav-number">1.1.2.</span> <span class="nav-text">URL 模式： new_topic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图函数-new-topic"><span class="nav-number">1.1.3.</span> <span class="nav-text">视图函数 new_topic()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板-new-topic"><span class="nav-number">1.1.4.</span> <span class="nav-text">模板 new_topic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接到页面-new-topic"><span class="nav-number">1.1.5.</span> <span class="nav-text">链接到页面 new_topic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加新条目"><span class="nav-number">1.2.</span> <span class="nav-text">添加新条目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用于添加新条目的表单"><span class="nav-number">1.2.1.</span> <span class="nav-text">用于添加新条目的表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-模式-new-entry"><span class="nav-number">1.2.2.</span> <span class="nav-text">URL 模式 new_entry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图函数-new-entry"><span class="nav-number">1.2.3.</span> <span class="nav-text">视图函数 new_entry()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板-new-entry"><span class="nav-number">1.2.4.</span> <span class="nav-text">模板 new_entry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接到页面-new-entry"><span class="nav-number">1.2.5.</span> <span class="nav-text">链接到页面 new_entry</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑条目"><span class="nav-number">1.3.</span> <span class="nav-text">编辑条目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-模式-edit-entry"><span class="nav-number">1.3.1.</span> <span class="nav-text">URL 模式 edit_entry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图函数-edit-entry"><span class="nav-number">1.3.2.</span> <span class="nav-text">视图函数 edit_entry()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板-edit-entry"><span class="nav-number">1.3.3.</span> <span class="nav-text">模板 edit_entry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接到页面-edit-entry"><span class="nav-number">1.3.4.</span> <span class="nav-text">链接到页面 edit_entry</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建用户账户"><span class="nav-number">2.</span> <span class="nav-text">创建用户账户</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新建应用程序-users"><span class="nav-number">2.1.</span> <span class="nav-text">新建应用程序 users</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登陆页面"><span class="nav-number">2.2.</span> <span class="nav-text">登陆页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL"><span class="nav-number">2.2.1.</span> <span class="nav-text">URL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板"><span class="nav-number">2.2.2.</span> <span class="nav-text">模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注销"><span class="nav-number">2.3.</span> <span class="nav-text">注销</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注销-URL"><span class="nav-number">2.3.1.</span> <span class="nav-text">注销 URL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图函数-logout-view"><span class="nav-number">2.3.2.</span> <span class="nav-text">视图函数 logout_view()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接到注销视图"><span class="nav-number">2.3.3.</span> <span class="nav-text">链接到注销视图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册页面"><span class="nav-number">2.4.</span> <span class="nav-text">注册页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义-URL"><span class="nav-number">2.4.1.</span> <span class="nav-text">定义 URL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图函数-register"><span class="nav-number">2.4.2.</span> <span class="nav-text">视图函数 register()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册模板"><span class="nav-number">2.4.3.</span> <span class="nav-text">注册模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接到注册页面"><span class="nav-number">2.4.4.</span> <span class="nav-text">链接到注册页面</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#授予用户写数据的权限"><span class="nav-number">3.</span> <span class="nav-text">授予用户写数据的权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用装饰器-login-required-限制访问"><span class="nav-number">3.1.</span> <span class="nav-text">使用装饰器 @login_required 限制访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限制对-topics-页面的访问"><span class="nav-number">3.1.1.</span> <span class="nav-text">限制对 topics 页面的访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全面限制对项目“学习笔记”的访问"><span class="nav-number">3.1.2.</span> <span class="nav-text">全面限制对项目“学习笔记”的访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将数据关联到用户"><span class="nav-number">3.2.</span> <span class="nav-text">将数据关联到用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改模型-Topic"><span class="nav-number">3.2.1.</span> <span class="nav-text">修改模型 Topic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定当前有哪些用户"><span class="nav-number">3.2.2.</span> <span class="nav-text">确定当前有哪些用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迁移数据库"><span class="nav-number">3.2.3.</span> <span class="nav-text">迁移数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#只允许用户访问自己的主题"><span class="nav-number">3.3.</span> <span class="nav-text">只允许用户访问自己的主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护用户的主题"><span class="nav-number">3.4.</span> <span class="nav-text">保护用户的主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护页面-edit-entry"><span class="nav-number">3.5.</span> <span class="nav-text">保护页面 edit_entry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将新主题关联到当前用户"><span class="nav-number">3.6.</span> <span class="nav-text">将新主题关联到当前用户</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习要点"><span class="nav-number">4.</span> <span class="nav-text">学习要点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ganru</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/ganru.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/ganru.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/ganru.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/ganru.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/ganru.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/ganru.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/ganru.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/ganru.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/ganru.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup   项目简介：这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning">
+<meta name="keywords" content="学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web应用（第三部分）">
+<meta property="og:url" content="https://ganru.github.io/posts/Python笔记/2018-11-24-Web应用（第三部分）.html">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup   项目简介：这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-24-Web应用（第三部分）/1.png">
+<meta property="og:updated_time" content="2018-11-24T07:29:43.083Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web应用（第三部分）">
+<meta name="twitter:description" content="该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘下载 ，密码：7rup   项目简介：这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning">
+<meta name="twitter:image" content="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-24-Web应用（第三部分）/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/ganru.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ganru.github.io/posts/Python笔记/2018-11-24-Web应用（第三部分）.html"/>
+
+
+
+
+
+  <title>Web应用（第三部分） | 小黑屋</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/ganru.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小黑屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/ganru.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/ganru.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/ganru.github.io/categories/随笔" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-write">
+          <a href="/ganru.github.io/categories/写作" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            写作
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read">
+          <a href="/ganru.github.io/categories/阅读" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            阅读
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-study">
+          <a href="/ganru.github.io/categories/学习" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            学习
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-code">
+          <a href="/ganru.github.io/categories/编程" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            编程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-py_code">
+          <a href="/ganru.github.io/categories/Python笔记" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-24-Web应用（第三部分）.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web应用（第三部分）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-24T15:20:48+08:00">
+                2018-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<blockquote>
+<p>项目简介：<br>这个 Web 应用程序项目其实就是做个网站，但我们不是做那种简单的 html 网站，是一种富应用程序（rich application），就像成熟的桌面应用程序一样。<br>在这里，我们主要学习 Django 框架。开发一个名为“学习笔记”（Learning Log）的项目，这是一个在线日志系统，让我们能够记录所学习的有关特定主题的知识。</p>
+</blockquote>
+<blockquote>
+<p>Django 简介：<br>Django 是一个 Web 框架——一套用于帮助开发交互式网站的工具。Django 能够响应网页请求，还能让我们更轻松地读写数据库、管理用户等。</p>
+</blockquote>
+<p>承接上次学习的内容，此次学学设置应用程序的样式并对其进行部署。</p>
+<h1 id="设置项目“学习笔记”的样式"><a href="#设置项目“学习笔记”的样式" class="headerlink" title="设置项目“学习笔记”的样式"></a>设置项目“学习笔记”的样式</h1><p>前面一路走来，所创建的网站非常的简单，页面就几个链接和文字，颇似 00 年代古老网站和论坛的风格，这是因为这些内容是骨干核心，只有网站能正确运行并具有相应的功能，我们才好在上面加皮肤。</p>
+<h2 id="应用程序-django-bootstrap3"><a href="#应用程序-django-bootstrap3" class="headerlink" title="应用程序 django-bootstrap3"></a>应用程序 django-bootstrap3</h2><p>为安装 django-bootstrap3 ，在活动的虚拟环境中执行如下命令：</p>
+<pre><code>pip install django-bootstrap3
+</code></pre><p>需要在 settings.py 的 INSTALLED_APPS 中添加如下代码，在项目中包含应用程序 django-boostrap3：</p>
+<pre><code># 我的应用程序
+&apos;learning_logs&apos;,
+&apos;users&apos;,
+
+# 第三方应用程序
+&apos;bootstrap3&apos;,
+</code></pre><p>我们需要让 django-bootstrap3 包含 jQuery ，这是一个 JavaScript 库，让我们能够使用 Bootstrap 模板提供的一些交互式元素。在 settings.py 的末尾添加如下代码：</p>
+<pre><code># 我的设置
+LOGIN_URL = &apos;/users/login/&apos;
+
+# django-bootstrap3 的设置
+BOOTSTRAP3 = {
+    &apos;include_jquery&apos;: True,
+    }
+</code></pre><p>这样，我们就无需手工下载 jQuery 并将其放到正确的地方。</p>
+<h2 id="使用-Bootstrap-来设置项目“学习笔记”的样式"><a href="#使用-Bootstrap-来设置项目“学习笔记”的样式" class="headerlink" title="使用 Bootstrap 来设置项目“学习笔记”的样式"></a>使用 Bootstrap 来设置项目“学习笔记”的样式</h2><p>Bootstrap 基本上就是一个大型的样式设置工具集，它还提供了大量的模板，我们可将它们应用于项目以创建独特的总体风格。</p>
+<p>要查看 Bootstrap 提供的模板，可访问 <a href="http://getbootstrap.com/" target="_blank" rel="noopener">http://getbootstrap.com/</a> ，单击 Getting Started ，再向下滚动到 Examples 部分，并找到 Navbars in action 。我们将使用模板 Static top navbar ，它提供了简单的顶部导航条、页面标题和用于放置页面内容的容器。</p>
+<h2 id="修改-base-html"><a href="#修改-base-html" class="headerlink" title="修改 base.html"></a>修改 base.html</h2><p>三步：</p>
+<ol>
+<li>定义 HTML 头部</li>
+<li>定义导航栏</li>
+<li>定义页面的主要部分</li>
+</ol>
+<h3 id="定义-HTML-头部"><a href="#定义-HTML-头部" class="headerlink" title="定义 HTML 头部"></a>定义 HTML 头部</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">现在，我们要重新设计文件 base.html 了，删掉其中的**全部**代码，重新构造：</span><br><span class="line"></span><br><span class="line">	&#123;% load bootstrap3 %&#125;  &lt;!--加载 django-bootstrap3 中的模板标签集--&gt;</span><br><span class="line"></span><br><span class="line">	&lt;!DOCTYPE html&gt;</span><br><span class="line">	&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">		&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span><br><span class="line">		&lt;title&gt;Learning Log&lt;/title&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;!--让 Django 包含所有的 Bootstrap 样式文件--&gt;</span><br><span class="line">		&#123;% bootstrap_css %&#125;</span><br><span class="line">		&#123;% bootstrap_javascript %&#125;</span><br><span class="line">		</span><br><span class="line">	&lt;/head&gt;</span><br></pre></td></tr></table></figure>
+<p>先写这一块。</p>
+<h3 id="定义导航栏"><a href="#定义导航栏" class="headerlink" title="定义导航栏"></a>定义导航栏</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;!-- Static navbar --&gt;</span><br><span class="line">	&lt;nav class=&quot;navbar navbar-default navbar-static-top&quot;&gt;</span><br><span class="line">	  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">		  </span><br><span class="line">		&lt;div class=&quot;navbar-header&quot;&gt;</span><br><span class="line">		  &lt;button type=&quot;button&quot; class=&quot;navbar-toggle collapsed&quot;</span><br><span class="line">			  data-toggle=&quot;collapse&quot; data-target=&quot;#navbar&quot;</span><br><span class="line">			  aria-expanded=&quot;false&quot; aria-controls=&quot;navbar&quot;&gt;</span><br><span class="line">		  &lt;/button&gt;</span><br><span class="line">		  &lt;a class=&quot;navbar-brand&quot; href=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot;&gt;</span><br><span class="line">			  Learning Log&lt;/a&gt;</span><br><span class="line">		  &lt;!--我们在导航栏的最左边显示项目名，并将其设置为到主页的链接，</span><br><span class="line">		  因为它将出现在这个项目的每个页面中。--&gt;</span><br><span class="line">			</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;div id=&quot;navbar&quot; class=&quot;navbar-collapse collapse&quot;&gt;</span><br><span class="line">		  &lt;ul class=&quot;nav navbar-nav&quot;&gt;</span><br><span class="line">			&lt;li&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:topics&apos; %&#125;&quot;&gt;Topics&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">		  &lt;/ul&gt;</span><br><span class="line">		  </span><br><span class="line">		  &lt;ul class=&quot;nav navbar-nav navbar-right&quot;&gt;</span><br><span class="line">			&#123;% if user.is_authenticated %&#125;</span><br><span class="line">			  &lt;li&gt;&lt;a&gt;Hello, &#123;&#123; user.username &#125;&#125;.&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">			  &lt;li&gt;&lt;a href=&quot;&#123;% url &apos;users:logout&apos; %&#125;&quot;&gt;log out&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">			&#123;% else %&#125;</span><br><span class="line">			  &lt;li&gt;&lt;a href=&quot;&#123;% url &apos;users:register&apos; %&#125;&quot;&gt;register&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">			  &lt;li&gt;&lt;a href=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot;&gt;log in&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">			&#123;% endif %&#125;</span><br><span class="line">		  &lt;/ul&gt;</span><br><span class="line">		&lt;/div&gt;&lt;!--/.nav-collapse --&gt;</span><br><span class="line">		</span><br><span class="line">	  &lt;/div&gt;</span><br><span class="line">	&lt;/nav&gt;</span><br><span class="line">	</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p> &lt; nav > 元素，表示页面的导航链接部分。对于这个元素内的所有内容，都将根据选择器 （selector）navbar、 navbar-default 和 navbar-static-top 定义的 Bootstrap 样式规则来设置样式。选择器决定了特定样式规则将应用于页面上的哪些元素。</p>
+<p>定义按钮，它将在浏览器窗口太窄、无法水平显示整个导航栏时显示出来。如果用户单击这个按钮，将出现一个下拉列表，其中包含所有的导航元素。</p>
+<p><code>id=&quot;navbar&quot;</code>这段 div 代码，定义了一组让用户能够在网站中导航的链接。导航栏其实就是一个以 \&lt; ul> 打头<br>的列表，其中每个链接都是一个列表项（\&lt; li > ）。要添加更多的链接，可插入更多类似的列表项。</p>
+<p>选择器 navbar-right 设置一组链接的样式，使其出现在导航栏右边——登录链接和注册链接通常出现在这里。</p>
+<h3 id="定义页面的主要部分"><a href="#定义页面的主要部分" class="headerlink" title="定义页面的主要部分"></a>定义页面的主要部分</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div class=&quot;page-header&quot;&gt;</span><br><span class="line">    &#123;% block header %&#125;&#123;% endblock %&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/div&gt; &lt;!-- /container --&gt;</span><br></pre></td></tr></table></figure>
+<p>这一块内容与上一个章节部分相似，区别在于 header 块的内容告诉用户页面包含哪些信息以及用户可在页面上执行哪些操作；其 class 属性值 page-header 将一系列样式应用于这个块。content 块是一个独立的 div ，未使用 class 属性指定样式。</p>
+<h2 id="使用-jumbotron-设置主页的样式"><a href="#使用-jumbotron-设置主页的样式" class="headerlink" title="使用 jumbotron 设置主页的样式"></a>使用 jumbotron 设置主页的样式</h2><p>打开 index.html ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;div class=&apos;jumbotron&apos;&gt;</span><br><span class="line">	  &lt;h1&gt;Track your learning.&lt;/h1&gt;        </span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">  &lt;h2&gt;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;users:register&apos; %&#125;&quot;&gt;Register an account&lt;/a&gt; to make </span><br><span class="line">	your own Learning Log, and list the topics you&apos;re learning about.</span><br><span class="line">  &lt;/h2&gt;</span><br><span class="line">  &lt;h2&gt;</span><br><span class="line">	Whenever you learn something new about a topic, make an entry </span><br><span class="line">	summarizing what you&apos;ve learned.</span><br><span class="line">  &lt;/h2&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>成型后页面如图所示：<br><img src="/ganru.github.io/posts/Python笔记/2018-11-24-Web应用（第三部分）/1.png"></p>
+<h2 id="设置登录页面的样式"><a href="#设置登录页面的样式" class="headerlink" title="设置登录页面的样式"></a>设置登录页面的样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line">&#123;% load bootstrap3 %&#125;</span><br><span class="line">&lt;!--加载 bootstrap3 模板标签--&gt;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;h2&gt;Log in to your account.&lt;/h2&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	</span><br><span class="line">  &lt;form method=&quot;post&quot; action=&quot;&#123;% url &apos;users:login&apos; %&#125;&quot; class=&quot;form&quot;&gt;</span><br><span class="line">	&#123;% csrf_token %&#125;</span><br><span class="line">	&#123;% bootstrap_form form %&#125;</span><br><span class="line">	&lt;!--将 Bootstrap 样式规则应用于各个表单元素，以显示表单，</span><br><span class="line">	替换了在第 19 章使用的标签 &#123;&#123; form.as_p &#125;&#125;--&gt;</span><br><span class="line"></span><br><span class="line">	&#123;% buttons %&#125;</span><br><span class="line">	  &lt;button name=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;log in&lt;/button&gt;</span><br><span class="line">	&#123;% endbuttons %&#125;</span><br><span class="line">	</span><br><span class="line">	&lt;input type=&quot;hidden&quot; name=&quot;next&quot; value=&quot;&#123;% url &apos;learning_logs:index&apos; %&#125;&quot; /&gt;</span><br><span class="line">  &lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：我们从这个模板中删除了 { % if form.errors %} 代码块，因为 django-bootstrap3 已经可以实现相应的功能（会自动管理表单错误）。</p>
+<h2 id="设置-new-topic-页面的样式"><a href="#设置-new-topic-页面的样式" class="headerlink" title="设置 new_topic 页面的样式"></a>设置 new_topic 页面的样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line">&#123;% load bootstrap3 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;h2&gt;Add a new topic:&lt;/h2&gt;</span><br><span class="line">&#123;% endblock header %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">	</span><br><span class="line">  &lt;form action=&quot;&#123;% url &apos;learning_logs:new_topic&apos; %&#125;&quot; method=&apos;post&apos;</span><br><span class="line">	  class=&quot;form&quot;&gt;</span><br><span class="line">	  </span><br><span class="line">	&#123;% csrf_token %&#125;</span><br><span class="line">	&#123;% bootstrap_form form %&#125;</span><br><span class="line">	</span><br><span class="line">	&#123;% buttons %&#125;</span><br><span class="line">	  &lt;button name=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;add topic&lt;/button&gt;</span><br><span class="line">	&#123;% endbuttons %&#125;</span><br><span class="line">	</span><br><span class="line">  &lt;/form&gt;</span><br><span class="line">	</span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="设置-topics-页面的样式"><a href="#设置-topics-页面的样式" class="headerlink" title="设置 topics 页面的样式"></a>设置 topics 页面的样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;learning_logs/base.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;h1&gt;Topics&lt;/h1&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line">  &lt;ul&gt;</span><br><span class="line">	&#123;% for topic in topics %&#125;</span><br><span class="line">	  &lt;li&gt;</span><br><span class="line">		&lt;h3&gt;</span><br><span class="line">		  &lt;a href=&quot;&#123;% url &apos;learning_logs:topic&apos; topic.id %&#125;&quot;&gt;&#123;&#123; topic &#125;&#125;&lt;/a&gt;</span><br><span class="line">		&lt;/h3&gt;</span><br><span class="line">	  &lt;/li&gt;</span><br><span class="line">	&#123;% empty %&#125;</span><br><span class="line">	  &lt;li&gt;No topics have been added yet.&lt;/li&gt;</span><br><span class="line">	&#123;% endfor %&#125;</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;h3&gt;&lt;a href=&quot;&#123;% url &apos;learning_logs:new_topic&apos; %&#125;&quot;&gt;Add new topic&lt;/h3&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>这里注意，不用导入标签{ % load bootstrap3 % } ，因为我们没有用到它的标签集。</p>
+<h2 id="设置-topic-页面中条目的样式"><a href="#设置-topic-页面中条目的样式" class="headerlink" title="设置 topic 页面中条目的样式"></a>设置 topic 页面中条目的样式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &apos;learning_logs/base.html&apos; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">  &lt;h2&gt;&#123;&#123; topic &#125;&#125;&lt;/h2&gt;</span><br><span class="line">&#123;% endblock header %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">  &lt;p&gt;</span><br><span class="line">	&lt;a href=&quot;&#123;% url &apos;learning_logs:new_entry&apos; topic.id %&#125;&quot;&gt;add new entry&lt;/a&gt;</span><br><span class="line">  &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">  &#123;% for entry in entries %&#125;</span><br><span class="line">	&lt;div class=&quot;panel panel-default&quot;&gt;</span><br><span class="line">	&lt;!--使用 Bootstrap 面板（panel）来突出每个条目--&gt;</span><br><span class="line">	  &lt;div class=&quot;panel-heading&quot;&gt;  &lt;!--面板标题--&gt;</span><br><span class="line">		&lt;h3&gt;</span><br><span class="line">		  &#123;&#123; entry.date_added|date:&apos;M d, Y H:i&apos; &#125;&#125;</span><br><span class="line">		  &lt;small&gt;  &lt;!--使其比时间戳小些--&gt;</span><br><span class="line">			&lt;a href=&quot;&#123;% url &apos;learning_logs:edit_entry&apos; entry.id %&#125;&quot;&gt;</span><br><span class="line">			  edit entry&lt;/a&gt;</span><br><span class="line">		  &lt;/small&gt;</span><br><span class="line">		&lt;/h3&gt;</span><br><span class="line">	  &lt;/div&gt;</span><br><span class="line">	  &lt;div class=&quot;panel-body&quot;&gt;  &lt;!--面板主体--&gt;</span><br><span class="line">		&#123;&#123; entry.text|linebreaks &#125;&#125;</span><br><span class="line">	  &lt;/div&gt;</span><br><span class="line">	&lt;/div&gt; &lt;!-- panel --&gt;</span><br><span class="line">  &#123;% empty %&#125;</span><br><span class="line">	There are no entries for this topic yet.</span><br><span class="line">  &#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endblock content %&#125;</span><br></pre></td></tr></table></figure>
+<p>到此为止，本地博客网站建立完毕。</p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>具体建议参考原书步骤。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/ganru.github.io/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/ganru.github.io/posts/Python笔记/2018-11-22-Web应用（第二部分）.html" rel="next" title="Web应用（第二部分）">
+                <i class="fa fa-chevron-left"></i> Web应用（第二部分）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/ganru.github.io/images/avatar.png"
+                alt="Ganru" />
+            
+              <p class="site-author-name" itemprop="name">Ganru</p>
+              <p class="site-description motion-element" itemprop="description">学习一向都是孤独的，慢慢玩。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/ganru.github.io/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设置项目“学习笔记”的样式"><span class="nav-number">1.</span> <span class="nav-text">设置项目“学习笔记”的样式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用程序-django-bootstrap3"><span class="nav-number">1.1.</span> <span class="nav-text">应用程序 django-bootstrap3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Bootstrap-来设置项目“学习笔记”的样式"><span class="nav-number">1.2.</span> <span class="nav-text">使用 Bootstrap 来设置项目“学习笔记”的样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-base-html"><span class="nav-number">1.3.</span> <span class="nav-text">修改 base.html</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义-HTML-头部"><span class="nav-number">1.3.1.</span> <span class="nav-text">定义 HTML 头部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义导航栏"><span class="nav-number">1.3.2.</span> <span class="nav-text">定义导航栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义页面的主要部分"><span class="nav-number">1.3.3.</span> <span class="nav-text">定义页面的主要部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-jumbotron-设置主页的样式"><span class="nav-number">1.4.</span> <span class="nav-text">使用 jumbotron 设置主页的样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置登录页面的样式"><span class="nav-number">1.5.</span> <span class="nav-text">设置登录页面的样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-new-topic-页面的样式"><span class="nav-number">1.6.</span> <span class="nav-text">设置 new_topic 页面的样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-topics-页面的样式"><span class="nav-number">1.7.</span> <span class="nav-text">设置 topics 页面的样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-topic-页面中条目的样式"><span class="nav-number">1.8.</span> <span class="nav-text">设置 topic 页面中条目的样式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署"><span class="nav-number">2.</span> <span class="nav-text">部署</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ganru</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ganru.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/ganru.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/ganru.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/ganru.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
