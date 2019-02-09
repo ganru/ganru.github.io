@@ -292,6 +292,197 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Java/2019-01-23-Java大杂烩.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/posts/Java/2019-01-23-Java大杂烩.html" itemprop="url">Java大杂烩</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T16:37:09+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java-中接口与抽象类的区别？"><a href="#Java-中接口与抽象类的区别？" class="headerlink" title="Java 中接口与抽象类的区别？"></a>Java 中接口与抽象类的区别？</h1><p>抽象类：</p>
+<ol>
+<li>class 之前要有 abstract 关键字修饰。</li>
+<li>只能被一个类单继承，即一个类只能使用一次继承关系。且这个子类必须实现该抽象类所有的抽象方法，要不就用 abstract 修饰这个子类。</li>
+<li>里面没有具体方法，只有抽象方法。故它不能用来创建对象。</li>
+<li>抽象方法必须声明为 public 或 protected，默认情况下是 public。</li>
+</ol>
+<p>接口：</p>
+<ol>
+<li>是一种极度抽象的类，其中的变量会隐式指定为 public static final ，而方法会隐式指定为 public abstract。</li>
+<li>一个类可以拥有多个接口。</li>
+<li>可以有默认方法，静态方法不被子类实现。</li>
+</ol>
+<p>两者区别：</p>
+<ol>
+<li>抽象类只能被一个类单一继承，而多个接口可以被单一类实现。</li>
+<li>抽象类中可以拥有自己的数据成员（要加 abstract 关键字），也可以有非 abstract 的成员方法（方便子类继承，不用重写）。而接口的变量成员必须是 static final 的（但是我们一般不在接口中定义数据成员），此外所有的成员方法都是 abstract 。</li>
+<li>继承抽象类，要么实现抽象类中的所有的抽象方法，要么该类必须声明为 abstract 类。然而实现接口，则是必须实现所有的抽象方法。</li>
+<li>接口变量默认为 public static final 类型，且必须有初值。</li>
+<li>在 Java1.8 之后，接口多了 static、default 实现，这些不属于实例，属于类方法。其中 static 不允许子类覆盖，而抽象类允许有 static 方法。</li>
+</ol>
+<h1 id="Java-对象创建的过程？"><a href="#Java-对象创建的过程？" class="headerlink" title="Java 对象创建的过程？"></a>Java 对象创建的过程？</h1><ol>
+<li>首先判断类是否加载</li>
+<li>然后为其分配内存<br><strong>指针碰撞：</strong>假设 Java 堆中内存是绝对规整的，所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那么分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离。<br><strong>空闲列表：</strong>如果 Java 堆中的内存并不是规整的，已使用的内存和空闲的内存相互交错，那就没有办法简单地进行指针碰撞了，虚拟机就必须维护个列表，记录上哪些内存块是可用的，在分配的时候从列表中找到一块足够大的空间划分给对象实例，并更新列表上的记录。</li>
+<li>初始化零值</li>
+<li>设置对象头<br>虚拟机要对对象进行必要的设置，例如这个对象是哪个类的实例、如何才能找到类的元数据信息、对象的哈希码、对象的 GC 分代年龄等信息。这些信息存放在对象的对象头之中。</li>
+<li>执行 &lt;init> 方法<br>从 JVM 视角来看，对象已建立好，但是在 Java 视角来看，所有字段都还只是零，需要执行一遍 init 方法，把对象按照程序员的意愿进行初始化。</li>
+</ol>
+<p>小注：对象在内存中的存储布局可以分为：对象头、实例数据，对齐填充。对象的定位访问有：句柄和直接访问。</p>
+<h1 id="Java-重载与重写的区别？"><a href="#Java-重载与重写的区别？" class="headerlink" title="Java 重载与重写的区别？"></a>Java 重载与重写的区别？</h1><h2 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h2><p>重载是让类以统一的方式处理不同类型数据的一种手段。大白话讲就是一个类中有多种名称相同的方法，但它们的方法体内容不同，或者参数类型和个数不同。是一个类中多态性的一种表现。<br>此外重载由静态类型确定，即在类加载时确定，属静态分派。</p>
+<h2 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h2><p>重写，也称覆盖。多出现在子类继承中，父类与子类之间的多态性，对父类的函数进行重新定义。也就是说父类有些已经写好的方法，但是子类不想原封不动地继承，这时候可以 @Override 重写一个与父类方法名称相同的方法。<br>重写由动态类型确定，是在运行时确定的，属于动态分派。动态分派由虚方法表实现，虚方法表中存在各个方法的实际入口地址，若父类方法没有被重写，则子类父类方法表中的方法地址相同，否则子类方法表的地址指向重写后的地址。</p>
+<h1 id="init-方法和-clinit-方法"><a href="#init-方法和-clinit-方法" class="headerlink" title="init 方法和 clinit 方法"></a>init 方法和 clinit 方法</h1><p>Java 在编译后会在字节码文件中生成 init 方法，称为 <strong>实例构造器</strong>。这个会将语句块、变量初始化、调用父类的构造器等等操作收敛到 init 方法中。它的收敛顺序为：</p>
+<ol>
+<li>父类变量初始化</li>
+<li>父类语句块</li>
+<li>父类构造函数</li>
+<li>子类变量初始化</li>
+<li>子类语句块</li>
+<li>子类构造函数</li>
+</ol>
+<p>不仅仅会在字节码中生成 init 方法，而且还会生成 clinit 方法，称为 <strong>类构造器</strong>。功能大抵与实力构造器相同，不同的是 clinit 处理的对象是静态成员。收敛顺序为：</p>
+<ol>
+<li>父类静态变量初始化</li>
+<li>父类静态语句块</li>
+<li>子类静态变量初始化</li>
+<li>子类静态语句块</li>
+</ol>
+<p>此外如果父类是接口，不会调用 &lt;clinit> 方法。一个类可以没有 clinit 方法。</p>
+<p>clinit 方法在类加载时执行，init 在对象实例化时执行，故，clinit 方法一定先于 init 方法。</p>
+<p># </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-11-24-Web应用（第三部分）.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1657,432 +1848,6 @@ path(&apos;topics/(?P&lt;topic_id&gt;\d+)/&apos;, views.topic, name=&apos;topic&
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-10-30-数据可视化（第三部分）.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ganru">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小黑屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-10-30-数据可视化（第三部分）.html" itemprop="url">数据可视化（第三部分）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-30T11:03:44+08:00">
-                2018-10-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">Python笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
-</blockquote>
-<p>上一部分学习了如何下载数据，这次学习如何使用 API。</p>
-<h1 id="使用-Web-API"><a href="#使用-Web-API" class="headerlink" title="使用 Web API"></a>使用 Web API</h1><p>我们这次使用的数据信息来自于 Github，我们编写一个程序，它自动下载 GitHub 上星级最高的 Python 项目的信息，并对这些信息进行可视化。<br>在此之前，我们先安装 requests 包：</p>
-<p><code>pip install --user requests</code></p>
-<h2 id="API-调用"><a href="#API-调用" class="headerlink" title="API 调用"></a>API 调用</h2><p>想要知道 API 调用啥样的，我们可以先在浏览器写入这个 URL：<a href="https://api.github.com/search/repositories?q=language:python&amp;sort=stars" target="_blank" rel="noopener">https://api.github.com/search/repositories?q=language:python&amp;sort=stars</a></p>
-<ul>
-<li>这个调用返回 GitHub 当前托管了多少个 Python 项目，还有有关最受欢迎的 Python 仓库的信息。下面来仔细研究这个调用。第一部分（<a href="https://api.github.com/" target="_blank" rel="noopener">https://api.github.com/</a> ）将请求发送到 GitHub 网站中响应 API 调用的部分；接下来的一部分（search/repositories）让 API 搜索 GitHub 上的所有仓库。</li>
-<li>repositories 后面的问号指出我们要传递一个实参。 q 表示查询，而等号让我们能够开始指定查询（q=）。通过使用 language:python，我们指出只想获取主要语言为 Python 的仓库的信息。最后一部分（&amp;sort=stars）指定将项目按其获得的星级进行排序。</li>
-</ul>
-<p>返回结果：</p>
-<pre><code>{
-    &quot;total_count&quot;: 3131505,
-    &quot;incomplete_results&quot;: false,
-    &quot;items&quot;: [
-        {
-            &quot;id&quot;: 21289110,
-            &quot;node_id&quot;: &quot;MDEwOlJlcG9zaXRvcnkyMTI4OTExMA==&quot;,
-            &quot;name&quot;: &quot;awesome-python&quot;,
-            &quot;full_name&quot;: &quot;vinta/awesome-python&quot;,
-            &quot;private&quot;: false,
-            &quot;owner&quot;: {
-            &quot;login&quot;: &quot;vinta&quot;,
-            &quot;id&quot;: 652070,
-            --snip--
-    ]
-    --snip--
-}
-</code></pre><p>从第二行输出可知，截止至 18.10.26，有 3131505 个 Python 项目，”incomplete_results” 的值为 false，据此我们知道请求是成功的（它并非不完整的）。倘若 GitHub 无法全面处理该 API，它返回的这个值将为 true。接下来的列表中显示了返回的 “items”，其中包含 GitHub 上最受欢迎的 Python 项目的详细信息。</p>
-<h2 id="处理-API-响应"><a href="#处理-API-响应" class="headerlink" title="处理 API 响应"></a>处理 API 响应</h2><p><strong>python_repos.py</strong></p>
-<hr>
-<pre><code>import requests
-
-# 执行 API 调用并存储响应
-url = &apos;https://api.github.com/search/repositories?q=language:python&amp;sort=stars&apos;
-r = requests.get(url)
-print(&quot;Status code: &quot;, r.status_code)
-
-# 将 API 响应存储在一个变量中
-response_dict = r.json()
-
-# 处理结果
-print(response_dict.keys())
-
-
-
-
-#-----------------------------
-输出结果：
-Status code:  200
-dict_keys([&apos;total_count&apos;, &apos;incomplete_results&apos;, &apos;items&apos;])
-</code></pre><p>这个 API 返回 JSON 格式的信息，因此我们使用方法 json() 将这些信息转换为一个 Python 字典。<br>状态码为 200，说明请求成功了。响应字典只包含三个键： ‘items’、 ‘total_count’ 和 ‘incomplete_results’。</p>
-<h2 id="处理响应字典"><a href="#处理响应字典" class="headerlink" title="处理响应字典"></a>处理响应字典</h2><p>将 API 调用返回的信息存储到字典中后，就可以处理这个字典中的数据了。</p>
-<pre><code># 指出 Github 共含有多少个 Python 库
-print(&quot;Total repositories:&quot;, response_dict[&apos;total_count&apos;])
-# total_count 指 API 返回调查到的 GitHub 有多少个 python 仓库
-
-# 探索有关仓库的信息
-repo_dicts = response_dict[&apos;items&apos;]
-print(&quot;Repositories returned:&quot;, len(repo_dicts))
-
-# 研究第一个仓库
-repo_dict = repo_dicts[0]
-print(&quot;\nKeys:&quot;, len(repo_dict))
-for key in sorted(repo_dict.keys()):
-    print(key)
-</code></pre><p>与 ‘items’ 相关联的值是一个列表，其中包含很多字典，而每个字典都包含有关一个 Python 仓库的信息。打印 repo_dicts 的长度，以获悉我们获得了多少个仓库的信息。</p>
-<p>运行后结果如下：</p>
-<pre><code>Status code:  200
-Total repositories: 3133850
-Repositories returned: 30
-# 注意：这里打印出来的 30 其实是我们所获得到的仓库数量，不可能全部仓库都给你展现出来
-
-Keys: 73
-archive_url
-archived
-assignees_url
-blobs_url
-branches_url
-clone_url
-collaborators_url
---snip--
-url
-watchers
-watchers_count
-dict_keys([&apos;total_count&apos;, &apos;incomplete_results&apos;, &apos;items&apos;])
-</code></pre><p>可看到第一个仓库包含 73 个键，通过仔细查看这些键，可大致知道可提取有关项目的哪些信息（要准确地获悉API将返回哪些信息，要么阅读文档，要么像此处这样使用代码来查看这些信息）。</p>
-<p>接下来我们提取 repo_dict 中与一些键相关联的值：</p>
-<pre><code># 研究第一个仓库
-repo_dict = repo_dicts[0]
-
-print(&quot;\nSelected information about first repository:&quot;)
-print(&apos;Name:&apos;, repo_dict[&apos;name&apos;])
-print(&apos;Owner:&apos;, repo_dict[&apos;owner&apos;][&apos;login&apos;])
-print(&apos;Stars:&apos;, repo_dict[&apos;stargazers_count&apos;])
-print(&apos;Repository:&apos;, repo_dict[&apos;html_url&apos;])
-print(&apos;Created:&apos;, repo_dict[&apos;created_at&apos;])
-print(&apos;Updated:&apos;, repo_dict[&apos;updated_at&apos;])
-print(&apos;Description:&apos;, repo_dict[&apos;description&apos;])
-</code></pre><p>运行后结果如下：</p>
-<pre><code>Status code:  200
-Total repositories: 3133913
-Repositories returned: 30
-
-Selected information about first repository:
-Name: awesome-python
-Owner: vinta
-Stars: 56752
-Repository: https://github.com/vinta/awesome-python
-Created: 2014-06-27T21:00:06Z
-Updated: 2018-10-27T08:12:02Z
-Description: A curated list of awesome Python frameworks, libraries, software and resources
-</code></pre><p>从上述可知，写这篇文章时，GitHub 上星级最高的 Python 项目为 awesome-python。其所有者是 vinta。拿到了 56752 颗星星。以及该项目的 URL、创建日期以及最后更新日期。最后还描述了该项目用途。</p>
-<h2 id="概述最受欢迎的仓库"><a href="#概述最受欢迎的仓库" class="headerlink" title="概述最受欢迎的仓库"></a>概述最受欢迎的仓库</h2><p>现在，把上面的代码稍加修改一下，加个 for 循环以期输出 30 个仓库的信息：</p>
-<pre><code>for repo_dict in repo_dicts:
-    print(&apos;Name:&apos;, repo_dict[&apos;name&apos;])
-    print(&apos;Owner:&apos;, repo_dict[&apos;owner&apos;][&apos;login&apos;])
-    print(&apos;Stars:&apos;, repo_dict[&apos;stargazers_count&apos;])
-    print(&apos;Repository:&apos;, repo_dict[&apos;html_url&apos;])
-    print(&apos;Created:&apos;, repo_dict[&apos;created_at&apos;])
-    print(&apos;Updated:&apos;, repo_dict[&apos;updated_at&apos;])
-    print(&apos;Description:&apos;, repo_dict[&apos;description&apos;])
-</code></pre><p>运行无误的话应该是全都能显示，现在不细究这个。</p>
-<h2 id="监视-API-的速率限制"><a href="#监视-API-的速率限制" class="headerlink" title="监视 API 的速率限制"></a>监视 API 的速率限制</h2><p>大多数 API 都存在速率限制，即我们在特定时间内可执行的请求数存在限制。<br>要获悉我们是否接近了 GitHub 的限制，在浏览器中输入<a href="https://api.github.com/rate_limit" target="_blank" rel="noopener">https://api.github.com/rate_limit</a> ，我们将看到类似于下面的响应：</p>
-<pre><code>{
-  &quot;resources&quot;: {
-    &quot;core&quot;: {
-      &quot;limit&quot;: 60,
-      &quot;remaining&quot;: 60,
-      &quot;reset&quot;: 1540652828
-    },
-    &quot;search&quot;: {
-      &quot;limit&quot;: 10,
-      &quot;remaining&quot;: 10,
-      &quot;reset&quot;: 1540649288
-    },
-    &quot;graphql&quot;: {
-      &quot;limit&quot;: 0,
-      &quot;remaining&quot;: 0,
-      &quot;reset&quot;: 1540652828
-    }
-  },
-  &quot;rate&quot;: {
-    &quot;limit&quot;: 60,
-    &quot;remaining&quot;: 60,
-    &quot;reset&quot;: 1540652828
-  }
-}
-</code></pre><p>这里面，search 就是搜索速率的限制。可知：限制（limit）为每分钟 10 个请求，在当前这一分钟还余下 10 个请求能执行（remaining）。<br>reset 值指的是配额将重置的 Unix 时间或新纪元时间（1970年1月1日午夜后多少秒）。</p>
-<h1 id="使用-Pygal-可视化仓库"><a href="#使用-Pygal-可视化仓库" class="headerlink" title="使用 Pygal 可视化仓库"></a>使用 Pygal 可视化仓库</h1><p>这时候我们导入 Pygal 包：</p>
-<pre><code>import pygal
-from pygal.style import LightColorizedStyle as LCS, LightenStyle as LS
-
-names, stars = [], []
-for repo_dict in repo_dicts:
-    names.append(repo_dict[&apos;name&apos;])
-    stars.append(repo_dict[&apos;stargazers_count&apos;])
-
-# 直方图可视化
-my_style = LS(&apos;#333366&apos;, base_style=LCS)
-chart = pygal.Bar(style=my_style, x_label_rotation=45, show_legend=False)
-chart.title = &apos;Most-Starred Python Projects on GitHub&apos;
-chart.x_labels = names
-chart.add(&apos;&apos;, stars)
-chart.render_to_file(&apos;python_repos.svg&apos;)
-</code></pre><p>这里的 <code>x_label_rotation=45, show_legend=False</code> 指标签绕 x 轴旋转45°，并隐藏图例（show_legend=False 不写或相反则默认打开）<br><code>chart.add(&#39;&#39;, stars)</code> ：导入数据，因为我们不需要给这个数据系列添加标签，加空字符串。</p>
-<p>运行后结果如下：<br><img src="/ganru.github.io/posts/Python笔记/2018-10-30-数据可视化（第三部分）/1.png"><br>至于上面说的隐藏图例是什么东西？看下图：<br><img src="/ganru.github.io/posts/Python笔记/2018-10-30-数据可视化（第三部分）/2.png"></p>
-<h2 id="图表的改进"><a href="#图表的改进" class="headerlink" title="图表的改进"></a>图表的改进</h2><p>我们看到， Bar() 里面含许多参数，但是还不够，我们要改进图表的样式，所以我们先创建一个 Pygal 类 Config 的实例：</p>
-<pre><code># 表格式配置文件
-my_config = pygal.Config()    # 配置对象
-my_config.x_label_rotation = 45
-my_config.show_legend = False    # 是否展示图例
-my_config.title_font_size = 24    # 图表标题字体大小
-my_config.label_font_size = 14    # #副标签字体大小
-my_config.major_label_font_size = 18    # 主标签字体大小
-my_config.truncate_label = 15    # 将裁剪较长字符到15个
-my_config.show_y_guides = False    # 是否展示图标中水平线
-my_config.width = 1000    # 自定义图表宽度
-
-chart = pygal.Bar(my_config, style=my_style)    # my_config 必须在前，否则将会报错
-</code></pre><p>书里是这么写的，但是其实看起来没什么变化，特别是字体大小，我不太明白，因此我采用下述代码：</p>
-<pre><code>my_style.title_font_size = 24
-my_style.label_font_size = 14
-my_style.major_label_font_size = 18
-</code></pre><p>以顶替上面的相关值，不知道你们是否会这样，我这里这两个代码结果都不同的：<br><strong>书中的代码：</strong><br><img src="/ganru.github.io/posts/Python笔记/2018-10-30-数据可视化（第三部分）/3.png"><br><strong>修改过的代码：</strong><br><img src="/ganru.github.io/posts/Python笔记/2018-10-30-数据可视化（第三部分）/4.png"></p>
-<p>只有后面那个图跟书本相同。<br>如果你们也跟我一样，建议这样写配置代码。</p>
-<p>在这个图表中，副标签是 x 轴上的项目名以及 y 轴上的大部分数字。主标签是 y 轴上为 50000 整数倍的刻度。</p>
-<h2 id="添加自定义工具提示"><a href="#添加自定义工具提示" class="headerlink" title="添加自定义工具提示"></a>添加自定义工具提示</h2><p>在 Pygal 中，将鼠标指向条形将显示它表示的信息，这通常称为工具提示。<br>我们可以看到，我们导入数据的代码是 <code>chart.add(&#39;&#39;, stars)</code>，但是我们可以这么做：</p>
-<pre><code>names, plot_dicts = [], []
-
-for repo_dict in repo_dicts:
-    names.append(repo_dict[&apos;name&apos;])
-
-    &apos;&apos;&apos;
-    Pygal 根据与键 &apos;value&apos; 相关联的数字来确定条形的高度，
-    并使用与 &apos;label&apos; 相关联的字符串给条形创建工具提示。
-    &apos;&apos;&apos;
-    plot_dict = {
-        &apos;value&apos;: repo_dict[&apos;stargazers_count&apos;],
-        &apos;label&apos;: repo_dict[&apos;description&apos;],
-        }
-    plot_dicts.append(plot_dict)
-</code></pre><p>把这个 <code>stars</code> 变为 <code>plot_dicts</code>，表示接收字典，这样不仅导入了 stars 值，还导入了 label （项目描述）。实现更多数据的可视化。<br>最后注意代码转换：<code>chart.add(&#39;&#39;, plot_dicts)</code></p>
-<h2 id="在图表中添加可单击的链接"><a href="#在图表中添加可单击的链接" class="headerlink" title="在图表中添加可单击的链接"></a>在图表中添加可单击的链接</h2><p>我们要让图表可以与我们交互，比如，单击某一个条状，会在浏览器打开一个新的标签页，跳转到相应项目的 GitHub 页面。<br>很简单，加一行代码就行：</p>
-<pre><code>plot_dict = {
-    &apos;value&apos;: repo_dict[&apos;stargazers_count&apos;],
-    &apos;label&apos;: repo_dict[&apos;description&apos;],
-    &apos;xlink&apos;: repo_dict[&apos;html_url&apos;],
-    }
-</code></pre><h2 id="Hacker-News-API"><a href="#Hacker-News-API" class="headerlink" title="Hacker News API"></a>Hacker News API</h2><p>现在，我们探索如何使用其他网站的 API 调用。不过在此之前我们得了解一下 Hacker News API。<br>在 Hacker News 网站，用户分享编程和技术方面的文章，并就这些文章展开积极的讨论。 Hacker News 的 API 让我们能够访问有关该网站所有文章和评论的信息，且不要求我们通过注册获得密钥。<br>在浏览器看看这个网址：<a href="https://hacker-news.firebaseio.com/v0/item/9884165.json" target="_blank" rel="noopener">https://hacker-news.firebaseio.com/v0/item/9884165.json</a><br>注意，可能登不上去，需要 Over the wall（具体方法自行探索）<br>可以看到：</p>
-<pre><code>{
-&quot;by&quot;:&quot;nns&quot;,
-&quot;descendants&quot;:297,
-&quot;id&quot;:9884165,
-&quot;kids&quot;:[9885099,9884723,9885165,9884789,9885604,9884137,9886151,9885220,9885790,9884661,9885844,9885029,9884817,9887342,9884545,9884372,9884499,9884881,9884109,9886496,9884342,9887832,9885023,9884334,9884707,9887008,9885348,9885131,9887539,9885880,9884196,9884640,9886534,9885152],
-&quot;score&quot;:558,
-&quot;time&quot;:1436875181,
-&quot;title&quot;:&quot;New Horizons: Nasa spacecraft speeds past Pluto&quot;,
-&quot;type&quot;:&quot;story&quot;,
-&quot;url&quot;:&quot;http://www.bbc.co.uk/news/science-environment-33524589&quot;
-}
-</code></pre><p>这是一部字典。在这里 descendants 指文章被评论的次数。与键 ‘kids’ 相关联的值包含对文章所做的所有评论的 ID。</p>
-<p>下面来执行一个 API 调用，返回 Hacker News 上当前热门文章的 ID，再查看每篇排名靠前的文章：<br><strong>hn_submissions.py</strong></p>
-<hr>
-<pre><code>import requests
-
-from operator import itemgetter
-
-# 执行 API 调用并存储响应
-url = &apos;https://hacker-news.firebaseio.com/v0/topstories.json&apos;
-r = requests.get(url)
-print(&quot;Status code:&quot;, r.status_code)
-
-# 处理有关每篇文章的信息
-submission_ids = r.json()
-submission_dicts = []
-for submission_id in submission_ids[:30]:
-    # 对于每篇文章，都执行一个 API 调用
-    url = (&apos;https://hacker-news.firebaseio.com/v0/item/&apos; + 
-        str(submission_id) + &apos;.json&apos;)
-    submission_r = requests.get(url)
-    print(&quot;Status code:&quot;, submission_r.status_code)
-    # 检查下调用是否成功，成功则存储响应至变量
-    response_dict = submission_r.json()
-
-    submission_dict = {
-        &apos;title&apos;: response_dict[&apos;title&apos;],
-        &apos;link&apos;: &apos;http://news.ycombinator.com/item?id=&apos; + str(submission_id),
-        &apos;comments&apos;: response_dict.get(&apos;descendants&apos;, 0)
-        }
-    submission_dicts.append(submission_dict)
-
-submission_dicts = sorted(submission_dicts, key=itemgetter(&apos;comments&apos;), reverse=True)
-
-for submission_dict in submission_dicts:
-    print(&quot;\nTitle&quot;, submission_dict[&apos;title&apos;])
-    print(&quot;Discussion link:&quot;, submission_dict[&apos;link&apos;])
-    print(&quot;Comments&quot;, submission_dict[&apos;comments&apos;])
-</code></pre><p>在最热门的 500 篇文章中提取 30 篇文章，然后把这每篇文章进行一次 API 调用并保存于变量中。<br><code>&#39;comments&#39;: response_dict.get(&#39;descendants&#39;, 0)</code>： 这里做了一点考量，如果是刚发的文章，无评论，即没有 ‘descendants’ 键，则导入我们制定的 0 作为评论数。<br>对对象 <code>submission_dicts</code> 完成导入后，我们再进行一次排序，以 ‘comments’ 为考量，对其进行降序排列。这里我们使用了模块 operator 中的函数 itemgetter()，该函数可以提取与键 ‘comments’ 相关联的值。</p>
-<p>运行后结果如下：</p>
-<pre><code>Status code: 200
-Status code: 200
-Status code: 200
---snip--
-
-Title Facebook exodus: Nearly half of young users have deleted the app
-Discussion link: http://news.ycombinator.com/item?id=18328750
-Comments 459
-
-Title With Proton and Steam Play, many Windows games now work on Linux
-Discussion link: http://news.ycombinator.com/item?id=18327342
-Comments 284
-
-Title Identifying QUIC deliverables
-Discussion link: http://news.ycombinator.com/item?id=18326658
-Comments 168
---snip--
-</code></pre><p>API 调用的具体操作方式就是如此。写好 url，并保存响应 <code>r = requests.get(url)</code>，然后将它以 json 格式保存在一个变量中，后面就可以自己发挥了。</p>
-<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
-<li>如何使用 API 来编写独立的程序，它们自动采集所需的数据并对其进行可视化</li>
-<li>使用 GitHub API 来探索 GitHub 上星级最高的 Python 项目</li>
-<li>如何使用 requests 包来自动执行 GitHub API 调用，以及如何处理调用的结果</li>
-<li>大致了解 Hacker News API</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2137,7 +1902,7 @@ Comments 168
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2148,7 +1913,7 @@ Comments 168
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -2212,7 +1977,7 @@ Comments 168
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

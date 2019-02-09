@@ -292,6 +292,401 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-24-类（面向对象编程）.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ganru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-24-类（面向对象编程）.html" itemprop="url">类（面向对象编程）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T17:18:18+08:00">
+                2018-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><p>写在前面</p></strong></p>
+<hr>
+<blockquote>
+<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
+</blockquote>
+<h1 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h1><p>可以理解为 C 中的结构体，两者有点像，但又有不同。<br>根据类来创建对象被称为实例化，这让你能够使用类的实例。</p>
+<h1 id="类的创建与使用"><a href="#类的创建与使用" class="headerlink" title="类的创建与使用"></a>类的创建与使用</h1><h2 id="创建类"><a href="#创建类" class="headerlink" title="创建类"></a>创建类</h2><p>创建一个学生类，赋予每个学生其学习（study()）和睡觉（sleep()）的能力。</p>
+<p>ex：</p>
+<pre><code>class Student():    #首字母要大写，指的是类（约定的），括号空，是因为要从空白建立类
+    &quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;
+
+    def \_\_init\_\_(self, name, age):    
+    #注意这里有个坑，默认方法构造书写格式是__init__，而不是_init_，即在init两侧都是双下划线，不是单下划线。 
+        &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
+        self.name = name
+        self.age = age
+
+    def study(self):
+        &quot;&quot;&quot;模拟学生学习&quot;&quot;&quot;
+        print(self.name.title() + &quot; is now learning.&quot;)
+
+    def sleep(self):
+        &quot;&quot;&quot;模拟学生睡觉&quot;&quot;&quot;
+        print(self.name.title() + &quot; is now sleeping.&quot;)
+
+    def get_descriptive(self):
+        &quot;&quot;&quot;返回学生信息&quot;&quot;&quot;
+        descriptive = self.name + &apos; &apos; + str(self.age)
+        return descriptive.title()
+</code></pre><ol>
+<li>上述代码中，在类中出现的函数称为方法，如 3 个 def，与函数一样，只是名称发生了变化。</li>
+<li>在类中，每当使用者用 Student 类创建新实例时，Python 就会自动运行方法 __init__()。每次写类都要初始化。</li>
+<li>方法也有不同，方法名首尾都有下划线的一般指 <strong>默认方法</strong>，这是为了避免Python默认方法与普通方法发生名称冲突。</li>
+<li>在 <em>init</em>() 中 self 必不可少，Python 调用这个方法来创建 Student 实例时，将自动传入实参 self。</li>
+<li>每个与类相关联的方法调用都自动传递实参 self，它是一个指向实例本身的引用，让实例能够访问类中的属性和方法。</li>
+<li>可通过实例访问的变量成为 属性（如：name、age）。</li>
+<li>每次新建实例时，只需写后面两个形参值。</li>
+<li>另外两个方法，由于不需要额外的信息，故只有一个形参 self。</li>
+<li>虽然没有写显式 return 语句，但 Python 会自动返回一个表示该学生的实例。</li>
+</ol>
+<h2 id="类的使用"><a href="#类的使用" class="headerlink" title="类的使用"></a>类的使用</h2><pre><code>class Student():
+    --snip--
+
+student_0 = Student(&apos;ganru&apos;, 20)
+
+print(&quot;student_0&apos;s name is &quot; + student_0.name.title() + &quot;.&quot;)
+print(&quot;student_0 is &quot; + str(student_0.age) + &quot; years old.&quot;)
+student_0.study()
+student_0.sleep()
+print(student_0.get_descriptive())
+</code></pre><p>out：</p>
+<pre><code>student_0&apos;s name is Ganru.
+student_0 is 20 years old.
+Ganru is now learning.
+Ganru is now sleeping.
+</code></pre><h1 id="给属性指定默认值"><a href="#给属性指定默认值" class="headerlink" title="给属性指定默认值"></a>给属性指定默认值</h1><p>还是原来的 Student() 类，我们指定学生学校默认为 JYU：</p>
+<pre><code>class Student():
+    &quot;&quot;&quot;学生类的模拟&quot;&quot;&quot;
+
+    def _init_(self, name, age):    
+        &quot;&quot;&quot;初始化学生属性&quot;&quot;&quot;
+        self.name = name
+        self.age = age
+        self.school = &apos;JYU&apos;        #改动在这里
+
+    def study(self):
+        --snip--
+
+    def sleep(self):
+        --snip--
+
+    def get_descriptive(self):
+        --snip--
+
+    def original_school(self):
+        &quot;&quot;&quot;打印一条学生原来学校的消息&quot;&quot;&quot;
+        print(&quot;The student from &quot; + self.school)
+
+student_0 = Student(&apos;ganru&apos;, 20)
+print(student_0.get_descriptive())
+student_0.original_school()
+</code></pre><h1 id="属性值的修改"><a href="#属性值的修改" class="headerlink" title="属性值的修改"></a>属性值的修改</h1><h2 id="直接修改"><a href="#直接修改" class="headerlink" title="直接修改"></a>直接修改</h2><pre><code>class Student():
+    --snip--
+
+student_0 = Student(&apos;ganru&apos;, 20)
+print(student_0.get_descriptive())
+student_0.school = &apos;THU&apos;    #改动在这里
+student_0.original_school()
+</code></pre><h2 id="通过方法修改属性的值"><a href="#通过方法修改属性的值" class="headerlink" title="通过方法修改属性的值"></a>通过方法修改属性的值</h2><p>若想无需直接访问属性，可将值传递给一个方法，由它在内部进行更新。<br>在原先类 Student() 的基础上，加上：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def update_school(self, value):</span><br><span class="line">	&quot;&quot;&quot;将学校名称改为指定值&quot;&quot;&quot;</span><br><span class="line">	self.school = value</span><br></pre></td></tr></table></figure></p>
+<pre><code>student_0 = Student(&apos;ganru&apos;, 20)
+print(student_0.get_descriptive())
+
+student_0.update_school(&apos;PKU&apos;)    #改动在这里
+student_0.original_school()
+</code></pre><p>还可以加一些功能，比如禁止属性值回调。<br>可参考书（P145）中的 <strong>里程表读数回调</strong>：</p>
+<pre><code>class Car():
+    --snip--
+
+    def update_odometer(self, mileage):
+        &quot;&quot;&quot;
+        将里程表读数设置为指定的值
+        禁止将里程表读数往回调
+        &quot;&quot;&quot;
+        if mileage &gt;= self.odometer_reading:
+            self.odometer_reading = mileage
+        else:
+            print(&quot;You can&apos;t roll back an odometer!&quot;)
+</code></pre><h2 id="通过方法对属性的值进行递增"><a href="#通过方法对属性的值进行递增" class="headerlink" title="通过方法对属性的值进行递增"></a>通过方法对属性的值进行递增</h2><p>比如上面的 Car 类，可以加一个 def：</p>
+<pre><code>def increment_odometer(self, miles):
+    &quot;&quot;&quot;将里程表读数在原来的基础上增加指定的量&quot;&quot;&quot;
+    self.odometer_reading += miles
+</code></pre><h1 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h1><p>有时候懒得写多几个重复项，想引用其他类并自定义自己的类，可用继承。原有类称父类，新类称子类。</p>
+<p>父类：</p>
+<pre><code>class Car():
+    &quot;&quot;&quot;一次模拟汽车的简单尝试&quot;&quot;&quot;
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+        self.odometer_reading = 0
+
+    def get_descriptive_name(self):
+        long_name = str(self.year) + &apos; &apos; + self.make + &apos; &apos; + self.model
+        return long_name.title()
+
+    def read_odometer(self):
+        print(&quot;This car has &quot; + str(self.odometer_reading) + &quot; miles on it.&quot;)
+
+    def update_odometer(self, mileage):
+        if mileage &gt;= self.odometer_reading:
+            self.odometer_reading = mileage
+        else:
+            print(&quot;You can&apos;t roll back an odometer!&quot;)
+
+    def increment_odometer(self, miles):
+        self.odometer_reading += miles
+</code></pre><p>子类：</p>
+<pre><code>class ElectricCar(Car):        #类括号内若导入参数，则继承某一个类
+    &quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;
+
+    def __init__(self, make, model, year):
+        &quot;&quot;&quot;初始化父类的属性&quot;&quot;&quot;
+        super().__init__(make, model, year)        
+        #super 是一个特殊函数，让 Python 调用 ElectricCar 的父类的方法 __init__()，让 ElectricCar 实例包含父类的所有属性。
+
+
+my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
+print(my_tesla.get_descriptive_name())
+</code></pre><p>out：</p>
+<pre><code>2016 Tesla Model S
+</code></pre><ol>
+<li>父类和子类必须要在同一文件中，且父类在子类前面。</li>
+<li>父类也称超类，名称 super 因此而得名。</li>
+</ol>
+<h1 id="给子类定义属性和方法"><a href="#给子类定义属性和方法" class="headerlink" title="给子类定义属性和方法"></a>给子类定义属性和方法</h1><pre><code>class Car():
+    --snip--
+
+class ElectricCar(Car):
+    &quot;&quot;&quot;Represent aspects of a car, specific to electric vehicles.&quot;&quot;&quot;
+
+    def __init__(self, make, model, year):
+        &quot;&quot;&quot;
+        电动汽车的独特之处
+        初始化父类的属性，再初始化电动汽车特有的属性
+        &quot;&quot;&quot;
+        super().__init__(make, model, year)
+        self.battery_size = 70                #子类属性添加
+
+    def describe_battery(self):
+        &quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;
+        print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)
+
+my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
+print(my_tesla.get_descriptive_name())
+my_tesla.describe_battery()
+</code></pre><p>out：</p>
+<pre><code>2016 Tesla Model S
+This car has a 70-kWh battery.
+</code></pre><ol>
+<li>如果一个属性或方法是任何汽车都有的，而不是电动汽车特有的，就应将其加入到 Car 类而不是 ElectricCar 类中。</li>
+<li>这样，使用 Car 类的人将获得相应的功能，而 ElectricCar 类只包含处理电动汽车特有属性和行为的代码。</li>
+</ol>
+<h1 id="重写父类"><a href="#重写父类" class="headerlink" title="重写父类"></a>重写父类</h1><p>假设 Car 类有一个名为 fill_gas_tank() 的方法，它对全电动汽车来说毫无意义，这时我们可以重写它：</p>
+<pre><code>def ElectricCar(Car):
+    --snip--
+
+    def fill_gas_tank():
+        &quot;&quot;&quot;电动汽车没有油箱&quot;&quot;&quot;
+        print(&quot;This car doesn&apos;t need a gas tank!&quot;)
+</code></pre><p>这时候，如果我们再次调用方法 fill_gas_tank()，则 Python 不会使用父类的方法，而是我们在子类新写的方法。</p>
+<h1 id="将实例用作属性（属性中的属性或方法）"><a href="#将实例用作属性（属性中的属性或方法）" class="headerlink" title="将实例用作属性（属性中的属性或方法）"></a>将实例用作属性（属性中的属性或方法）</h1><p>有时候类太大，可能会比较复杂，可以将大类拆分成小类。</p>
+<pre><code>class Car():
+    --snip--
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Battery():</span><br><span class="line">	&quot;&quot;&quot;一次模拟电动汽车电瓶的简单尝试&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">	def __init__(self, battery_size=70):</span><br><span class="line">		&quot;&quot;&quot;初始化电瓶的属性&quot;&quot;&quot;</span><br><span class="line">		self.battery_size = battery_size</span><br><span class="line"></span><br><span class="line">	def describe_battery(self):</span><br><span class="line">		&quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;</span><br><span class="line">		print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)</span><br></pre></td></tr></table></figure>
+
+class ElectricCar(Car):
+    &quot;&quot;&quot;电动汽车的独特之处&quot;&quot;&quot;
+
+    def __init__(self, make, model, year):
+        &quot;&quot;&quot;
+        初始化父类的属性，再初始化电动汽车特有的属性
+        &quot;&quot;&quot;
+        super().__init__(make, model, year)
+        self.battery = Battery()        #将实例用作属性
+
+my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
+print(my_tesla.get_descriptive_name())
+my_tesla.battery.describe_battery()
+</code></pre><p>out：</p>
+<pre><code>2016 Tesla Model S
+This car has a 70-kWh battery.
+</code></pre><h1 id="类的导入"><a href="#类的导入" class="headerlink" title="类的导入"></a>类的导入</h1><p>跟函数模块差不多，将类写入一个 .py 文件。<br>导入格式：</p>
+<p>import module_name（.py 文件名）<br>from module_name（.py 文件名） import class_name（在 .py 文件中的类名）<br>from module_name import class_0, class_1, …</p>
+<p>如果模块与模块之间有联系，则这两个模块都要导入同一个文件中，不然创建实例时将引发错误。</p>
+<h1 id="Python-标准库"><a href="#Python-标准库" class="headerlink" title="Python 标准库"></a>Python 标准库</h1><p>Python标准库是一组模块，安装的Python都包含它。大致理解类之后，就可以使用他人的模块了。</p>
+<p>尝试：<br>如果在以前，我们可能这么写：favorite_languages = {}<br>字典能够将信息关联起来，但不记录添加键—值对的顺序。要创建字典并记录其添加顺序，可使用模块 collections 中的 OrderedDict 类。</p>
+<pre><code>from collections import OrderedDict
+
+favorite_languages = OrderedDict()
+
+favorite_languages[&apos;jen&apos;] = &apos;python&apos;
+favorite_languages[&apos;sarah&apos;] = &apos;c&apos;
+favorite_languages[&apos;edward&apos;] = &apos;ruby&apos;
+favorite_languages[&apos;phil&apos;] = &apos;python&apos;
+
+for name, language in favorite_languages.items():
+    print(name.title() + &quot;&apos;s favorite language is &quot; +
+        language.title() + &quot;.&quot;)
+</code></pre><p>out：</p>
+<pre><code>Jen&apos;s favorite language is Python.
+Sarah&apos;s favorite language is C.
+Edward&apos;s favorite language is Ruby.
+Phil&apos;s favorite language is Python.
+</code></pre><h1 id="类编码风格"><a href="#类编码风格" class="headerlink" title="类编码风格"></a>类编码风格</h1><ol>
+<li><p>驼峰命名法：类名中的每个单词的首字母都大写，而不使用下划线。<br>ex：<br>class Car():<br>class Student():<br>…</p>
+</li>
+<li><p>实例名和模块名都采用小写格式，并在单词之间加上下划线。<br>ex：<br>my_tesla<br>student_0<br>son.py<br>…</p>
+</li>
+<li><p>对于每个类，都写类注释。</p>
+</li>
+<li>在类中，可使用一个空行来分隔方法；而在模块中，可使用两个空行来分隔类。</li>
+<li>需要同时导入标准库中的模块和你编写的模块时，先编写导入标准库模块的 import 语句，再添加一个空行，然后编写导入你自己编写的模块的 import 语句。</li>
+</ol>
+<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
+<li>类的创建于使用（类的建立一定要初始化）</li>
+<li>实例属性的修改</li>
+<li>类的继承</li>
+<li>重写父类</li>
+<li>将实例用作属性（属性中的属性或方法）</li>
+<li>类的导入</li>
+<li>类编码的规约</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-22-函数专项.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1478,286 +1873,6 @@ not in 判断特定值是否不在列表中
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ganru.github.io/ganru.github.io/posts/Python笔记/2018-09-17-列表的使用.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ganru">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/ganru.github.io/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小黑屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/ganru.github.io/posts/Python笔记/2018-09-17-列表的使用.html" itemprop="url">列表的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T16:04:32+08:00">
-                2018-09-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/ganru.github.io/categories/Python笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">Python笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong><p>写在前面</p></strong></p>
-<hr>
-<blockquote>
-<p>该笔记学习的内容均来自于《Python 编程：从入门到实践》，只是作为一个内容总纲，若需详细学习，可去百度网盘<a href="https://pan.baidu.com/share/init?surl=dFxjtXf" target="_blank" rel="noopener">下载</a> ，密码：7rup</p>
-</blockquote>
-<h1 id="什么是列表（和-C-C-中的数组有点像）"><a href="#什么是列表（和-C-C-中的数组有点像）" class="headerlink" title="什么是列表（和 C/C++ 中的数组有点像）"></a>什么是列表（和 C/C++ 中的数组有点像）</h1><p>存储多个数据的元素集合。</p>
-<h1 id="列表元素的访问"><a href="#列表元素的访问" class="headerlink" title="列表元素的访问"></a>列表元素的访问</h1><pre><code>ex：
-    motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
-    print(motorcycles)
-</code></pre><h1 id="元素的索引从-0-开始"><a href="#元素的索引从-0-开始" class="headerlink" title="元素的索引从 0 开始"></a>元素的索引从 0 开始</h1><p>标注：PY有一种特殊的语法，就是索引可以为负数（如：-1），-1 就是索引列表倒数第一个元素。</p>
-<h1 id="列表的增、删、改、查"><a href="#列表的增、删、改、查" class="headerlink" title="列表的增、删、改、查"></a>列表的增、删、改、查</h1><h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><p>有两种常见方法，append(b)（加在列表尾）、insert(a,b)（a是索引序号，b是新增元素）</p>
-<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><p>del语句。如：del Array[0]（删掉列表头部元素）</p>
-<p>标注：删还有一种特殊方式 pop() （弹出），这是方法,默认弹出栈顶元素，若要弹出指定元素，只需在括号中添加索引序号。</p>
-<pre><code>ex：
-    motorcycles = [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
-    print(motorcycles)
-    popped_motorcycle = motorcycles.pop()
-    print(motorcycles)
-    print(popped_motorcycle)
-out：
-    [&apos;honda&apos;, &apos;yamaha&apos;, &apos;suzuki&apos;]
-    [&apos;honda&apos;, &apos;yamaha&apos;]
-    suzuki
-</code></pre><p>这两种删，前者为销毁，后者为数据提取。</p>
-<p>补充：<br>如果不知道要删掉的元素位置，只知道元素值，用方法 remove(b)（b是要删除的元素值）。<br>    ex：Array.remove(‘doubi’)</p>
-<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><pre><code>ex：
-    Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GG&apos;]
-    Array[0] = &apos;gandalf&apos;
-out：
-    [&apos;gandalf&apos;,&apos;G&apos;,&apos;GG&apos;]
-</code></pre><h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><p>与 <a href="#qiepian">切片的遍历</a> 类似。</p>
-<h1 id="列表排序与长度确定（注意分永久和暂时排序）"><a href="#列表排序与长度确定（注意分永久和暂时排序）" class="headerlink" title="列表排序与长度确定（注意分永久和暂时排序）"></a>列表排序与长度确定（注意分永久和暂时排序）</h1><h2 id="永久性排序："><a href="#永久性排序：" class="headerlink" title="永久性排序："></a>永久性排序：</h2><pre><code>ex：
-    cars = [&apos;bmw&apos;, &apos;audi&apos;, &apos;toyota&apos;, &apos;subaru&apos;]
-    cars.sort()        //若要大到小排序，在括号内输入 **reverse = True。**
-    print(cars)        //如果要反转列表，写 **cars.reverse**
-out：
-    [&apos;audi&apos;, &apos;bmw&apos;, &apos;subaru&apos;, &apos;toyota&apos;]
-</code></pre><h2 id="暂时性排序："><a href="#暂时性排序：" class="headerlink" title="暂时性排序："></a>暂时性排序：</h2><pre><code>ex：
-    Array = [&apos;qwd&apos;,&apos;asd&apos;,&apos;gwa&apos;,&apos;xdf&apos;]
-    print(Array)
-    print(sorted(Array))    //注：如果想大到小排序，写 **sorted(Array，reverse = True)。**
-    print(Array)
-out：
-    [&apos;qwd&apos;,&apos;asd&apos;,&apos;gwa&apos;,&apos;xdf&apos;]
-    [&apos;asd&apos;,&apos;gwa&apos;,&apos;qwd&apos;,&apos;xdf&apos;]
-    [&apos;qwd&apos;,&apos;asd&apos;,&apos;gwa&apos;,&apos;xdf&apos;]
-</code></pre><p><strong>补充：</strong><br>首字母大到小排序：reverse = True<br>字符串长度大到小排序：key = len<br>key 有很多种方式，具体不表。</p>
-<h2 id="列表长度确定"><a href="#列表长度确定" class="headerlink" title="列表长度确定"></a>列表长度确定</h2><pre><code>ex：
-    cars = [&apos;bmw&apos;, &apos;audi&apos;, &apos;toyota&apos;, &apos;subaru&apos;]
-    len(cars)
-</code></pre><h1 id="列表使用时可能会产生索引错误"><a href="#列表使用时可能会产生索引错误" class="headerlink" title="列表使用时可能会产生索引错误"></a>列表使用时可能会产生索引错误</h1><p>如：索引超过当前列表长度的序值。<br>列表为空时索引 -1。</p>
-<h1 id="列表中-for-的使用"><a href="#列表中-for-的使用" class="headerlink" title="列表中 for 的使用"></a>列表中 for 的使用</h1><p>跟 C、C++ 一样，用 for 语句循环遍历，不过 python 的使用方式有所不同。</p>
-<pre><code>如 for cat in cats:
-        .
-        .        //循环语句块（带上缩进才算，即写完 for 换行之后，缩进该行）
-        .
-</code></pre><p>表示从列表 cats 选取第一个元素并赋予 cat，然后执行语句块，直至选取到列表 cats 中最后一个元素。</p>
-<p><strong>注意</strong>这里的命名规则，尽量用复数名词表示列表（如 cats），用单数名词表示单个列表元素（如 cat）。</p>
-<p>通常遇见这种错误<br>    <code>Indentation Error: expected an indented block</code><br>表示你没缩进，编译器没检测到循环语句块。<br>这里也展现出了 C/C++ 与 python 的不同，没事别乱缩进，就算代码排版难看也别缩进。。。<br>补充：真要缩进，打 4 个空格也行。（遵循 PEP8 协议）</p>
-<h1 id="数值列表的创建"><a href="#数值列表的创建" class="headerlink" title="数值列表的创建"></a>数值列表的创建</h1><h2 id="函数-range-a-b-c"><a href="#函数-range-a-b-c" class="headerlink" title="函数 range(a,b,c)"></a>函数 range(a,b,c)</h2><p>作用：生成一系列数字。<br>使用方式：<br>    从 a 数值开始，至 b 结束，步长值为 c 。（ c 不写则默认为 1 ）<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ex：</span><br><span class="line">	for value in range(1,4):</span><br><span class="line">		print(value)</span><br><span class="line">out：</span><br><span class="line">	1</span><br><span class="line">	2</span><br><span class="line">	3</span><br></pre></td></tr></table></figure></p>
-<h2 id="函数-list"><a href="#函数-list" class="headerlink" title="函数 list()"></a>函数 list()</h2><p>作用：生成列表。</p>
-<pre><code>ex：
-    numbers = list(range(1,4))
-    print(numbers)
-out：
-    [1,2,3]
-</code></pre><h1 id="数字列表的统计计算"><a href="#数字列表的统计计算" class="headerlink" title="数字列表的统计计算"></a>数字列表的统计计算</h1><pre><code>min()、max()、sum() 的使用
-</code></pre><h1 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h1><p>用于简化代码。</p>
-<pre><code>ex：
-    numbers = [value**2 for value in range(1,4)]
-    print(numbers)
-out：
-    [1,4,9]
-</code></pre><h1 id="切片（-python-术语，意为处理列表的部分元素）"><a href="#切片（-python-术语，意为处理列表的部分元素）" class="headerlink" title="切片（ python 术语，意为处理列表的部分元素）"></a>切片（ python 术语，意为处理列表的部分元素）</h1><pre><code>其语法形式为：
-
-    Array = [&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
-    print(Array[1:4])    //从第 1 个开始，到第 4 个结束（不包含第 4 个）。注意，从 0 开始计算。
-out：
-    [&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
-</code></pre><p>如果没有指定开头索引值（如 Array[:4]）,则将从表头开始，其输出结果为：</p>
-<pre><code>[&apos;gan&apos;,&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;]
-</code></pre><p>类似的，没有指定末尾索引值（如 Array[1:]）,则从指定索引序号到列表末尾，其输出结果为：</p>
-<pre><code>[&apos;G&apos;,&apos;GA&apos;,&apos;GAN&apos;,&apos;GANR&apos;]
-</code></pre><p>此外，索引序号可以为负数，请注意若为 [-3:]（负几都一样）,并不会给你打完一整个列表，而只会打印最后3个元素，直至列表结束。</p>
-<p><a id="qiepian"></a></p>
-<h1 id="切片的遍历"><a href="#切片的遍历" class="headerlink" title="切片的遍历"></a>切片的遍历</h1><pre><code>很简单，加个循环语句（如 for ）就行。
-
-    ex：
-        for cat in cats[:3]:
-    out：
-        [前面三个元素]
-</code></pre><h1 id="列表的复制"><a href="#列表的复制" class="headerlink" title="列表的复制"></a>列表的复制</h1><p>其实是对切片的特殊使用，形式为 [:]，意为从 0 开始，直至列表末尾（就是复制整个列表）。</p>
-<pre><code>ex：
-    my_cars = friend_cars[:]
-out：
-    得到两个一毛一样的列表（但是互相独立）
-</code></pre><p>注意不要这么写：</p>
-<pre><code>`my_cars = friend_cars`
-</code></pre><p>这只是为 my_cars 另起一个变量名而已，这两个指代的还是同一个列表。</p>
-<h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><h2 id="元组的定义"><a href="#元组的定义" class="headerlink" title="元组的定义"></a>元组的定义</h2><p>列表中的元素可变，而元组不能变，其他相同。</p>
-<p>存在的意义：在整个程序生命周期中保持一组元素值不变。（说白了就是常量）<br>其定义格式为：</p>
-<pre><code>    dimensions = (200, 50)        //用小括号，不再用中括号
-    print(dimensions[0])
-    print(dimensions[1])
-out：
-    200
-    50
-</code></pre><h2 id="元组的遍历"><a href="#元组的遍历" class="headerlink" title="元组的遍历"></a>元组的遍历</h2><pre><code>ex：
-    dimensions = (200, 50)
-    for dimension in dimensions:
-        print(dimension)
-out：
-    200
-    50
-</code></pre><h2 id="修改元组的变量"><a href="#修改元组的变量" class="headerlink" title="修改元组的变量"></a>修改元组的变量</h2><p>虽然元组元素不可改变，但是可以给存储元组的变量赋值。</p>
-<pre><code>ex：
-    dimensions = (200, 50)
-    print(&quot;原来的：&quot;)
-    for dimension in dimensions:
-        print(dimension)
-    dimensions = (400, 100)
-    print(&quot;\n改变：&quot;)
-    for dimension in dimensions:
-        print(dimension)
-out：
-    原来的：
-    200
-    50
-
-    改变：
-    400
-    100
-</code></pre><p>注意：这里说的修改不是这么改：<br>    <code>dimensions[0] = 250</code><br>这是改不了的，元组存储的元素不可改变，只能从根源上改。</p>
-<h1 id="学习要点"><a href="#学习要点" class="headerlink" title="学习要点"></a>学习要点</h1><ol>
-<li>列表的增、删、改、查</li>
-<li>for 的使用（和 C 有所不同，而且密切注意缩进的不同）</li>
-<li>列表的复制</li>
-<li>元组的应用</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1812,7 +1927,7 @@ out：
               
                 <a href="/ganru.github.io/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1823,7 +1938,7 @@ out：
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1887,7 +2002,7 @@ out：
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
