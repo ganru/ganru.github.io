@@ -434,7 +434,98 @@
 </ol>
 <p>此外如果父类是接口，不会调用 &lt;clinit> 方法。一个类可以没有 clinit 方法。</p>
 <p>clinit 方法在类加载时执行，init 在对象实例化时执行，故，clinit 方法一定先于 init 方法。</p>
-<p># </p>
+<h1 id="Java-中的引用"><a href="#Java-中的引用" class="headerlink" title="Java 中的引用"></a>Java 中的引用</h1><p>分为四类：强引用、软引用、弱引用、虚引用。<br><strong>强引用：</strong>就是我们常见的<code>Object object = new object();</code>这样的。只要强引用还存在，那么永远不会被垃圾回收器回收掉这个对象，它可以存活到 JVM 停止运行的时候。</p>
+<p><strong>软引用：</strong>用来描述一些还有点用，但是非必须的对象。软引用是使用 SoftReference 创建的引用，强度弱于强引用，被其引用的对象在内存不足的时候会被回收，不会产生内存溢出。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 创建强引用与String对象关联，现在该 String 对象为强可达状态</span><br><span class="line">String s = new String(&quot;Frank&quot;);</span><br><span class="line">// 再创建一个软引用关联该对象</span><br><span class="line">SoftReference&lt;String&gt; softRef = new SoftReference&lt;String&gt;(s);</span><br><span class="line"></span><br><span class="line">s = null;	// 消除强引用，现在只剩下软引用与其关联，该 String 对象为软可达状态</span><br><span class="line">s = softRef.get();</span><br><span class="line">// 重新关联上强引用，此时如果 GC 没有回收 String 对象，则 s 继续与之强关联，</span><br><span class="line">//否则 s 只会关联到 null 值。</span><br></pre></td></tr></table></figure>
+<p>根据代码大概可以看出，软引用就是间接通过强引用对象对目标对象（String）关联而得到的对象类群。如果内存即将发生溢出，在此之前会把这类对象进行二次垃圾回收，如果这次回收还是没有解决内存溢出，就会发生异常。软引用可以用来实现内存敏感的高速缓存。比如网页缓存、图片缓存等。</p>
+<p><strong>弱引用：</strong>描述非必需对象。长这样：<br><code>WeakReference&lt;String&gt; abcWeakRef = new WeakReference&lt;String&gt;(str);</code><br>弱引用有着比软引用更脆弱的生命周期。即使内存充足，但是只要被 GC 扫描到就会被回收。不过由于垃圾收集器线程的优先级很低，所以弱引用不一定会被很快回收。</p>
+<p><strong>虚引用：</strong>无法通过一个虚引用获得一个对象实例，一个对象是否有虚引用，对其生命周期无影响。它存在的目的是对象在被垃圾回收时收到一个系统通知，而且它跟软、弱引用有个区别，就是必须和引用队列 (ReferenceQueue) 联合使用。</p>
+<h1 id="可达性分析"><a href="#可达性分析" class="headerlink" title="可达性分析"></a>可达性分析</h1><p>首先要明白，可达性分析是用于判断对象是否存活的算法。</p>
+<p>起始，有一系列的 GC Root 根节点，从这些节点向下搜索，走过的路径称为引用链。如果有这么一条链（注意不是引用链，或者单一对象）向上无法追溯到 GC Root 根节点，则该链上的对象都为不可达状态，可以被回收。<strong>但是可以用 finallize() 方法自救</strong>。<br>有哪些可以作为 GC Root 对象：</p>
+<ol>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>虚拟机栈中引用的对象</li>
+<li>本地方法中引用的对象<br>题外话：其实判断对象是否存活还有一种古老且报废的方法：<strong>引用计数法</strong>。在堆中存储对象时，在对象头处维护一个 counter 计数器，如果一个对象增加了一个引用与之相连，则将 counter++ 。如果一个引用关系失效则 counter– 。如果一个对象的 counter 变为 0 ，则说明该对象已经被废弃，不处于存活状态。<strong>但是</strong>，有这么一种情况，如果对象 A 持有对象 B ，而 B 也持有 A ，那就会发生类似操作系统中死锁的循环持有，A 与 B 的 counter 恒大于 1 ，会使得 GC 永远无法回收这两个对象。</li>
+</ol>
+<h1 id="String-是基本数据类型吗？"><a href="#String-是基本数据类型吗？" class="headerlink" title="String 是基本数据类型吗？"></a>String 是基本数据类型吗？</h1><p>不是，基本数据类型只有 8 个：int、short、long、byte、double、float、char、boolean。</p>
+<h1 id="Java-中-Object-类有哪些常用方法？有什么作用？"><a href="#Java-中-Object-类有哪些常用方法？有什么作用？" class="headerlink" title="Java 中 Object 类有哪些常用方法？有什么作用？"></a>Java 中 Object 类有哪些常用方法？有什么作用？</h1><p>toString(): 用于输出该对象的字符串表示形式。<br>getclass(): final 方法，获得运行时类型。<br>finalize(): 释放资源，用的少。<br>equals(): 判断两对象中的内容是否相等。<br>hashCode(): 用于哈希查找。<br>wait(): wait方法就是使当前线程等待该对象的锁。<br>notify(): 唤醒在该对象上在等待的某个线程。</p>
+<h1 id="哪个类声明了-clone-方法？是-Cloneable-还是-Object？"><a href="#哪个类声明了-clone-方法？是-Cloneable-还是-Object？" class="headerlink" title="哪个类声明了 clone 方法？是 Cloneable 还是 Object？"></a>哪个类声明了 clone 方法？是 Cloneable 还是 Object？</h1><p>java.lang.Cloneable 是一个标示性接口，不包含任何方法，clone 方法在 object 类中定义。并且需要知道 clone() 方法是一个本地方法，这意味着它是由 c 或 c++ 或 其他本地语言实现的。</p>
+<h1 id="Java-中-操作符是线程安全的吗？"><a href="#Java-中-操作符是线程安全的吗？" class="headerlink" title="Java 中 ++ 操作符是线程安全的吗？"></a>Java 中 ++ 操作符是线程安全的吗？</h1><p>不安全，这个操作符涉及到多个指令，比如赋值，增加，存储回内存，会有线程交叉现象。</p>
+<h1 id="基本数据类型和引用类型的区别在哪里？"><a href="#基本数据类型和引用类型的区别在哪里？" class="headerlink" title="基本数据类型和引用类型的区别在哪里？"></a>基本数据类型和引用类型的区别在哪里？</h1><ol>
+<li>基本数据类型变量指向的是具体的数值，而引用类型变量指向的是堆内存里存数据对象的内存地址，即变量名指向 hash 值。</li>
+<li>基本数据类型之间的赋值是创建新的拷贝，而引用类型之间的赋值只是传递引用。</li>
+<li>“==”和“!=”在基本数据类型中是在比较值，而在引用类型中是在比较两个引用是否相同，想比较值需要自己实现equals()方法。</li>
+<li>基本数据类型是在栈中进行分配，而引用类型是在堆中进行分配。</li>
+<li>前者变量在声明之后 java 就会立刻分配给他内存空间，后者它以特殊的方式(类似 C 指针)指向对象实体（具体的值），这类变量声明时不会分配内存，只是存储了一个内存地址。</li>
+<li>基本类型变量创建和销毁很快，而类对象需要 JVM 去销毁。</li>
+</ol>
+<h1 id="String-类可以继承吗？"><a href="#String-类可以继承吗？" class="headerlink" title="String 类可以继承吗？"></a>String 类可以继承吗？</h1><p>不能，String 类是 final 的。</p>
+<h1 id="final-有什么使用场景？"><a href="#final-有什么使用场景？" class="headerlink" title="final 有什么使用场景？"></a>final 有什么使用场景？</h1><ol>
+<li>final 类不能被继承</li>
+<li>final 变量不能被改变</li>
+<li>final 方法不能被重写</li>
+</ol>
+<h1 id="Java-中-String，StringBuilder，StringBuffer-的区别"><a href="#Java-中-String，StringBuilder，StringBuffer-的区别" class="headerlink" title="Java 中 String，StringBuilder，StringBuffer 的区别"></a>Java 中 String，StringBuilder，StringBuffer 的区别</h1><p>String 不可变，StringBuffer 和 StringBuilder 可变，此外，String 和 StringBuffer 是线程安全的。</p>
+<h1 id="Java-中-char-是多少个-bit-？-可以存储中文吗？"><a href="#Java-中-char-是多少个-bit-？-可以存储中文吗？" class="headerlink" title="Java 中 char 是多少个 bit ？ 可以存储中文吗？"></a>Java 中 char 是多少个 bit ？ 可以存储中文吗？</h1><p>char 是 16-bit 的 Unicode 字符，可以存储中文。</p>
+<h1 id="构造器（constructor）是否可被重写（override）？"><a href="#构造器（constructor）是否可被重写（override）？" class="headerlink" title="构造器（constructor）是否可被重写（override）？"></a>构造器（constructor）是否可被重写（override）？</h1><p>不能，它不能被继承，自然不能被重写，但是可以重载。<br>题外：它是你所理解的构造方法。构造函数也叫做构造方法、构造器，英文叫做 Constructor …</p>
+<h1 id="成员变量和局部变量的区别"><a href="#成员变量和局部变量的区别" class="headerlink" title="成员变量和局部变量的区别?"></a>成员变量和局部变量的区别?</h1><ol>
+<li>成员变量定义在类中，局部变量定义在方法、参数、语句块中。</li>
+<li>成员变量在整个类中都有效，局部变量不能离开它所属的大括号被其他作用域应用。</li>
+<li>成员变量存在于堆内存中，与对象共存亡。局部变量跟着方法等这些所属的区域运行而存在，结束后释放。</li>
+</ol>
+<h1 id="列举-3-4-个集合实现类"><a href="#列举-3-4-个集合实现类" class="headerlink" title="列举 3-4 个集合实现类"></a>列举 3-4 个集合实现类</h1><p>ArrayList、HashMap、LinkedList、HashSet。</p>
+<h1 id="Java-中哪些集合类是线程安全的？哪些集合类是线程不安全的？（各列举至少4个，不许说错）"><a href="#Java-中哪些集合类是线程安全的？哪些集合类是线程不安全的？（各列举至少4个，不许说错）" class="headerlink" title="Java 中哪些集合类是线程安全的？哪些集合类是线程不安全的？（各列举至少4个，不许说错）"></a>Java 中哪些集合类是线程安全的？哪些集合类是线程不安全的？（各列举至少4个，不许说错）</h1><p>安全的：Vector、HashTable、Properties、Concurrent开头的类（如ConcurrentHashMap、ConcurrentSkipListMap、ConcurrentSkipListSet、ConcurrentLinkedQueue、ConcurrentLinkedDeque）、CopyOnWrite开头的类（如CopyOnWriteArrayList、CopyOnWriteArraySet）等。</p>
+<p>不安全的：ArrayList、LinkedList、HashSet、TreeSet、HashMap、TreeMap 等。</p>
+<h1 id="Java-中-ArrayList-与-LinkedList-实现上的不同-各自试用的场景？"><a href="#Java-中-ArrayList-与-LinkedList-实现上的不同-各自试用的场景？" class="headerlink" title="Java 中 ArrayList 与 LinkedList 实现上的不同? 各自试用的场景？"></a>Java 中 ArrayList 与 LinkedList 实现上的不同? 各自试用的场景？</h1><p>ArrayList 是可变数组，基于数组的数据结构。一般用于随机访问 get、set 这些（查找），因为数组是通过下标访问的。<br>LinkedList 是基于链表的数据结构。一般用于插入、删除操作，方便，而 ArrayList 不是末尾插入数据的话，要移动数据。</p>
+<h1 id="（-ArrayList-扩容）ArrayList-是基于数组的数据结构，但是因为数组是定长的结构，从使用情况来看-ArrayList-并不是，这里怎么解释？"><a href="#（-ArrayList-扩容）ArrayList-是基于数组的数据结构，但是因为数组是定长的结构，从使用情况来看-ArrayList-并不是，这里怎么解释？" class="headerlink" title="（ ArrayList 扩容）ArrayList 是基于数组的数据结构，但是因为数组是定长的结构，从使用情况来看 ArrayList 并不是，这里怎么解释？"></a>（ ArrayList 扩容）ArrayList 是基于数组的数据结构，但是因为数组是定长的结构，从使用情况来看 ArrayList 并不是，这里怎么解释？</h1><p>根据 JDK1.8 的 ArrayList 的算法，可知数据结构内部维护有一个数组。当它达到一定长度后会自动扩容，是因为确定 ArrayList 扩容之后最新的可存储元素个数时，调用<br><code>elementData = Arrays.copyOf(elementData, newCapacity);</code></p>
+<h1 id="HashMap-的数据结构是怎样的？"><a href="#HashMap-的数据结构是怎样的？" class="headerlink" title="HashMap 的数据结构是怎样的？"></a>HashMap 的数据结构是怎样的？</h1><p>是一个二维结构，第一维是数组，第二维是链表，jdk1.8 之后，链表在超过阈值后可以转化成红黑树。</p>
+<h1 id="HashMap-Get-方法的流程是怎样的？Get-方法的时间复杂度是多少？"><a href="#HashMap-Get-方法的流程是怎样的？Get-方法的时间复杂度是多少？" class="headerlink" title="HashMap Get 方法的流程是怎样的？Get 方法的时间复杂度是多少？"></a>HashMap Get 方法的流程是怎样的？Get 方法的时间复杂度是多少？</h1><p>先调用 key 的 hashcode 方法（key.hashcode()），拿到对象的 hash 值后，用 hash 值对第一维数组的长度进行取模，得到数组下标。其下标所在的元素就是第二维链表的表头。然后遍历链表，用 key.equals() 同链表元素比较，匹配成功就返回链表元素值 Value 。其时间复杂度为 O(1)。</p>
+<p>1.判断 key，根据 key 算出索引。<br>2.根据索引获得索引位置所对应的键值对链表。<br>3.遍历键值对链表，根据 key 找到对应的键值对。<br>4.拿到 value 。 </p>
+<h1 id="请解释一下-HashMap-的参数-loadFactor-，它的作用是什么？"><a href="#请解释一下-HashMap-的参数-loadFactor-，它的作用是什么？" class="headerlink" title="请解释一下 HashMap 的参数 loadFactor ，它的作用是什么？"></a>请解释一下 HashMap 的参数 loadFactor ，它的作用是什么？</h1><p>用于 HashMap 扩容。<br>loadFactor（负载因子）默认等于 0.75 ，当 HashMap 里面容纳的元素已经达到 HashMap 数组长度的 75% 时，表示 HashMap 太挤了，需要扩容，在 HashMap 的构造器中可以定制 loadFactor 。</p>
+<h1 id="为什么-HashMap-是线程不安全的，实际会如何体现？"><a href="#为什么-HashMap-是线程不安全的，实际会如何体现？" class="headerlink" title="为什么 HashMap 是线程不安全的，实际会如何体现？"></a>为什么 HashMap 是线程不安全的，实际会如何体现？</h1><p>假想有很多个线程同时 put() 添加元素，假设正好存在两个 put 的 key 发生了碰撞( hash 值一样)，那么根据 HashMap 的实现，这两个 key 会添加到数组的同一个位置，这样最终就会发生其中一个线程的 put 的数据被覆盖。</p>
+<p>此外，如果多个线程同时检测到元素个数超过数组大小*loadFactor ，这样会发生多个线程同时对 hash 数组进行扩容，都在重新计算元素位置以及复制数据，但是最终只有一个线程扩容后的数组会赋给 table ，也就是说其他线程的都会丢失，并且各自线程 put 的数据也丢失。最重要的是并发扩容可能会引起死循环的，导致 get 操作时，cpu 100%。</p>
+<p>线程安全的HashMap是HashTable、ConcurrentHashMap</p>
+<h1 id="Java-中-Runnable-和-Callable-有什么不同？"><a href="#Java-中-Runnable-和-Callable-有什么不同？" class="headerlink" title="Java 中 Runnable 和 Callable 有什么不同？"></a>Java 中 Runnable 和 Callable 有什么不同？</h1><p>在实际开发中一个多线程的操作很少使用 Thread 类，而是通过 Runnable 接口完成。<br>Runnable 和 Callable 功能很相似，不同在于， Callable.call() 可以返回值和抛出异常，而 Runnable.run() 不能。此外 Callable 可以返回装载有计算结果的 Future 对象。Future 表示异步计算的结果。 </p>
+<h1 id="在-Java-并发编程中，线程之间如何完成通信？"><a href="#在-Java-并发编程中，线程之间如何完成通信？" class="headerlink" title="在 Java 并发编程中，线程之间如何完成通信？"></a>在 Java 并发编程中，线程之间如何完成通信？</h1><p>共享内存。</p>
+<h1 id="Java-中-synchronized-关键字是什么？"><a href="#Java-中-synchronized-关键字是什么？" class="headerlink" title="Java 中 synchronized 关键字是什么？"></a>Java 中 synchronized 关键字是什么？</h1><p>关键字 synchronized 可以保证在同一个时刻，只有一个线程可以执行某个方法或者某个代码块。</p>
+<h1 id="Java-中的-volatile-变量是什么？"><a href="#Java-中的-volatile-变量是什么？" class="headerlink" title="Java 中的 volatile 变量是什么？"></a>Java 中的 volatile 变量是什么？</h1><p>volatile 是一个特殊的修饰符，只有成员变量才能使用它。本质是告诉 JVM 当前变量在寄存器中的值不确定，需要从主存中获取。而且他不会造成线程的阻塞。在 Java 并发程序缺少同步类的情况下，多线程对成员变量的操作对其它线程是透明的。volatile 变量可以保证下一个读取操作会在前一个写操作之后发生。</p>
+<h1 id="Java-中的-volatile-的使用场景与局限性？"><a href="#Java-中的-volatile-的使用场景与局限性？" class="headerlink" title="Java 中的 volatile 的使用场景与局限性？"></a>Java 中的 volatile 的使用场景与局限性？</h1><p>volatile 可以保证内存可见性, 但是不能保证原子性。</p>
+<h1 id="什么是-ThreadLocal-变量？"><a href="#什么是-ThreadLocal-变量？" class="headerlink" title="什么是 ThreadLocal 变量？"></a>什么是 ThreadLocal 变量？</h1><p>ThreadLocal 用于线程间的数据隔离，保证在随意修改自己的变量的同时不会影响到其他的线程。它是为创建代价高昂的对象（每次调用都要创建不同的实例）获取线程安全的好方法。</p>
+<h1 id="ThreadLocal-和-InheritableThreadLocal-的区别？"><a href="#ThreadLocal-和-InheritableThreadLocal-的区别？" class="headerlink" title="ThreadLocal 和 InheritableThreadLocal 的区别？"></a>ThreadLocal 和 InheritableThreadLocal 的区别？</h1><p>前者不可继承父线程的内容，而后者可以做到很好的在父子线程间传递数据。</p>
+<h1 id="多线程中-synchronized-和-Lock-的使用区别？"><a href="#多线程中-synchronized-和-Lock-的使用区别？" class="headerlink" title="多线程中 synchronized 和 Lock 的使用区别？"></a>多线程中 synchronized 和 Lock 的使用区别？</h1><ol>
+<li><p>假如线程 A 和 B 都要获取对象 O 的锁定，假设 A 获取了对象 O 锁，B 将等待 A 释放对 O 的锁定。使用 synchronized ，如果 A 一直不释放，B 将一直等待。而使用 Lock ，如果 A 不释放，可以使 B 在等待了足够长的时间以后，中断等待，而干别的事情。</p>
+</li>
+<li><p>synchronized 是在 JVM 层面上实现的（通过Monitor），不但可以通过一些监控工具监控 synchronized 的锁定，而且在代码执行时出现异常， JVM 会自动释放锁定，但是使用 Lock 则不行，lock 是通过代码实现的，要保证锁定一定会被释放，就必须将 unLock() 放到 finally{} 中。</p>
+</li>
+<li><p>在资源竞争不是很激烈的情况下， Synchronized 的性能要优于 ReetrantLock ，但是在资源竞争很激烈的情况下， Synchronized 的性能会下降几十倍，但是 ReetrantLock 的性能能维持常态。</p>
+</li>
+</ol>
+<h1 id="JDBC-的-PreparedStatement-是什么？"><a href="#JDBC-的-PreparedStatement-是什么？" class="headerlink" title="JDBC 的 PreparedStatement 是什么？"></a>JDBC 的 PreparedStatement 是什么？</h1><p>是预编译 SQL 语句对象。用它提供的 setter 方法可以传入查询的变量。通过它可以将对应的 SQL 语句高效的执行多次。由于 PreparedStatement 自动对特殊字符转义，避免了 SQL 注入攻击，因此应当尽量的使用它。</p>
+<h1 id="Java线程模型定义了哪几种状态？"><a href="#Java线程模型定义了哪几种状态？" class="headerlink" title="Java线程模型定义了哪几种状态？"></a>Java线程模型定义了哪几种状态？</h1><p>在任意一个时间点，一个线程有且只有其中一个状态：</p>
+<ol>
+<li>新建（New）：新建的 Thread ，尚未开始。</li>
+<li>运行（Runable）：包含操作系统线程状态中的 Running、Ready，也就是处于正在执行或正在等待 CPU 分配时间的状态。</li>
+<li>无限期等待（Waiting）：处于这种状态的线程不会被分配 CPU 时间，等待其他线程唤醒。</li>
+<li>限期等待（Timed Waiting）：处于这种状态的线程不会被分配 CPU 时间，在一定时间后会由系统自动唤醒。</li>
+<li>阻塞（Blocked）：在等待获得排他锁。</li>
+<li>结束（Terminated）：已终止的线程。</li>
+</ol>
+<h1 id="什么是线程安全？"><a href="#什么是线程安全？" class="headerlink" title="什么是线程安全？"></a>什么是线程安全？</h1><p>就是在多个线程同时访问同一段代码的时候，不会产生不确定的结果。</p>
+<h1 id="static-关键字有哪些作用？"><a href="#static-关键字有哪些作用？" class="headerlink" title="static 关键字有哪些作用？"></a>static 关键字有哪些作用？</h1><ol>
+<li>作用在公共属性上，节省内存。</li>
+<li>用作属于类的方法，不会被调用。</li>
+<li>用来初始化类的静态数据，在类加载的时候被执行。</li>
+</ol>
+<h1 id="数据库事务特性？"><a href="#数据库事务特性？" class="headerlink" title="数据库事务特性？"></a>数据库事务特性？</h1><p>ACID，原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。一个支持事务（Transaction）的数据库，必须要具有这四种特性。</p>
+<h1 id="什么是数据库的隔离级别？"><a href="#什么是数据库的隔离级别？" class="headerlink" title="什么是数据库的隔离级别？"></a>什么是数据库的隔离级别？</h1><p>为了实现数据的一致性使用事务时，数据库系统用锁来防止别人访问事务中用到的数据。<br>隔离级别从高到低有：<br>Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。</p>
+<p>Repeatable read (可重复读)：可避免脏读、不可重复读的发生。</p>
+<p>Read committed (读已提交)：可避免脏读的发生。</p>
+<p>Read uncommitted (读未提交)：最低级别，任何情况都无法保证。</p>
+<h1 id="什么是数据库索引？"><a href="#什么是数据库索引？" class="headerlink" title="什么是数据库索引？"></a>什么是数据库索引？</h1><p>索引是一种提高数据库查询速度的机制，是对表中列值排序的一种结构。可以加快从表中或视图中检索行的速度，查询时不必进行全表扫描。</p>
+<h1 id="Spring-有哪些优点？"><a href="#Spring-有哪些优点？" class="headerlink" title="Spring 有哪些优点？"></a>Spring 有哪些优点？</h1><p>轻量级：Spring在大小和透明性方面绝对属于轻量级的，基础版本的Spring框架大约只有2MB。<br>控制反转(IOC)：Spring使用控制反转技术实现了松耦合。依赖被注入到对象，而不是创建或寻找依赖对象。<br>面向切面编程(AOP)： Spring支持面向切面编程，同时把应用的业务逻辑与系统的服务分离开来。<br>容器：Spring包含并管理应用程序对象的配置及生命周期。<br>MVC框架：Spring的web框架是一个设计优良的web MVC框架，很好的取代了一些web框架。<br>事务管理：Spring对下至本地业务上至全局业务(JAT)提供了统一的事务管理接口。<br>异常处理：Spring提供一个方便的API将特定技术的异常(由JDBC, Hibernate, 或JDO抛出)转化为一致的、Unchecked异常。</p>
+<h1 id="Java-中会存在内存泄漏吗？"><a href="#Java-中会存在内存泄漏吗？" class="headerlink" title="Java 中会存在内存泄漏吗？"></a>Java 中会存在内存泄漏吗？</h1><p>虽然有垃圾回收机制，看起来可能不会发生。但是在实际开发中，常常会有一些无用但是可达的对象，这些 GC 不会去回收，因此如果不及时 close 或者 flush ，也有可能发生内存泄漏。</p>
+<h1 id="GC-是什么？为什么要有-GC？"><a href="#GC-是什么？为什么要有-GC？" class="headerlink" title="GC 是什么？为什么要有 GC？"></a>GC 是什么？为什么要有 GC？</h1><p>垃圾回收机制，可有效防止内存泄漏，有效的使用可以使用的内存。</p>
 
           
         
